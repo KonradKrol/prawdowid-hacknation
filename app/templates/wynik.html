@@ -1,0 +1,153 @@
+{% extends "base.html" %}
+{% block title %}Wynik sprawdzenia — Prawdomir{% endblock %}
+{% block body_class %}page-result{% endblock %}
+{% block main %}
+<div class="wrap result">
+  <a class="back" href="/"><svg aria-hidden="true"><use href="#i-back"/></svg>Nowe sprawdzenie</a>
+
+  {% if r.status == "ok" %}
+  {% set items = r["items"] %}
+  {% macro icon(tone) %}{{ {"ok": "check", "false": "cross", "mislead": "alert", "nei": "question", "nv": "speech", "answer": "info"}[tone] }}{% endmacro %}
+
+  {% if items | length == 1 %}
+  {# ---------- JEDNA SPRAWA ---------- #}
+  {% set item = items[0] %}{% set key = item.label if item.kind == "verdict" else "answer" %}{% set tone = L[key].tone %}
+  <section class="hv tone-{{ tone }}" aria-labelledby="hv-title">
+    <span class="hv__icon" aria-hidden="true"><svg><use href="#i-{{ icon(tone) }}"/></svg></span>
+    <div class="hv__body">
+      <p class="hv__word">{{ PLAIN[key] }}</p>
+      <h1 class="hv__answer" id="hv-title">{% if item.kind == "answer" %}{{ item.answer }}{% else %}{{ r.summary or item.reason }}{% endif %}</h1>
+      {% if item.kind == "answer" or (r.summary and item.reason != r.summary) %}<p class="hv__why">{{ item.reason }}</p>{% endif %}
+    </div>
+  </section>
+  {% include "_dowod.html" %}
+
+  {% else %}
+  {# ---------- KILKA SPRAW ---------- #}
+  <section class="hv tone-multi" aria-labelledby="hv-title">
+    <span class="hv__icon" aria-hidden="true"><svg><use href="#i-info"/></svg></span>
+    <div class="hv__body">
+      <p class="hv__word">{{ items | length }} {{ pl_count(items | length, "informacja", "informacje", "informacji") }} w jednej wiadomości</p>
+      <h1 class="hv__answer" id="hv-title">{{ r.summary }}</h1>
+    </div>
+  </section>
+
+  {% if v.lista == "zaznaczenia" %}
+  <section class="msg" aria-label="Twoja wiadomość z zaznaczonymi fragmentami">
+    <p class="msg__label">Twoja wiadomość</p>
+    <p class="msg__text">{{ mark_tones(r.input.text_masked, items) }}</p>
+  </section>
+  {% else %}
+  <ul class="overview">
+    {% for item in items %}{% set key = item.label if item.kind == "verdict" else "answer" %}{% set tone = L[key].tone %}
+    <li class="overview__row tone-{{ tone }}">
+      <span class="dot" aria-hidden="true"><svg><use href="#i-{{ icon(tone) }}"/></svg></span>
+      <a href="#{{ item.id }}">„{{ item.claim_span or item.claim }}”</a>
+      <strong>{{ PLAIN[key] }}</strong>
+    </li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+
+  <ol class="cards">
+    {% for item in items %}{% set key = item.label if item.kind == "verdict" else "answer" %}{% set tone = L[key].tone %}
+    <li class="card tone-{{ tone }}" id="{{ item.id }}">
+      <div class="card__head">
+        <span class="card__n">{{ loop.index }}</span>
+        <span class="dot" aria-hidden="true"><svg><use href="#i-{{ icon(tone) }}"/></svg></span>
+        <strong class="card__word">{{ PLAIN[key] }}</strong>
+      </div>
+      <p class="card__quote">„{{ item.claim_span or item.claim }}”</p>
+      <p class="card__reason">{% if item.kind == "answer" %}<strong>{{ item.answer }}.</strong> {% endif %}{{ item.reason }}</p>
+      {% include "_dowod.html" %}
+    </li>
+    {% endfor %}
+  </ol>
+  {% endif %}
+
+  {% for n in r.notices if not (n.type == "archival_material" and items | selectattr("context_mismatch") | list) %}
+  <p class="note note--warn"><svg aria-hidden="true"><use href="#i-{{ NOTICE_ICON.get(n.type, "info") }}"/></svg><span>{{ n.text }}</span></p>
+  {% endfor %}
+
+  <div class="actions">
+    <a class="btn btn--primary" href="/">Sprawdź inną wiadomość</a>
+    <button class="btn btn--secondary" type="button" data-copy="{{ r.summary }}" hidden><span data-copy-label>Skopiuj krótką odpowiedź</span></button>
+  </div>
+
+  <details class="meta">
+    <summary>Jak doszliśmy do tej odpowiedzi</summary>
+    <p>Sprawdzana wiadomość: „{{ r.input.text_masked }}”</p>
+    {% for item in items %}{% set key = item.label if item.kind == "verdict" else "answer" %}
+    <div class="meta__item">
+      <p><strong>{% if items | length > 1 %}{{ loop.index }}. {% endif %}{{ item.claim }}</strong></p>
+      <p>Ocena według metodyki: {{ L[key].name | lower }}. Pewność podstawy: {{ STRENGTH[item.strength.level][0] | lower }}.</p>
+      {% if item.strength.premises %}<ul>{% for p in item.strength.premises %}<li>{{ p.text }}</li>{% endfor %}</ul>{% endif %}
+    </div>
+    {% endfor %}
+    <p>Odpowiedź przygotował automat wyłącznie na podstawie wskazanych źródeł. Cytaty sprawdzamy w kodzie — muszą występować w dokumencie dosłownie. Zawsze możesz otworzyć źródło i ocenić je samodzielnie.</p>
+    <p class="meta__tech">Nr {{ r.id }} · {{ r.created_at | datetime }} · zbiór źródeł {{ r.meta.corpus_version[:8] }} · {{ "%.1f" | format(r.meta.elapsed_ms / 1000) }} s</p>
+  </details>
+
+  {% elif r.status == "needs_clarification" %}
+  {# ---------- DOPRECYZOWANIE (dialog) ---------- #}
+  <header class="result__head">
+    <p class="eyebrow">Zanim sprawdzimy</p>
+    <h1 class="result__summary">Potrzebujemy jednego doprecyzowania.</h1>
+  </header>
+  <div class="dialog" role="log" aria-label="Rozmowa z Prawdomirem">
+    <div class="bubble bubble--user"><span class="bubble__who">Ty</span><p>{{ r.input.text_masked }}</p></div>
+    <div class="bubble bubble--bot">
+      <span class="bubble__who"><svg aria-hidden="true"><use href="#i-mark"/></svg>Prawdomir</span>
+      <p>{{ r.clarification_question }}</p>
+    </div>
+  </div>
+  <form class="reply" method="post" action="/sprawdz" data-check-form>
+    <input type="hidden" name="clarifies" value="{{ r.id }}">
+    <div data-form-body>
+      <label class="ask__label" for="reply">Twoja odpowiedź</label>
+      <textarea id="reply" name="text" rows="3" maxlength="4000" required placeholder="Np. SMS przyszedł dziś z numeru podpisanego „Alert RCB”…"></textarea>
+      <div class="ask__row">
+        <a class="btn btn--ghost" href="/">Zacznij od nowa</a>
+        <button class="btn btn--primary" type="submit">Wyślij odpowiedź <svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
+      </div>
+    </div>
+    <div class="progress" data-progress hidden aria-live="polite">
+      <p class="progress__title">Sprawdzamy źródła…</p>
+      <ol class="progress__steps"><li data-step>Łączymy Twoją odpowiedź z wiadomością</li><li data-step>Szukamy w źródłach</li><li data-step>Sprawdzamy cytaty</li></ol>
+    </div>
+  </form>
+
+  {% else %}
+  {# ---------- POZA ZAKRESEM / AWARIA / INNE ---------- #}
+  {% set s = S[r.status] %}
+  <section class="state state--{{ r.status }}" aria-labelledby="state-title">
+    <span class="state__icon" aria-hidden="true"><svg><use href="#i-{{ s.icon }}"/></svg></span>
+    <p class="eyebrow">{% if r.status == "technical_error" %}To nie jest ocena Twojej wiadomości{% else %}Nie sprawdzamy tego{% endif %}</p>
+    <h1 id="state-title" class="state__title">{{ s.name }}</h1>
+    <p class="state__msg">{{ r.message }}</p>
+    {% if r.status == "out_of_scope" %}
+    <div class="scope">
+      <h2>Prawdomir sprawdza</h2>
+      <ul class="scope__yes">
+        <li>wiadomości i posty o sprawach publicznych,</li>
+        <li>komunikaty przypisywane urzędom i instytucjom,</li>
+        <li>pytania o wydarzenia, daty i liczby.</li>
+      </ul>
+      <h2>Nie zajmuje się</h2>
+      <ul class="scope__no">
+        <li>sprawami prywatnymi i osobami prywatnymi,</li>
+        <li>poradami medycznymi, prawnymi i finansowymi,</li>
+        <li>zadaniami, rachunkami i pisaniem tekstów.</li>
+      </ul>
+    </div>
+    {% elif r.status == "technical_error" %}
+    <p class="state__sub">Spróbuj ponownie za chwilę. Jeśli problem się powtarza, nie traktuj braku odpowiedzi jako potwierdzenia ani zaprzeczenia.</p>
+    {% endif %}
+    <div class="actions">
+      <a class="btn btn--primary" href="/">{% if r.status == "technical_error" %}Spróbuj ponownie{% else %}Sprawdź inną wiadomość{% endif %} <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    </div>
+  </section>
+  {% endif %}
+
+</div>
+{% endblock %}

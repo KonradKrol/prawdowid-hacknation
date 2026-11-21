@@ -4,16 +4,17 @@ Autorski projekt Konrada Króla na zadanie MSZ **Prawdowid** na HackNation 2026.
 
 ## Backend, WWW i adapter demonstracyjny
 
-Wymagany Python 3.12 lub nowszy z SQLite FTS5. W katalogu projektu:
+Wymagany Python 3.12 lub nowszy z SQLite FTS5. Uruchomienie odbywa się z katalogu repozytorium.
 
 ```powershell
 python -m pip install -r requirements.txt
+if (!(Test-Path -LiteralPath .env)) { Copy-Item .env.example .env }
 python -m uvicorn app.main:app --port 8000
 ```
 
-Strona WWW działa pod `/`, kontrakt pod `/docs`. [Opis API i adaptera WhatsApp](docs/KONTRAKT_API.md) podaje żądania i format wyniku. Adapter nie wymaga konta Meta do demonstracji. Dane sesji i zdarzeń zapisują się w SQLite. [Instrukcja Fly.io](docs/WDROZENIE_FLY.md) opisuje trwały wolumen `/data` i kopię bazy.
+Jedna aplikacja obsługuje stronę WWW pod `/` i API pod `/docs`. Widok `/zrodla`, API `/api/v1/sources` i ocena zgłoszeń korzystają z korpusu wskazanego przez `PRAWDOWID_CORPUS`. Przykładowa konfiguracja wskazuje `Research/Prawdowid_Korpus_Probny.jsonl`. Po zmianie ustawienia uruchom aplikację ponownie. [Opis API i adaptera WhatsApp](docs/KONTRAKT_API.md) podaje żądania i format wyniku. Adapter nie wymaga konta Meta do demonstracji. Dane sesji i zdarzeń zapisują się w SQLite. [Instrukcja Fly.io](docs/WDROZENIE_FLY.md) opisuje trwały wolumen `/data` i kopię bazy.
 
-W trybie deweloperskim `PRAWDOWID_EVALUATOR=fake` umożliwia próbę frontendu bez klucza. W produkcji do oceny używa się modelu konfigurowanego przez `PRAWDOWID_API_KEY` i `PRAWDOWID_MODEL`. Kluczy nie zapisuj w Git. Domyślny kandydat do pomiaru to GPT-6 Luna. Rzetelne porównanie modeli wymaga prób live.
+Do rzeczywistej weryfikacji ustaw w pliku `.env` wartości `PRAWDOWID_API_KEY` i `PRAWDOWID_MODEL` dla swojego dostawcy oraz wybierz `PRAWDOWID_EVALUATOR=live`. Plik `.env` jest ignorowany przez Git. Ustawienie `PRAWDOWID_EVALUATOR=fake` służy do podglądu frontendu bez klucza. Produkcja wymaga trybu live.
 
 **Dane.** Utwórz nową wersję przez `python scripts/import_sources.py Research/Prawdowid_Korpus_Start.jsonl nowe_materialy.csv --output Research/korpus_demo.jsonl` i ustaw `PRAWDOWID_CORPUS`. Oczekiwane odpowiedzi i próby trzymaj poza korpusem. Dodatkowy strażnik importu działa z `--llm-guard` i wymaga klucza.
 

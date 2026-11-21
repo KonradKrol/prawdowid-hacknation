@@ -214,7 +214,12 @@ def get_service():
 def run_check(text, *, channel="web", lang="pl", session_id=None, use_cache=True, clarifies=None):
     service = get_service()
     bucket = CLIENT_BUCKET.get()
-    if bucket and channel in {"web", "api"} and not service.store.charge(bucket, int(datetime.now(timezone.utc).timestamp())):
+    if (
+        service.settings.rate_limit_enabled
+        and bucket
+        and channel in {"web", "api"}
+        and not service.store.charge(bucket, int(datetime.now(timezone.utc).timestamp()))
+    ):
         return service.limit(text, channel)
     return service.run(text, channel=channel, lang=lang, session_id=session_id or SESSION.get(),
                        use_cache=use_cache, clarifies=clarifies)

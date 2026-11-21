@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}Źródła — Prawdomir{% endblock %}
+{% block main %}
+<div class="wrap page">
+  <a class="back" href="/"><svg aria-hidden="true"><use href="#i-back"/></svg>Strona główna</a>
+  <header class="result__head">
+    <p class="eyebrow">Lista do audytu</p>
+    <h1 class="result__summary">Na czym opieramy odpowiedzi</h1>
+    <p class="lead">Prawdomir nie przeszukuje całego internetu. Korzysta tylko z poniższych, zatwierdzonych materiałów: komunikatów instytucji, danych publicznych i weryfikacji organizacji fact-checkingowych.</p>
+  </header>
+  <dl class="trust__stats trust__stats--page">
+    <div><dt>dokumentów</dt><dd>{{ stats.documents or "—" }}</dd></div>
+    <div><dt>domen</dt><dd>{{ stats.domains or "—" }}</dd></div>
+    <div><dt>typów źródeł</dt><dd>{{ stats.types or "—" }}</dd></div>
+  </dl>
+  <div class="table-wrap" tabindex="0" role="region" aria-label="Tabela źródeł">
+    <table class="sources">
+      <thead><tr><th scope="col">Wydawca i tytuł</th><th scope="col">Typ</th><th scope="col">Publikacja</th><th scope="col">Pobrano</th></tr></thead>
+      <tbody>
+        {% for s in stats.sources %}
+        <tr>
+          <td><span class="sources__pub">{{ s.publisher }}</span><a href="{{ s.url }}" rel="noopener noreferrer" target="_blank">{{ s.title }}</a></td>
+          <td><span class="tag">{{ s.type }}</span></td>
+          <td>{{ s.published_on | date or "—" }}</td>
+          <td>{{ s.checked_on | date }}</td>
+        </tr>
+        {% else %}
+        <tr><td colspan="4">Lista źródeł jest chwilowo niedostępna.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

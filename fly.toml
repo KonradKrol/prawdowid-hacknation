@@ -4,6 +4,7 @@ primary_region = "fra"
 [env]
   PRAWDOWID_ENV = "production"
   PRAWDOWID_DATA_DIR = "/data"
+  PRAWDOWID_CORPUS = "/srv/prawdowid/Research/Prawdowid_Korpus_Probny.jsonl"
 
 [[mounts]]
   source = "data"
@@ -12,9 +13,9 @@ primary_region = "fra"
 [http_service]
   internal_port = 8080
   force_https = true
-  auto_stop_machines = "off"
+  auto_stop_machines = "stop"
   auto_start_machines = true
-  min_machines_running = 1
+  min_machines_running = 0
 
 [[http_service.checks]]
   method = "GET"
@@ -22,3 +23,8 @@ primary_region = "fra"
   interval = "30s"
   timeout = "5s"
   grace_period = "10s"
+
+[[vm]]
+  cpu_kind = "shared"
+  cpus = 1
+  memory = "256mb"

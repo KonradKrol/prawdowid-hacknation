@@ -21,6 +21,7 @@ class Settings:
     price_in: str | None = field(default_factory=lambda: os.getenv("PRAWDOWID_PRICE_IN_PER_M"))
     price_out: str | None = field(default_factory=lambda: os.getenv("PRAWDOWID_PRICE_OUT_PER_M"))
     timeout: float = field(default_factory=lambda: float(os.getenv("PRAWDOWID_TIMEOUT_S", "22")))
+    rate_limit_enabled: bool = field(default_factory=lambda: os.getenv("PRAWDOWID_RATE_LIMIT_ENABLED") == "1")
     whatsapp_secret: str = field(default_factory=lambda: os.getenv("PRAWDOWID_WA_APP_SECRET", ""), repr=False)
     whatsapp_token: str = field(default_factory=lambda: os.getenv("PRAWDOWID_WA_VERIFY_TOKEN", ""), repr=False)
 

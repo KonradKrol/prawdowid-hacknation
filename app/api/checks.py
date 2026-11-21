@@ -14,10 +14,13 @@ router = APIRouter()
 
 
 def charge(request, channel):
+    service = get_service()
+    if not service.settings.rate_limit_enabled:
+        return True
     remote = request.client.host if request.client else "local"
     # Use the address forwarded by the ASGI server only when its proxy is trusted.
     key = sha256(f"{channel}:{remote}".encode()).hexdigest()
-    return get_service().store.charge(key, int(time()))
+    return service.store.charge(key, int(time()))
 
 
 @router.post("/api/v1/checks", response_model=CheckResult)

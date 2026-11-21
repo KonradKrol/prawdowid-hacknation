@@ -52,6 +52,22 @@ def test_contract_cases(configured, text, status, label):
             assert any(n.type == "instructions_ignored" for n in result.notices)
 
 
+@pytest.mark.parametrize("path", ["/api/v1/checks", "/api/whatsapp/demo"])
+@pytest.mark.parametrize("enabled", [False, True])
+def test_request_rate_limit_is_opt_in(configured, monkeypatch, path, enabled):
+    if enabled:
+        monkeypatch.setenv("PRAWDOWID_RATE_LIMIT_ENABLED", "1")
+    else:
+        monkeypatch.delenv("PRAWDOWID_RATE_LIMIT_ENABLED", raising=False)
+
+    payload = {"text": "Czy RCB wysłało ten SMS?"}
+    with TestClient(create_app()) as client:
+        admitted = 10 if enabled else 100
+        for _ in range(admitted):
+            assert client.post(path, json=payload).status_code == 200
+        assert client.post(path, json=payload).status_code == (429 if enabled else 200)
+
+
 def test_session_persistence_and_deletion(configured):
     with TestClient(create_app()) as browser:
         result = browser.post("/api/v1/checks", json={"question": "Czy RCB wysłało SMS?"}).json()

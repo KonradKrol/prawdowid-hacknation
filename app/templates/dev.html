@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Podgląd stanów — Prawdomir{% endblock %}
+{% block main %}
+<div class="wrap page">
+  <header class="result__head">
+    <p class="eyebrow">Tylko dla zespołu</p>
+    <h1 class="result__summary">Podgląd wszystkich stanów karty</h1>
+    <p class="lead">Przykładowe dane do pracy nad wyglądem. Źródła oznaczone „przykład testowy” są zmyślone.</p>
+  </header>
+  <ul class="dev-list">
+    {% for n in names %}<li><a class="chip" href="/dev/wynik/{{ n }}">{{ n }}</a></li>{% endfor %}
+  </ul>
+</div>
+{% endblock %}

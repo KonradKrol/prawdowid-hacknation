@@ -9,3 +9,7 @@ Fly Machine ma ulotny system plików obrazu i osobny trwały Fly Volume. Plik SQ
 5. Kopię SQLite wykonaj okresowo za pomocą mechanizmu backup SQLite, np. `python scripts/backup_db.py /data/prawdowid.db /data/backup-YYYY-MM-DD.db`. Wybierz też zatwierdzone miejsce kopii poza tym samym wolumenem.
 
 Wolumen jest lokalny dla jednej maszyny i Fly nie replikuje go automatycznie. Produkcyjna konfiguracja używa jednego workera i cookies Secure. Plik SQLite na niezamontowanym dysku obrazu jest odpowiedni tylko dla krótkiego testu. [Fly Volumes](https://fly.io/docs/volumes/overview/)
+
+## Konfiguracja na pierwszy prototyp
+
+Zacznij od jednej maszyny z 1 współdzielonym vCPU i 256 MB RAM oraz pojedynczego wolumenu 1 GB. Uruchom jednego workera i sprawdź stan maszyny po pierwszej serii prób. Konfiguracja zatrzymuje maszynę przy bezczynności i uruchamia po kolejnym żądaniu. Pierwsza odpowiedź po przerwie może być wolniejsza, a wolumen pozostaje przy maszynie. Przed oceną zrób jedno sprawdzenie rozgrzewające. Koszt zależy od regionu i czasu pracy, a wolumen i zewnętrzne API mają osobne rozliczenia. [Cennik Fly.io](https://fly.io/docs/about/pricing/).

@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Nie znaleziono — Prawdomir{% endblock %}
+{% block main %}
+<div class="wrap page">
+  <section class="state">
+    <span class="state__icon" aria-hidden="true"><svg><use href="#i-question"/></svg></span>
+    <h1 class="state__title">Nie znaleźliśmy tego sprawdzenia</h1>
+    <p class="state__msg">Mogło zostać usunięte albo wygasło. Sprawdzenia przechowujemy tylko przez krótki czas.</p>
+    <div class="actions"><a class="btn btn--primary" href="/">Nowe sprawdzenie <svg aria-hidden="true"><use href="#i-arrow"/></svg></a></div>
+  </section>
+</div>
+{% endblock %}

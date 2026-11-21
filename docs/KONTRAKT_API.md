@@ -4,7 +4,7 @@ Ustalenia implementacyjne z sekcji 2 dokumentu podziału pracy. Modele Pydantic 
 
 | Metoda | Wejście i odpowiedź |
 |---|---|
-| `POST /api/v1/checks` | `{"text":"…","lang":"pl"}`. Starsze `question` działa jako alias. Opcjonalne `clarifies` wskazuje poprzednie sprawdzenie z tej samej sesji, a `?nocache=1` pomija odczyt cache. Zwraca `CheckResult` i 200 lub 429 przy limicie. |
+| `POST /api/v1/checks` | `{"text":"…","lang":"pl"}`. Starsze `question` działa jako alias. Opcjonalne `clarifies` wskazuje poprzednie sprawdzenie z tej samej sesji, a `?nocache=1` pomija odczyt cache. Zwraca `CheckResult` z kodem 200. Wersja konkursowa przyjmuje zgłoszenia bez limitu częstotliwości. `PRAWDOWID_RATE_LIMIT_ENABLED=1` włącza 10 zgłoszeń na minutę i 100 na dobę na adres IP dla WWW/API oraz dla demo WhatsApp. Przekroczenie limitu skutkuje kodem 429. |
 | `GET /api/v1/checks/{id}` | Wynik w bieżącej sesji albo 404. |
 | `DELETE /api/v1/checks/{id}` | Usunięcie własnego sprawdzenia, 204 lub 404. |
 | `DELETE /api/v1/session` | Usunięcie wyników tej sesji, odpowiedź `{"deleted":n}`. |
