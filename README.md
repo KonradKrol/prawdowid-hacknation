@@ -2,9 +2,27 @@
 
 Autorski projekt Konrada Króla na zadanie MSZ **Prawdowid** na HackNation 2026. Z wklejonej wiadomości wyodrębnia twierdzenia do sprawdzenia, wyszukuje lokalne dowody i wskazuje, co można rozstrzygnąć oraz jakiego dowodu brakuje. Oddziela pytanie o autorstwo wypowiedzi od oceny jej treści.
 
+## Backend, WWW i adapter demonstracyjny
+
+Wymagany Python 3.12 lub nowszy z SQLite FTS5. W katalogu projektu:
+
+```powershell
+python -m pip install -r requirements.txt
+python -m uvicorn app.main:app --port 8000
+```
+
+Strona WWW działa pod `/`, kontrakt pod `/docs`. [Opis API i adaptera WhatsApp](docs/KONTRAKT_API.md) podaje żądania i format wyniku. Adapter nie wymaga konta Meta do demonstracji. Dane sesji i zdarzeń zapisują się w SQLite. [Instrukcja Fly.io](docs/WDROZENIE_FLY.md) opisuje trwały wolumen `/data` i kopię bazy.
+
+W trybie deweloperskim `PRAWDOWID_EVALUATOR=fake` umożliwia próbę frontendu bez klucza. W produkcji do oceny używa się modelu konfigurowanego przez `PRAWDOWID_API_KEY` i `PRAWDOWID_MODEL`. Kluczy nie zapisuj w Git. Domyślny kandydat do pomiaru to GPT-6 Luna. Rzetelne porównanie modeli wymaga prób live.
+
+**Dane.** Utwórz nową wersję przez `python scripts/import_sources.py Research/Prawdowid_Korpus_Start.jsonl nowe_materialy.csv --output Research/korpus_demo.jsonl` i ustaw `PRAWDOWID_CORPUS`. Oczekiwane odpowiedzi i próby trzymaj poza korpusem. Dodatkowy strażnik importu działa z `--llm-guard` i wymaga klucza.
+
+**Pomiary.** `python eval/run.py --report wyniki` tworzy JSON, Markdown i CSV do ręcznej oceny cytatów. `python eval/run_guard.py --report guard.json` porównuje 20 syntetycznych prób z niezmienionym przypadkiem. Oba skrypty wymagają trybu live. Próby techniczne uruchom przez `python -m pip install -r requirements-dev.txt` i `python -m pytest tests`.
+
+
 ## Aktualny stan
 
-Lokalne wyszukiwanie i konsolowy przebieg są zaimplementowane. Próby z symulowanymi odpowiedziami sprawdziły walidację cytatu, datę, brak trafień i pomiary. Do pierwszego uruchomienia z modelem potrzebny jest klucz API. WWW, drugi kanał, pełny korpus i ewaluacja konkursowa są kolejnymi blokami.
+Backend obsługuje API v1, sesje, SQLite i adapter demonstracyjny. Testy z próbkami sprawdzają kontrakt, walidację dowodów i HTTP. Do ewaluacji jakości potrzebny jest klucz modelu i docelowy korpus. Wdrożenie na Fly.io wymaga wskazania aplikacji, wolumenu i ustawienia sekretów.
 
 ## Uruchomienie
 
