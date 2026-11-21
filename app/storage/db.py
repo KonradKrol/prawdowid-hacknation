@@ -35,6 +35,9 @@ class Store:
                   bucket TEXT NOT NULL, created INTEGER NOT NULL
                 );
                 CREATE INDEX IF NOT EXISTS by_bucket ON rate_hits(bucket, created);
+                CREATE TABLE IF NOT EXISTS paid_check_budget (
+                  id INTEGER PRIMARY KEY CHECK (id = 1), used INTEGER NOT NULL
+                );
             """)
 
     @contextmanager
@@ -88,6 +91,14 @@ class Store:
                 return False
             db.execute("INSERT INTO rate_hits VALUES (?, ?)", (bucket, now))
             return True
+
+    def reserve_paid_check(self, limit):
+        with self.connection() as db:
+            cursor = db.execute("""
+                INSERT INTO paid_check_budget VALUES (1, 1)
+                ON CONFLICT(id) DO UPDATE SET used = used + 1 WHERE used < ?
+            """, (limit,))
+            return cursor.rowcount == 1
 
     def cached(self, key, now):
         with self.connection() as db:

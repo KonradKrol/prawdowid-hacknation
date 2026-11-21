@@ -5,6 +5,7 @@ primary_region = "fra"
   PRAWDOWID_ENV = "production"
   PRAWDOWID_DATA_DIR = "/data"
   PRAWDOWID_CORPUS = "/srv/prawdowid/Research/Prawdowid_Korpus_Probny.jsonl"
+  PRAWDOWID_PAID_CHECK_LIMIT = "400"
 
 [[mounts]]
   source = "data"

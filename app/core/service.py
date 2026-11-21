@@ -122,6 +122,8 @@ class Service:
                         result.items = [missing_item("t1", root, "W zatwierdzonym korpusie nie znaleziono pasujących dowodów.")]
                     elif not self.settings.key:
                         result.status, result.message = "technical_error", "Brakuje konfiguracji usługi modelu."
+                    elif self.settings.paid_check_limit and not self.store.reserve_paid_check(self.settings.paid_check_limit):
+                        result.status, result.message = "technical_error", "Pula sprawdzeń w tym demie została wykorzystana."
                     else:
                         self.assess(result, root, candidates, suspected, now)
             if result.status == "needs_clarification" and rounds >= 2:

@@ -1,6 +1,25 @@
+from datetime import date
+
 from app.contract import Evidence, Item, Premise, Strength
 from app.core.safety import safe_copy
 from prawdowid_core import literal_citation
+
+
+POLISH_MONTHS = (
+    "stycznia", "lutego", "marca", "kwietnia", "maja", "czerwca",
+    "lipca", "sierpnia", "września", "października", "listopada", "grudnia",
+)
+
+
+def matches_publication_date(answer, published_on):
+    if not answer or not published_on:
+        return False
+    if answer == published_on:
+        return True
+    publication = date.fromisoformat(published_on)
+    human_date = f"{publication.day} {POLISH_MONTHS[publication.month - 1]} {publication.year}"
+    normalized = " ".join(answer.casefold().split()).rstrip(".")
+    return normalized in {human_date, f"{human_date} r", f"{human_date} roku", publication.strftime("%d.%m.%Y")}
 
 
 def citations_for(draft, sources):
@@ -11,8 +30,8 @@ def citations_for(draft, sources):
             continue
         published = source.get("published_on")
         if ref.field == "published_on":
-            if (draft.kind != "answer" or published is None or draft.answer != published
-                    or ref.quote is not None or ref.stance != "supports"):
+            if (draft.kind != "answer" or ref.quote is not None or ref.stance != "supports"
+                    or not matches_publication_date(draft.answer, published)):
                 continue
         elif not ref.quote or len(ref.quote.split()) < 3 or not literal_citation([source], ref.source_id, ref.quote):
             continue
@@ -84,6 +103,7 @@ def normalize(draft, sources, item_id, question, canary):
         return missing_item(item_id, claim, "Dostępne źródła nie rozstrzygają tej tezy.", missing, evidence, span)
     expected = {"confirmed": {"supports"}, "false": {"refutes"}, "misleading": {"context", "refutes"}}
     if draft.kind == "answer":
+        answer = next((row.published_on for row in evidence if row.field == "published_on"), answer)
         valid = draft.label is None and bool(answer) and "supports" in stances
     else:
         valid = bool(stances & expected.get(draft.label, set()))

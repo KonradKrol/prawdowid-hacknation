@@ -22,6 +22,7 @@ class Settings:
     price_out: str | None = field(default_factory=lambda: os.getenv("PRAWDOWID_PRICE_OUT_PER_M"))
     timeout: float = field(default_factory=lambda: float(os.getenv("PRAWDOWID_TIMEOUT_S", "22")))
     rate_limit_enabled: bool = field(default_factory=lambda: os.getenv("PRAWDOWID_RATE_LIMIT_ENABLED") == "1")
+    paid_check_limit: int = field(default_factory=lambda: int(os.getenv("PRAWDOWID_PAID_CHECK_LIMIT", "0")))
     whatsapp_secret: str = field(default_factory=lambda: os.getenv("PRAWDOWID_WA_APP_SECRET", ""), repr=False)
     whatsapp_token: str = field(default_factory=lambda: os.getenv("PRAWDOWID_WA_VERIFY_TOKEN", ""), repr=False)
 
@@ -32,3 +33,5 @@ class Settings:
             raise ValueError("The fake evaluator is disabled in production")
         if self.timeout <= 0:
             raise ValueError("The model timeout must be positive")
+        if self.paid_check_limit < 0:
+            raise ValueError("The paid check limit must be nonnegative")

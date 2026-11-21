@@ -10,7 +10,7 @@ from app.contract import CheckResult
 from app.core.model import CitationDraft, ItemDraft
 from app.core.result import normalize
 from app.core.safety import input_info
-from app.core.service import get_service
+from app.core.service import Service, get_service
 from app.main import create_app
 from prawdowid_core import DEFAULT_CORPUS, load_corpus
 
@@ -66,6 +66,29 @@ def test_request_rate_limit_is_opt_in(configured, monkeypatch, path, enabled):
         for _ in range(admitted):
             assert client.post(path, json=payload).status_code == 200
         assert client.post(path, json=payload).status_code == (429 if enabled else 200)
+
+
+def test_paid_check_limit_is_shared_between_channels(configured, monkeypatch):
+    monkeypatch.setenv("PRAWDOWID_EVALUATOR", "live")
+    monkeypatch.setenv("PRAWDOWID_API_KEY", "local-test-placeholder")
+    monkeypatch.setenv("PRAWDOWID_PAID_CHECK_LIMIT", "1")
+    assessed = []
+
+    def assess(service, result, root, candidates, suspected, now):
+        assessed.append(result.channel)
+
+    monkeypatch.setattr(Service, "assess", assess)
+    service = Service(Settings())
+    try:
+        question = "Czy RCB wysłało SMS do mężczyzn?"
+        first = service.run(question, channel="web", use_cache=False)
+        second = service.run(question, channel="adapter", use_cache=False)
+    finally:
+        service.corpus.close()
+
+    assert first.status == "ok"
+    assert second.status == "technical_error"
+    assert assessed == ["web"]
 
 
 def test_session_persistence_and_deletion(configured):
@@ -127,6 +150,33 @@ def test_masking_preserves_topic_and_hides_query():
     assert result.url == "https://example.org/post"
     assert "token" not in result.text_masked
     assert "test@" not in result.text_masked
+
+
+@pytest.mark.parametrize(("answer", "kind"), [
+    ("2018-11-27", "answer"),
+    ("27 listopada 2018 roku.", "answer"),
+    (" 27 listopada 2018 r. ", "answer"),
+    ("27.11.2018", "answer"),
+    ("28 listopada 2018 roku.", "verdict"),
+])
+def test_publication_date_answers_are_validated_against_metadata(answer, kind):
+    docs, _ = load_corpus(DEFAULT_CORPUS)
+    source = docs["rcb-2018-dementi"]
+    draft = ItemDraft(
+        claim="Dzień publikacji sprostowania", claim_span=None, kind="answer", label=None,
+        answer=answer, reason="Data publikacji według dokumentu.",
+        missing_evidence=None, context_mismatch=None,
+        evidence=[CitationDraft(source_id=source["id"], stance="supports",
+                                field="published_on", quote=None)],
+    )
+    item = normalize(draft, [source], "t1", "Kiedy opublikowano sprostowanie?", "")
+    assert item.kind == kind
+    if kind == "answer":
+        assert item.answer == source["published_on"]
+        assert item.evidence[0].field == "published_on"
+    else:
+        assert item.label == "insufficient_evidence"
+        assert not item.evidence
 
 
 def test_invalid_quote_downgrades_verdict():
