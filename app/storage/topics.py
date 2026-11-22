@@ -42,23 +42,26 @@ class TopicStore:
             db.execute("INSERT INTO topic_reports VALUES (?, ?, ?, ?, ?, ?, ?)",
                        (topic_id, now, check_id, channel, label, topic, text[:600]))
 
-    def topics_board(self, now, since, limit=30):
-        """Tematy z ostatnich dni: liczba zgłoszeń, w ostatniej godzinie, rozkład ocen i ostatnie treści."""
+    def topics_board(self, now, since, limit=30, *, hourly_threshold, daily_threshold):
+        """Tematy z ostatnich dni: liczba zgłoszeń w ostatniej godzinie i dobie, rozkład ocen i ostatnie treści."""
         with self.connection() as db:
             rows = db.execute(
                 """SELECT t.id, t.title, t.reports, t.created, t.updated,
-                          (SELECT COUNT(*) FROM topic_reports r WHERE r.topic_id=t.id AND r.created >= ?)
-                   FROM topics t WHERE t.updated >= ? ORDER BY 6 DESC, t.reports DESC, t.updated DESC LIMIT ?""",
-                (now - 3600, since, limit)).fetchall()
+                          (SELECT COUNT(*) FROM topic_reports r WHERE r.topic_id=t.id AND r.created >= ?) AS last_hour,
+                          (SELECT COUNT(*) FROM topic_reports r WHERE r.topic_id=t.id AND r.created >= ?) AS last_day
+                   FROM topics t WHERE t.updated >= ?
+                   ORDER BY CASE WHEN last_hour >= ? THEN 2 WHEN last_day >= ? THEN 1 ELSE 0 END DESC,
+                            last_hour DESC, last_day DESC, t.updated DESC LIMIT ?""",
+                (now - 3600, now - 86400, since, hourly_threshold, daily_threshold, limit)).fetchall()
             board = []
-            for topic_id, title, reports, created, updated, last_hour in rows:
+            for topic_id, title, reports, created, updated, last_hour, last_day in rows:
                 labels = dict(db.execute("SELECT COALESCE(label, 'brak'), COUNT(*) FROM topic_reports WHERE topic_id=? GROUP BY 1",
                                          (topic_id,)).fetchall())
                 recent = [{"created": r[0], "channel": r[1], "text": r[2], "topic": r[3]} for r in db.execute(
                     "SELECT created, channel, text, topic FROM topic_reports WHERE topic_id=? ORDER BY created DESC LIMIT 10",
                     (topic_id,)).fetchall()]
                 board.append({"id": topic_id, "title": title, "reports": reports, "created": created, "updated": updated,
-                              "last_hour": last_hour, "labels": labels, "recent": recent})
+                              "last_hour": last_hour, "last_day": last_day, "labels": labels, "recent": recent})
         return board
 
     def topics_prune(self, before):

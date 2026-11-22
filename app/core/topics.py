@@ -19,7 +19,8 @@ from app.ingest.places import fold
 
 WINDOW_S = 48 * 3600
 SAME = 0.67
-GROWING_LAST_HOUR = 5  # tyle zgłoszeń w ciągu godziny = „szybko rośnie”
+GROWING_LAST_HOUR = 5
+RECURRING_LAST_DAY = 15
 STEM = 6
 STOP = {"czy", "jest", "przez", "oraz", "ktory", "ktora", "ktore", "jako", "przy", "tego", "temat",
         "prawda", "informacja", "wiadomosc", "sprawa", "kwestia", "zapowiedz", "plan", "mozliwe", "zmiana"}
