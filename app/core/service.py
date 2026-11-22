@@ -170,7 +170,9 @@ class Service:
                         cache_key = sha256(json.dumps(lookup, ensure_ascii=False).encode()).hexdigest()
                     cached = self.store.cached(cache_key, now) if cache_key and use_cache else None
                     if cached:
-                        result.items, result.summary, result.notices = cached.items, cached.summary, cached.notices
+                        # Uwagę o znanej narracji liczymy zawsze od nowa (poniżej), żeby jej nie dublować.
+                        result.items, result.summary = cached.items, cached.summary
+                        result.notices = [n for n in cached.notices if n.type != "known_narrative"]
                         result.meta.cached, result.meta.estimated_cost_usd = True, 0.0
                     elif not candidates:
                         result.items = [missing_item("t1", root, "W zatwierdzonym korpusie nie znaleziono pasujących dowodów.")]
