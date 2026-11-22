@@ -99,6 +99,7 @@ def citations_for(draft, sources):
             archival=bool(source.get("archival")) or bool(published and
                 int(source["checked_on"][:4]) - int(published[:4]) >= 2),
             explanation=getattr(ref, "explanation", None) or None,
+            quote_role=getattr(ref, "quote_role", None),
         )
         if entry not in evidence:
             evidence.append(entry)

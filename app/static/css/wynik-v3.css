@@ -254,3 +254,8 @@ html.a11y-contrast .quick__try button, html.a11y-contrast .quick__help summary {
 .hv__body { min-width: 0; overflow-wrap: anywhere; }
 /* Pasek na całą szerokość liczy 100vw razem z paskiem przewijania; przycinamy te kilka pikseli */
 html, body { overflow-x: clip; }
+
+/* Cytat, który jest sprawdzanym twierdzeniem (np. słowa polityka w fact-checku), a nie ustaleniem źródła */
+.proof__flag { display: inline-flex; align-items: center; gap: .35rem; margin: .25rem 0 .4rem; padding: .15rem .5rem; background: #FFF2DF; color: #6B3A00; border: 1px solid #E9C48F; font-weight: 700; font-size: .9rem; }
+.proof__flag svg { width: 1rem; height: 1rem; }
+.proof--claim .proof__quote { border-left-color: #B26A00; color: var(--ink-2); font-style: italic; }

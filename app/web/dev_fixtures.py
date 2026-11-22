@@ -94,7 +94,8 @@ FIXTURES = {
              "evidence": [
                  _ev("supports", source_id="przyklad-a", quote="W protestach uczestniczyło ponad milion pracowników.",
                      title="Przykładowy komunikat organizatora (przykład testowy)", publisher="Źródło A — przykład testowy",
-                     url="https://example.org/a", published_on="2026-10-03", source_type="organizacja", is_primary=False, archival=False),
+                     url="https://example.org/a", published_on="2026-10-03", source_type="organizacja", is_primary=False, archival=False,
+                     quote_role="checked_claim"),
                  _ev("refutes", source_id="przyklad-b", quote="Według szacunków w protestach wzięło udział około 300 tysięcy osób.",
                      title="Przykładowy raport (przykład testowy)", publisher="Źródło B — przykład testowy",
                      url="https://example.org/b", published_on="2026-10-04", source_type="media", is_primary=False, archival=False),

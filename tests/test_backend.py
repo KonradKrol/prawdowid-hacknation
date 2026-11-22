@@ -307,3 +307,10 @@ def test_cache_text_ignores_case_punctuation_and_polish_letters():
     from app.core.service import cache_text
     assert cache_text("Czy RCB wysłało alert?!") == cache_text("czy rcb  wyslalo alert")
     assert cache_text("Czy RCB wysłało alert?") != cache_text("Czy RCB nie wysłało alertu?")
+
+
+def test_checked_claim_quote_is_flagged_on_result_page(configured):
+    with TestClient(create_app()) as client:
+        page = client.get("/dev/wynik/sprzecznosc").text
+    assert "Cytat to sprawdzane twierdzenie, a nie ustalenie źródła" in page
+    assert page.count("proof--claim") == 1  # tylko cytat-twierdzenie, nie raport, który mu przeczy

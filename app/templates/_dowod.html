@@ -1,8 +1,10 @@
 {# Dowód: najpierw po ludzku, co ten materiał mówi; potem tytuł, cytat i źródło #}
 {% set undecided = item.label in ("insufficient_evidence", "not_verifiable") %}
 {% for ev in item.evidence %}
-<figure class="proof">
+{% set claimed = ev.quote_role == "checked_claim" %}
+<figure class="proof{% if claimed %} proof--claim{% endif %}">
   <p class="proof__label">{% if undecided %}Co wiadomo ze źródeł{% else %}Skąd to wiemy{% endif %}</p>
+  {% if claimed %}<p class="proof__flag"><svg aria-hidden="true"><use href="#i-alert"/></svg>Cytat to sprawdzane twierdzenie, a nie ustalenie źródła</p>{% endif %}
   {% if ev.explanation %}<p class="proof__explain">{{ ev.explanation }}</p>{% endif %}
   <p class="proof__title">{{ ev.title }}</p>
   {% if ev.quote %}<blockquote class="proof__quote">„{{ ev.quote }}”</blockquote>

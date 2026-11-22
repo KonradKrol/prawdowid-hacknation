@@ -31,6 +31,7 @@ class Evidence(BaseModel):
     is_primary: bool
     archival: bool
     explanation: str | None = None
+    quote_role: Literal["finding", "checked_claim"] | None = None  # checked_claim: cytat to twierdzenie sprawdzane przez źródło
 
 
 class Premise(BaseModel):
