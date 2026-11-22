@@ -1,0 +1,597 @@
+[
+ {
+  "id": "gov-gdynia-narodowe-swieto-niepodleglosci",
+  "score": 0,
+  "powod": "Fragmenty zawierają ogólne, okolicznościowe opisy i apel, ale nie podają konkretnego sprawdzalnego faktu o obchodach w Gdyni."
+ },
+ {
+  "id": "gov-rozmowy-o-realizacji-programu-olioc",
+  "score": 0,
+  "powod": "To ogólnikowy opis spotkania, bez konkretnej informacji o jego przebiegu lub ustaleniach."
+ },
+ {
+  "id": "gov-zeromski-wciaz-inspiruje-i-laczy-pokolenia",
+  "score": 0,
+  "powod": "Fragmenty zawierają ogólnikowy opis znaczenia pielęgnowania tradycji i edukacji, ale nie podają konkretnego sprawdzalnego faktu o Żeromskim."
+ },
+ {
+  "id": "gov-strazacka-zbiorka-z-okazji-narodowego-swieta-niepodleglosci",
+  "score": 0,
+  "powod": "Fragmenty zawierają wyłącznie ogólne podziękowania i gratulacje, bez konkretnego, sprawdzalnego faktu o zbiórce."
+ },
+ {
+  "id": "gov-konkurs-plastyczny-uroki-lubelszczyzny-w-stylu-art-dco-zosta",
+  "score": 1,
+  "powod": "Fragmenty podają tytuły prac i ich autorów, ale nie wskazują kluczowego faktu, takiego jak miejsce w konkursie ani jego rozstrzygnięcie."
+ },
+ {
+  "id": "gov-wodociag-publiczny-wisniowa-gora---woda-nadaje-sie-do-spozyc",
+  "score": 1,
+  "powod": "Fragmenty wskazują, że komunikat dotyczy przydatności wody z wodociągu Wiśniowa Góra, ale nie podają, czy woda nadaje się do spożycia."
+ },
+ {
+  "id": "gov-posiedzenie-wojewodzkiej-rady-dialogu-spolecznego3",
+  "score": 1,
+  "powod": "Fragmenty wskazują tematy posiedzenia Wojewódzkiej Rady Dialogu Społecznego, ale nie podają konkretnych ustaleń ani faktów dotyczących tych tematów."
+ },
+ {
+  "id": "gov-ostrzezenie-publiczne-dotyczace-zywnosci-wykrycie-obecnosci-2",
+  "score": 1,
+  "powod": "Fragmenty wskazują na wykrycie bakterii w produkcie i możliwe skutki jej spożycia, ale nie podają kluczowych danych o serze ani partii."
+ },
+ {
+  "id": "gov-cyberczwartki-fakty-i-mity-dokumentacja-to-wiecej-niz-polity",
+  "score": 1,
+  "powod": "Fragmenty wskazują, że dokumentacja w KSC 2.0 obejmuje także dowody realizacji instrukcji, ale nie podają szczegółów ani przykładów."
+ },
+ {
+  "id": "gov-przed-zima-apel-wojewody",
+  "score": 1,
+  "powod": "Fragment wskazuje, gdzie znaleźć bazę miejsc tymczasowego schronienia w gminach województwa pomorskiego, ale nie podaje konkretnych miejsc ani danych o ich dostępności."
+ },
+ {
+  "id": "gov-nobirdflu--czyli-jak-zmniejszyc-ryzyko-przedostania-sie-wiru",
+  "score": 1,
+  "powod": "Fragment opisuje ogólnie charakter i możliwe skutki grypy ptaków, ale nie podaje konkretnego zdarzenia ani szczegółu pozwalającego rozstrzygnąć pytanie o określony fakt."
+ },
+ {
+  "id": "gov-ostrzezenie-publiczne-dotyczace-zywnosci-stwierdzenie-niezad-2",
+  "score": 1,
+  "powod": "Fragmenty wskazują na niezadeklarowaną obecność glutenu i możliwe ryzyko dla alergików, ale nie podają danych pozwalających ustalić, której partii produktu dotyczy ostrzeżenie."
+ },
+ {
+  "id": "gov-nowe-obowiazki-nalozone-na-wlascicieli-lub-zarzadcow-budynko",
+  "score": 1,
+  "powod": "Fragment wskazuje obowiązek analizy ryzyk dla wewnętrznych instalacji wodociągowych, ale drugi jest jedynie urwanym elementem opisu parametrów i brakuje szczegółów pozwalających ustalić pełny zakres obowiązków."
+ },
+ {
+  "id": "gov-outsourcing-pracowniczy-pod-lupa-kas-spolki-musza-zaplacic-p",
+  "score": 1,
+  "powod": "Fragmenty wskazują, że KAS wykryła zaniżanie VAT przez dwie spółki z branży outsourcingu pracowniczego, ale nie podają kluczowej kwoty zaległego podatku ani wyniku sprawy."
+ },
+ {
+  "id": "gov-legalizacja-pobytu-w-polsce-zapraszamy-na-dzien-otwarty7",
+  "score": 1,
+  "powod": "Fragmenty wskazują miejsce obsługi cudzoziemców i program, w ramach którego odbywa się dzień otwarty, ale nie podają jego terminu ani innych kluczowych szczegółów wydarzenia."
+ },
+ {
+  "id": "gov-v-powiatowy-przeglad-mlodziezowej-tworczosci-patriotycznej",
+  "score": 1,
+  "powod": "Fragmenty wskazują, że odbył się przegląd twórczości patriotycznej, a uczestnicy prezentowali piosenki, tańce i etiudy, lecz nie podają kluczowych szczegółów, takich jak data ani miejsce wydarzenia."
+ },
+ {
+  "id": "gov-polska-gospodarzem-miedzynarodowej-konferencji",
+  "score": 1,
+  "powod": "Fragment wskazuje temat konferencji i ocenia działania Polski, ale nie podaje konkretnego sprawdzalnego wyniku ani szczegółów tych działań."
+ },
+ {
+  "id": "gov-ostrzezenie-publiczne-dotyczace-zywnosci-alkaloidy-opium-w-o",
+  "score": 1,
+  "powod": "Fragmenty wskazują na przekroczenie dopuszczalnego poziomu alkaloidów i ryzyko zdrowotne oraz podają dystrybutora, ale nie zawierają numeru partii ani danych pozwalających ustalić, o który produkt chodzi."
+ },
+ {
+  "id": "gov-ostrzezenie-publiczne-dotyczace-zywnosci-mozliwa-obecnosc-fr",
+  "score": 1,
+  "powod": "Fragmenty wskazują na możliwe zanieczyszczenie puddingów proteinowych szkłem i ryzyko urazu, ale nie podają kluczowych danych identyfikujących partię produktu."
+ },
+ {
+  "id": "gov-14-listopada-swiatowy-dzien-cukrzycy",
+  "score": 1,
+  "powod": "Fragmenty dotyczą ogólnych zaleceń zdrowego żywienia i aktywności fizycznej, ale nie zawierają konkretnego faktu ani informacji o cukrzycy."
+ },
+ {
+  "id": "gov-bezpieczna-cyfrowa-przyszlosc---zapraszamy-do-udzialu-w-kons",
+  "score": 1,
+  "powod": "Fragmenty wskazują, że Ministerstwo Cyfryzacji organizuje konsultacje co pół roku i że grudniowe spotkanie ma dotyczyć bezpiecznej cyfrowej przyszłości, ale nie podają konkretnej daty ani szczegółów wydarzenia."
+ },
+ {
+  "id": "gov-ostrzezenie-publiczne-dotyczace-zywnosci-mozliwa-obecnosc-fr-2",
+  "score": 1,
+  "powod": "Fragmenty wskazują produkt KRYSTYNKA, zgłoszenie fragmentu szkła oraz producenta, ale nie podają numeru kwestionowanej partii ani skali wycofania."
+ },
+ {
+  "id": "gov-komunikat-miedzyresortowej-komisji-ds-nds-i-ndn-dotyczacy-ko",
+  "score": 1,
+  "powod": "Fragment wskazuje, że komunikat dotyczy przeliczania stężenia diizocyjanianu na stężenie grupy NCO w związku ze zmianami w wykazie NDS, ale nie podaje samego wzoru ani szczegółów zmian."
+ },
+ {
+  "id": "gov-strazacy-niepodlegla-2022",
+  "score": 1,
+  "powod": "Fragment podaje datę odzyskania niepodległości i okres 123 lat zaborów, ale drugi jedynie zapowiada artykuł, nie przedstawiając jego treści."
+ },
+ {
+  "id": "gov-koscierzyna-konferencja-wies-kobieta-stoi",
+  "score": 1,
+  "powod": "Fragmenty wskazują temat konferencji i omawiane zagadnienia, ale nie podają jej daty ani innych konkretnych ustaleń lub rozstrzygnięć."
+ },
+ {
+  "id": "gov-bezpieczniejsze-szkoly-i-wieksza-ochrona-nauczycieli-projekt",
+  "score": 1,
+  "powod": "Fragmenty wskazują temat i proponowane zmiany, ale nie podają konkretnych rozwiązań ani szczegółów projektu ustawy."
+ },
+ {
+  "id": "gov-nowy-konsultant-wojewodzki-w-dziedzinie-kardiochirurgii",
+  "score": 1,
+  "powod": "Fragmenty wskazują stanowisko Macieja Kolowcy i opisują ogólne obowiązki konsultantów wojewódzkich, ale nie podają, czy został nowym konsultantem w dziedzinie kardiochirurgii."
+ },
+ {
+  "id": "gov-olioc-1-600-000-zl-dla-powiatu-leborskiego",
+  "score": 1,
+  "powod": "Fragmenty wskazują, że zakupione ambulanse typu C mają napęd 4×4 i zaawansowane wyposażenie, ale nie podają kluczowej informacji o przekazaniu 1 600 000 zł powiatowi lęborskiemu."
+ },
+ {
+  "id": "gov-czlowiek-w-centrum-technologicznej-zmiany-ministerstwo-cyfry",
+  "score": 1,
+  "powod": "Fragmenty wskazują temat festiwalu i ogólny kontekst bezpieczeństwa cyfrowego, ale nie podają konkretnych faktów o terminie, miejscu ani programie wydarzenia."
+ },
+ {
+  "id": "gov-geologia-gospodarka-wodna-i-gornictwo-wspolpraca-jako-wazny",
+  "score": 1,
+  "powod": "Fragmenty wskazują, że dyskusja dotyczyła współpracy i usprawniania inwestycji geologiczno-górniczych, ale nie podają konkretnego rozstrzygnięcia ani szczegółowego faktu."
+ },
+ {
+  "id": "gov-krajowe-centrum-przetwarzania-danych--16-mld-zl-na-bezpieczn",
+  "score": 1,
+  "powod": "Fragmenty wskazują cel i rolę Krajowego Centrum Przetwarzania Danych, ale nie podają konkretnych sprawdzalnych informacji o inwestycji wartej 1,6 mld zł."
+ },
+ {
+  "id": "gov-programisci-zmierza-sie-z-wyzwaniami-administracji-publiczne",
+  "score": 1,
+  "powod": "Fragmenty wyjaśniają cel i organizatorów HackNation, ale nie podają konkretnych informacji o rejestracji na edycję 2026."
+ },
+ {
+  "id": "gov-xxi-miedzynarodowa-konferencja-wspolczesne-oblicza-bezpiecze",
+  "score": 1,
+  "powod": "Fragmenty jasno opisują tematykę pierwszego dnia konferencji, ale nie podają konkretnych ustaleń, działań ani innych sprawdzalnych faktów."
+ },
+ {
+  "id": "gov-apel-na-okres-zimowy---nasza-wrazliwosc-moze-uratowac-komus",
+  "score": 1,
+  "powod": "Fragmenty wskazują, że niskie temperatury zagrażają osobom bez schronienia i apelują o reagowanie, ale nie podają konkretnego zdarzenia ani innego weryfikowalnego faktu."
+ },
+ {
+  "id": "gov-to-stanowisko-ma-pasowac-do-ciebie-nie-odwrotnie",
+  "score": 1,
+  "powod": "Fragmenty jasno wskazują temat ergonomii i jej ogólną zasadę, ale nie zawierają konkretnego sprawdzalnego faktu dotyczącego decyzji, daty, liczby ani wyniku."
+ },
+ {
+  "id": "gov-pierwszy-krajowy-program-certyfikacji-cyberbezpieczenstwa-sk",
+  "score": 1,
+  "powod": "Fragmenty wyjaśniają cel i możliwe zastosowania certyfikatu Firma Bezpieczna Cyfrowo, ale nie podają kluczowych szczegółów programu ani jego statusu."
+ },
+ {
+  "id": "gov-rzuc-palenie-zrob-pierwszy-krok-dla-siebie",
+  "score": 1,
+  "powod": "Fragmenty wskazują na szkodliwość palenia i korzyści z jego rzucenia, ale nie podają konkretnych, weryfikowalnych danych o wielkości ryzyka ani tempie regeneracji organizmu."
+ },
+ {
+  "id": "gov-nowy-konsultant-wojewodzki-w-dziedzinie-psychologii-kliniczn",
+  "score": 1,
+  "powod": "Fragmenty podają informacje o pracy Wojciecha Rakoczego i ogólnych zadaniach konsultantów, ale nie zawierają kluczowego faktu z tytułu: że został nowym konsultantem wojewódzkim w dziedzinie psychologii klinicznej."
+ },
+ {
+  "id": "gov-ministerstwo-cyfryzacji-pierwszym-ministerstwem-w-polsce-z-c",
+  "score": 1,
+  "powod": "Fragmenty potwierdzają audyt i uzyskanie certyfikatu ISO 27001 przez Ministerstwo Cyfryzacji, ale nie wskazują, że było ono pierwszym ministerstwem w Polsce."
+ },
+ {
+  "id": "gov-dialog-dla-sprawniejszych-inwestycji-wody-polskie-i-branza-w",
+  "score": 1,
+  "powod": "Fragmenty wskazują temat spotkania i deklarację dalszej współpracy, ale nie podają konkretnych rozstrzygnięć ani szczegółów zmian legislacyjnych."
+ },
+ {
+  "id": "gov-rusza-modernizacja-obwalowan-wisly-gostynki-i-mlecznej-wody",
+  "score": 1,
+  "powod": "Fragmenty wskazują cel inwestycji i przywołują powodzie z 2010 oraz września 2024 roku, ale nie podają kluczowych faktów o podpisanych umowach ani zakresie modernizacji obwałowań."
+ },
+ {
+  "id": "gov-spotkanie-branzowe-z-przedstawicielami-sektora-konstrukcji-s",
+  "score": 1,
+  "powod": "Fragmenty jasno wskazują temat spotkania i omawiane zawody, ale nie podają konkretnych danych o kształceniu ani szczegółów samego spotkania."
+ },
+ {
+  "id": "gov-renaturyzacja-oparta-na-wiedzy-wody-polskie-angazuja-sie-w-p",
+  "score": 1,
+  "powod": "Fragmenty wskazują, że Wody Polskie uczestniczą w projektach badawczych i wymieniają WARBLER, FLLORA oraz BeaverWise, ale nie podają konkretnych wyników ani szczegółów tych przedsięwzięć."
+ },
+ {
+  "id": "gov-wody-polskie-intensywnie-przygotowuja-sie-do-sezonu-zimowego",
+  "score": 1,
+  "powod": "Fragmenty opisują zagrożenia związane z zimowymi zjawiskami lodowymi i ogólnie działania przygotowawcze Wód Polskich, ale nie podają konkretnych danych o wykonanych przygotowaniach."
+ },
+ {
+  "id": "gov-wody-polskie-z-nowym-statutem-od-1-stycznia-2027-r",
+  "score": 1,
+  "powod": "Fragmenty opisują ogólne cele i uzasadnienie nowego statutu, ale nie podają konkretnego faktu z tytułu, że statut zacznie obowiązywać 1 stycznia 2027 r."
+ },
+ {
+  "id": "gov-badanie-satysfakcji-klienta-lubelskiego-urzedu-wojewodzkiego",
+  "score": 2,
+  "powod": "Fragmenty podają konkretne informacje o terminie ankiety (2–27 listopada 2026 r.) i adresie formularza, które pozwalają odpowiedzieć na pytania o badanie."
+ },
+ {
+  "id": "gov-6-lat-uslugi-umow-wizyte-w-urzedzie-skarbowym",
+  "score": 2,
+  "powod": "Fragmenty podają konkretną datę uruchomienia usługi oraz informację, że od tego czasu umówiono ponad 24 miliony wizyt."
+ },
+ {
+  "id": "gov-alert-rcb---zagrozenie-z-powietrza-2110",
+  "score": 2,
+  "powod": "Fragmenty podają konkretną treść alertu o zakończeniu ataku na Ukrainę i braku zagrożenia w Polsce oraz wskazują województwa, do których go wysłano."
+ },
+ {
+  "id": "gov-alert-rcb---zagrozenie-z-powietrza-2010",
+  "score": 2,
+  "powod": "Fragmenty podają konkretną treść komunikatu o zakończeniu ataku i braku zagrożenia w Polsce oraz informują, że alert wysłano do odbiorców w województwach podkarpackim i lubelskim."
+ },
+ {
+  "id": "gov-kas-odzyskala-ponad-47-mln-zl-zaleglego-podatku",
+  "score": 2,
+  "powod": "Fragmenty podają, że wielkopolska KAS wykazała nieprawidłowości w rozliczeniu WHT, a do budżetu wpłynęło ponad 47 mln zł zaległego podatku wraz z odsetkami."
+ },
+ {
+  "id": "gov-akcja-kas-w-wolce-kosowskiej-porzucony-towar-wart-44-mln-zl",
+  "score": 2,
+  "powod": "Fragmenty podają konkretne ustalenia KAS: zatrzymanie prawie 80 tys. sztuk towarów z podrobionymi znakami oraz zabezpieczenie e-papierosów i płynów bez polskich znaków akcyzy."
+ },
+ {
+  "id": "gov-kas-uderza-w-nielegalny-hazard-zabezpieczono-85-automatow-o",
+  "score": 2,
+  "powod": "Fragmenty podają konkretny fakt o zabezpieczeniu 85 nielegalnych automatów oraz przeprowadzeniu działań jednocześnie w 20 lokalach w Warszawie."
+ },
+ {
+  "id": "gov-nowe-jednostki-w-krajowym-systemie-ratowniczo-gasniczym",
+  "score": 2,
+  "powod": "Fragmenty podają, że decyzją z 10 listopada 2026 r. do systemu włączono 11 listopada 248 jednostek OSP, w tym 79 nowych i 169 ponownie włączonych."
+ },
+ {
+  "id": "gov-alert-rcb---cwiczenia-powiat-laski",
+  "score": 2,
+  "powod": "Fragmenty podają konkretną informację o treningu systemu alarmowania 14 października w godzinach 10:00–13:00 na terenie powiatu łaskiego oraz o wysłaniu tam alertu RCB."
+ },
+ {
+  "id": "gov-alert-rcb---cwiczenia-sluzb-1910",
+  "score": 2,
+  "powod": "Fragmenty podają daty i lokalizacje ćwiczeń służb w Warszawie oraz informację, że alert wysłano do odbiorców na terenie miasta."
+ },
+ {
+  "id": "gov-alert-rcb---niezdatna-woda-1710",
+  "score": 2,
+  "powod": "Fragmenty podają, że 17 października woda w wymienionych miejscowościach powiatu polkowickiego nie nadawała się do spożycia, a Alert RCB wysłano na terenie tego powiatu."
+ },
+ {
+  "id": "gov-alert-rcb---niezdatna-woda-2110",
+  "score": 2,
+  "powod": "Fragmenty podają konkretny komunikat, że woda z wodociągu Wrzos w części Świeradowa-Zdroju nie nadaje się do spożycia, oraz wskazują obszar wysłania alertu."
+ },
+ {
+  "id": "gov-malgorzata-krok-wybrana-na-przewodniczaca-zarzadu-euca",
+  "score": 2,
+  "powod": "Fragmenty podają konkretny wynik wyborów: Małgorzata Krok została przewodniczącą Zarządu EUCA, zdobywając 21 z 27 głosów."
+ },
+ {
+  "id": "gov-alert-rcb---zagrozenie-z-powietrza-1810",
+  "score": 2,
+  "powod": "Fragmenty podają konkretne informacje o rosyjskim ataku powietrznym na Ukrainę, działaniach polskiego lotnictwa oraz zakończeniu ataku i braku zagrożenia w Polsce."
+ },
+ {
+  "id": "gov-alert-rcb---zagrozenie-atakiem-z-powietrza-1611",
+  "score": 2,
+  "powod": "Fragmenty podają konkretne komunikaty RCB o rosyjskim ataku powietrznym na Ukrainę, działaniach polskiego lotnictwa i braku zagrożenia w Polsce po zakończeniu ataku."
+ },
+ {
+  "id": "gov-alert-rcb---zagrozenie-atakiem-z-powietrza-1511",
+  "score": 2,
+  "powod": "Fragmenty podają konkretne komunikaty RCB o rosyjskim ataku powietrznym na Ukrainę, działaniach polskiego lotnictwa oraz późniejszym zakończeniu ataku i braku zagrożenia w Polsce."
+ },
+ {
+  "id": "gov-alert-rcb---rosyjski-atak-powietrzny-na-terenie-ukrainy-1510",
+  "score": 2,
+  "powod": "Fragmenty podają, że 15 października trwał rosyjski atak powietrzny na Ukrainę, polskie lotnictwo operowało w przestrzeni RP, a po zakończeniu ataku nie było zagrożenia na terenie Polski."
+ },
+ {
+  "id": "gov-alert-rcb---trening-systemu-alarmowania2",
+  "score": 2,
+  "powod": "Fragmenty podają, że 22 października w godz. 10:00–12:00 w gminie Radgoszcz odbędzie się trening systemu alarmowania z użyciem syren oraz że alert wysłano do odbiorców w powiecie dąbrowskim."
+ },
+ {
+  "id": "gov-alert-rcb---trening-systemow-alarmowania-pow-tomaszowski-151",
+  "score": 2,
+  "powod": "Fragmenty podają datę, godziny, miejsce i charakter treningu systemu alarmowania oraz informację o wysłaniu alertu."
+ },
+ {
+  "id": "gov-wodociag-publiczny-wisniowa-gora-gm-andrespol--stwierdzono-n",
+  "score": 2,
+  "powod": "Fragmenty wskazują, że w wodociągu publicznym Wiśniowa Góra stwierdzono niezgodność dotyczącą bakterii grupy coli, oraz wymieniają obszar objęty informacją z wyłączeniem konkretnych ulic."
+ },
+ {
+  "id": "gov-alert-rcb---trening-systemu-alarmowania-z-wykorzystaniem-syr",
+  "score": 2,
+  "powod": "Fragmenty podają konkretnie, że 16 października w godz. 12:00–13:00 w gminie Oława odbędzie się trening alarmowania z użyciem syren, a alert wysłano do odbiorców w powiecie oławskim."
+ },
+ {
+  "id": "gov-alert-rcb---trening-systemu-alarmowania-pow-wabrzeski-1511",
+  "score": 2,
+  "powod": "Fragmenty podają, że 15 października w godz. 08:30–13:00 w powiecie wąbrzeskim przeprowadzono trening systemu alarmowania z użyciem syren oraz że wysłano tam Alert RCB."
+ },
+ {
+  "id": "gov-uroczysta-zbiorka-z-okazji-narodowego-swieta-niepodleglosci-2",
+  "score": 2,
+  "powod": "Fragment podaje konkretną datę, miejsce i okazję uroczystej zbiórki oraz wskazuje, że uczestniczyli w niej odznaczeni, wyróżnieni i awansowani funkcjonariusze oraz pracownicy cywilni KG PSP."
+ },
+ {
+  "id": "sam-newsletter-wydarzenia-we-wroclawiu",
+  "score": 0,
+  "powod": "Fragmenty są hasłami promocyjnymi i tytułem wystawy, nie podają informacji o tym, jak zapisać się na newsletter."
+ },
+ {
+  "id": "sam-remont-ulic-okulickiego-brucknera",
+  "score": 0,
+  "powod": "Fragmenty zawierają wezwanie do obserwowania oraz nagłówek o utrudnieniach kolejowych, ale nie podają żadnego sprawdzalnego faktu o wymianie nawierzchni na ul. Okulickiego i Brucknera."
+ },
+ {
+  "id": "sam-akcja-zima-2026-2027-na-wroclawskich-drogach-wroclaw-gotowy",
+  "score": 0,
+  "powod": "Fragmenty są promocyjną zachętą i odsyłaczem do innego artykułu; nie zawierają informacji o przygotowaniu Wrocławia do zimy."
+ },
+ {
+  "id": "sam-pogoda-we-wroclawiu-ostrzezenia-prognozy",
+  "score": 0,
+  "powod": "Fragmenty zawierają wezwanie do obserwowania i tytuł innego artykułu, a nie sprawdzalne informacje o prognozie pogody we Wrocławiu."
+ },
+ {
+  "id": "sam-imgw-ostrzega-przed-burza-we-wroclawiu-w-poniedzialek-11-maj",
+  "score": 0,
+  "powod": "Fragmenty są promocyjnym wezwaniem do obserwowania oraz zajawką innego artykułu i nie podają żadnych informacji o ostrzeżeniu IMGW przed burzą."
+ },
+ {
+  "id": "sam-wroclaw-komunikacja-miejska",
+  "score": 0,
+  "powod": "Fragmenty zawierają ogólne zachęty i odsyłacze, ale nie podają konkretnych, sprawdzalnych informacji o komunikacji miejskiej we Wrocławiu."
+ },
+ {
+  "id": "sam-konkursy-portalu-wwwwroclawpl",
+  "score": 1,
+  "powod": "Fragmenty wskazują, że portal organizuje konkursy i zapowiada konkurs z gadżetami z okazji Dnia Życzliwości 2026, ale nie podają szczegółów rozstrzygnięcia ani zasad."
+ },
+ {
+  "id": "sam-aktualne-awarie-pradu-wroclaw-ulice",
+  "score": 1,
+  "powod": "Fragmenty wskazują, że tekst dotyczy przerw w dostawie prądu we Wrocławiu, ale nie podają konkretnych miejsc ani godzin wyłączeń."
+ },
+ {
+  "id": "sam-news-186313",
+  "score": 0,
+  "powod": "Fragmenty są zapowiedzią i zachętą do sprawdzenia terminów, ale nie podają żadnego konkretnego wydarzenia ani daty."
+ },
+ {
+  "id": "sam-news-186256",
+  "score": 0,
+  "powod": "Fragmenty są wstępem i odsyłaczem, nie podają konkretnych, sprawdzalnych informacji o atrakcjach ani terminach festiwalu."
+ },
+ {
+  "id": "sam-news-186304",
+  "score": 1,
+  "powod": "Fragment wskazuje, że 20 listopada w Łodzi odsłonięto napis po remoncie POW, otwarto rondo na Retkini i na Piotrkowskiej pojawiła się ciężarówka Coca-Cola, ale nie podaje szczegółów potwierdzających te informacje."
+ },
+ {
+  "id": "sam-kupa-milosci-do-psa-to-tez-odpowiedzialnosc-znane-sa-wyniki",
+  "score": 1,
+  "powod": "Fragmenty mówią o konkursie fotograficznym i liczbie nadesłanych zdjęć, ale nie podają jego wyników ani zwycięzców."
+ },
+ {
+  "id": "sam-serwis-dla-zdrowia-bezplatne-badania-i-konsultacje-na-motoar",
+  "score": 1,
+  "powod": "Fragmenty wskazują, że wydarzenie „Serwis dla zdrowia” dotyczy profilaktyki onkologicznej kobiet i mężczyzn, ale nie podają kluczowych szczegółów, takich jak termin ani konkretne badania i konsultacje."
+ },
+ {
+  "id": "sam-w-jakich-warunkach-powinni-dorastac-najmlodsi",
+  "score": 1,
+  "powod": "Fragmenty wskazują, że konferencja dotyczyła standardów jakości opieki i edukacji dzieci do lat 3, ale nie podają konkretnych warunków, w jakich powinny dorastać."
+ },
+ {
+  "id": "sam-jagodka-dolaczyla-do-torunskich-aniolow",
+  "score": 1,
+  "powod": "Fragmenty wskazują, że Jagódka została zaprezentowana przy ulicy Most Pauliński jako pierwszy anioł pierogarni, ale nie podają dokładnej daty ani innych szczegółów wydarzenia."
+ },
+ {
+  "id": "sam-zmiany-organizacji-ruchu-przy-ul-grunwaldzkiej",
+  "score": 2,
+  "powod": "Fragmenty podają przyczynę i termin wprowadzenia zmian oraz konkretną zmianę organizacji ruchu na ul. Grunwaldzkiej."
+ },
+ {
+  "id": "sam-zawieszki-swiateczne",
+  "score": 2,
+  "powod": "Fragment informuje, że Warszawa przygotowała 21 tys. drewnianych zawieszek świątecznych, które mieszkańcy mogli zabrać ze słupów reklamowych."
+ },
+ {
+  "id": "sam-wybieramy-obiekt-roku",
+  "score": 2,
+  "powod": "Fragmenty podają konkretny termin naboru, nazwę edycji oraz informacje o nagrodzie, organizatorze i częstotliwości konkursu."
+ },
+ {
+  "id": "fc-niemcy-w-kombinezonach-ochronnych-nie-podrzucali-do-polski-c",
+  "score": 0,
+  "powod": "Fragmenty zawierają jedynie ogólny wstęp i opis portalu, bez faktu dotyczącego rzekomego podrzucania chorych migrantów do Polski."
+ },
+ {
+  "id": "fc-to-nie-relokowani-imigranci-z-niemiec-tylko-obchody-eid-al-f",
+  "score": 0,
+  "powod": "Fragmenty nie podają żadnego sprawdzalnego faktu dotyczącego weryfikowanego nagrania ani tego, czy przedstawia ono obchody Eid al-Fitr."
+ },
+ {
+  "id": "fc-czym-jest-dsa-i-jak-wplywa-na-wolnosc-slowa-analiza",
+  "score": 1,
+  "powod": "Pierwszy fragment zapowiada konkretne informacje o instytucjach egzekwujących DSA, ale ich nie wymienia, a drugi jest jedynie ogólnym opisem portalu."
+ },
+ {
+  "id": "fc-zasieg-lodu-na-antarktydzie-nie-jest-dzis-o-17-wiekszy-niz-w",
+  "score": 1,
+  "powod": "Wskazano sprawdzaną tezę o 17-procentowym wzroście zasięgu lodu od 1979 roku, ale fragmenty nie podają wyniku weryfikacji ani danych pozwalających ją ocenić."
+ },
+ {
+  "id": "fc-norma-euro-7-a-wylaczenie-silnika-analiza",
+  "score": 1,
+  "powod": "Fragment jasno wskazuje temat twierdzeń o normie Euro 7 i samoczynnym wyłączaniu silnika, ale nie podaje, czy są one prawdziwe ani jakie są ustalenia fact-checku."
+ },
+ {
+  "id": "fc-w-chinach-nie-zbudowano-robota-ktory-bedzie-rodzil-dzieci",
+  "score": 1,
+  "powod": "Fragmenty wskazują, że historia o chińskim robocie-matce była szeroko rozpowszechniana i wywodziła się z doniesień portalu Kuai Ke Zhi, ale nie podają wprost werdyktu ani faktu, że takiego robota nie zbudowano."
+ },
+ {
+  "id": "fc-popularny-film-nie-przedstawia-chaosu-na-tureckiej-ulicy",
+  "score": 1,
+  "powod": "Fragment podaje wstępny wniosek, że nagranie zostało zmanipulowane i nie przedstawia miejsca w Turcji, ale nie wskazuje, gdzie je nagrano ani na czym polegała manipulacja."
+ },
+ {
+  "id": "fc-szczepionki-mrna-nie-modyfikuja-ludzkiego-genomu-i-nie-wywol",
+  "score": 1,
+  "powod": "Fragmenty przedstawiają tezę i wyjaśniają, że powodowanie nowotworów przez RNA ze szczepionki jest biologicznie nieprawdopodobne, ale nie zawierają pełnego rozstrzygnięcia ani konkretnego dowodu dotyczącego modyfikacji genomu."
+ },
+ {
+  "id": "fc-izrael-nie-wprowadza-kary-wiezienia-za-wspomnienie-jezusa",
+  "score": 1,
+  "powod": "Fragment sygnalizuje temat rzekomej kary więzienia za wspomnienie Jezusa, ale nie podaje konkretnego faktu ani rozstrzygnięcia weryfikacji."
+ },
+ {
+  "id": "fc-ocalaly-z-pozaru-dom-z-los-angeles-zostal-wygenerowany-przez",
+  "score": 1,
+  "powod": "Fragment wskazuje, że zdjęcie domu rzekomo ocalałego z pożaru nie jest prawdziwe, ale nie podaje wprost, że wygenerowano je przez AI."
+ },
+ {
+  "id": "fc-w-szkocji-nie-wprowadzono-zakazu-modlitwy-w-domach",
+  "score": 1,
+  "powod": "Fragment wskazuje, że sprawa dotyczy rzekomego zakazu modlitwy w promieniu 200 metrów od kliniki aborcyjnej w Szkocji, ale nie podaje rozstrzygnięcia, czy taki zakaz wprowadzono."
+ },
+ {
+  "id": "fc-usaid-nie-oplacila-zelenskiemu-tytulu-czlowieka-roku-time",
+  "score": 1,
+  "powod": "Fragmenty wskazują, że twierdzenie o opłaceniu tytułu przez USAID jest fałszywe, ale nie podają faktów ani dowodów uzasadniających tę weryfikację."
+ },
+ {
+  "id": "fc-na-podstawie-zdjec-gory-z-rio-de-janeiro-nie-mozna-ocenic-wz",
+  "score": 1,
+  "powod": "Fragment wskazuje, że zdjęcia Głowy Cukru z Rio de Janeiro nie pozwalają ocenić wzrostu poziomu morza, ale nie podaje konkretnego uzasadnienia ani wyniku analizy."
+ },
+ {
+  "id": "fc-polskie-agregaty-z-akcji-cieplo-z-polski-dla-kijowa-nie-sa-o",
+  "score": 1,
+  "powod": "Fragmenty podają szczegóły dostawy generatorów, ale nie zawierają kluczowego ustalenia, czy agregaty z akcji były odsprzedawane na ukraińskim OLX."
+ },
+ {
+  "id": "fc-dezinformacja-nt-sytuacji-na-granicy-polsko-niemieckiej-anal",
+  "score": 1,
+  "powod": "Fragmenty wskazują, że oficjalne dane nie potwierdzają „inwazji” migrantów, ale nie podają konkretnych danych ani szczegółów pozwalających zweryfikować skalę zjawiska."
+ },
+ {
+  "id": "fc-analiza-narracji-dezinformacyjnych-o-ataku-dronow-na-polske",
+  "score": 2,
+  "powod": "Fragment wskazuje, że według weryfikacji Federacja Rosyjska odpowiada za atak na Polskę, a przeciwne narracje są nieprawdziwe."
+ },
+ {
+  "id": "fc-safe-a-kwestia-mechanizmu-warunkowosci-analiza",
+  "score": 2,
+  "powod": "Fragment podaje sprawdzalne informacje o instrumencie SAFE, jego wartości, przeznaczeniu oraz kwocie przewidzianej dla Polski."
+ },
+ {
+  "id": "fc-pep-guardiola-nie-wybral-najlepszej-11-z-lewandowskim-to-dee",
+  "score": 2,
+  "powod": "Fragmenty podają konkretny fakt-check: informacja o jedenastce rzekomo wskazanej przez Guardiolę, w której był Lewandowski, opierała się na deepfake’u, a wpis Transferów Piłkarskich usunięto po 20 godzinach."
+ },
+ {
+  "id": "fc-c822cb8f3d",
+  "score": 0,
+  "powod": "To wstęp zapowiadający temat artykułu, ale nie zawiera sprawdzalnego faktu ani rozstrzygnięcia dotyczącego biopsji."
+ },
+ {
+  "id": "fc-28153f2d8a",
+  "score": 0,
+  "powod": "To wstęp do artykułu opisujący temat weryfikacji, ale nie podaje sprawdzalnego faktu ani rozstrzygnięcia."
+ },
+ {
+  "id": "fc-6c3dfaae48",
+  "score": 0,
+  "powod": "To wstęp przedstawiający temat i pytanie, ale nie podaje sprawdzalnego faktu ani werdyktu dotyczącego działania antykoncepcyjnego oleju sojowego."
+ },
+ {
+  "id": "fc-89f6012d60",
+  "score": 0,
+  "powod": "To wstęp zapowiada temat weryfikacji, ale nie zawiera konkretnego faktu ani jej wyniku."
+ },
+ {
+  "id": "fc-18f01455b6",
+  "score": 0,
+  "powod": "Fragmenty jedynie przedstawiają sprawdzaną narrację i ogólny kontekst, nie podają ustalenia dotyczącego zakazu korzystania z prywatnych studni."
+ },
+ {
+  "id": "fc-653272d0a6",
+  "score": 0,
+  "powod": "Fragmenty zawierają wstęp i ogólny opis rosyjskiej propagandy, ale nie podają konkretnego, sprawdzalnego faktu o Polaku ani weryfikowanych wypowiedziach."
+ },
+ {
+  "id": "fc-627bdba206",
+  "score": 1,
+  "powod": "Фрагмент указывает на опровергаемое ложное сообщение, но не сообщает, где и кем оно было опровергнуто или что именно установил фактчек."
+ },
+ {
+  "id": "fc-d8a6b1d5e2",
+  "score": 1,
+  "powod": "Fragment wskazuje temat wizyty niemieckiego policjanta w Gdańsku, ale nie podaje sprawdzalnego faktu ani celu jego przyjazdu."
+ },
+ {
+  "id": "fc-997f555447",
+  "score": 1,
+  "powod": "Fragment wskazuje, że zarzut o przerzucaniu zakażonych migrantów przez niemieckie służby jest nieprawdziwy, ale nie podaje konkretnego faktu wyjaśniającego, co przedstawia zdjęcie ani co było przyczyną przypadku cholery."
+ },
+ {
+  "id": "fc-e5d5ecbba5",
+  "score": 1,
+  "powod": "Fragment wskazuje temat twierdzenia o wpływie promieniowania UV na nowotwory skóry, ale nie podaje wyniku weryfikacji ani konkretnego faktu rozstrzygającego, czy UV chroni przed czerniakiem."
+ },
+ {
+  "id": "fc-fa751950b9",
+  "score": 1,
+  "powod": "Temat jest jasny i wskazano, że obietnica całkowitego wyleczenia cukrzycy oraz związana z nią witryna to oszustwo, ale fragmenty nie podają konkretnych ustaleń ani faktów potwierdzających werdykt."
+ },
+ {
+  "id": "fc-bialy-kitel-czarna-magia-lekarz-po-ciemnej-stronie-medycyny",
+  "score": 0,
+  "powod": "To ogólny wstęp o lekarzach promujących pseudonaukę i nie wskazuje konkretnego sprawdzalnego faktu ani osoby."
+ },
+ {
+  "id": "fc-lekarka-polecala-biorezonans-i-srebro-koloidalne-sprawdzilis",
+  "score": 0,
+  "powod": "Fragmenty są ogólnym wstępem i opisem platformy Ofiara Szarlatana, a nie podają sprawdzalnych informacji o poradach lekarki dotyczących boreliozy."
+ },
+ {
+  "id": "fc-ziola-na-borelioze",
+  "score": 1,
+  "powod": "Fragment wskazuje temat ziół i suplementów reklamowanych na boreliozę, ale nie zawiera konkretnego sprawdzalnego faktu ani werdyktu fact-checku."
+ },
+ {
+  "id": "fc-lekarz-medycyny-zakonnej-i-terapie-bez-dowodow-kulisy-dziala",
+  "score": 1,
+  "powod": "Fragmenty wskazują, że klinika oferuje biorezonans i naturoterapię oraz zamieszcza klauzulę o edukacyjnym charakterze konsultacji, ale nie podają kluczowych szczegółów ani rozstrzygnięcia fact-checku."
+ }
+]
