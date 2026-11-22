@@ -187,7 +187,7 @@ class Service:
             if result.status == "ok":
                 for match in narratives.find(root, self.narratives)[:1]:
                     result.notices.append(NoticeItem(type="known_narrative", text=narratives.notice_text(match),
-                                                     url=match["url"]))
+                                                     url=match["url"], label=match["narrative"]))
             if result.status == "ok" and not result.summary:
                 result.summary = " ".join((item.answer or item.reason) for item in result.items[:2])
             result.meta.elapsed_ms = round((perf_counter() - start) * 1000)

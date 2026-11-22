@@ -242,3 +242,15 @@ html.a11y-contrast .quick__try button, html.a11y-contrast .quick__help summary {
 .proof__explain { margin-top: .45rem; font-size: 1.15rem; font-weight: 600; line-height: 1.45; }
 .proof__title { margin-top: .7rem; font-size: .95rem; font-weight: 700; color: var(--ink-2); }
 .proof__title + .proof__quote { margin-top: .25rem; font-size: 1.05rem; color: var(--ink-2); border-left: 3px solid var(--line); padding-left: .75rem; }
+
+/* Znana narracja (EUvsDisinfo): mała etykieta zamiast akapitu */
+.narrative { display: flex; flex-wrap: wrap; align-items: center; gap: .35rem .6rem; margin-top: 1rem; font-size: 1rem; }
+.narrative__tag { display: inline-flex; align-items: center; gap: .35rem; padding: .2rem .6rem; background: #FFF2DF; color: #6B3A00; border: 1px solid #E9C48F; font-weight: 700; font-size: .9rem; }
+.narrative__tag svg { width: 1rem; height: 1rem; }
+.narrative__name { font-weight: 600; }
+.narrative__src { color: var(--ink-2); }
+
+/* Długie słowa w odpowiedzi nie rozpychają strony na wąskim ekranie */
+.hv__body { min-width: 0; overflow-wrap: anywhere; }
+/* Pasek na całą szerokość liczy 100vw razem z paskiem przewijania; przycinamy te kilka pikseli */
+html, body { overflow-x: clip; }

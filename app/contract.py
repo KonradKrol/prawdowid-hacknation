@@ -69,6 +69,7 @@ class NoticeItem(BaseModel):
     type: Notice
     text: str
     url: str | None = None
+    label: str | None = None  # krótka nazwa, np. narracji EUvsDisinfo
 
 
 class InputInfo(BaseModel):

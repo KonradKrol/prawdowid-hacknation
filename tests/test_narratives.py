@@ -24,7 +24,8 @@ def test_recycled_narrative_shows_case_differences_and_keeps_verdict_on_evidence
     with TestClient(create_app()) as client:
         result = client.post("/api/v1/checks", json={"text": MESSAGE}).json()
     notice = next(n for n in result["notices"] if n["type"] == "known_narrative")
-    assert notice["url"] == match["url"] and "nie rozstrzyga" in notice["text"]
+    assert notice["url"] == match["url"] and notice["label"] == match["narrative"]
+    assert len(notice["text"]) < 140  # krótka etykieta, nie akapit
     # Podobieństwo nie jest dowodem: bez materiału o tej sprawie werdykt pozostaje wstrzymany.
     assert result["items"][0]["label"] == "insufficient_evidence"
     get_service.cache_clear()

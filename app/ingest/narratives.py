@@ -68,12 +68,8 @@ def find(text, cases):
 
 
 def notice_text(match):
-    parts = [f"Ta wiadomość powtarza narrację opisaną przez EUvsDisinfo: „{match['narrative']}” "
-             f"(przypadek z {match['date']}, narracja wracała co najmniej {match['recurrences']} razy)."]
-    if match["differences"]:
-        parts.append("Różnice w tym zgłoszeniu: " + "; ".join(match["differences"]) + ".")
-    parts.append("Podobieństwo do starej narracji nie rozstrzyga tej wiadomości. Ocena opiera się na dowodach o tej sprawie.")
-    return " ".join(parts)
+    """Jedno krótkie zdanie. Szczegóły (różnice, liczba powrotów) zostają w danych dla moderatora."""
+    return f"„{match['narrative']}” — znana narracja dezinformacyjna opisana przez EUvsDisinfo."
 
 
 # ---------- pobieranie przypadków z serwera MCP ----------

@@ -86,7 +86,13 @@
   {% endif %}
 
   {% for n in r.notices if not (n.type == "archival_material" and items | selectattr("context_mismatch") | list) %}
+  {% if n.type == "known_narrative" %}
+  <p class="narrative"><span class="narrative__tag"><svg aria-hidden="true"><use href="#i-alert"/></svg>Znana narracja dezinformacyjna</span>
+    <span class="narrative__name">„{{ n.label or n.text }}”</span>
+    {% if n.url %}<a class="narrative__src" href="{{ n.url }}" rel="noopener noreferrer" target="_blank">opisana przez EUvsDisinfo<span class="visually-hidden"> (nowa karta)</span></a>{% endif %}</p>
+  {% else %}
   <p class="note note--warn"><svg aria-hidden="true"><use href="#i-{{ NOTICE_ICON.get(n.type, "info") }}"/></svg><span>{{ n.text }}{% if n.url %} <a href="{{ n.url }}" rel="noopener noreferrer" target="_blank">Zobacz przypadek</a>{% endif %}</span></p>
+  {% endif %}
   {% endfor %}
 
   <div class="actions">
