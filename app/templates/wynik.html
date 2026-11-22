@@ -8,10 +8,15 @@
   {% if r.status == "ok" %}
   {% set items = r["items"] %}
   {% macro narrative_label() %}{% for n in r.notices if n.type == "known_narrative" %}
-  <p class="narrative"><span class="narrative__tag"><svg aria-hidden="true"><use href="#i-alert"/></svg>Znana narracja dezinformacyjna</span>
-    <span class="narrative__name">„{{ n.label or n.text }}”</span>
-    {% if n.url %}<a class="narrative__src" href="{{ n.url }}" rel="noopener noreferrer" target="_blank">opisana przez EUvsDisinfo<span class="visually-hidden"> (nowa karta)</span></a>{% endif %}
-    <a class="narrative__help" href="/informacje#euvsdisinfo">co to znaczy?</a></p>
+  <aside class="narrative" aria-label="Znana narracja dezinformacyjna">
+    <p class="narrative__tag">Znana narracja dezinformacyjna</p>
+    <p class="narrative__name">„{{ n.label or n.text }}”</p>
+    {% if n.state_outlet %}<p class="narrative__attribution">EUvsDisinfo udokumentowało tę narrację w rosyjskim medium państwowym {{ n.state_outlet }}.</p>{% endif %}
+    <p class="narrative__links">
+      {% if n.url %}<a href="{{ n.url }}" rel="noopener noreferrer" target="_blank">Opisana przez EUvsDisinfo<span class="visually-hidden"> (nowa karta)</span></a>{% endif %}
+      <a href="/informacje#euvsdisinfo">Co to znaczy?</a>
+    </p>
+  </aside>
   {% endfor %}{% endmacro %}
   {% macro icon(tone) %}{{ {"ok": "check", "false": "cross", "mislead": "alert", "nei": "question", "nv": "speech", "answer": "info"}[tone] }}{% endmacro %}
 

@@ -243,12 +243,15 @@ html.a11y-contrast .quick__try button, html.a11y-contrast .quick__help summary {
 .proof__title { margin-top: .7rem; font-size: .95rem; font-weight: 700; color: var(--ink-2); }
 .proof__title + .proof__quote { margin-top: .25rem; font-size: 1.05rem; color: var(--ink-2); border-left: 3px solid var(--line); padding-left: .75rem; }
 
-/* Znana narracja (EUvsDisinfo): mała etykieta zamiast akapitu */
-.narrative { display: flex; flex-wrap: wrap; align-items: center; gap: .35rem .6rem; margin-top: 1rem; font-size: 1rem; }
-.narrative__tag { display: inline-flex; align-items: center; gap: .35rem; padding: .2rem .6rem; background: #FFF2DF; color: #6B3A00; border: 1px solid #E9C48F; font-weight: 700; font-size: .9rem; }
-.narrative__tag svg { width: 1rem; height: 1rem; }
-.narrative__name { font-weight: 600; }
-.narrative__src { color: var(--ink-2); }
+/* Znana narracja (EUvsDisinfo) */
+.narrative { margin-top: 1rem; padding: .8rem 1rem; background: #fffbf5; border-inline-start: 3px solid #b26a00; border-radius: .25rem; }
+.narrative p { margin: 0; }
+.narrative p + p { margin-top: .4rem; }
+.narrative__tag { color: #6b3a00; font-size: .9rem; font-weight: 700; }
+.narrative__name { font-size: 1.05rem; font-weight: 600; overflow-wrap: anywhere; }
+.narrative__attribution { color: var(--ink-2); }
+.narrative__links { display: flex; flex-wrap: wrap; gap: .25rem 1rem; font-size: .95rem; }
+.narrative__links a { display: inline-block; padding-block: .3rem; text-decoration: underline; text-underline-offset: .15em; }
 
 /* Długie słowa w odpowiedzi nie rozpychają strony na wąskim ekranie */
 .hv__body { min-width: 0; overflow-wrap: anywhere; }
@@ -260,9 +263,8 @@ html, body { overflow-x: clip; }
 .proof__flag svg { width: 1rem; height: 1rem; }
 .proof--claim .proof__quote { border-left-color: #B26A00; color: var(--ink-2); font-style: italic; }
 
-/* Drobne dopiski: licencja IMGW pod cytatem, link wyjaśniający przy etykiecie narracji */
+/* Licencja IMGW pod cytatem */
 .proof__license { margin-top: .4rem; font-size: .85rem; color: var(--ink-2); }
-.narrative__help { font-size: .9rem; color: var(--ink-2); }
 
 /* Logo: „o” w nazwie jest soczewką z żółtą kropką (propozycja C) */
 .lens { position: relative; display: inline-block; width: .56em; height: .56em; margin-bottom: -.01em; border: .14em solid currentColor; border-radius: 50%; box-sizing: border-box; }

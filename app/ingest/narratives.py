@@ -66,6 +66,7 @@ def compare(case, text):
         "narrative": case["narrative"], "shared": [case["narrative"]] + [f"motyw: {tag}" for tag in case.get("tags", [])[-2:]],
         "differences": differences, "recurrences": len(case.get("recurrences", [])) + 1,
         "claim": case.get("claim", ""), "fact": case.get("fact", ""),
+        "state_outlet": case.get("verified_russian_state_outlet", {}).get("name"),
     }
 
 

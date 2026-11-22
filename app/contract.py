@@ -71,6 +71,7 @@ class NoticeItem(BaseModel):
     text: str
     url: str | None = None
     label: str | None = None  # krótka nazwa, np. narracji EUvsDisinfo
+    state_outlet: str | None = None  # ręcznie zweryfikowany wydawca konkretnego przypadku
 
 
 class InputInfo(BaseModel):

@@ -44,7 +44,7 @@
         <details>
           <summary>
             <span class="mod-topic__title">{{ t.title }}</span>
-            {% if t.growing or t.recurring %}<span class="mod-hot"><svg aria-hidden="true"><use href="#i-alert"/></svg>{{ "Szybko rośnie" if t.growing else "Często zgłaszany" }}</span>{% endif %}
+            {% if t.growing or t.recurring %}<span class="mod-hot"><svg aria-hidden="true"><use href="#i-alert"/></svg>Wiele zgłoszeń</span>{% endif %}
             <span class="mod-topic__n"><strong>{{ t.reports }}</strong> {{ pl_count(t.reports, "zgłoszenie", "zgłoszenia", "zgłoszeń") }}{% if t.growing %} · {{ t.last_hour }} w ostatniej godzinie{% elif t.recurring %} · {{ t.last_day }} w ostatnich 24 godz.{% endif %}</span>
           </summary>
           <p class="mod-topic__labels">{% for key, n in t.labels.items() %}<span class="mod-tone tone-{{ L[key].tone if key in L else 'nei' }}">{{ PLAIN[key] if key in PLAIN else "bez oceny" }}: {{ n }}</span> {% endfor %}</p>

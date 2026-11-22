@@ -47,8 +47,8 @@ def test_reports_join_one_topic_and_panel_flags_growth(service):
     assert len(ids) == 1 and other_id not in ids
     with TestClient(create_app()) as client:
         page = client.get("/moderacja", headers={"X-Admin-Token": "test-admin"}).text
-    assert "dymisja ministra spraw zagranicznych" in page and "Szybko rośnie" in page
-    assert page.count("Szybko rośnie") == 1  # temat ministra zdrowia ma jedno zgłoszenie
+    assert "dymisja ministra spraw zagranicznych" in page and "Wiele zgłoszeń" in page
+    assert page.count("Wiele zgłoszeń") == 1  # temat ministra zdrowia ma jedno zgłoszenie
 
 
 def test_old_topics_are_not_joined(service):
