@@ -18,7 +18,7 @@ from urllib.request import Request, urlopen
 
 from app.ingest.places import fold
 
-MCP_URL = "https://euvsdisinfo-mcp-server.vercel.app/mcp"
+MCP_URL = "https://mcp.euvsd.info/mcp"  # adres z dokumentacji EUvsDisinfo przesłanej z tokenem
 DEFAULT_PATH = Path(__file__).resolve().parents[2] / "Research" / "EUvsDisinfo_Przypadki.jsonl"
 SIGNATURE = re.compile(r"(podpisan\w*|podpis|w imieniu|komunikat|rozkaz|oświadczeni\w*)\s*:?\s*([A-ZŁŚŻŹĆŃÓ][\w .,-]{3,60})")
 AUTHORITY = re.compile(r"(Sztab Generalny[\w ]*|Ministerstw\w+ Obrony Narodowej|MON|Dowództw\w+ Operacyjn\w+|"
@@ -29,11 +29,17 @@ PLACES = ("Lwów", "Lwowa", "Lwowie", "Wołyń", "Wołyniu", "Łuck", "Łucku", 
           "Przemyśl", "Przemyśla", "Medyka", "Medyce", "Hrubieszów", "Chełm")
 
 
+IMPORTED_PATH = DEFAULT_PATH.with_name("EUvsDisinfo_Przypadki_PL.jsonl")
+
+
 def load(path=None):
-    path = Path(path or os.getenv("PRAWDOWID_NARRATIVES", DEFAULT_PATH))
-    if not path.exists():
-        return []
-    return [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line.strip()]
+    """Przypadki dobrane ręcznie oraz zaimportowane z MCP i przetłumaczone (scripts/euvs_translate.py)."""
+    paths = [Path(path)] if path else [Path(os.getenv("PRAWDOWID_NARRATIVES", DEFAULT_PATH)), IMPORTED_PATH]
+    cases = []
+    for item in paths:
+        if item.exists():
+            cases += [json.loads(line) for line in item.read_text(encoding="utf-8").splitlines() if line.strip()]
+    return cases
 
 
 def matches(case, text):
@@ -57,14 +63,18 @@ def compare(case, text):
         differences.append(f"podpis lub nadawca: {who} (przypadek: {case['attribution']})")
     return {
         "case_id": case["case_id"], "url": case["url"], "title": case["title"], "date": case["date"],
-        "narrative": case["narrative"], "shared": [case["narrative"]] + [f"motyw: {tag}" for tag in case["tags"][-2:]],
+        "narrative": case["narrative"], "shared": [case["narrative"]] + [f"motyw: {tag}" for tag in case.get("tags", [])[-2:]],
         "differences": differences, "recurrences": len(case.get("recurrences", [])) + 1,
-        "claim": case["claim"], "fact": case["fact"],
+        "claim": case.get("claim", ""), "fact": case.get("fact", ""),
     }
 
 
 def find(text, cases):
-    return [compare(case, text) for case in cases if matches(case, text)]
+    """Najpierw przypadki dobrane ręcznie, potem te z najdokładniejszymi znacznikami i najnowsze."""
+    found = [case for case in cases if matches(case, text)]
+    found.sort(key=lambda case: case.get("date") or "", reverse=True)
+    found.sort(key=lambda case: (bool(case.get("translated")), -len(case["markers"])))
+    return [compare(case, text) for case in found]
 
 
 def notice_text(match):
@@ -89,7 +99,7 @@ def _post(payload, token, session=None, timeout=30):
 
 def fetch_cases(token=None, offset=0, limit=100):
     """Zwraca listę przypadków (pola id, title, claim, fact, date, url, keywords, countries)."""
-    token = token or os.getenv("PRAWDOWID_EUVS_TOKEN", "")
+    token = token or os.getenv("PRAWDOWID_EUVS_TOKEN") or os.getenv("EUVSDISINFO_TOKEN", "")
     if not token:
         raise PermissionError("Brak tokenu EUvsDisinfo (PRAWDOWID_EUVS_TOKEN)")
     _, session = _post({"jsonrpc": "2.0", "id": 0, "method": "initialize", "params": {

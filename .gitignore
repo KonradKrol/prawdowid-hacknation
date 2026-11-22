@@ -14,3 +14,6 @@ data/
 *.log
 node_modules/
 dist/
+
+# Surowe przypadki EUvsDisinfo zostają lokalnie (pobierane przez scripts/euvs_fetch.py)
+Research/EUvsDisinfo_Surowe_PL.jsonl

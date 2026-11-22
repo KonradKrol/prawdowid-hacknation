@@ -7,3 +7,4 @@ data/
 *.py[cod]
 .venv/
 pomiary*.jsonl
+Research/EUvsDisinfo_Surowe_PL.jsonl

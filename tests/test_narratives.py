@@ -49,3 +49,19 @@ def test_cached_result_does_not_duplicate_narrative_notice(monkeypatch, tmp_path
     assert second.meta.cached  # przebieg naprawdę przeszedł przez pamięć wyników
     assert len(narrative) == 1 and narrative[0].label
     get_service.cache_clear()
+
+
+def test_manual_case_ranks_before_imported_translation():
+    manual = narratives.load(narratives.DEFAULT_PATH)[0]
+    imported = dict(manual, case_id="imported", translated=True, narrative="Inna nazwa", date="2026-11-01")
+    found = narratives.find(MESSAGE, [imported, manual])
+    assert [row["case_id"] for row in found] == [manual["case_id"], "imported"]
+
+
+def test_translated_case_needs_every_marker_group():
+    case = {"case_id": "x", "url": "https://euvsdisinfo.eu/report/x/", "title": "t", "date": "2025-01-01",
+            "narrative": "Ukraina sprzedaje broń z Zachodu przestępcom", "tags": ["Weapons"], "places": [],
+            "attribution": "", "claim": "", "fact": "", "translated": True,
+            "markers": [["ukrain"], ["bron", "uzbroj"], ["sprzeda", "handl"]]}
+    assert narratives.find("Ukraina sprzedaje broń otrzymaną od NATO na czarnym rynku", [case])
+    assert not narratives.find("Polska przekazała Ukrainie kolejną partię broni", [case])
