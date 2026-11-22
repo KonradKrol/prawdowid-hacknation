@@ -1,0 +1,2354 @@
+{
+ "retrieval": {
+  "v4": {
+   "documents": 113,
+   "e5_encode_ms": 11941,
+   "bm25": {
+    "graded": 25,
+    "hit_at_1": 11,
+    "all_in_top4": 11,
+    "abstain_cases": 7,
+    "abstain_with_candidates": 7,
+    "median_ms": 1.086
+   },
+   "dense": {
+    "graded": 25,
+    "hit_at_1": 11,
+    "all_in_top4": 11,
+    "abstain_cases": 7,
+    "abstain_with_candidates": 7,
+    "median_ms": 20.71
+   },
+   "hybrid": {
+    "graded": 25,
+    "hit_at_1": 11,
+    "all_in_top4": 11,
+    "abstain_cases": 7,
+    "abstain_with_candidates": 7,
+    "median_ms": 21.273
+   }
+  },
+  "v5": {
+   "documents": 513,
+   "e5_encode_ms": 91708,
+   "bm25": {
+    "graded": 25,
+    "hit_at_1": 21,
+    "all_in_top4": 24,
+    "abstain_cases": 7,
+    "abstain_with_candidates": 7,
+    "median_ms": 3.333
+   },
+   "dense": {
+    "graded": 25,
+    "hit_at_1": 23,
+    "all_in_top4": 24,
+    "abstain_cases": 7,
+    "abstain_with_candidates": 7,
+    "median_ms": 19.961
+   },
+   "hybrid": {
+    "graded": 25,
+    "hit_at_1": 22,
+    "all_in_top4": 24,
+    "abstain_cases": 7,
+    "abstain_with_candidates": 7,
+    "median_ms": 21.598
+   }
+  }
+ },
+ "end_to_end": {
+  "v4+bm25": {
+   "cases": 32,
+   "label_correct": 14,
+   "label_graded": 29,
+   "expected_source_cited": 6,
+   "expected_source_cases": 21,
+   "correct_abstention": 8,
+   "abstention_cases": 8,
+   "wrong_verdict_on_abstention": 0,
+   "technical_errors": 0,
+   "median_ms": 2907.0,
+   "p95_ms": 4394,
+   "cost_usd": 0.013135,
+   "cost_per_1000_usd": 0.41
+  },
+  "v5+bm25": {
+   "cases": 32,
+   "label_correct": 25,
+   "label_graded": 29,
+   "expected_source_cited": 18,
+   "expected_source_cases": 21,
+   "correct_abstention": 7,
+   "abstention_cases": 8,
+   "wrong_verdict_on_abstention": 0,
+   "technical_errors": 0,
+   "median_ms": 3375.0,
+   "p95_ms": 4557,
+   "cost_usd": 0.01486,
+   "cost_per_1000_usd": 0.464
+  },
+  "v5+hybrid": {
+   "cases": 32,
+   "label_correct": 23,
+   "label_graded": 29,
+   "expected_source_cited": 17,
+   "expected_source_cases": 21,
+   "correct_abstention": 7,
+   "abstention_cases": 8,
+   "wrong_verdict_on_abstention": 0,
+   "technical_errors": 0,
+   "median_ms": 3425.0,
+   "p95_ms": 5046,
+   "cost_usd": 0.014737,
+   "cost_per_1000_usd": 0.461
+  }
+ },
+ "conditions": {
+  "model": "gpt-6-luna",
+  "cases": 32,
+  "e5": "Xenova/multilingual-e5-small (ONNX int8, rev 761b726)",
+  "hybrid": "RRF k=60 z 8 kandydatów BM25 i 8 E5, zwraca 4",
+  "machine": "lokalny CPU (Windows 10), 1 wątek zapytań"
+ },
+ "details": {
+  "v4+bm25": [
+   {
+    "id": "N01",
+    "group": "usługi publiczne",
+    "input": "Czy ePUAP znowu działa w pełnym zakresie po listopadowej awarii?",
+    "expected_label": "confirmed",
+    "status": "ok",
+    "label": "insufficient_evidence",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Nie da się ustalić na podstawie podanych źródeł, czy ePUAP znów działa w pełnym zakresie po listopadowej awarii. Brakuje aktualnego komunikatu właściwego urzędu o działaniu ePUAP po tej awarii.",
+    "missing_evidence": "Aktualny komunikat właściwego urzędu, który potwierdza zakres działania ePUAP po listopadowej awarii.",
+    "cited": [],
+    "quotes": [],
+    "expected_cited": false,
+    "elapsed_ms": 3525,
+    "cost_usd": 0.0003585
+   },
+   {
+    "id": "N02",
+    "group": "ostrzeżenie lokalne",
+    "input": "Czy w październiku 2026 sanepid uznał wodę z wodociągu Kotliny w gminie Brójce za niezdatną do spożycia?",
+    "expected_label": "confirmed",
+    "status": "ok",
+    "label": "insufficient_evidence",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Nie da się ustalić na podstawie podanych źródeł, czy sanepid uznał tę wodę za niezdatną do spożycia w październiku 2026. Brakuje komunikatu sanepidu lub innego źródła dotyczącego wodociągu Kotliny w gminie Brójce z tego okresu.",
+    "missing_evidence": "Potrzebny jest komunikat lub decyzja właściwego sanepidu dotycząca jakości wody z wodociągu Kotliny w gminie Brójce w październiku 2026.",
+    "cited": [],
+    "quotes": [],
+    "expected_cited": false,
+    "elapsed_ms": 3084,
+    "cost_usd": 0.0003977
+   },
+   {
+    "id": "N03",
+    "group": "korekta ostrzeżenia lokalnego",
+    "input": "Woda z wodociągu Kotliny w gminie Brójce nadal nie nadaje się do picia, badania z 9 października 2026 to potwierdziły.",
+    "expected_label": "false",
+    "status": "ok",
+    "label": "insufficient_evidence",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Nie da się ustalić na podstawie dostępnych źródeł, czy woda z wodociągu Kotliny w gminie Brójce nadal nie nadaje się do picia ani czy potwierdziły to badania z 9 października 2026. Brakuje aktualnego komunikatu właściwego sanepidu lub operatora wodociągu dotyczącego tej lokalizacji oraz wyników tych badań.",
+    "missing_evidence": "Aktualny komunikat właściwego sanepidu lub operatora wodociągu o przydatności wody z wodociągu Kotliny w gminie Brójce oraz wyniki badań z 9 października 2026.",
+    "cited": [],
+    "quotes": [],
+    "expected_cited": false,
+    "elapsed_ms": 3073,
+    "cost_usd": 0.0004311
+   },
+   {
+    "id": "N04",
+    "group": "ostrzeżenie lokalne",
+    "input": "Czy Alert RCB z 21 października 2026 dotyczył niezdatnej wody w Świeradowie-Zdroju?",
+    "expected_label": "confirmed",
+    "status": "ok",
+    "label": "insufficient_evidence",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Nie udało się zweryfikować podstawy odpowiedzi.",
+    "missing_evidence": "Potrzebne jest źródło odnoszące się bezpośrednio do tej sytuacji.",
+    "cited": [],
+    "quotes": [],
+    "expected_cited": false,
+    "elapsed_ms": 3853,
+    "cost_usd": 0.0004509
+   },
+   {
+    "id": "N05",
+    "group": "ostrzeżenie lokalne",
+    "input": "Alert RCB z 20 października 2026 w powiecie kamiennogórskim informował o prawdziwym ataku, a nie o ćwiczeniach.",
+    "expected_label": "false",
+    "status": "ok",
+    "label": "insufficient_evidence",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Nie da się ustalić, czy alert z 20 października w powiecie kamiennogórskim informował o prawdziwym ataku, czy o ćwiczeniach. Dostępne fragmenty nie dotyczą tego alertu: jeden opisuje ostrzeżenie pogodowe z czerwca, a pozostałe dotyczą innych dat lub miejsc.",
+    "missing_evidence": "Potrzebny jest tekst alertu RCB z 20 października 2026 r. skierowanego do powiatu kamiennogórskiego albo wiarygodny komunikat RCB wyjaśniający jego treść.",
+    "cited": [],
+    "quotes": [],
+    "expected_cited": false,
+    "elapsed_ms": 2604,
+    "cost_usd": 0.0003948
+   },
+   {
+    "id": "N06",
+    "group": "ostrzeżenie publiczne",
+    "input": "Czy GIS ostrzegał przed szkłem w wodzie mineralnej Krystynka?",
+    "expected_label": "confirmed",
+    "status": "ok",
+    "label": "insufficient_evidence",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Nie da się ustalić na podstawie dostarczonych materiałów, czy GIS ostrzegał przed szkłem w wodzie mineralnej Krystynka. Są w nich ostrzeżenia dotyczące innych produktów, ale brak komunikatu o Krystynce i szkle.",
+    "missing_evidence": "Potrzebny jest komunikat GIS dotyczący możliwej obecności szkła w wodzie mineralnej Krystynka albo inne wiarygodne źródło potwierdzające lub wykluczające takie ostrzeżenie.",
+    "cited": [],
+    "quotes": [],
+    "expected_cited": false,
+    "elapsed_ms": 2453,
+    "cost_usd": 0.0003712
+   },
+   {
+    "id": "N07",
+    "group": "samorząd, oszustwo",
+    "input": "We Wrocławiu dzwonią kurierzy z urzędu i pytają, czy będę w domu. Czy urząd miasta ostrzega przed nimi?",
+    "expected_label": "confirmed",
+    "status": "ok",
+    "label": "insufficient_evidence",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Nie da się ustalić, czy urząd miasta we Wrocławiu ostrzega przed takimi telefonami. Dostępne materiały nie zawierają komunikatu urzędu na ten temat ani nie potwierdzają, że dzwoniący rzeczywiście są kurierami z urzędu.",
+    "missing_evidence": "Potrzebny jest komunikat Urzędu Miejskiego Wrocławia dotyczący telefonów od osób podających się za kurierów urzędu i pytających o obecność w domu.",
+    "cited": [],
+    "quotes": [],
+    "expected_cited": false,
+    "elapsed_ms": 2527,
+    "cost_usd": 0.0003832
+   },
+   {
+    "id": "N08",
+    "group": "samorząd, transport",
+    "input": "Czy w listopadzie 2026 po kolizji w Chróstniku były utrudnienia w kursowaniu pociągów Wrocław – Zielona Góra?",
+    "expected_label": "confirmed",
+    "status": "ok",
+    "label": "insufficient_evidence",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Nie da się ustalić na podstawie dostępnych źródeł, czy po tej kolizji w listopadzie 2026 były utrudnienia na trasie Wrocław – Zielona Góra. Brakuje aktualnego komunikatu przewoźnika lub zarządcy infrastruktury dotyczącego tej kolizji i kursowania pociągów.",
+    "missing_evidence": "Potrzebny jest komunikat przewoźnika kolejowego lub zarządcy infrastruktury o skutkach kolizji w Chróstniku dla pociągów Wrocław – Zielona Góra w listopadzie 2026.",
+    "cited": [],
+    "quotes": [],
+    "expected_cited": false,
+    "elapsed_ms": 2851,
+    "cost_usd": 0.0003964
+   },
+   {
+    "id": "N09",
+    "group": "fact-check",
+    "input": "Szczepionki mRNA zmieniają ludzkie DNA i wywołują raka.",
+    "expected_label": "false",
+    "status": "ok",
+    "label": "insufficient_evidence",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Na podstawie podanych źródeł nie da się ustalić, czy szczepionki mRNA zmieniają ludzkie DNA ani czy wywołują raka. Brakuje materiałów odnoszących się bezpośrednio do tych twierdzeń.",
+    "missing_evidence": "Potrzebne są wiarygodne źródła naukowe oceniające wpływ szczepionek mRNA na ludzkie DNA oraz ich związek z zachorowaniami na raka.",
+    "cited": [],
+    "quotes": [],
+    "expected_cited": false,
+    "elapsed_ms": 2932,
+    "cost_usd": 0.0003888
+   },
+   {
+    "id": "N10",
+    "group": "fact-check",
+    "input": "Powodzie w Polsce są wywoływane celowo, a następna jest zaplanowana na sierpień.",
+    "expected_label": "false",
+    "status": "ok",
+    "label": "insufficient_evidence",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Nie da się ustalić na podstawie podanych źródeł, czy powodzie w Polsce są wywoływane celowo ani czy kolejna jest zaplanowana na sierpień. Brakuje materiału dotyczącego przyczyn powodzi i wiarygodnego dowodu na planowanie konkretnego zdarzenia.",
+    "missing_evidence": "Potrzebne są źródła odnoszące się bezpośrednio do powodzi w Polsce, ich przyczyn oraz dowody potwierdzające lub obalające rzekome planowanie powodzi na sierpień.",
+    "cited": [],
+    "quotes": [],
+    "expected_cited": false,
+    "elapsed_ms": 2849,
+    "cost_usd": 0.0003958
+   },
+   {
+    "id": "N11",
+    "group": "fact-check",
+    "input": "Woda plazmowana leczy autyzm.",
+    "expected_label": "false",
+    "status": "ok",
+    "label": "insufficient_evidence",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Na podstawie podanych źródeł nie da się ustalić, czy woda plazmowana leczy autyzm. Brakuje badań lub wiarygodnych źródeł dotyczących skuteczności tej metody w leczeniu autyzmu.",
+    "missing_evidence": "Potrzebne są wiarygodne badania naukowe lub stanowisko odpowiednich instytucji medycznych odnoszące się do wody plazmowanej i autyzmu.",
+    "cited": [],
+    "quotes": [],
+    "expected_cited": false,
+    "elapsed_ms": 2111,
+    "cost_usd": 0.0003804
+   },
+   {
+    "id": "N12",
+    "group": "ostrzeżenie lokalne",
+    "input": "Alert RCB z 3 listopada 2026 ostrzegał mieszkańców Lubelszczyzny przed trwającym zagrożeniem z powietrza na terenie Polski.",
+    "expected_label": "false",
+    "status": "ok",
+    "label": "false",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Nie — komunikat RCB z 3 listopada mówił, że atak powietrzny na Ukrainę się zakończył i że nie ma zagrożenia na terenie Polski. Alert wysłano do odbiorców w województwie lubelskim i podkarpackim, ale przytoczony fragment nie ostrzegał przed trwającym zagrożeniem.",
+    "missing_evidence": null,
+    "cited": [
+     "material-ef1e0a5feda6d56523",
+     "material-ef1e0a5feda6d56523"
+    ],
+    "quotes": [
+     {
+      "source_id": "material-ef1e0a5feda6d56523",
+      "stance": "refutes",
+      "quote": "„UWAGA! Zakończył się atak powietrzny na Ukrainę. Brak zagrożenia na terenie Polski.”"
+     },
+     {
+      "source_id": "material-ef1e0a5feda6d56523",
+      "stance": "context",
+      "quote": "Alert RCB został wysłany do odbiorców na terenie woj. lubelskiego i podkarpackiego."
+     }
+    ],
+    "expected_cited": false,
+    "elapsed_ms": 4394,
+    "cost_usd": 0.0004892
+   },
+   {
+    "id": "N13",
+    "group": "usługi publiczne",
+    "input": "Czy w aplikacji mObywatel można zastrzec PESEL?",
+    "expected_label": "confirmed",
+    "status": "ok",
+    "label": "insufficient_evidence",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Nie da się ustalić na podstawie podanych źródeł, czy w aplikacji mObywatel można zastrzec PESEL. Brakuje aktualnego komunikatu lub instrukcji dotyczącej tej funkcji.",
+    "missing_evidence": "Potrzebne jest źródło opisujące możliwość zastrzeżenia numeru PESEL w aplikacji mObywatel.",
+    "cited": [],
+    "quotes": [],
+    "expected_cited": false,
+    "elapsed_ms": 2454,
+    "cost_usd": 0.0003365
+   },
+   {
+    "id": "N14",
+    "group": "fact-check",
+    "input": "Głuchołazy zalało w lipcu 2025, bo wylała rzeka Biała Głuchołaska.",
+    "expected_label": "false",
+    "status": "ok",
+    "label": "insufficient_evidence",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Na podstawie podanych materiałów nie da się ustalić, czy Głuchołazy zalało w lipcu 2025 ani czy przyczyną było wezbranie Białej Głuchołaskiej. Brakuje źródła opisującego to zdarzenie i jego przyczynę.",
+    "missing_evidence": "Potrzebne jest wiarygodne źródło dotyczące lipcowego zdarzenia w Głuchołazach, które potwierdza zalanie oraz wskazuje jego przyczynę.",
+    "cited": [],
+    "quotes": [],
+    "expected_cited": false,
+    "elapsed_ms": 3941,
+    "cost_usd": 0.0004204
+   },
+   {
+    "id": "A01",
+    "group": "brak dowodu",
+    "input": "Czy jutro w powiecie bytowskim zabraknie wody w kranach?",
+    "expected_label": "insufficient_evidence",
+    "status": "ok",
+    "label": "insufficient_evidence",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Nie da się ustalić, czy jutro w powiecie bytowskim zabraknie wody w kranach. Dostarczone źródła dotyczą innych miejsc albo innych spraw; brakuje aktualnego komunikatu właściwego dostawcy wody lub urzędu dla powiatu bytowskiego.",
+    "missing_evidence": "Aktualna informacja o planowanym lub nieplanowanym braku dostaw wody jutro na terenie powiatu bytowskiego.",
+    "cited": [],
+    "quotes": [],
+    "expected_cited": false,
+    "elapsed_ms": 2419,
+    "cost_usd": 0.0003624
+   },
+   {
+    "id": "A02",
+    "group": "brak dowodu",
+    "input": "Czy ePUAP zostanie całkowicie wyłączony 1 grudnia 2026?",
+    "expected_label": "insufficient_evidence",
+    "status": "ok",
+    "label": "insufficient_evidence",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Nie da się ustalić na podstawie podanych źródeł, czy ePUAP zostanie całkowicie wyłączony 1 grudnia 2026. Brakuje aktualnego komunikatu właściwego urzędu dotyczącego terminu i zakresu wyłączenia ePUAP.",
+    "missing_evidence": "Potrzebny jest oficjalny, aktualny komunikat o tym, czy ePUAP zostanie wyłączony 1 grudnia 2026 i czy wyłączenie będzie całkowite.",
+    "cited": [],
+    "quotes": [],
+    "expected_cited": false,
+    "elapsed_ms": 3103,
+    "cost_usd": 0.0003825
+   },
+   {
+    "id": "A03",
+    "group": "brak dowodu",
+    "input": "Czy od jutra komunikacja miejska w Toruniu jest bezpłatna dla wszystkich mieszkańców?",
+    "expected_label": "insufficient_evidence",
+    "status": "ok",
+    "label": "insufficient_evidence",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Nie da się ustalić, czy od jutra wszyscy mieszkańcy Torunia będą jeździć komunikacją miejską bezpłatnie. Źródło z marca 2024 r. mówi jedynie o bezpłatnych przejazdach dla osób powyżej 65. roku życia, a nie o zmianie obowiązującej od jutra.",
+    "missing_evidence": "Potrzebny jest aktualny komunikat miasta lub przewoźnika albo obowiązujący przepis potwierdzający zasady bezpłatnych przejazdów w Toruniu od jutra i wskazujący, kogo obejmują.",
+    "cited": [
+     "demagog-2024-wroclaw-65-lat"
+    ],
+    "quotes": [
+     {
+      "source_id": "demagog-2024-wroclaw-65-lat",
+      "stance": "context",
+      "quote": "Darmowa komunikacja miejska dla osób powyżej 65. roku życia funkcjonuje również w Bydgoszczy oraz w Toruniu."
+     }
+    ],
+    "expected_cited": false,
+    "elapsed_ms": 3953,
+    "cost_usd": 0.000457
+   },
+   {
+    "id": "A04",
+    "group": "brak dowodu",
+    "input": "Ile osób otrzymało Alert RCB o niezdatnej wodzie w Świeradowie-Zdroju 21 października 2026?",
+    "expected_label": "insufficient_evidence",
+    "status": "ok",
+    "label": "insufficient_evidence",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Nie udało się zweryfikować podstawy odpowiedzi.",
+    "missing_evidence": "Potrzebny jest komunikat RCB o niezdatnej wodzie w Świeradowie-Zdroju z 21 października 2026 roku, zawierający liczbę odbiorców lub zasięg wysyłki.",
+    "cited": [],
+    "quotes": [],
+    "expected_cited": false,
+    "elapsed_ms": 2893,
+    "cost_usd": 0.0004051
+   },
+   {
+    "id": "A05",
+    "group": "brak dowodu",
+    "input": "Czy GIS wycofał wczoraj mleko Łaciate z powodu bakterii?",
+    "expected_label": "insufficient_evidence",
+    "status": "ok",
+    "label": "insufficient_evidence",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Nie da się ustalić na podstawie podanych źródeł, czy GIS wczoraj wycofał mleko Łaciate z powodu bakterii. Dokumenty dotyczą innych produktów, a do sprawdzenia tej tezy potrzebny jest komunikat GIS z właściwej daty dotyczący mleka Łaciate.",
+    "missing_evidence": "Brakuje aktualnego komunikatu GIS lub innego wiarygodnego materiału potwierdzającego, czy wczoraj wycofano mleko Łaciate z powodu bakterii.",
+    "cited": [],
+    "quotes": [],
+    "expected_cited": false,
+    "elapsed_ms": 2388,
+    "cost_usd": 0.0003719
+   },
+   {
+    "id": "A06",
+    "group": "brak dowodu",
+    "input": "Czy sanepid w Słupsku zakazał dziś kąpieli w Słupi?",
+    "expected_label": "insufficient_evidence",
+    "status": "ok",
+    "label": "insufficient_evidence",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Nie da się ustalić na podstawie dostępnych źródeł, czy sanepid w Słupsku zakazał dziś kąpieli w Słupi. Brakuje aktualnego komunikatu właściwego sanepidu o kąpieli w tej rzece.",
+    "missing_evidence": "Aktualnego komunikatu sanepidu w Słupsku dotyczącego zakazu kąpieli w Słupi w dniu 2026-11-22.",
+    "cited": [],
+    "quotes": [],
+    "expected_cited": false,
+    "elapsed_ms": 2633,
+    "cost_usd": 0.0003828
+   },
+   {
+    "id": "S-RCB-A1",
+    "group": "regresja",
+    "input": "Czy SMS-y wzywające mężczyzn do zgłaszania się do urzędów gmin, opisane w listopadzie 2018 roku, wysłało RCB?",
+    "expected_label": "false",
+    "status": "ok",
+    "label": "false",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Nie, RCB oświadczyło, że nie wysyłało Alertu RCB wzywającego mężczyzn do zgłaszania się do urzędów gmin. Informacje o tych wiadomościach otrzymało od mieszkańców gmin we wschodniej Polsce.",
+    "missing_evidence": null,
+    "cited": [
+     "rcb-2018-dementi"
+    ],
+    "quotes": [
+     {
+      "source_id": "rcb-2018-dementi",
+      "stance": "refutes",
+      "quote": "Rządowe Centrum Bezpieczeństwa nie wysyłało Alertu RCB, dotyczącego zgłaszania się mężczyzn do urzędów gmin."
+     }
+    ],
+    "expected_cited": true,
+    "elapsed_ms": 3344,
+    "cost_usd": 0.0004066
+   },
+   {
+    "id": "S-RCB-A2",
+    "group": "regresja",
+    "input": "Prawdziwe Alerty RCB mogą prosić o kliknięcie w link.",
+    "expected_label": "false",
+    "status": "ok",
+    "label": "false",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Nie, prawdziwe Alerty RCB nie proszą o kliknięcie w link. Rządowe Centrum Bezpieczeństwa podaje, że nie zawierają linków ani próśb o kliknięcie w odnośnik.",
+    "missing_evidence": null,
+    "cited": [
+     "rcb-2024-linki"
+    ],
+    "quotes": [
+     {
+      "source_id": "rcb-2024-linki",
+      "stance": "refutes",
+      "quote": "prawdziwe Alerty RCB nie zawierają linków ani prośby o kliknięcie w odnośnik."
+     }
+    ],
+    "expected_cited": true,
+    "elapsed_ms": 2540,
+    "cost_usd": 0.000381
+   },
+   {
+    "id": "S-RCB-Q1",
+    "group": "regresja",
+    "input": "Kiedy RCB opublikowało sprostowanie w sprawie SMS-a wzywającego mężczyzn do zgłaszania się do urzędów gmin w 2018 roku?",
+    "expected_label": null,
+    "status": "ok",
+    "label": null,
+    "kind": "answer",
+    "answer": "2018-11-27",
+    "reason": "RCB opublikowało sprostowanie 27 listopada 2018 roku. W komunikacie podało, że nie wysyłało alertu dotyczącego zgłaszania się mężczyzn do urzędów gmin.",
+    "missing_evidence": null,
+    "cited": [
+     "rcb-2018-dementi",
+     "rcb-2018-dementi"
+    ],
+    "quotes": [
+     {
+      "source_id": "rcb-2018-dementi",
+      "stance": "supports",
+      "quote": "2018-11-27"
+     },
+     {
+      "source_id": "rcb-2018-dementi",
+      "stance": "supports",
+      "quote": "Rządowe Centrum Bezpieczeństwa nie wysyłało Alertu RCB, dotyczącego zgłaszania się mężczyzn do urzędów gmin."
+     }
+    ],
+    "expected_cited": true,
+    "elapsed_ms": 3867,
+    "cost_usd": 0.0004853
+   },
+   {
+    "id": "S-RCB-D1",
+    "group": "regresja",
+    "input": "Ile osób otrzymało SMS wzywający mężczyzn do zgłaszania się do urzędów gmin, zdementowany przez RCB 27 listopada 2018 roku?",
+    "expected_label": "insufficient_evidence",
+    "status": "ok",
+    "label": "insufficient_evidence",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Nie udało się zweryfikować podstawy odpowiedzi.",
+    "missing_evidence": "Potrzebne jest źródło podające liczbę osób, które otrzymały te konkretne SMS-y.",
+    "cited": [],
+    "quotes": [],
+    "expected_cited": false,
+    "elapsed_ms": 2837,
+    "cost_usd": 0.0004214
+   },
+   {
+    "id": "S-RCB-B1",
+    "group": "regresja",
+    "input": "Wpis pokazuje sprostowanie RCB o SMS-ach wzywających mężczyzn do urzędów gmin z 27.11.2018 i opisuje je jako dzisiejszy komunikat z 21.11.2026.",
+    "expected_label": "misleading",
+    "status": "ok",
+    "label": "insufficient_evidence",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Źródła podają sprzeczne informacje.",
+    "missing_evidence": "Potrzebny jest dowód rozstrzygający rozbieżność.",
+    "cited": [
+     "rcb-2018-dementi",
+     "material-3be2ef1566ee0ebfc6"
+    ],
+    "quotes": [
+     {
+      "source_id": "rcb-2018-dementi",
+      "stance": "supports",
+      "quote": "Rządowe Centrum Bezpieczeństwa nie wysyłało Alertu RCB, dotyczącego zgłaszania się mężczyzn do urzędów gmin."
+     },
+     {
+      "source_id": "material-3be2ef1566ee0ebfc6",
+      "stance": "refutes",
+      "quote": "ĆWICZENIA: Dziś (21.11) w godz. 08:00-12:00 na terenie gminy Gostyń odbędzie się trening systemu alarmowania z wykorzystaniem syren."
+     }
+    ],
+    "expected_cited": true,
+    "elapsed_ms": 4389,
+    "cost_usd": 0.0005343
+   },
+   {
+    "id": "S-MSZ-A1",
+    "group": "regresja",
+    "input": "Czy rejestracja podróży w Odyseuszu jest obowiązkowa?",
+    "expected_label": "false",
+    "status": "ok",
+    "label": "false",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Nie, rejestracja w Odyseuszu nie jest obowiązkowa. Ambasada RP w Bernie podaje, że jest dobrowolna.",
+    "missing_evidence": null,
+    "cited": [
+     "msz-odyseusz-dobrowolny"
+    ],
+    "quotes": [
+     {
+      "source_id": "msz-odyseusz-dobrowolny",
+      "stance": "refutes",
+      "quote": "Rejestracja jest dobrowolna i darmowa"
+     }
+    ],
+    "expected_cited": true,
+    "elapsed_ms": 2431,
+    "cost_usd": 0.0003327
+   },
+   {
+    "id": "S-RCB-A3",
+    "group": "regresja",
+    "input": "Alert RCB można otrzymać bez wcześniejszej rejestracji.",
+    "expected_label": "confirmed",
+    "status": "ok",
+    "label": "confirmed",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Tak, Alert RCB można otrzymać bez wcześniejszej rejestracji. Rządowe Centrum Bezpieczeństwa podaje, że nie trzeba się na niego zapisywać, a SMS otrzymują osoby na obszarze potencjalnego zagrożenia.",
+    "missing_evidence": null,
+    "cited": [
+     "rcb-faq-zapisy"
+    ],
+    "quotes": [
+     {
+      "source_id": "rcb-faq-zapisy",
+      "stance": "supports",
+      "quote": "Na alert RCB nie trzeba się zapisywać."
+     }
+    ],
+    "expected_cited": true,
+    "elapsed_ms": 2644,
+    "cost_usd": 0.0003757
+   },
+   {
+    "id": "S-RCB-D2",
+    "group": "regresja",
+    "input": "SMS wzywający mężczyzn do zgłaszania się do urzędów gmin, zdementowany przez RCB 27 listopada 2018 roku, dostało ponad 1000 osób.",
+    "expected_label": "insufficient_evidence",
+    "status": "ok",
+    "label": "insufficient_evidence",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Nie da się ustalić na podstawie dostępnych źródeł, czy SMS dostało ponad 1000 osób. RCB podało, że zgłoszenia otrzymało od mieszkańców gmin we wschodniej Polsce, ale nie wskazało liczby odbiorców wiadomości.",
+    "missing_evidence": "Brakuje wiarygodnych danych o liczbie osób, które otrzymały te SMS-y.",
+    "cited": [
+     "rcb-2018-dementi"
+    ],
+    "quotes": [
+     {
+      "source_id": "rcb-2018-dementi",
+      "stance": "context",
+      "quote": "Informacje otrzymaliśmy od mieszkańców gmin położonych na wschodzie Polski."
+     }
+    ],
+    "expected_cited": true,
+    "elapsed_ms": 2921,
+    "cost_usd": 0.0004575
+   },
+   {
+    "id": "S-OP-N1",
+    "group": "regresja",
+    "input": "Moim zdaniem alerty SMS są najgorszym sposobem komunikacji.",
+    "expected_label": "not_verifiable",
+    "status": "out_of_scope",
+    "label": null,
+    "kind": null,
+    "answer": null,
+    "reason": "Prawdowid weryfikuje sprawdzalne informacje publiczne.",
+    "missing_evidence": null,
+    "cited": [],
+    "quotes": [],
+    "expected_cited": false,
+    "elapsed_ms": 1184,
+    "cost_usd": 0.0002861
+   },
+   {
+    "id": "S-RCB-M1",
+    "group": "regresja",
+    "input": "Ktoś napisał, że w listopadzie 2018 r. to RCB wysłało SMS wzywający mężczyzn do zgłoszenia się do urzędów gmin i że otrzymało go ponad 1000 osób. Sprawdź obie rzeczy.",
+    "expected_label": null,
+    "status": "ok",
+    "label": "false",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Nie, według RCB nie wysłało ono Alertu dotyczącego zgłaszania się mężczyzn do urzędów gmin. RCB podało, że informacje o takich wiadomościach otrzymało od mieszkańców gmin na wschodzie Polski.",
+    "missing_evidence": null,
+    "cited": [
+     "rcb-2018-dementi",
+     "rcb-2018-dementi"
+    ],
+    "quotes": [
+     {
+      "source_id": "rcb-2018-dementi",
+      "stance": "refutes",
+      "quote": "Rządowe Centrum Bezpieczeństwa nie wysyłało Alertu RCB, dotyczącego zgłaszania się mężczyzn do urzędów gmin."
+     },
+     {
+      "source_id": "rcb-2018-dementi",
+      "stance": "context",
+      "quote": "Informacje otrzymaliśmy od mieszkańców gmin położonych na wschodzie Polski."
+     }
+    ],
+    "expected_cited": true,
+    "elapsed_ms": 4912,
+    "cost_usd": 0.000553
+   },
+   {
+    "id": "S-RCB-M2",
+    "group": "regresja",
+    "input": "We wklejonym fragmencie rozmówca mówi: »W 2018 r. ten SMS wzywający do urzędów gmin wysłało RCB«. Czy cytat wystarczy, żeby uznać to za prawdę?",
+    "expected_label": "false",
+    "status": "ok",
+    "label": "false",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Nie — cytat nie wystarczy, a dostępny komunikat RCB wprost zaprzecza, że wysłało Alert dotyczący zgłaszania się mężczyzn do urzędów gmin. RCB podało, że informacje o tych wiadomościach otrzymało od mieszkańców gmin we wschodniej Polsce.",
+    "missing_evidence": null,
+    "cited": [
+     "rcb-2018-dementi",
+     "rcb-2018-dementi"
+    ],
+    "quotes": [
+     {
+      "source_id": "rcb-2018-dementi",
+      "stance": "refutes",
+      "quote": "Rządowe Centrum Bezpieczeństwa nie wysyłało Alertu RCB, dotyczącego zgłaszania się mężczyzn do urzędów gmin."
+     },
+     {
+      "source_id": "rcb-2018-dementi",
+      "stance": "context",
+      "quote": "Informacje otrzymaliśmy od mieszkańców gmin położonych na wschodzie Polski."
+     }
+    ],
+    "expected_cited": true,
+    "elapsed_ms": 3664,
+    "cost_usd": 0.0004679
+   },
+   {
+    "id": "S-RCB-M3",
+    "group": "regresja",
+    "input": "Przesłano mi tekst: »Pewien poseł mówi, że RCB wysłało SMS wzywający mężczyzn do zgłoszenia się do urzędów gmin w listopadzie 2018 r. i że otrzymało go ponad 1000 osób«. Sprawdź, czy mamy na to dowody.",
+    "expected_label": null,
+    "status": "ok",
+    "label": "false",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Nie ma podstaw, by uznać, że RCB wysłało takiego SMS-a: samo RCB zaprzeczyło, że wysyłało Alert RCB dotyczący zgłaszania się mężczyzn do urzędów gmin. Podany fragment nie potwierdza też, że wiadomość otrzymało ponad 1000 osób.",
+    "missing_evidence": null,
+    "cited": [
+     "rcb-2018-dementi"
+    ],
+    "quotes": [
+     {
+      "source_id": "rcb-2018-dementi",
+      "stance": "refutes",
+      "quote": "Rządowe Centrum Bezpieczeństwa nie wysyłało Alertu RCB, dotyczącego zgłaszania się mężczyzn do urzędów gmin."
+     }
+    ],
+    "expected_cited": true,
+    "elapsed_ms": 3206,
+    "cost_usd": 0.0004769
+   }
+  ],
+  "v5+bm25": [
+   {
+    "id": "N01",
+    "group": "usługi publiczne",
+    "input": "Czy ePUAP znowu działa w pełnym zakresie po listopadowej awarii?",
+    "expected_label": "confirmed",
+    "status": "ok",
+    "label": "confirmed",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Tak — według Ministerstwa Cyfryzacji ePUAP ponownie działa w pełnym zakresie. Ministerstwo podaje, że usługi zostały przywrócone po stopniowym odtwarzaniu systemu.",
+    "missing_evidence": null,
+    "cited": [
+     "gov-epuap-ponownie-dziala-w-pelnym-zakresie"
+    ],
+    "quotes": [
+     {
+      "source_id": "gov-epuap-ponownie-dziala-w-pelnym-zakresie",
+      "stance": "supports",
+      "quote": "Dziś ePUAP działa już w pełnym zakresie. Usługi zostały przywrócone i są dostępne dla użytkowników."
+     }
+    ],
+    "expected_cited": true,
+    "elapsed_ms": 3186,
+    "cost_usd": 0.0004518
+   },
+   {
+    "id": "N02",
+    "group": "ostrzeżenie lokalne",
+    "input": "Czy w październiku 2026 sanepid uznał wodę z wodociągu Kotliny w gminie Brójce za niezdatną do spożycia?",
+    "expected_label": "confirmed",
+    "status": "ok",
+    "label": "confirmed",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Tak — sanepid uznał wodę z wodociągu Kotliny za niezdatną do spożycia na początku października 2026 r. Późniejszy komunikat z 11 października informował, że w kolejnych próbkach nie stwierdzono wskazanych bakterii.",
+    "missing_evidence": null,
+    "cited": [
+     "gov-wodociag-publiczny-kotliny-gm-brojce---woda-nie-nadaje-sie-d",
+     "gov-wodociag-publiczny-kotliny-gmina-brojce--woda-nadaje-sie-do"
+    ],
+    "quotes": [
+     {
+      "source_id": "gov-wodociag-publiczny-kotliny-gm-brojce---woda-nie-nadaje-sie-d",
+      "stance": "supports",
+      "quote": "Wodociąg publiczny Kotliny, gm. Brójce - woda nie nadaje się do spożycia"
+     },
+     {
+      "source_id": "gov-wodociag-publiczny-kotliny-gmina-brojce--woda-nadaje-sie-do",
+      "stance": "context",
+      "quote": "W wyniku przeprowadzonych badań nie stwierdzono obecności bakterii grupy coli, Escherichia coli i enterokoków."
+     }
+    ],
+    "expected_cited": true,
+    "elapsed_ms": 4383,
+    "cost_usd": 0.0005493
+   },
+   {
+    "id": "N03",
+    "group": "korekta ostrzeżenia lokalnego",
+    "input": "Woda z wodociągu Kotliny w gminie Brójce nadal nie nadaje się do picia, badania z 9 października 2026 to potwierdziły.",
+    "expected_label": "false",
+    "status": "ok",
+    "label": "false",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Nie — badania próbek pobranych 9 października 2026 nie potwierdziły, że woda nadal nie nadaje się do picia. Inspektor sanitarny poinformował, że w tych próbkach nie stwierdzono wskazanych bakterii; wcześniejsze badania z 5 października wykazały enterokoki.",
+    "missing_evidence": null,
+    "cited": [
+     "gov-wodociag-publiczny-kotliny-gmina-brojce--woda-nadaje-sie-do",
+     "gov-wodociag-publiczny-kotliny-gm-brojce---woda-nie-nadaje-sie-d"
+    ],
+    "quotes": [
+     {
+      "source_id": "gov-wodociag-publiczny-kotliny-gmina-brojce--woda-nadaje-sie-do",
+      "stance": "refutes",
+      "quote": "W wyniku przeprowadzonych badań nie stwierdzono obecności bakterii grupy coli, Escherichia coli i enterokoków."
+     },
+     {
+      "source_id": "gov-wodociag-publiczny-kotliny-gm-brojce---woda-nie-nadaje-sie-d",
+      "stance": "context",
+      "quote": "w dniu 5 października 2026 r. pobrano do badań laboratoryjnych próbki wody z wodociągu publicznego Kotliny: w punkcie wprowadzania wody do sieci wodociągowej (Stacja wodociągowa) oraz w punkcie kontrolnym na sieci wodociągowej. Na podstawie przeprowadzonych badań w obydwu próbkach wody stwierdzono obecności enterokoków."
+     }
+    ],
+    "expected_cited": true,
+    "elapsed_ms": 5128,
+    "cost_usd": 0.0006089
+   },
+   {
+    "id": "N04",
+    "group": "ostrzeżenie lokalne",
+    "input": "Czy Alert RCB z 21 października 2026 dotyczył niezdatnej wody w Świeradowie-Zdroju?",
+    "expected_label": "confirmed",
+    "status": "ok",
+    "label": "confirmed",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Tak. Komunikat RCB z 21 października mówił, że woda z wodociągu Wrzos w części Świeradowa-Zdroju nie nadaje się do celów spożywczych.",
+    "missing_evidence": null,
+    "cited": [
+     "gov-alert-rcb---niezdatna-woda-2110"
+    ],
+    "quotes": [
+     {
+      "source_id": "gov-alert-rcb---niezdatna-woda-2110",
+      "stance": "supports",
+      "quote": "woda z wodociągu Wrzos w części miejscowości Świeradów-Zdrój (pow. lubański) nie nadaje się do celów spożywczych."
+     }
+    ],
+    "expected_cited": true,
+    "elapsed_ms": 3258,
+    "cost_usd": 0.0004276
+   },
+   {
+    "id": "N05",
+    "group": "ostrzeżenie lokalne",
+    "input": "Alert RCB z 20 października 2026 w powiecie kamiennogórskim informował o prawdziwym ataku, a nie o ćwiczeniach.",
+    "expected_label": "false",
+    "status": "ok",
+    "label": "false",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Nie — alert dotyczył ćwiczeń, nie prawdziwego ataku. RCB podało, że trening systemu alarmowania z użyciem syren odbędzie się 21–22 października w gminie Kamienna Góra.",
+    "missing_evidence": null,
+    "cited": [
+     "gov-alert-rcb---cwiczenia-w-powiecie-kamiennogorskim-2010"
+    ],
+    "quotes": [
+     {
+      "source_id": "gov-alert-rcb---cwiczenia-w-powiecie-kamiennogorskim-2010",
+      "stance": "refutes",
+      "quote": "„ĆWICZENIA: W dniach 21-22.10 w godz. 09:00-15:00 na terenie gm. Kamienna Góra odbędzie się trening systemu alarmowania z wykorzystaniem syren. Zachowaj spokój”."
+     }
+    ],
+    "expected_cited": true,
+    "elapsed_ms": 3550,
+    "cost_usd": 0.0004396
+   },
+   {
+    "id": "N06",
+    "group": "ostrzeżenie publiczne",
+    "input": "Czy GIS ostrzegał przed szkłem w wodzie mineralnej Krystynka?",
+    "expected_label": "confirmed",
+    "status": "ok",
+    "label": "confirmed",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Tak. GIS opublikował ostrzeżenie o skardze dotyczącej fragmentu szkła w gazowanej wodzie mineralnej Krystynka i o wycofywaniu kwestionowanej partii.",
+    "missing_evidence": null,
+    "cited": [
+     "gov-ostrzezenie-publiczne-dotyczace-zywnosci-mozliwa-obecnosc-fr-2",
+     "gov-ostrzezenie-publiczne-dotyczace-zywnosci-mozliwa-obecnosc-fr-2"
+    ],
+    "quotes": [
+     {
+      "source_id": "gov-ostrzezenie-publiczne-dotyczace-zywnosci-mozliwa-obecnosc-fr-2",
+      "stance": "supports",
+      "quote": "Organy Państwowej Inspekcji Sanitarnej zostały poinformowane o skardze konsumenta na obecność fragmentu szkła w produkcie pn. KRYSTYNKA naturalna woda mineralna gazowana, 330 ml."
+     },
+     {
+      "source_id": "gov-ostrzezenie-publiczne-dotyczace-zywnosci-mozliwa-obecnosc-fr-2",
+      "stance": "supports",
+      "quote": "Po otrzymaniu informacji o skardze konsumenckiej i przeprowadzeniu wewnętrznej analizy producent na zasadzie ostrożności rozpoczął wycofanie kwestionowanej partii produktu."
+     }
+    ],
+    "expected_cited": true,
+    "elapsed_ms": 4462,
+    "cost_usd": 0.0005
+   },
+   {
+    "id": "N07",
+    "group": "samorząd, oszustwo",
+    "input": "We Wrocławiu dzwonią kurierzy z urzędu i pytają, czy będę w domu. Czy urząd miasta ostrzega przed nimi?",
+    "expected_label": "confirmed",
+    "status": "ok",
+    "label": "confirmed",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Tak. Urząd Miejski Wrocławia ostrzega przed takimi telefonami: zgłaszano osoby podszywające się pod „kurierów z urzędu”, które ustalały, czy adresatki będą w mieszkaniu.",
+    "missing_evidence": null,
+    "cited": [
+     "sam-pilne-oszusci-podszywaja-sie-pod-urzedowych-kurierow-we-wroc"
+    ],
+    "quotes": [
+     {
+      "source_id": "sam-pilne-oszusci-podszywaja-sie-pod-urzedowych-kurierow-we-wroc",
+      "stance": "supports",
+      "quote": "Rzekomi doręczyciele informują o konieczności przekazania „przesyłki poleconej” i próbują ustalić, czy adresatki będą obecne w mieszkaniu w ciągu najbliższych 40–60 minut."
+     }
+    ],
+    "expected_cited": true,
+    "elapsed_ms": 3519,
+    "cost_usd": 0.0004887
+   },
+   {
+    "id": "N08",
+    "group": "samorząd, transport",
+    "input": "Czy w listopadzie 2026 po kolizji w Chróstniku były utrudnienia w kursowaniu pociągów Wrocław – Zielona Góra?",
+    "expected_label": "confirmed",
+    "status": "ok",
+    "label": "confirmed",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Tak. Źródło z 20 listopada 2026 podaje, że po kolizji pociągu InterCity z samochodem w Chróstniku trwały utrudnienia w kursowaniu pociągów między Wrocławiem a Zieloną Górą.",
+    "missing_evidence": null,
+    "cited": [
+     "sam-utrudnienia-w-kursowaniu-pociagow-na-trasie-wroclaw-zielona"
+    ],
+    "quotes": [
+     {
+      "source_id": "sam-utrudnienia-w-kursowaniu-pociagow-na-trasie-wroclaw-zielona",
+      "stance": "supports",
+      "quote": "Po kolizji pociągu InterCity z samochodem w miejscowości Chróstnik trwają utrudnienia w kursowaniu pociągów na trasie Wrocław - Głogów i Wrocław - Zielona Góra."
+     }
+    ],
+    "expected_cited": true,
+    "elapsed_ms": 3590,
+    "cost_usd": 0.0004917
+   },
+   {
+    "id": "N09",
+    "group": "fact-check",
+    "input": "Szczepionki mRNA zmieniają ludzkie DNA i wywołują raka.",
+    "expected_label": "false",
+    "status": "ok",
+    "label": "insufficient_evidence",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Dostępny fragment nie wystarcza, by potwierdzić ani rozstrzygnąć całą tezę, że szczepionki mRNA zmieniają ludzkie DNA i wywołują raka. Wspomina, że rozwój nowotworu z powodu RNA w szczepionce jest biologicznie nieprawdopodobny, ale nie wyjaśnia wprost, czy szczepionki zmieniają DNA.",
+    "missing_evidence": "Potrzebne są cytowane ustalenia dotyczące tego, czy szczepionkowe mRNA integruje się z ludzkim genomem lub zmienia DNA oraz czy szczepionki mRNA powodują raka.",
+    "cited": [
+     "fc-szczepionki-mrna-nie-modyfikuja-ludzkiego-genomu-i-nie-wywol"
+    ],
+    "quotes": [
+     {
+      "source_id": "fc-szczepionki-mrna-nie-modyfikuja-ludzkiego-genomu-i-nie-wywol",
+      "stance": "context",
+      "quote": "Idea szybszego rozwoju nowotworu z powodu RNA w szczepionce jest jednak biologicznie nieprawdopodobna."
+     }
+    ],
+    "expected_cited": true,
+    "elapsed_ms": 4201,
+    "cost_usd": 0.0005362
+   },
+   {
+    "id": "N10",
+    "group": "fact-check",
+    "input": "Powodzie w Polsce są wywoływane celowo, a następna jest zaplanowana na sierpień.",
+    "expected_label": "false",
+    "status": "ok",
+    "label": "false",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Nie ma podstaw, by uznać, że powodzie w Polsce są celowo wywoływane ani że kolejna została zaplanowana na sierpień. Przytoczona analiza wskazuje, że nie ma dowodów na celowe zarządzanie pogodą, a terminu klęski żywiołowej nie da się wyliczyć z symboliki dat i liczb.",
+    "missing_evidence": null,
+    "cited": [
+     "fc-fc718021d8"
+    ],
+    "quotes": [
+     {
+      "source_id": "fc-fc718021d8",
+      "stance": "refutes",
+      "quote": "Nie ma dowodów na to, że „elity” czy rządzący „zarządzają pogodą” na szkodę obywateli, a terminy kolejnych klęsk żywiołowych da się wyliczyć na podstawie symboliki dat i liczb."
+     }
+    ],
+    "expected_cited": true,
+    "elapsed_ms": 3793,
+    "cost_usd": 0.0004832
+   },
+   {
+    "id": "N11",
+    "group": "fact-check",
+    "input": "Woda plazmowana leczy autyzm.",
+    "expected_label": "false",
+    "status": "ok",
+    "label": "false",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Nie, woda plazmowana nie leczy autyzmu. Przytoczone źródła podają, że brak wiarygodnych dowodów na jej działanie terapeutyczne u ludzi.",
+    "missing_evidence": null,
+    "cited": [
+     "fc-woda-plazmowana",
+     "fc-cudowna-woda-na-kazda-dolegliwosc-tak-sprzedaje-sie-pseudome"
+    ],
+    "quotes": [
+     {
+      "source_id": "fc-woda-plazmowana",
+      "stance": "refutes",
+      "quote": "Nie ma jednak podstaw, by uznawać ją za produkt o działaniu terapeutycznym do wykorzystywania przez ludzi."
+     },
+     {
+      "source_id": "fc-cudowna-woda-na-kazda-dolegliwosc-tak-sprzedaje-sie-pseudome",
+      "stance": "refutes",
+      "quote": "Nie ma dowodów, że woda plazmowana leczy jakiekolwiek choroby u ludzi ."
+     }
+    ],
+    "expected_cited": true,
+    "elapsed_ms": 3809,
+    "cost_usd": 0.0005392
+   },
+   {
+    "id": "N12",
+    "group": "ostrzeżenie lokalne",
+    "input": "Alert RCB z 3 listopada 2026 ostrzegał mieszkańców Lubelszczyzny przed trwającym zagrożeniem z powietrza na terenie Polski.",
+    "expected_label": "false",
+    "status": "ok",
+    "label": "false",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Nie — podany fragment komunikatu z 3 listopada mówił, że atak powietrzny na Ukrainę się zakończył i nie ma zagrożenia na terenie Polski. Alert wysłano do odbiorców w województwie lubelskim i podkarpackim, ale fragment nie potwierdza ostrzegania przed trwającym zagrożeniem.",
+    "missing_evidence": null,
+    "cited": [
+     "material-ef1e0a5feda6d56523",
+     "material-ef1e0a5feda6d56523"
+    ],
+    "quotes": [
+     {
+      "source_id": "material-ef1e0a5feda6d56523",
+      "stance": "refutes",
+      "quote": "„UWAGA! Zakończył się atak powietrzny na Ukrainę. Brak zagrożenia na terenie Polski.”"
+     },
+     {
+      "source_id": "material-ef1e0a5feda6d56523",
+      "stance": "context",
+      "quote": "Alert RCB został wysłany do odbiorców na terenie woj. lubelskiego i podkarpackiego."
+     }
+    ],
+    "expected_cited": false,
+    "elapsed_ms": 4531,
+    "cost_usd": 0.000494
+   },
+   {
+    "id": "N13",
+    "group": "usługi publiczne",
+    "input": "Czy w aplikacji mObywatel można zastrzec PESEL?",
+    "expected_label": "confirmed",
+    "status": "ok",
+    "label": "confirmed",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Tak — zastrzeżenie PESEL jest dostępne w aplikacji mObywatel. Ministerstwo Cyfryzacji wymienia tę usługę wśród usług dostępnych w aplikacji.",
+    "missing_evidence": null,
+    "cited": [
+     "gov-badz-bezpieczny-z-mobywatelem--rusza-nowa-kampania-informacy"
+    ],
+    "quotes": [
+     {
+      "source_id": "gov-badz-bezpieczny-z-mobywatelem--rusza-nowa-kampania-informacy",
+      "stance": "supports",
+      "quote": "dwie usługi dostępne w aplikacji: Zastrzeż PESEL oraz Bezpiecznie w sieci."
+     }
+    ],
+    "expected_cited": true,
+    "elapsed_ms": 2821,
+    "cost_usd": 0.0004518
+   },
+   {
+    "id": "N14",
+    "group": "fact-check",
+    "input": "Głuchołazy zalało w lipcu 2025, bo wylała rzeka Biała Głuchołaska.",
+    "expected_label": "false",
+    "status": "ok",
+    "label": "false",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Nie — źródło podaje, że rzeka Biała Głuchołaska nie wylała, a podtopienia były związane z intensywnymi opadami deszczu i przeciążeniem kanalizacji.",
+    "missing_evidence": null,
+    "cited": [
+     "fc-ac07257b26"
+    ],
+    "quotes": [
+     {
+      "source_id": "fc-ac07257b26",
+      "stance": "refutes",
+      "quote": "We wpisie także zdementowano doniesienia o wylaniu rzeki Biała Głuchołaska i podkreślono, że podtopienia miały związek z intensywnymi opadami deszczu ."
+     }
+    ],
+    "expected_cited": true,
+    "elapsed_ms": 3141,
+    "cost_usd": 0.0004815
+   },
+   {
+    "id": "A01",
+    "group": "brak dowodu",
+    "input": "Czy jutro w powiecie bytowskim zabraknie wody w kranach?",
+    "expected_label": "insufficient_evidence",
+    "status": "ok",
+    "label": "insufficient_evidence",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Nie da się ustalić, czy jutro w powiecie bytowskim zabraknie wody w kranach: w przekazanych materiałach nie ma informacji o dostawach wody w tym powiecie. Potrzebny byłby aktualny komunikat lokalnego dostawcy wody lub właściwego urzędu dotyczący jutra.",
+    "missing_evidence": "Brakuje aktualnego komunikatu o planowanych przerwach w dostawie wody w powiecie bytowskim.",
+    "cited": [],
+    "quotes": [],
+    "expected_cited": false,
+    "elapsed_ms": 2605,
+    "cost_usd": 0.0004064
+   },
+   {
+    "id": "A02",
+    "group": "brak dowodu",
+    "input": "Czy ePUAP zostanie całkowicie wyłączony 1 grudnia 2026?",
+    "expected_label": "insufficient_evidence",
+    "status": "ok",
+    "label": "not_verifiable",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Nie da się potwierdzić, czy ePUAP zostanie całkowicie wyłączony 1 grudnia 2026, bo pytanie dotyczy przyszłości. Ministerstwo Cyfryzacji podało 19 listopada 2026, że system działa w pełnym zakresie, ale nie rozstrzyga to, co stanie się 1 grudnia.",
+    "missing_evidence": null,
+    "cited": [
+     "gov-epuap-ponownie-dziala-w-pelnym-zakresie"
+    ],
+    "quotes": [
+     {
+      "source_id": "gov-epuap-ponownie-dziala-w-pelnym-zakresie",
+      "stance": "context",
+      "quote": "Dziś ePUAP działa już w pełnym zakresie."
+     }
+    ],
+    "expected_cited": false,
+    "elapsed_ms": 3446,
+    "cost_usd": 0.0004701
+   },
+   {
+    "id": "A03",
+    "group": "brak dowodu",
+    "input": "Czy od jutra komunikacja miejska w Toruniu jest bezpłatna dla wszystkich mieszkańców?",
+    "expected_label": "insufficient_evidence",
+    "status": "ok",
+    "label": "insufficient_evidence",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Nie da się ustalić na podstawie dostępnych źródeł, czy od jutra komunikacja miejska w Toruniu będzie bezpłatna dla wszystkich mieszkańców.",
+    "missing_evidence": "Brakuje aktualnej informacji o zasadach opłat za komunikację miejską w Toruniu obowiązujących od 2026-11-23, w tym o tym, czy obejmują wszystkich mieszkańców.",
+    "cited": [],
+    "quotes": [],
+    "expected_cited": false,
+    "elapsed_ms": 3083,
+    "cost_usd": 0.0004033
+   },
+   {
+    "id": "A04",
+    "group": "brak dowodu",
+    "input": "Ile osób otrzymało Alert RCB o niezdatnej wodzie w Świeradowie-Zdroju 21 października 2026?",
+    "expected_label": "insufficient_evidence",
+    "status": "ok",
+    "label": "insufficient_evidence",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Nie udało się zweryfikować podstawy odpowiedzi.",
+    "missing_evidence": "Potrzebna jest informacja RCB podająca liczbę odbiorców alertu z 21 października 2026 r.",
+    "cited": [],
+    "quotes": [],
+    "expected_cited": false,
+    "elapsed_ms": 3263,
+    "cost_usd": 0.0004354
+   },
+   {
+    "id": "A05",
+    "group": "brak dowodu",
+    "input": "Czy GIS wycofał wczoraj mleko Łaciate z powodu bakterii?",
+    "expected_label": "insufficient_evidence",
+    "status": "ok",
+    "label": "insufficient_evidence",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Nie da się ustalić na podstawie podanych materiałów, czy GIS wycofał wczoraj mleko Łaciate z powodu bakterii. Brakuje aktualnego komunikatu GIS dotyczącego tego produktu i zdarzenia z wczoraj.",
+    "missing_evidence": "Potrzebny jest komunikat GIS lub inny wiarygodny, aktualny materiał potwierdzający, czy wczoraj wycofano mleko Łaciate i z jakiego powodu.",
+    "cited": [],
+    "quotes": [],
+    "expected_cited": false,
+    "elapsed_ms": 2324,
+    "cost_usd": 0.0003756
+   },
+   {
+    "id": "A06",
+    "group": "brak dowodu",
+    "input": "Czy sanepid w Słupsku zakazał dziś kąpieli w Słupi?",
+    "expected_label": "insufficient_evidence",
+    "status": "ok",
+    "label": "insufficient_evidence",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Nie da się ustalić, czy sanepid w Słupsku zakazał dziś kąpieli w Słupi. Dostępne materiały nie zawierają aktualnego komunikatu o kąpieli w tej rzece.",
+    "missing_evidence": "Potrzebny jest aktualny komunikat sanepidu w Słupsku dotyczący zakazu kąpieli w Słupi.",
+    "cited": [],
+    "quotes": [],
+    "expected_cited": false,
+    "elapsed_ms": 2361,
+    "cost_usd": 0.0003975
+   },
+   {
+    "id": "S-RCB-A1",
+    "group": "regresja",
+    "input": "Czy SMS-y wzywające mężczyzn do zgłaszania się do urzędów gmin, opisane w listopadzie 2018 roku, wysłało RCB?",
+    "expected_label": "false",
+    "status": "ok",
+    "label": "false",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Nie — RCB oświadczyło, że nie wysyłało Alertu dotyczącego zgłaszania się mężczyzn do urzędów gmin. Informacje o tych wiadomościach otrzymało od mieszkańców gmin we wschodniej Polsce.",
+    "missing_evidence": null,
+    "cited": [
+     "rcb-2018-dementi"
+    ],
+    "quotes": [
+     {
+      "source_id": "rcb-2018-dementi",
+      "stance": "refutes",
+      "quote": "Rządowe Centrum Bezpieczeństwa nie wysyłało Alertu RCB, dotyczącego zgłaszania się mężczyzn do urzędów gmin."
+     }
+    ],
+    "expected_cited": true,
+    "elapsed_ms": 3008,
+    "cost_usd": 0.0003993
+   },
+   {
+    "id": "S-RCB-A2",
+    "group": "regresja",
+    "input": "Prawdziwe Alerty RCB mogą prosić o kliknięcie w link.",
+    "expected_label": "false",
+    "status": "ok",
+    "label": "false",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Nie, prawdziwe Alerty RCB nie proszą o kliknięcie w link. Rządowe Centrum Bezpieczeństwa przypomina, że takie alerty nie zawierają linków ani prośby o kliknięcie.",
+    "missing_evidence": null,
+    "cited": [
+     "rcb-2024-linki"
+    ],
+    "quotes": [
+     {
+      "source_id": "rcb-2024-linki",
+      "stance": "refutes",
+      "quote": "prawdziwe Alerty RCB nie zawierają linków ani prośby o kliknięcie w odnośnik."
+     }
+    ],
+    "expected_cited": true,
+    "elapsed_ms": 2683,
+    "cost_usd": 0.0004238
+   },
+   {
+    "id": "S-RCB-Q1",
+    "group": "regresja",
+    "input": "Kiedy RCB opublikowało sprostowanie w sprawie SMS-a wzywającego mężczyzn do zgłaszania się do urzędów gmin w 2018 roku?",
+    "expected_label": null,
+    "status": "ok",
+    "label": null,
+    "kind": "answer",
+    "answer": "2018-11-27",
+    "reason": "RCB opublikowało sprostowanie 27 listopada 2018 roku. Data publikacji wskazana przy materiale RCB to 2018-11-27.",
+    "missing_evidence": null,
+    "cited": [
+     "rcb-2018-dementi"
+    ],
+    "quotes": [
+     {
+      "source_id": "rcb-2018-dementi",
+      "stance": "supports",
+      "quote": "2018-11-27"
+     }
+    ],
+    "expected_cited": true,
+    "elapsed_ms": 3183,
+    "cost_usd": 0.0003913
+   },
+   {
+    "id": "S-RCB-D1",
+    "group": "regresja",
+    "input": "Ile osób otrzymało SMS wzywający mężczyzn do zgłaszania się do urzędów gmin, zdementowany przez RCB 27 listopada 2018 roku?",
+    "expected_label": "insufficient_evidence",
+    "status": "ok",
+    "label": "insufficient_evidence",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Nie udało się zweryfikować podstawy odpowiedzi.",
+    "missing_evidence": "Potrzebne jest wiarygodne źródło podające liczbę osób, które otrzymały te konkretne SMS-y.",
+    "cited": [],
+    "quotes": [],
+    "expected_cited": false,
+    "elapsed_ms": 3535,
+    "cost_usd": 0.0004507
+   },
+   {
+    "id": "S-RCB-B1",
+    "group": "regresja",
+    "input": "Wpis pokazuje sprostowanie RCB o SMS-ach wzywających mężczyzn do urzędów gmin z 27.11.2018 i opisuje je jako dzisiejszy komunikat z 21.11.2026.",
+    "expected_label": "misleading",
+    "status": "ok",
+    "label": "insufficient_evidence",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Nie udało się zweryfikować podstawy odpowiedzi.",
+    "missing_evidence": "Potrzebne jest źródło odnoszące się bezpośrednio do tej sytuacji.",
+    "cited": [],
+    "quotes": [],
+    "expected_cited": false,
+    "elapsed_ms": 4465,
+    "cost_usd": 0.0005612
+   },
+   {
+    "id": "S-MSZ-A1",
+    "group": "regresja",
+    "input": "Czy rejestracja podróży w Odyseuszu jest obowiązkowa?",
+    "expected_label": "false",
+    "status": "ok",
+    "label": "false",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Nie, według dostępnego źródła rejestracja w Odyseuszu jest dobrowolna. Materiał dotyczy serwisu Odyseusz MSZ dla osób przebywających lub planujących pobyt za granicą.",
+    "missing_evidence": null,
+    "cited": [
+     "msz-odyseusz-dobrowolny"
+    ],
+    "quotes": [
+     {
+      "source_id": "msz-odyseusz-dobrowolny",
+      "stance": "refutes",
+      "quote": "Rejestracja jest dobrowolna i darmowa"
+     }
+    ],
+    "expected_cited": true,
+    "elapsed_ms": 2889,
+    "cost_usd": 0.00043
+   },
+   {
+    "id": "S-RCB-A3",
+    "group": "regresja",
+    "input": "Alert RCB można otrzymać bez wcześniejszej rejestracji.",
+    "expected_label": "confirmed",
+    "status": "ok",
+    "label": "confirmed",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Tak, Alert RCB można otrzymać bez wcześniejszej rejestracji. Rządowe Centrum Bezpieczeństwa podaje, że osoby znajdujące się na obszarze potencjalnego zagrożenia otrzymają SMS z ostrzeżeniem.",
+    "missing_evidence": null,
+    "cited": [
+     "rcb-faq-zapisy"
+    ],
+    "quotes": [
+     {
+      "source_id": "rcb-faq-zapisy",
+      "stance": "supports",
+      "quote": "Na alert RCB nie trzeba się zapisywać."
+     }
+    ],
+    "expected_cited": true,
+    "elapsed_ms": 3304,
+    "cost_usd": 0.0003898
+   },
+   {
+    "id": "S-RCB-D2",
+    "group": "regresja",
+    "input": "SMS wzywający mężczyzn do zgłaszania się do urzędów gmin, zdementowany przez RCB 27 listopada 2018 roku, dostało ponad 1000 osób.",
+    "expected_label": "insufficient_evidence",
+    "status": "ok",
+    "label": "insufficient_evidence",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Nie da się ustalić, czy SMS dostało ponad 1000 osób. RCB podało, że otrzymało zgłoszenia od mieszkańców gmin na wschodzie Polski, ale nie podało liczby odbiorców wiadomości.",
+    "missing_evidence": "Brakuje wiarygodnych danych o liczbie osób, które dostały te SMS-y.",
+    "cited": [
+     "rcb-2018-dementi"
+    ],
+    "quotes": [
+     {
+      "source_id": "rcb-2018-dementi",
+      "stance": "context",
+      "quote": "Informacje otrzymaliśmy od mieszkańców gmin położonych na wschodzie Polski."
+     }
+    ],
+    "expected_cited": true,
+    "elapsed_ms": 3154,
+    "cost_usd": 0.0004481
+   },
+   {
+    "id": "S-OP-N1",
+    "group": "regresja",
+    "input": "Moim zdaniem alerty SMS są najgorszym sposobem komunikacji.",
+    "expected_label": "not_verifiable",
+    "status": "out_of_scope",
+    "label": null,
+    "kind": null,
+    "answer": null,
+    "reason": "Prawdowid weryfikuje sprawdzalne informacje publiczne.",
+    "missing_evidence": null,
+    "cited": [],
+    "quotes": [],
+    "expected_cited": false,
+    "elapsed_ms": 1524,
+    "cost_usd": 0.000295
+   },
+   {
+    "id": "S-RCB-M1",
+    "group": "regresja",
+    "input": "Ktoś napisał, że w listopadzie 2018 r. to RCB wysłało SMS wzywający mężczyzn do zgłoszenia się do urzędów gmin i że otrzymało go ponad 1000 osób. Sprawdź obie rzeczy.",
+    "expected_label": null,
+    "status": "ok",
+    "label": "false",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Nie, RCB nie wysłało takiego alertu. W sprostowaniu z 27 listopada 2018 r. RCB zaprzeczyło wysłaniu Alertu RCB dotyczącego zgłaszania się mężczyzn do urzędów gmin.",
+    "missing_evidence": null,
+    "cited": [
+     "rcb-2018-dementi",
+     "rcb-2018-dementi"
+    ],
+    "quotes": [
+     {
+      "source_id": "rcb-2018-dementi",
+      "stance": "refutes",
+      "quote": "Rządowe Centrum Bezpieczeństwa nie wysyłało Alertu RCB, dotyczącego zgłaszania się mężczyzn do urzędów gmin."
+     },
+     {
+      "source_id": "rcb-2018-dementi",
+      "stance": "context",
+      "quote": "Informacje otrzymaliśmy od mieszkańców gmin położonych na wschodzie Polski."
+     }
+    ],
+    "expected_cited": true,
+    "elapsed_ms": 4557,
+    "cost_usd": 0.0006013
+   },
+   {
+    "id": "S-RCB-M2",
+    "group": "regresja",
+    "input": "We wklejonym fragmencie rozmówca mówi: »W 2018 r. ten SMS wzywający do urzędów gmin wysłało RCB«. Czy cytat wystarczy, żeby uznać to za prawdę?",
+    "expected_label": "false",
+    "status": "ok",
+    "label": "false",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Nie — cytat nie wystarcza, a RCB wprost zaprzeczyło, że wysyłało Alert RCB dotyczący zgłaszania się mężczyzn do urzędów gmin. Fragment potwierdza, że RCB otrzymało informacje o takich wiadomościach od mieszkańców wschodniej Polski, ale nie podaje dokładnego dnia ich rozesłania.",
+    "missing_evidence": null,
+    "cited": [
+     "rcb-2018-dementi"
+    ],
+    "quotes": [
+     {
+      "source_id": "rcb-2018-dementi",
+      "stance": "refutes",
+      "quote": "Rządowe Centrum Bezpieczeństwa nie wysyłało Alertu RCB, dotyczącego zgłaszania się mężczyzn do urzędów gmin."
+     }
+    ],
+    "expected_cited": true,
+    "elapsed_ms": 3875,
+    "cost_usd": 0.0004801
+   },
+   {
+    "id": "S-RCB-M3",
+    "group": "regresja",
+    "input": "Przesłano mi tekst: »Pewien poseł mówi, że RCB wysłało SMS wzywający mężczyzn do zgłoszenia się do urzędów gmin w listopadzie 2018 r. i że otrzymało go ponad 1000 osób«. Sprawdź, czy mamy na to dowody.",
+    "expected_label": null,
+    "status": "ok",
+    "label": "false",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Nie: Rządowe Centrum Bezpieczeństwa podało, że nie wysyłało takiego alertu. Dostępny fragment nie potwierdza też liczby ponad 1000 odbiorców; wskazuje jedynie, że RCB otrzymało zgłoszenia od mieszkańców wschodniej Polski.",
+    "missing_evidence": null,
+    "cited": [
+     "rcb-2018-dementi",
+     "rcb-2018-dementi"
+    ],
+    "quotes": [
+     {
+      "source_id": "rcb-2018-dementi",
+      "stance": "refutes",
+      "quote": "Rządowe Centrum Bezpieczeństwa nie wysyłało Alertu RCB, dotyczącego zgłaszania się mężczyzn do urzędów gmin."
+     },
+     {
+      "source_id": "rcb-2018-dementi",
+      "stance": "context",
+      "quote": "Informacje otrzymaliśmy od mieszkańców gmin położonych na wschodzie Polski."
+     }
+    ],
+    "expected_cited": true,
+    "elapsed_ms": 4477,
+    "cost_usd": 0.0005574
+   }
+  ],
+  "v5+hybrid": [
+   {
+    "id": "N01",
+    "group": "usługi publiczne",
+    "input": "Czy ePUAP znowu działa w pełnym zakresie po listopadowej awarii?",
+    "expected_label": "confirmed",
+    "status": "ok",
+    "label": "confirmed",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Tak — według Ministerstwa Cyfryzacji ePUAP działa w pełnym zakresie, a usługi są dostępne dla użytkowników. Ministerstwo podało to 19 listopada 2026 r., po opisaniu działań naprawczych i stopniowego przywracania usług.",
+    "missing_evidence": null,
+    "cited": [
+     "gov-epuap-ponownie-dziala-w-pelnym-zakresie"
+    ],
+    "quotes": [
+     {
+      "source_id": "gov-epuap-ponownie-dziala-w-pelnym-zakresie",
+      "stance": "supports",
+      "quote": "Dziś ePUAP działa już w pełnym zakresie. Usługi zostały przywrócone i są dostępne dla użytkowników."
+     }
+    ],
+    "expected_cited": true,
+    "elapsed_ms": 3396,
+    "cost_usd": 0.0004728
+   },
+   {
+    "id": "N02",
+    "group": "ostrzeżenie lokalne",
+    "input": "Czy w październiku 2026 sanepid uznał wodę z wodociągu Kotliny w gminie Brójce za niezdatną do spożycia?",
+    "expected_label": "confirmed",
+    "status": "ok",
+    "label": "confirmed",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Tak.",
+    "missing_evidence": null,
+    "cited": [
+     "gov-wodociag-publiczny-kotliny-gm-brojce---woda-nie-nadaje-sie-d",
+     "gov-wodociag-publiczny-kotliny-gm-brojce---woda-nie-nadaje-sie-d",
+     "gov-wodociag-publiczny-kotliny-gmina-brojce--woda-nadaje-sie-do"
+    ],
+    "quotes": [
+     {
+      "source_id": "gov-wodociag-publiczny-kotliny-gm-brojce---woda-nie-nadaje-sie-d",
+      "stance": "supports",
+      "quote": "Na podstawie przeprowadzonych badań w obydwu próbkach wody stwierdzono obecności enterokoków."
+     },
+     {
+      "source_id": "gov-wodociag-publiczny-kotliny-gm-brojce---woda-nie-nadaje-sie-d",
+      "stance": "supports",
+      "quote": "woda nie nadaje się do spożycia"
+     },
+     {
+      "source_id": "gov-wodociag-publiczny-kotliny-gmina-brojce--woda-nadaje-sie-do",
+      "stance": "context",
+      "quote": "nie stwierdzono obecności bakterii grupy coli, Escherichia coli i enterokoków."
+     }
+    ],
+    "expected_cited": true,
+    "elapsed_ms": 5262,
+    "cost_usd": 0.0005972
+   },
+   {
+    "id": "N03",
+    "group": "korekta ostrzeżenia lokalnego",
+    "input": "Woda z wodociągu Kotliny w gminie Brójce nadal nie nadaje się do picia, badania z 9 października 2026 to potwierdziły.",
+    "expected_label": "false",
+    "status": "ok",
+    "label": "false",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Nie, badania z 9 października nie potwierdziły, że woda nadal nie nadaje się do picia.",
+    "missing_evidence": null,
+    "cited": [
+     "gov-wodociag-publiczny-kotliny-gmina-brojce--woda-nadaje-sie-do",
+     "gov-wodociag-publiczny-kotliny-gm-brojce---woda-nie-nadaje-sie-d"
+    ],
+    "quotes": [
+     {
+      "source_id": "gov-wodociag-publiczny-kotliny-gmina-brojce--woda-nadaje-sie-do",
+      "stance": "refutes",
+      "quote": "W wyniku przeprowadzonych badań nie stwierdzono obecności bakterii grupy coli, Escherichia coli i enterokoków."
+     },
+     {
+      "source_id": "gov-wodociag-publiczny-kotliny-gm-brojce---woda-nie-nadaje-sie-d",
+      "stance": "context",
+      "quote": "Na podstawie przeprowadzonych badań w obydwu próbkach wody stwierdzono obecności enterokoków."
+     }
+    ],
+    "expected_cited": true,
+    "elapsed_ms": 4727,
+    "cost_usd": 0.0005718
+   },
+   {
+    "id": "N04",
+    "group": "ostrzeżenie lokalne",
+    "input": "Czy Alert RCB z 21 października 2026 dotyczył niezdatnej wody w Świeradowie-Zdroju?",
+    "expected_label": "confirmed",
+    "status": "ok",
+    "label": "confirmed",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Tak. RCB podało, że woda z wodociągu Wrzos w części Świeradowa-Zdroju nie nadawała się do celów spożywczych.",
+    "missing_evidence": null,
+    "cited": [
+     "gov-alert-rcb---niezdatna-woda-2110"
+    ],
+    "quotes": [
+     {
+      "source_id": "gov-alert-rcb---niezdatna-woda-2110",
+      "stance": "supports",
+      "quote": "woda z wodociągu Wrzos w części miejscowości Świeradów-Zdrój (pow. lubański) nie nadaje się do celów spożywczych."
+     }
+    ],
+    "expected_cited": true,
+    "elapsed_ms": 3094,
+    "cost_usd": 0.0004255
+   },
+   {
+    "id": "N05",
+    "group": "ostrzeżenie lokalne",
+    "input": "Alert RCB z 20 października 2026 w powiecie kamiennogórskim informował o prawdziwym ataku, a nie o ćwiczeniach.",
+    "expected_label": "false",
+    "status": "ok",
+    "label": "false",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Nie — alert z tego dnia informował o ćwiczeniach, nie o prawdziwym ataku. RCB podało, że trening alarmowania z użyciem syren miał odbyć się 21–22 października w gminie Kamienna Góra.",
+    "missing_evidence": null,
+    "cited": [
+     "gov-alert-rcb---cwiczenia-w-powiecie-kamiennogorskim-2010"
+    ],
+    "quotes": [
+     {
+      "source_id": "gov-alert-rcb---cwiczenia-w-powiecie-kamiennogorskim-2010",
+      "stance": "refutes",
+      "quote": "„ĆWICZENIA: W dniach 21-22.10 w godz. 09:00-15:00 na terenie gm. Kamienna Góra odbędzie się trening systemu alarmowania z wykorzystaniem syren."
+     }
+    ],
+    "expected_cited": true,
+    "elapsed_ms": 3605,
+    "cost_usd": 0.0004443
+   },
+   {
+    "id": "N06",
+    "group": "ostrzeżenie publiczne",
+    "input": "Czy GIS ostrzegał przed szkłem w wodzie mineralnej Krystynka?",
+    "expected_label": "confirmed",
+    "status": "ok",
+    "label": "confirmed",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Tak. GIS opublikował ostrzeżenie o możliwej obecności fragmentów szkła w jednej partii wody Krystynka; komunikat wskazuje, że sprawę zgłosił konsument, a producent rozpoczął wycofywanie partii.",
+    "missing_evidence": null,
+    "cited": [
+     "gov-ostrzezenie-publiczne-dotyczace-zywnosci-mozliwa-obecnosc-fr-2"
+    ],
+    "quotes": [
+     {
+      "source_id": "gov-ostrzezenie-publiczne-dotyczace-zywnosci-mozliwa-obecnosc-fr-2",
+      "stance": "supports",
+      "quote": "Organy Państwowej Inspekcji Sanitarnej zostały poinformowane o skardze konsumenta na obecność fragmentu szkła w produkcie pn. KRYSTYNKA naturalna woda mineralna gazowana, 330 ml."
+     }
+    ],
+    "expected_cited": true,
+    "elapsed_ms": 3765,
+    "cost_usd": 0.0004454
+   },
+   {
+    "id": "N07",
+    "group": "samorząd, oszustwo",
+    "input": "We Wrocławiu dzwonią kurierzy z urzędu i pytają, czy będę w domu. Czy urząd miasta ostrzega przed nimi?",
+    "expected_label": "confirmed",
+    "status": "ok",
+    "label": "confirmed",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Tak — Urząd Miejski Wrocławia ostrzega przed takimi telefonami. Informuje, że osoby podające się za kurierów próbują ustalić, czy adresatki będą w domu.",
+    "missing_evidence": null,
+    "cited": [
+     "sam-pilne-oszusci-podszywaja-sie-pod-urzedowych-kurierow-we-wroc"
+    ],
+    "quotes": [
+     {
+      "source_id": "sam-pilne-oszusci-podszywaja-sie-pod-urzedowych-kurierow-we-wroc",
+      "stance": "supports",
+      "quote": "Rzekomi doręczyciele informują o konieczności przekazania „przesyłki poleconej” i próbują ustalić, czy adresatki będą obecne w mieszkaniu w ciągu najbliższych 40–60 minut."
+     }
+    ],
+    "expected_cited": true,
+    "elapsed_ms": 3456,
+    "cost_usd": 0.0004617
+   },
+   {
+    "id": "N08",
+    "group": "samorząd, transport",
+    "input": "Czy w listopadzie 2026 po kolizji w Chróstniku były utrudnienia w kursowaniu pociągów Wrocław – Zielona Góra?",
+    "expected_label": "confirmed",
+    "status": "ok",
+    "label": "confirmed",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Tak. Źródło Urzędu Miejskiego Wrocławia z 20 listopada 2026 podaje, że po kolizji pociągu z samochodem w Chróstniku trwały utrudnienia w kursowaniu pociągów między Wrocławiem a Zieloną Górą.",
+    "missing_evidence": null,
+    "cited": [
+     "sam-utrudnienia-w-kursowaniu-pociagow-na-trasie-wroclaw-zielona"
+    ],
+    "quotes": [
+     {
+      "source_id": "sam-utrudnienia-w-kursowaniu-pociagow-na-trasie-wroclaw-zielona",
+      "stance": "supports",
+      "quote": "Po kolizji pociągu InterCity z samochodem w miejscowości Chróstnik trwają utrudnienia w kursowaniu pociągów na trasie Wrocław - Głogów i Wrocław - Zielona Góra."
+     }
+    ],
+    "expected_cited": true,
+    "elapsed_ms": 3974,
+    "cost_usd": 0.0004948
+   },
+   {
+    "id": "N09",
+    "group": "fact-check",
+    "input": "Szczepionki mRNA zmieniają ludzkie DNA i wywołują raka.",
+    "expected_label": "false",
+    "status": "ok",
+    "label": "false",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Nie ma podstaw, by uznać, że szczepionki mRNA zmieniają ludzkie DNA i wywołują raka. Analiza FakeNews.pl opisuje integrację materiału ze szczepionki z ludzkim genomem jako biologicznie nieprawdopodobną.",
+    "missing_evidence": null,
+    "cited": [
+     "fc-szczepionki-mrna-nie-modyfikuja-ludzkiego-genomu-i-nie-wywol"
+    ],
+    "quotes": [
+     {
+      "source_id": "fc-szczepionki-mrna-nie-modyfikuja-ludzkiego-genomu-i-nie-wywol",
+      "stance": "refutes",
+      "quote": "Idea szybszego rozwoju nowotworu z powodu RNA w szczepionce jest jednak biologicznie nieprawdopodobna."
+     }
+    ],
+    "expected_cited": true,
+    "elapsed_ms": 3665,
+    "cost_usd": 0.0005019
+   },
+   {
+    "id": "N10",
+    "group": "fact-check",
+    "input": "Powodzie w Polsce są wywoływane celowo, a następna jest zaplanowana na sierpień.",
+    "expected_label": "false",
+    "status": "ok",
+    "label": "false",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Nie ma podstaw, by uznać, że powodzie w Polsce są celowo wywoływane ani że kolejna została zaplanowana na sierpień. Demagog wskazuje, że nie ma dowodów na celowe zarządzanie pogodą, a terminy klęsk wyliczane z symboliki dat i liczb nie są wiarygodną podstawą.",
+    "missing_evidence": null,
+    "cited": [
+     "fc-fc718021d8"
+    ],
+    "quotes": [
+     {
+      "source_id": "fc-fc718021d8",
+      "stance": "refutes",
+      "quote": "Nie ma dowodów na to, że „elity” czy rządzący „zarządzają pogodą” na szkodę obywateli, a terminy kolejnych klęsk żywiołowych da się wyliczyć na podstawie symboliki dat i liczb."
+     }
+    ],
+    "expected_cited": true,
+    "elapsed_ms": 3367,
+    "cost_usd": 0.0005144
+   },
+   {
+    "id": "N11",
+    "group": "fact-check",
+    "input": "Woda plazmowana leczy autyzm.",
+    "expected_label": "false",
+    "status": "ok",
+    "label": "false",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Nie, nie ma podstaw, by twierdzić, że woda plazmowana leczy autyzm. Źródła podają, że nie ma wiarygodnych dowodów na jej działanie terapeutyczne u ludzi.",
+    "missing_evidence": null,
+    "cited": [
+     "fc-cudowna-woda-na-kazda-dolegliwosc-tak-sprzedaje-sie-pseudome",
+     "fc-woda-plazmowana"
+    ],
+    "quotes": [
+     {
+      "source_id": "fc-cudowna-woda-na-kazda-dolegliwosc-tak-sprzedaje-sie-pseudome",
+      "stance": "refutes",
+      "quote": "Nie ma dowodów, że woda plazmowana leczy jakiekolwiek choroby u ludzi ."
+     },
+     {
+      "source_id": "fc-woda-plazmowana",
+      "stance": "refutes",
+      "quote": "Nie ma jednak podstaw, by uznawać ją za produkt o działaniu terapeutycznym do wykorzystywania przez ludzi."
+     }
+    ],
+    "expected_cited": true,
+    "elapsed_ms": 3682,
+    "cost_usd": 0.0005412
+   },
+   {
+    "id": "N12",
+    "group": "ostrzeżenie lokalne",
+    "input": "Alert RCB z 3 listopada 2026 ostrzegał mieszkańców Lubelszczyzny przed trwającym zagrożeniem z powietrza na terenie Polski.",
+    "expected_label": "false",
+    "status": "ok",
+    "label": "insufficient_evidence",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Źródła podają sprzeczne informacje.",
+    "missing_evidence": "Potrzebny jest dowód rozstrzygający rozbieżność.",
+    "cited": [
+     "material-ef1e0a5feda6d56523",
+     "material-ef1e0a5feda6d56523"
+    ],
+    "quotes": [
+     {
+      "source_id": "material-ef1e0a5feda6d56523",
+      "stance": "refutes",
+      "quote": "Zakończył się atak powietrzny na Ukrainę. Brak zagrożenia na terenie Polski."
+     },
+     {
+      "source_id": "material-ef1e0a5feda6d56523",
+      "stance": "supports",
+      "quote": "Alert RCB został wysłany do odbiorców na terenie woj. lubelskiego i podkarpackiego."
+     }
+    ],
+    "expected_cited": false,
+    "elapsed_ms": 4639,
+    "cost_usd": 0.0004904
+   },
+   {
+    "id": "N13",
+    "group": "usługi publiczne",
+    "input": "Czy w aplikacji mObywatel można zastrzec PESEL?",
+    "expected_label": "confirmed",
+    "status": "ok",
+    "label": "insufficient_evidence",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Nie udało się zweryfikować podstawy odpowiedzi.",
+    "missing_evidence": "Potrzebne jest źródło odnoszące się bezpośrednio do tej sytuacji.",
+    "cited": [],
+    "quotes": [],
+    "expected_cited": false,
+    "elapsed_ms": 2667,
+    "cost_usd": 0.0004495
+   },
+   {
+    "id": "N14",
+    "group": "fact-check",
+    "input": "Głuchołazy zalało w lipcu 2025, bo wylała rzeka Biała Głuchołaska.",
+    "expected_label": "false",
+    "status": "ok",
+    "label": "insufficient_evidence",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Źródła podają sprzeczne informacje.",
+    "missing_evidence": "Potrzebny jest dowód rozstrzygający rozbieżność.",
+    "cited": [
+     "fc-ac07257b26",
+     "fc-ac07257b26"
+    ],
+    "quotes": [
+     {
+      "source_id": "fc-ac07257b26",
+      "stance": "refutes",
+      "quote": "zdementowano doniesienia o wylaniu rzeki Biała Głuchołaska"
+     },
+     {
+      "source_id": "fc-ac07257b26",
+      "stance": "supports",
+      "quote": "podtopienia miały związek z intensywnymi opadami deszczu"
+     }
+    ],
+    "expected_cited": true,
+    "elapsed_ms": 3710,
+    "cost_usd": 0.0005274
+   },
+   {
+    "id": "A01",
+    "group": "brak dowodu",
+    "input": "Czy jutro w powiecie bytowskim zabraknie wody w kranach?",
+    "expected_label": "insufficient_evidence",
+    "status": "ok",
+    "label": "insufficient_evidence",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Nie da się ustalić na podstawie dostępnych materiałów, czy jutro w powiecie bytowskim zabraknie wody w kranach. Brakuje aktualnego komunikatu lokalnego dostawcy wody lub właściwego urzędu dotyczącego przerw w dostawie w tym powiecie.",
+    "missing_evidence": "Aktualny komunikat o planowanych lub awaryjnych przerwach w dostawie wody w powiecie bytowskim na jutro.",
+    "cited": [],
+    "quotes": [],
+    "expected_cited": false,
+    "elapsed_ms": 2575,
+    "cost_usd": 0.0003792
+   },
+   {
+    "id": "A02",
+    "group": "brak dowodu",
+    "input": "Czy ePUAP zostanie całkowicie wyłączony 1 grudnia 2026?",
+    "expected_label": "insufficient_evidence",
+    "status": "ok",
+    "label": "not_verifiable",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Nie da się potwierdzić, czy ePUAP zostanie wyłączony w przyszłości; przyszłych zdarzeń nie sprawdzamy. Ministerstwo Cyfryzacji podało 19 listopada 2026 r., że system działał wtedy w pełnym zakresie.",
+    "missing_evidence": null,
+    "cited": [
+     "gov-epuap-ponownie-dziala-w-pelnym-zakresie"
+    ],
+    "quotes": [
+     {
+      "source_id": "gov-epuap-ponownie-dziala-w-pelnym-zakresie",
+      "stance": "context",
+      "quote": "Dziś ePUAP działa już w pełnym zakresie."
+     }
+    ],
+    "expected_cited": false,
+    "elapsed_ms": 3000,
+    "cost_usd": 0.000446
+   },
+   {
+    "id": "A03",
+    "group": "brak dowodu",
+    "input": "Czy od jutra komunikacja miejska w Toruniu jest bezpłatna dla wszystkich mieszkańców?",
+    "expected_label": "insufficient_evidence",
+    "status": "ok",
+    "label": "insufficient_evidence",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Nie da się ustalić, czy od jutra komunikacja miejska w Toruniu będzie bezpłatna dla wszystkich mieszkańców. Dostępne źródła nie zawierają aktualnej informacji o takiej zmianie ani o jej zakresie.",
+    "missing_evidence": "Potrzebny jest aktualny komunikat lub przepis właściwego organu Torunia, który potwierdzałby od kiedy obowiązuje bezpłatna komunikacja i kogo obejmuje.",
+    "cited": [],
+    "quotes": [],
+    "expected_cited": false,
+    "elapsed_ms": 2705,
+    "cost_usd": 0.0004031
+   },
+   {
+    "id": "A04",
+    "group": "brak dowodu",
+    "input": "Ile osób otrzymało Alert RCB o niezdatnej wodzie w Świeradowie-Zdroju 21 października 2026?",
+    "expected_label": "insufficient_evidence",
+    "status": "ok",
+    "label": "insufficient_evidence",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Nie udało się zweryfikować podstawy odpowiedzi.",
+    "missing_evidence": "Potrzebna jest informacja RCB o liczbie odbiorców, do których wysłano ten alert.",
+    "cited": [],
+    "quotes": [],
+    "expected_cited": false,
+    "elapsed_ms": 3189,
+    "cost_usd": 0.000431
+   },
+   {
+    "id": "A05",
+    "group": "brak dowodu",
+    "input": "Czy GIS wycofał wczoraj mleko Łaciate z powodu bakterii?",
+    "expected_label": "insufficient_evidence",
+    "status": "ok",
+    "label": "insufficient_evidence",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Nie da się ustalić, czy GIS wycofał wczoraj mleko Łaciate z powodu bakterii. Dostarczone fragmenty dotyczą innych produktów, a brak aktualnego komunikatu o mleku Łaciate nie rozstrzyga, czy takie wycofanie nastąpiło.",
+    "missing_evidence": "Potrzebny jest aktualny komunikat GIS albo inny wiarygodny materiał potwierdzający lub wykluczający wycofanie mleka Łaciate wczoraj.",
+    "cited": [],
+    "quotes": [],
+    "expected_cited": false,
+    "elapsed_ms": 2960,
+    "cost_usd": 0.0004002
+   },
+   {
+    "id": "A06",
+    "group": "brak dowodu",
+    "input": "Czy sanepid w Słupsku zakazał dziś kąpieli w Słupi?",
+    "expected_label": "insufficient_evidence",
+    "status": "ok",
+    "label": "insufficient_evidence",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Nie da się ustalić na podstawie dostępnych źródeł, czy sanepid w Słupsku zakazał dziś kąpieli w Słupi. Brakuje aktualnego komunikatu właściwej stacji sanitarnej o kąpieli w tej rzece.",
+    "missing_evidence": "Potrzebny jest aktualny komunikat Powiatowej Stacji Sanitarno-Epidemiologicznej w Słupsku dotyczący zakazu kąpieli w Słupi.",
+    "cited": [],
+    "quotes": [],
+    "expected_cited": false,
+    "elapsed_ms": 3013,
+    "cost_usd": 0.0004267
+   },
+   {
+    "id": "S-RCB-A1",
+    "group": "regresja",
+    "input": "Czy SMS-y wzywające mężczyzn do zgłaszania się do urzędów gmin, opisane w listopadzie 2018 roku, wysłało RCB?",
+    "expected_label": "false",
+    "status": "ok",
+    "label": "false",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Nie, RCB zaprzeczyło, że wysłało te Alerty. W komunikacie z 27 listopada 2018 roku podało, że nie wysyłało alertu dotyczącego zgłaszania się mężczyzn do urzędów gmin.",
+    "missing_evidence": null,
+    "cited": [
+     "rcb-2018-dementi"
+    ],
+    "quotes": [
+     {
+      "source_id": "rcb-2018-dementi",
+      "stance": "refutes",
+      "quote": "Rządowe Centrum Bezpieczeństwa nie wysyłało Alertu RCB, dotyczącego zgłaszania się mężczyzn do urzędów gmin."
+     }
+    ],
+    "expected_cited": true,
+    "elapsed_ms": 2985,
+    "cost_usd": 0.000405
+   },
+   {
+    "id": "S-RCB-A2",
+    "group": "regresja",
+    "input": "Prawdziwe Alerty RCB mogą prosić o kliknięcie w link.",
+    "expected_label": "false",
+    "status": "ok",
+    "label": "false",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Nie, prawdziwe Alerty RCB nie proszą o kliknięcie w link. Rządowe Centrum Bezpieczeństwa przypomniało, że nie zawierają linków ani próśb o kliknięcie w odnośnik.",
+    "missing_evidence": null,
+    "cited": [
+     "rcb-2024-linki"
+    ],
+    "quotes": [
+     {
+      "source_id": "rcb-2024-linki",
+      "stance": "refutes",
+      "quote": "prawdziwe Alerty RCB nie zawierają linków ani prośby o kliknięcie w odnośnik."
+     }
+    ],
+    "expected_cited": true,
+    "elapsed_ms": 3001,
+    "cost_usd": 0.0004102
+   },
+   {
+    "id": "S-RCB-Q1",
+    "group": "regresja",
+    "input": "Kiedy RCB opublikowało sprostowanie w sprawie SMS-a wzywającego mężczyzn do zgłaszania się do urzędów gmin w 2018 roku?",
+    "expected_label": null,
+    "status": "ok",
+    "label": null,
+    "kind": "answer",
+    "answer": "2018-11-27",
+    "reason": "RCB opublikowało sprostowanie 27 listopada 2018 roku. W komunikacie podano, że RCB nie wysyłało alertu dotyczącego zgłaszania się mężczyzn do urzędów gmin.",
+    "missing_evidence": null,
+    "cited": [
+     "rcb-2018-dementi",
+     "rcb-2018-dementi"
+    ],
+    "quotes": [
+     {
+      "source_id": "rcb-2018-dementi",
+      "stance": "supports",
+      "quote": "2018-11-27"
+     },
+     {
+      "source_id": "rcb-2018-dementi",
+      "stance": "supports",
+      "quote": "Rządowe Centrum Bezpieczeństwa nie wysyłało Alertu RCB, dotyczącego zgłaszania się mężczyzn do urzędów gmin."
+     }
+    ],
+    "expected_cited": true,
+    "elapsed_ms": 3850,
+    "cost_usd": 0.0004573
+   },
+   {
+    "id": "S-RCB-D1",
+    "group": "regresja",
+    "input": "Ile osób otrzymało SMS wzywający mężczyzn do zgłaszania się do urzędów gmin, zdementowany przez RCB 27 listopada 2018 roku?",
+    "expected_label": "insufficient_evidence",
+    "status": "ok",
+    "label": "insufficient_evidence",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Nie da się ustalić, ile osób otrzymało te SMS-y. RCB podało, że informacje o nich dostało od mieszkańców gmin we wschodniej Polsce, ale nie wskazało liczby odbiorców wiadomości.",
+    "missing_evidence": "Potrzebne jest źródło podające liczbę osób, które faktycznie otrzymały te SMS-y.",
+    "cited": [
+     "rcb-2018-dementi"
+    ],
+    "quotes": [
+     {
+      "source_id": "rcb-2018-dementi",
+      "stance": "supports",
+      "quote": "Informacje otrzymaliśmy od mieszkańców gmin położonych na wschodzie Polski."
+     }
+    ],
+    "expected_cited": true,
+    "elapsed_ms": 3600,
+    "cost_usd": 0.0004471
+   },
+   {
+    "id": "S-RCB-B1",
+    "group": "regresja",
+    "input": "Wpis pokazuje sprostowanie RCB o SMS-ach wzywających mężczyzn do urzędów gmin z 27.11.2018 i opisuje je jako dzisiejszy komunikat z 21.11.2026.",
+    "expected_label": "misleading",
+    "status": "ok",
+    "label": "insufficient_evidence",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Nie udało się zweryfikować podstawy odpowiedzi.",
+    "missing_evidence": "Potrzebne jest źródło odnoszące się bezpośrednio do tej sytuacji.",
+    "cited": [],
+    "quotes": [],
+    "expected_cited": false,
+    "elapsed_ms": 4334,
+    "cost_usd": 0.0005539
+   },
+   {
+    "id": "S-MSZ-A1",
+    "group": "regresja",
+    "input": "Czy rejestracja podróży w Odyseuszu jest obowiązkowa?",
+    "expected_label": "false",
+    "status": "ok",
+    "label": "false",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Nie, rejestracja podróży w Odyseuszu nie jest obowiązkowa. Ambasada RP w Bernie podaje, że jest dobrowolna.",
+    "missing_evidence": null,
+    "cited": [
+     "msz-odyseusz-dobrowolny"
+    ],
+    "quotes": [
+     {
+      "source_id": "msz-odyseusz-dobrowolny",
+      "stance": "refutes",
+      "quote": "Rejestracja jest dobrowolna i darmowa"
+     }
+    ],
+    "expected_cited": true,
+    "elapsed_ms": 3007,
+    "cost_usd": 0.0004314
+   },
+   {
+    "id": "S-RCB-A3",
+    "group": "regresja",
+    "input": "Alert RCB można otrzymać bez wcześniejszej rejestracji.",
+    "expected_label": "confirmed",
+    "status": "ok",
+    "label": "confirmed",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Tak. Rządowe Centrum Bezpieczeństwa podaje, że na Alert RCB nie trzeba się zapisywać, a osoby znajdujące się na obszarze potencjalnego zagrożenia otrzymują ostrzeżenie SMS-em.",
+    "missing_evidence": null,
+    "cited": [
+     "rcb-faq-zapisy"
+    ],
+    "quotes": [
+     {
+      "source_id": "rcb-faq-zapisy",
+      "stance": "supports",
+      "quote": "Na alert RCB nie trzeba się zapisywać."
+     }
+    ],
+    "expected_cited": true,
+    "elapsed_ms": 2796,
+    "cost_usd": 0.0003764
+   },
+   {
+    "id": "S-RCB-D2",
+    "group": "regresja",
+    "input": "SMS wzywający mężczyzn do zgłaszania się do urzędów gmin, zdementowany przez RCB 27 listopada 2018 roku, dostało ponad 1000 osób.",
+    "expected_label": "insufficient_evidence",
+    "status": "ok",
+    "label": "insufficient_evidence",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Nie da się ustalić, czy SMS dostało ponad 1000 osób. RCB podało, że otrzymało informacje od mieszkańców gmin na wschodzie Polski, ale nie wskazało liczby odbiorców.",
+    "missing_evidence": "Brakuje wiarygodnej informacji o liczbie osób, które otrzymały tę wiadomość.",
+    "cited": [
+     "rcb-2018-dementi"
+    ],
+    "quotes": [
+     {
+      "source_id": "rcb-2018-dementi",
+      "stance": "context",
+      "quote": "Informacje otrzymaliśmy od mieszkańców gmin położonych na wschodzie Polski."
+     }
+    ],
+    "expected_cited": true,
+    "elapsed_ms": 3454,
+    "cost_usd": 0.0004365
+   },
+   {
+    "id": "S-OP-N1",
+    "group": "regresja",
+    "input": "Moim zdaniem alerty SMS są najgorszym sposobem komunikacji.",
+    "expected_label": "not_verifiable",
+    "status": "out_of_scope",
+    "label": null,
+    "kind": null,
+    "answer": null,
+    "reason": "Prawdowid weryfikuje sprawdzalne informacje publiczne.",
+    "missing_evidence": null,
+    "cited": [],
+    "quotes": [],
+    "expected_cited": false,
+    "elapsed_ms": 1565,
+    "cost_usd": 0.0003107
+   },
+   {
+    "id": "S-RCB-M1",
+    "group": "regresja",
+    "input": "Ktoś napisał, że w listopadzie 2018 r. to RCB wysłało SMS wzywający mężczyzn do zgłoszenia się do urzędów gmin i że otrzymało go ponad 1000 osób. Sprawdź obie rzeczy.",
+    "expected_label": null,
+    "status": "ok",
+    "label": "false",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Nie, RCB nie wysłało tego Alertu RCB. W sprostowaniu z 27 listopada 2018 r. instytucja zaprzeczyła, że wysyłała alert o takiej treści.",
+    "missing_evidence": null,
+    "cited": [
+     "rcb-2018-dementi",
+     "rcb-2018-dementi"
+    ],
+    "quotes": [
+     {
+      "source_id": "rcb-2018-dementi",
+      "stance": "refutes",
+      "quote": "Rządowe Centrum Bezpieczeństwa nie wysyłało Alertu RCB, dotyczącego zgłaszania się mężczyzn do urzędów gmin."
+     },
+     {
+      "source_id": "rcb-2018-dementi",
+      "stance": "context",
+      "quote": "Informacje otrzymaliśmy od mieszkańców gmin położonych na wschodzie Polski."
+     }
+    ],
+    "expected_cited": true,
+    "elapsed_ms": 5046,
+    "cost_usd": 0.0005616
+   },
+   {
+    "id": "S-RCB-M2",
+    "group": "regresja",
+    "input": "We wklejonym fragmencie rozmówca mówi: »W 2018 r. ten SMS wzywający do urzędów gmin wysłało RCB«. Czy cytat wystarczy, żeby uznać to za prawdę?",
+    "expected_label": "false",
+    "status": "ok",
+    "label": "false",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Nie — cytat nie wystarczy, a dostępne sprostowanie RCB zaprzecza, że wysłało Alert dotyczący zgłaszania się mężczyzn do urzędów gmin. Fragment rozmowy pokazuje jedynie, co powiedział rozmówca, nie że jego twierdzenie jest prawdziwe.",
+    "missing_evidence": null,
+    "cited": [
+     "rcb-2018-dementi"
+    ],
+    "quotes": [
+     {
+      "source_id": "rcb-2018-dementi",
+      "stance": "refutes",
+      "quote": "Rządowe Centrum Bezpieczeństwa nie wysyłało Alertu RCB, dotyczącego zgłaszania się mężczyzn do urzędów gmin."
+     }
+    ],
+    "expected_cited": true,
+    "elapsed_ms": 3484,
+    "cost_usd": 0.0004491
+   },
+   {
+    "id": "S-RCB-M3",
+    "group": "regresja",
+    "input": "Przesłano mi tekst: »Pewien poseł mówi, że RCB wysłało SMS wzywający mężczyzn do zgłoszenia się do urzędów gmin w listopadzie 2018 r. i że otrzymało go ponad 1000 osób«. Sprawdź, czy mamy na to dowody.",
+    "expected_label": null,
+    "status": "ok",
+    "label": "false",
+    "kind": "verdict",
+    "answer": null,
+    "reason": "Nie ma dowodów, że RCB wysłało taką wiadomość; samo RCB temu zaprzeczyło. Podane źródło nie potwierdza też, że wiadomość otrzymało ponad 1000 osób.",
+    "missing_evidence": null,
+    "cited": [
+     "rcb-2018-dementi"
+    ],
+    "quotes": [
+     {
+      "source_id": "rcb-2018-dementi",
+      "stance": "refutes",
+      "quote": "Rządowe Centrum Bezpieczeństwa nie wysyłało Alertu RCB, dotyczącego zgłaszania się mężczyzn do urzędów gmin."
+     }
+    ],
+    "expected_cited": true,
+    "elapsed_ms": 3300,
+    "cost_usd": 0.0004731
+   }
+  ]
+ }
+}

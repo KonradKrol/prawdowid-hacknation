@@ -22,6 +22,7 @@ from app.core.result import missing_item, normalize
 from app.core.safety import SCOPE, SUSPICIOUS, VAGUE, input_info
 from app.ingest.official import OfficialSync, summarize
 from app.ingest.places import signature as event_signature
+from app.ingest import narratives
 from app.storage.db import Store
 from prawdowid_core import fragments
 
@@ -61,6 +62,7 @@ class Service:
         self.last_prune = 0
         self.maintenance = Lock()
         self.official = OfficialSync(self)
+        self.narratives = narratives.load()
         self.official.load_current()
 
     def sources(self):
@@ -177,6 +179,10 @@ class Service:
                 result.status, result.message, result.clarification_question = "ok", None, None
                 result.items = [missing_item("t1", result.input.text_masked,
                     "Po doprecyzowaniu nadal brakuje informacji.", "Dokładna teza oraz źródło, którego dotyczy pytanie.")]
+            if result.status == "ok":
+                for match in narratives.find(root, self.narratives)[:1]:
+                    result.notices.append(NoticeItem(type="known_narrative", text=narratives.notice_text(match),
+                                                     url=match["url"]))
             if result.status == "ok" and not result.summary:
                 result.summary = " ".join((item.answer or item.reason) for item in result.items[:2])
             result.meta.elapsed_ms = round((perf_counter() - start) * 1000)

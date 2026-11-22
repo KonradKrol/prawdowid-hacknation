@@ -86,7 +86,7 @@
   {% endif %}
 
   {% for n in r.notices if not (n.type == "archival_material" and items | selectattr("context_mismatch") | list) %}
-  <p class="note note--warn"><svg aria-hidden="true"><use href="#i-{{ NOTICE_ICON.get(n.type, "info") }}"/></svg><span>{{ n.text }}</span></p>
+  <p class="note note--warn"><svg aria-hidden="true"><use href="#i-{{ NOTICE_ICON.get(n.type, "info") }}"/></svg><span>{{ n.text }}{% if n.url %} <a href="{{ n.url }}" rel="noopener noreferrer" target="_blank">Zobacz przypadek</a>{% endif %}</span></p>
   {% endfor %}
 
   <div class="actions">

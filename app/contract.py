@@ -68,6 +68,7 @@ class Item(BaseModel):
 class NoticeItem(BaseModel):
     type: Notice
     text: str
+    url: str | None = None
 
 
 class InputInfo(BaseModel):

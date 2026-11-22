@@ -95,7 +95,7 @@ def citations_for(draft, sources):
             source_id=source["id"], stance=ref.stance, field=ref.field, quote=ref.quote,
             title=source["title"], publisher=source["publisher"], url=source["url"],
             published_on=published, retrieved_on=source["checked_on"], source_type=source["type"],
-            is_primary=source["type"] in {"urzędowe", "pierwotne", "dane_publiczne"},
+            is_primary=source["type"] in {"urzędowe", "samorządowe", "pierwotne", "dane_publiczne", "dane publiczne"},
             archival=bool(source.get("archival")) or bool(published and
                 int(source["checked_on"][:4]) - int(published[:4]) >= 2),
             explanation=getattr(ref, "explanation", None) or None,

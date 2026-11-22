@@ -1,0 +1,175 @@
+{
+ "source": "https://danepubliczne.imgw.pl/api/data/warningsmeteo",
+ "interval_s": 120,
+ "started": "2026-11-22T00:18:43.173044+00:00",
+ "last": "2026-11-22T00:46:46.043069+00:00",
+ "polls": 15,
+ "failed_polls": 0,
+ "lag": {
+  "count": 0,
+  "backlog": 1
+ },
+ "entries": [
+  {
+   "entry_id": "Sk20261121110027236",
+   "version": 1,
+   "published_at": "2026-11-21T12:00:00+01:00",
+   "first_fetched_at": "2026-11-22T00:18:42.871071+00:00",
+   "indexed_at": "2026-11-22T00:18:43.154863+00:00",
+   "last_seen_at": "2026-11-22T00:46:45.927055+00:00"
+  }
+ ],
+ "runs": [
+  {
+   "at": "2026-11-22T00:18:43.173044+00:00",
+   "status": "ok",
+   "error": null,
+   "fetched": 1,
+   "new": 1,
+   "changed": 0,
+   "unchanged": 0,
+   "rejected": 0
+  },
+  {
+   "at": "2026-11-22T00:20:43.611598+00:00",
+   "status": "ok",
+   "error": null,
+   "fetched": 1,
+   "new": 0,
+   "changed": 0,
+   "unchanged": 1,
+   "rejected": 0
+  },
+  {
+   "at": "2026-11-22T00:22:43.776731+00:00",
+   "status": "ok",
+   "error": null,
+   "fetched": 1,
+   "new": 0,
+   "changed": 0,
+   "unchanged": 1,
+   "rejected": 0
+  },
+  {
+   "at": "2026-11-22T00:24:43.920488+00:00",
+   "status": "ok",
+   "error": null,
+   "fetched": 1,
+   "new": 0,
+   "changed": 0,
+   "unchanged": 1,
+   "rejected": 0
+  },
+  {
+   "at": "2026-11-22T00:26:44.106383+00:00",
+   "status": "ok",
+   "error": null,
+   "fetched": 1,
+   "new": 0,
+   "changed": 0,
+   "unchanged": 1,
+   "rejected": 0
+  },
+  {
+   "at": "2026-11-22T00:28:44.277862+00:00",
+   "status": "ok",
+   "error": null,
+   "fetched": 1,
+   "new": 0,
+   "changed": 0,
+   "unchanged": 1,
+   "rejected": 0
+  },
+  {
+   "at": "2026-11-22T00:30:44.413033+00:00",
+   "status": "ok",
+   "error": null,
+   "fetched": 1,
+   "new": 0,
+   "changed": 0,
+   "unchanged": 1,
+   "rejected": 0
+  },
+  {
+   "at": "2026-11-22T00:32:44.567310+00:00",
+   "status": "ok",
+   "error": null,
+   "fetched": 1,
+   "new": 0,
+   "changed": 0,
+   "unchanged": 1,
+   "rejected": 0
+  },
+  {
+   "at": "2026-11-22T00:34:44.716989+00:00",
+   "status": "ok",
+   "error": null,
+   "fetched": 1,
+   "new": 0,
+   "changed": 0,
+   "unchanged": 1,
+   "rejected": 0
+  },
+  {
+   "at": "2026-11-22T00:36:44.922346+00:00",
+   "status": "ok",
+   "error": null,
+   "fetched": 1,
+   "new": 0,
+   "changed": 0,
+   "unchanged": 1,
+   "rejected": 0
+  },
+  {
+   "at": "2026-11-22T00:38:45.118968+00:00",
+   "status": "ok",
+   "error": null,
+   "fetched": 1,
+   "new": 0,
+   "changed": 0,
+   "unchanged": 1,
+   "rejected": 0
+  },
+  {
+   "at": "2026-11-22T00:40:45.267228+00:00",
+   "status": "ok",
+   "error": null,
+   "fetched": 1,
+   "new": 0,
+   "changed": 0,
+   "unchanged": 1,
+   "rejected": 0
+  },
+  {
+   "at": "2026-11-22T00:42:45.689468+00:00",
+   "status": "ok",
+   "error": null,
+   "fetched": 1,
+   "new": 0,
+   "changed": 0,
+   "unchanged": 1,
+   "rejected": 0
+  },
+  {
+   "at": "2026-11-22T00:44:45.904721+00:00",
+   "status": "ok",
+   "error": null,
+   "fetched": 1,
+   "new": 0,
+   "changed": 0,
+   "unchanged": 1,
+   "rejected": 0
+  },
+  {
+   "at": "2026-11-22T00:46:46.043069+00:00",
+   "status": "ok",
+   "error": null,
+   "fetched": 1,
+   "new": 0,
+   "changed": 0,
+   "unchanged": 1,
+   "rejected": 0
+  }
+ ],
+ "median_import_ms": 132
+}
