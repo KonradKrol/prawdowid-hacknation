@@ -124,6 +124,36 @@
     {% endif %}
   </section>
 
+  <section class="mod-sec mod-gap" id="luka" aria-labelledby="gap-h">
+    <h2 id="gap-h" class="mod-h">Załataj lukę informacyjną <span class="mod-soon">Podgląd: funkcja planowana</span></h2>
+    <p class="mod-sub">Gdy ludzie pytają o coś, na co nie mamy źródła, moderator dodaje oficjalny materiał i odpowiedź przestaje być „Brak potwierdzenia”.</p>
+    <form class="mod-gap__form" data-gap-form>
+      <label class="mod-gap__wide">Której luki dotyczy materiał
+        <select name="gap">{% for t in b.topics[:8] %}<option>{{ t.title }}</option>{% else %}<option>dymisja ministra spraw zagranicznych</option>{% endfor %}</select>
+      </label>
+      <label>Wydawca
+        <input type="text" name="publisher" placeholder="np. Ministerstwo Spraw Zagranicznych">
+      </label>
+      <label>Adres materiału
+        <input type="url" name="url" placeholder="https://www.gov.pl/…">
+      </label>
+      <label class="mod-gap__wide">Wklej oficjalny komunikat
+        <textarea name="text" rows="4" placeholder="Wklej treść komunikatu. Fragmenty do cytowania wskażemy za Ciebie, a Ty je zatwierdzisz."></textarea>
+      </label>
+      <div class="mod-actions mod-gap__wide">
+        <button class="btn btn--primary" type="submit">Dodaj do bazy źródeł</button>
+        <span class="mod-gap__steps">1 Wybierz lukę · 2 Wklej materiał · 3 Zatwierdź fragmenty</span>
+      </div>
+      <p class="note note--advice mod-gap__done" role="status" hidden><svg aria-hidden="true"><use href="#i-info"/></svg><span>To podgląd funkcji. Zapis dodamy w kolejnej wersji, a materiał trafi do bazy dopiero po zatwierdzeniu fragmentów przez moderatora.</span></p>
+    </form>
+    <script>
+      document.querySelector("[data-gap-form]")?.addEventListener("submit", (e) => {
+        e.preventDefault();
+        e.currentTarget.querySelector(".mod-gap__done").hidden = false;
+      });
+    </script>
+  </section>
+
   <section class="mod-sec mod-sim" id="symulacje" aria-labelledby="sim-h">
     <details{% if sim.active or sim.removed is not none %} open{% endif %}>
       <summary><h2 id="sim-h" class="mod-h">Symulacja ostrzeżenia</h2></summary>
@@ -217,6 +247,12 @@
 .mod-sim__h { font-size: 1.1rem; margin-top: 1.25rem; }
 .mod-sim__list { margin: .5rem 0 1rem 1.2rem; }
 .mod-empty { color: var(--ink-2); margin-top: .8rem; }
+.mod-soon { display: inline-block; margin-left: .5rem; padding: .1rem .55rem; font-size: .85rem; font-weight: 700; vertical-align: middle; background: #E9EEF5; color: #14305C; border: 1px solid #C6CFDB; }
+.mod-gap__form { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: .75rem 1rem; margin-top: 1rem; padding: 1.1rem 1.2rem; background: #fff; border: 1px solid var(--line); border-left: 5px solid #14305C; }
+.mod-gap__form label { display: grid; gap: .25rem; font-weight: 700; color: var(--ink-2); font-size: .95rem; }
+.mod-gap__form select, .mod-gap__form input, .mod-gap__form textarea { font: inherit; padding: .45rem .55rem; border: 2px solid var(--line); background: #fff; color: var(--ink); width: 100%; }
+.mod-gap__wide { grid-column: 1 / -1; }
+.mod-gap__steps { color: var(--ink-2); font-size: .95rem; align-self: center; }
 @media (max-width: 40rem) { .mod-diff { grid-template-columns: 1fr; } .mod-topic__n { white-space: normal; } }
 </style>
 {% endblock %}

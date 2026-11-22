@@ -1,16 +1,17 @@
 <section id="skala">
 <p class="eyebrow">Skala, RAG i koszt</p>
-<h2>0,46 USD za 1000 sprawdzeń, a maszyna śpi, gdy nikt nie pyta</h2>
-<table style="margin-top:40px; font-size:27px;">
-<tr><th style="width:22%">Wyszukiwanie (korpus v5)</th><th style="width:15%">Trafienie nr 1</th><th style="width:15%">Komplet w top 4</th><th style="width:13%">Czas wyszuk.</th><th style="width:13%">Werdykty</th><th style="width:10%">Mediana</th><th>Koszt / 1000</th></tr>
-<tr><td>BM25 (domyślnie)</td><td>21/25</td><td>24/25</td><td>3,3 ms</td><td>25/29</td><td>3,4 s</td><td>0,464 USD</td></tr>
-<tr><td>E5 semantyczne</td><td>23/25</td><td>24/25</td><td>20,0 ms</td><td>—</td><td>—</td><td>—</td></tr>
-<tr><td>Hybryda BM25 + E5</td><td>22/25</td><td>24/25</td><td>21,6 ms</td><td>23/29</td><td>3,4 s</td><td>0,461 USD</td></tr>
+<h2>Przetestowaliśmy wyszukiwanie semantyczne i wiemy, kiedy je włączyć</h2>
+<table style="margin-top:40px; font-size:30px;">
+<tr><th style="width:36%">Wyszukiwanie</th><th>Trafienie nr 1</th><th>Poprawne werdykty</th><th>Czas</th></tr>
+<tr><td>Słowa kluczowe (BM25), dziś</td><td>21/25</td><td>25/29</td><td>3 ms</td></tr>
+<tr><td>Semantyczne (E5)</td><td>23/25</td><td>—</td><td>20 ms</td></tr>
+<tr><td>Hybryda</td><td>22/25</td><td>23/29</td><td>22 ms</td></tr>
 </table>
-<div class="row" style="margin-top:44px; gap:48px;">
-<div class="col"><h3>Infrastruktura dziś</h3><p class="muted">Fly.io: 1 współdzielony CPU, 256 MB, automatyczne zatrzymanie bez ruchu, SQLite na trwałym wolumenie. Limit 400 płatnych sprawdzeń w demo.</p></div>
-<div class="col"><h3>Droga do skali</h3><p class="muted">Hybryda RAG do włączenia przy większym korpusie i parafrazach. Kolejne kanały (RSO, RCB) przez ten sam importer. Model i dostawca wymienni.</p></div>
+<div class="row" style="margin-top:48px; gap:56px;">
+<div class="col"><h3>0,46 USD za 1000 sprawdzeń</h3><p class="muted">Najtańszy model, odpowiedź w około 3 sekundy. Maszyna zasypia, gdy nikt nie pyta.</p></div>
+<div class="col"><h3>Semantyczny RAG: gotowy</h3><p class="muted">Lepiej trafia pierwszy dokument, ale dziś słowa kluczowe dają lepsze werdykty. Włączymy go, gdy baza urośnie.</p></div>
+<div class="col"><h3>Skaluje się kanałami</h3><p class="muted">Kolejne źródła (RSO, RCB) wchodzą przez ten sam importer.</p></div>
 </div>
-<p class="foot">Warunki: 32 pytania, gpt-6-luna, bez pamięci podręcznej, 22.11.2026. E5 = multilingual-e5-small ONNX int8, lokalny CPU, indeks 513 dok. w 92 s. Hybryda = RRF k=60. Koszt z liczników tokenów API.</p>
-<aside>BM25 zostaje domyślnie: przy tym korpusie daje najlepsze werdykty i najniższy czas. E5 lepiej trafia pierwszy dokument przy parafrazach, więc hybryda jest gotowa do włączenia, gdy korpus urośnie. Koszt to ułamek centa za sprawdzenie.</aside>
+<p class="foot">FastAPI · SQLite · Fly.io (Frankfurt). 25 pytań o wskazany dokument, 29 pytań z werdyktem, 22.11.2026.</p>
+<aside>Mocna strona: porównaliśmy trzy sposoby wyszukiwania na tych samych pytaniach. Semantyczne trafia pierwszy dokument najlepiej, ale hybryda dała mniej poprawnych werdyktów, więc zostajemy przy słowach kluczowych i włączymy semantykę, gdy baza urośnie.</aside>
 </section>
