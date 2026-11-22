@@ -92,15 +92,53 @@ def area_line(entry):
             f"i obejmuje obszar: {names}.")
 
 
+# ---------- symulacja z panelu moderatora ----------
+# Wpis w formacie API IMGW, który przechodzi tę samą ścieżkę co prawdziwy import.
+# Identyfikator „SYM-…” oznacza go w tytule, wydawcy i adresie, żeby nikt nie wziął go za komunikat IMGW.
+SIM_PREFIX = "SYM-"
+SIM_PUBLISHER = "SYMULACJA z panelu moderatora (format ostrzeżeń IMGW-PIB)"
+SIM_EVENTS = {
+    "oblodzenie": ("Oblodzenie", "Prognozuje się zamarzanie mokrej nawierzchni dróg i chodników."),
+    "burze": ("Burze z gradem", "Prognozuje się burze z opadami gradu i porywami wiatru do 80 km/h."),
+    "silny_wiatr": ("Silny wiatr", "Prognozuje się silny wiatr o średniej prędkości do 50 km/h, w porywach do 90 km/h."),
+    "opady_sniegu": ("Intensywne opady śniegu", "Prognozuje się opady śniegu o wysokości pokrywy do 20 cm."),
+    "silny_mroz": ("Silny mróz", "Prognozuje się spadek temperatury minimalnej do -20°C."),
+    "upal": ("Upał", "Prognozuje się temperaturę maksymalną do 34°C."),
+    "mgla": ("Gęsta mgła", "Prognozuje się gęstą mgłę ograniczającą widzialność do 200 m."),
+}
+
+
+def is_simulated(entry_id):
+    return str(entry_id).startswith(SIM_PREFIX)
+
+
+def simulated_row(hazard, teryt, level, valid_from, hours, text=None, published_at=None):
+    """Surowy wpis w formacie danepubliczne.imgw.pl/api/data/warningsmeteo."""
+    event, default_text = SIM_EVENTS[hazard]
+    published_at = published_at or datetime.now(WARSAW)
+    stamp = "%Y-%m-%d %H:%M:%S"
+    return {
+        "id": f"{SIM_PREFIX}{published_at:%Y%m%d%H%M%S}",
+        "nazwa_zdarzenia": event, "stopien": str(level), "prawdopodobienstwo": "90",
+        "opublikowano": published_at.strftime(stamp),
+        "obowiazuje_od": valid_from.strftime(stamp),
+        "obowiazuje_do": (valid_from + timedelta(hours=hours)).strftime(stamp),
+        "tresc": (text or default_text).strip(), "komentarz": "", "biuro": "Symulacja w panelu moderatora",
+        "teryt": list(teryt),
+    }
+
+
 def to_source(entry, version, fetched_at):
     """Rekord korpusu z jednym wpisem IMGW. Drugi fragment to dosłowny zapis pól ważności i obszaru."""
     data = gazetteer()[0]
     names = [county_label(code, data) for code in entry.teryt]
     short = ", ".join(names[:6]) + (f" i {len(names) - 6} innych" if len(names) > 6 else "")
+    simulated = is_simulated(entry.entry_id)
     return {
         "id": f"imgw-{entry.entry_id}-v{version}",
-        "title": f"Ostrzeżenie IMGW: {entry.event} ({entry.level}. stopnia) – {short}",
-        "publisher": PUBLISHER,
+        "title": ("[SYMULACJA] " if simulated else "") + f"Ostrzeżenie IMGW: {entry.event} ({entry.level}. stopnia) – {short}",
+        "publisher": SIM_PUBLISHER if simulated else PUBLISHER,
+        "simulated": simulated,
         "type": "urzędowe",
         "kind": "ostrzeżenie",
         "domain": "imgw.pl",

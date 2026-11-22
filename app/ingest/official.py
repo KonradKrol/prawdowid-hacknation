@@ -112,6 +112,22 @@ class OfficialSync:
                 created.append(proposal_id)
         return created, failed
 
+    def simulate(self, hazard, teryt, level=2, valid_from=None, hours=24, text=None):
+        """Wstrzykuje symulowane ostrzeżenie tą samą ścieżką co prawdziwy import (wersja, indeks, ponowna ocena)."""
+        from app.ingest.places import WARSAW
+        now = datetime.now(WARSAW).replace(microsecond=0)
+        row = imgw.simulated_row(hazard, teryt, level, valid_from or now, hours, text, published_at=now)
+        return self.sync(raw=[row])
+
+    def remove_simulations(self):
+        removed = self.store.official_delete_simulated(self.feed, imgw.SIM_PREFIX)
+        for source_id in removed:
+            self.service.corpus.remove(source_id)
+        return len(removed)
+
+    def simulations(self):
+        return [row for row in self.store.official_current(self.feed) if row.get("simulated")]
+
     def status(self, stale_after_s=1800):
         runs = self.store.sync_runs(self.feed, limit=10)
         last_ok = next((run for run in runs if run["status"] in {"ok", "partial"}), None)
@@ -140,6 +156,7 @@ def lag_stats(entries):
 
     Wpisy wykryte przy pierwszym w historii pobraniu (zaległość) nie mówią nic o opóźnieniu
     importu, więc zwracamy je osobno."""
+    entries = [row for row in entries if not imgw.is_simulated(row["entry_id"])]  # symulacje nie zaniżają pomiaru
     if not entries:
         return {"count": 0}
     first_fetch = min(row["first_fetched_at"] for row in entries)

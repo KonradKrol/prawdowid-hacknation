@@ -87,6 +87,16 @@ class OfficialStore:
                    WHERE (? IS NULL OR e.feed=?) ORDER BY e.published_at""", (feed, feed)).fetchall()
         return [json.loads(row[0]) for row in rows]
 
+    def official_delete_simulated(self, feed, prefix):
+        """Usuwa wszystkie wersje wpisów-symulacji. Zwraca identyfikatory rekordów korpusu."""
+        with self.connection() as db:
+            rows = db.execute("SELECT source FROM official_entries WHERE feed=? AND entry_id LIKE ?",
+                              (feed, prefix + "%")).fetchall()
+            db.execute("DELETE FROM official_entries WHERE feed=? AND entry_id LIKE ?", (feed, prefix + "%"))
+            db.execute("DELETE FROM proposals WHERE feed=? AND entry_id LIKE ? AND status='pending'",
+                       (feed, prefix + "%"))
+        return [json.loads(row[0])["id"] for row in rows]
+
     def official_entries(self, feed):
         with self.connection() as db:
             rows = db.execute(

@@ -21,7 +21,7 @@ from app.core.repository import Corpus
 from app.core.result import missing_item, normalize
 from app.core.safety import SCOPE, SUSPICIOUS, VAGUE, input_info
 from app.ingest.official import OfficialSync, summarize
-from app.ingest.places import signature as event_signature
+from app.ingest.places import needs_place, signature as event_signature
 from app.ingest import narratives
 from app.storage.db import Store
 from prawdowid_core import fragments
@@ -145,6 +145,11 @@ class Service:
                 url_source = self.corpus.urls.get(clean_url)
                 if SCOPE.match(root):
                     result.status, result.message = "out_of_scope", "Prawdowid weryfikuje sprawdzalne informacje publiczne."
+                elif rounds == 0 and not pinned and needs_place(root):
+                    # Ostrzeżenia pogodowe są lokalne: bez miejsca dalibyśmy tylko „Brak potwierdzenia”.
+                    # Bez przykładowych nazw: pytanie trafia do kontekstu rozmowy i nazwa zostałaby uznana za miejsce.
+                    # Pytanie kończy się słowem „powiatu”, więc sama odpowiedź „bytowski” zostaje rozpoznana jako powiat.
+                    self.clarify(result, "Gdzie? Wystarczy nazwa miasta albo powiatu.")
                 elif self.settings.evaluator == "fake":
                     pool = list(pinned or []) + [row for row in self.corpus.sources.values()
                                                  if row["id"] not in {p["id"] for p in pinned or []}]
@@ -194,7 +199,7 @@ class Service:
                 self.store.cache(cache_key, now, cache_result)
             self.store.save(result, session_id, root, rounds)
             if register and result.status in {"ok", "needs_clarification"}:
-                self.register_case(result, channel, at)
+                self.register_case(result, channel, at, root)
             self.store.event(now, "check", result.id, {
                 "status": result.status, "channel": channel, "elapsed_ms": result.meta.elapsed_ms,
                 "estimated_cost_usd": result.meta.estimated_cost_usd, "corpus_version": self.corpus.version,
@@ -250,9 +255,10 @@ class Service:
         if dates:
             result.notices.append(NoticeItem(type="archival_material", text="Dowód jest archiwalny. Zwróć uwagę na jego datę."))
 
-    def register_case(self, result, channel, at):
-        """Łączy zgłoszenia o tym samym zdarzeniu lokalnym (zjawisko, powiat, dzień) w jedną sprawę."""
-        text = result.input.text_masked
+    def register_case(self, result, channel, at, context=None):
+        """Łączy zgłoszenia o tym samym zdarzeniu lokalnym (zjawisko, powiat, dzień) w jedną sprawę.
+        Po doprecyzowaniu bierzemy całą rozmowę: „Słupsk” sam nie mówi, o jakie zjawisko chodzi."""
+        text = context or result.input.text_masked
         found = event_signature(text, at)
         if found is None:
             return None

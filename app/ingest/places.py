@@ -96,6 +96,20 @@ def counties(text):
     return sorted(result)
 
 
+NATIONWIDE = re.compile(r"\b(polsk\w*|kraj\w*|caly kraj|calej polsce|wojewodztw\w*|woj)\b")
+
+
+def needs_place(text):
+    """Krótkie pytanie o lokalne zjawisko pogodowe bez miejsca („Czy jutro będzie gołoledź?”).
+    Ostrzeżenia IMGW dotyczą powiatów, więc bez miejsca nie da się ich dopasować."""
+    if len(text) > 300 or not hazards(text) or counties(text):
+        return False
+    folded = fold(text)
+    tokens = WORD.findall(folded)
+    voivodeships = gazetteer()[3]
+    return not NATIONWIDE.search(folded) and not any(token.startswith(stem) for token in tokens for stem in voivodeships)
+
+
 def event_day(text, received):
     """Dzień zdarzenia: data podana wprost, „dziś/jutro/wczoraj” albo dzień otrzymania."""
     today = received.astimezone(WARSAW).date()

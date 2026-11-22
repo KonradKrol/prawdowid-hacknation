@@ -74,10 +74,16 @@ def decide(proposal_id: int, request: Request, decision: str):
 # ---------- strony WWW ----------
 
 @router.get("/moderacja")
-def moderation_page(request: Request, synchronizacja: str | None = None):
+def moderation_page(request: Request, synchronizacja: str | None = None, usunieto: int | None = None):
     require_admin(request)
+    from app.ingest import imgw
+    from app.ingest.places import county_label, gazetteer
     from app.web.routes import _render
-    response = _render(request, "moderacja.html", b=board(), flash=synchronizacja)
+    data = gazetteer()[0]
+    counties = sorted(((code, county_label(code, data)) for code in data), key=lambda row: row[1])
+    sim = {"events": {key: name for key, (name, _) in imgw.SIM_EVENTS.items()}, "counties": counties,
+           "active": get_service().official.simulations(), "removed": usunieto}
+    response = _render(request, "moderacja.html", b=board(), flash=synchronizacja, sim=sim)
     offered = request.query_params.get("klucz")
     if offered:
         response.set_cookie(ADMIN_COOKIE, offered, httponly=True, samesite="strict",
@@ -90,6 +96,31 @@ async def moderation_sync(request: Request):
     require_admin(request)
     summary = await run_in_threadpool(get_service().official.sync)
     return RedirectResponse(f"/moderacja?synchronizacja={summary['status']}", status_code=303)
+
+
+@router.post("/moderacja/symulacja")
+async def moderation_simulate(request: Request, hazard: str = Form(...), teryt: str = Form(...),
+                              level: int = Form(2), start: str = Form("teraz"), hours: int = Form(24),
+                              text: str = Form("")):
+    """Symulowane ostrzeżenie w formacie IMGW — do pokazu przebiegu: import → ponowna ocena → propozycja."""
+    require_admin(request)
+    from datetime import timedelta
+    from app.ingest import imgw
+    from app.ingest.places import WARSAW, gazetteer
+    if hazard not in imgw.SIM_EVENTS or teryt not in gazetteer()[0] or not 1 <= level <= 3 or not 1 <= hours <= 72:
+        raise HTTPException(422, "Nieprawidłowe dane symulacji.")
+    now = datetime.now(WARSAW).replace(minute=0, second=0, microsecond=0)
+    valid_from = now + timedelta(days=1) if start == "jutro" else now
+    summary = await run_in_threadpool(get_service().official.simulate, hazard, (teryt,), level, valid_from,
+                                      hours, text.strip()[:500] or None)
+    return RedirectResponse(f"/moderacja?synchronizacja={summary['status']}&symulacja=1#symulacje", status_code=303)
+
+
+@router.post("/moderacja/symulacja/usun")
+def moderation_simulation_clear(request: Request):
+    require_admin(request)
+    removed = get_service().official.remove_simulations()
+    return RedirectResponse(f"/moderacja?usunieto={removed}#symulacje", status_code=303)
 
 
 @router.post("/moderacja/propozycje/{proposal_id}")

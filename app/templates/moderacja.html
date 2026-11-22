@@ -49,6 +49,38 @@
     {% endif %}
   </section>
 
+  <section class="mod-sim" id="symulacje" aria-labelledby="sim-h">
+    <h2 id="sim-h" class="section-title">Symulacja ostrzeżenia</h2>
+    <p>Dodaje ostrzeżenie w formacie IMGW tą samą ścieżką co prawdziwy import: nowa wersja wpisu, indeks wyszukiwania i ponowna ocena otwartych spraw. Wpis jest oznaczony jako <strong>[SYMULACJA]</strong> w tytule i wydawcy, także w odpowiedziach dla użytkowników. Usuń symulacje po pokazie.</p>
+    {% if sim.removed is not none %}<p class="note note--advice" role="status">Usunięto symulacje: {{ sim.removed }} {{ pl_count(sim.removed, "wpis", "wpisy", "wpisów") }}.</p>{% endif %}
+    <form method="post" action="/moderacja/symulacja" class="mod-sim__form">
+      <label>Zjawisko
+        <select name="hazard">{% for key, name in sim.events.items() %}<option value="{{ key }}">{{ name }}</option>{% endfor %}</select>
+      </label>
+      <label>Powiat
+        <select name="teryt">{% for code, name in sim.counties %}<option value="{{ code }}"{% if code == "2201" %} selected{% endif %}>{{ name }}</option>{% endfor %}</select>
+      </label>
+      <label>Stopień
+        <select name="level"><option value="1">1</option><option value="2" selected>2</option><option value="3">3</option></select>
+      </label>
+      <label>Początek
+        <select name="start"><option value="teraz">od teraz</option><option value="jutro">od jutra</option></select>
+      </label>
+      <label>Czas trwania (godz.)
+        <input type="number" name="hours" value="24" min="1" max="72">
+      </label>
+      <label class="mod-sim__wide">Treść (opcjonalnie)
+        <textarea name="text" rows="2" maxlength="500" placeholder="Zostaw puste, żeby użyć typowej treści ostrzeżenia dla tego zjawiska."></textarea>
+      </label>
+      <div class="mod-actions mod-sim__wide"><button class="btn btn--primary" type="submit">Dodaj symulowane ostrzeżenie</button></div>
+    </form>
+    {% if sim.active %}
+    <h3 class="mod-sim__h">Aktywne symulacje ({{ sim.active | length }})</h3>
+    <ul class="mod-sim__list">{% for s in sim.active %}<li>{{ s.title }} <small>· ważne do {{ s.valid_to | datetime }}</small></li>{% endfor %}</ul>
+    <form method="post" action="/moderacja/symulacja/usun"><button class="btn btn--secondary" type="submit">Usuń wszystkie symulacje</button></form>
+    {% endif %}
+  </section>
+
   <section aria-labelledby="cases-h">
     <h2 id="cases-h" class="section-title">Sprawy ({{ b.cases | length }})</h2>
     {% for c in b.cases %}
@@ -66,16 +98,16 @@
       <details class="mod-reports"><summary>Treść zgłoszeń</summary>
         <ul>{% for r in c.reports_list %}<li>„{{ r.text }}” <small>({{ r.channel }}, {{ r.created_at | datetime }})</small></li>{% endfor %}</ul>
       </details>
-      {% for p in c.proposals %}
+      {% for p in c.proposals %}{% set simulated = p.entry_id.startswith("SYM-") %}
       <div class="mod-proposal" data-proposal="{{ p.id }}" data-status="{{ p.status }}">
-        <p class="eyebrow">Propozycja po komunikacie IMGW · wpis {{ p.entry_id }}, wersja {{ p.version }} · {{ p.created_at | datetime }}</p>
+        <p class="eyebrow">{% if simulated %}Propozycja po SYMULOWANYM komunikacie{% else %}Propozycja po komunikacie IMGW{% endif %} · wpis {{ p.entry_id }}, wersja {{ p.version }} · {{ p.created_at | datetime }}</p>
         <div class="mod-diff">
           <div><p class="mod-diff__h">Poprzedni wynik</p>{{ verdict(p.previous) }}<p>{{ p.previous.reason }}</p></div>
           <div><p class="mod-diff__h">Proponowany wynik</p>{{ verdict(p.proposed) }}<p>{{ p.proposed.reason }}</p></div>
         </div>
         {% if p.quote %}
         <blockquote class="proof__quote" data-quote>„{{ p.quote }}”</blockquote>
-        <p class="proof__src">IMGW-PIB · <a href="{{ p.source_url }}" rel="noopener noreferrer" target="_blank">{{ p.source_url | domain }}</a></p>
+        <p class="proof__src">{% if simulated %}Symulacja (format IMGW){% else %}IMGW-PIB{% endif %} · <a href="{{ p.source_url }}" rel="noopener noreferrer" target="_blank">{{ p.source_url | domain }}</a></p>
         {% else %}
         <p class="note note--warn">Model nie zacytował nowego komunikatu. Sprawdź uzasadnienie przed zatwierdzeniem.</p>
         {% endif %}
@@ -110,6 +142,12 @@
 .mod-diff > div { background: var(--soft); padding: .75rem .9rem; }
 .mod-diff__h { font-weight: 700; color: var(--ink-2); font-size: .95rem; margin-bottom: .25rem; }
 .mod-actions { display: flex; gap: .75rem; margin-top: 1rem; flex-wrap: wrap; }
+.mod-sim__form { display: grid; grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr)); gap: .75rem 1rem; margin-top: 1rem; }
+.mod-sim__form label { display: grid; gap: .25rem; font-weight: 700; color: var(--ink-2); font-size: .95rem; }
+.mod-sim__form select, .mod-sim__form input, .mod-sim__form textarea { font: inherit; padding: .45rem .55rem; border: 2px solid var(--line); background: var(--bg, #fff); color: var(--ink); width: 100%; }
+.mod-sim__wide { grid-column: 1 / -1; }
+.mod-sim__h { font-size: 1.1rem; margin-top: 1.25rem; }
+.mod-sim__list { margin: .5rem 0 1rem 1.2rem; }
 @media (max-width: 40rem) { .mod-diff { grid-template-columns: 1fr; } }
 </style>
 {% endblock %}

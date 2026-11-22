@@ -132,3 +132,46 @@ def test_moderation_requires_token(client):
     assert client.get("/moderacja").status_code == 404
     assert client.get("/api/v1/cases").status_code == 404
     assert client.post("/api/v1/official/sync").status_code == 404
+
+
+def test_needs_place_only_for_local_weather_without_place():
+    from app.ingest.places import needs_place
+    assert needs_place("Czy to prawda, że jutro będzie gołoledź?")
+    assert not needs_place("Czy jutro w powiecie bytowskim będzie gołoledź?")
+    assert not needs_place("Czy w Słupsku jutro będzie gołoledź?")
+    assert not needs_place("Czy w całej Polsce będzie silny mróz?")
+    assert not needs_place("Czy w województwie pomorskim będzie wichura?")
+    assert not needs_place("Czy RCB wysłało SMS?")
+
+
+def test_one_word_place_reply_completes_the_question_and_joins_case(client):
+    admin = {"X-Admin-Token": "test-admin"}
+    first = client.post("/api/v1/checks", json={"text": "Czy to prawda, że 3 grudnia 2026 będzie gołoledź?"}).json()
+    assert first["status"] == "needs_clarification"
+    assert "Słupsk" not in first["clarification_question"]  # bez przykładowych nazw w pytaniu
+    reply = client.post("/api/v1/checks", json={"text": "bytowski", "clarifies": first["id"]}).json()
+    assert reply["status"] == "ok"  # jedno słowo wystarcza: odpowiedź łączy się z pytaniem
+    keys = {case["key"] for case in client.get("/api/v1/cases", headers=admin).json()["cases"]}
+    assert "oblodzenie|2201|2026-12-03" in keys
+
+
+def test_simulated_warning_runs_full_pipeline_and_can_be_removed(client):
+    admin = {"X-Admin-Token": "test-admin"}
+    service = get_service()
+    client.post("/api/v1/checks", json={"text": "Czy dziś w powiecie bytowskim będzie gołoledź?"})
+    page = client.get("/moderacja", headers=admin)
+    assert page.status_code == 200 and "Symulacja ostrzeżenia" in page.text
+    response = client.post("/moderacja/symulacja", headers=admin, follow_redirects=False,
+                           data={"hazard": "oblodzenie", "teryt": "2201", "level": "2", "start": "teraz", "hours": "24"})
+    assert response.status_code == 303
+    simulated = service.official.simulations()
+    assert len(simulated) == 1
+    source = simulated[0]
+    assert source["title"].startswith("[SYMULACJA]") and "SYMULACJA" in source["publisher"]
+    assert source["id"] in service.corpus.sources
+    case = next(c for c in client.get("/api/v1/cases", headers=admin).json()["cases"] if c["key"].startswith("oblodzenie|2201"))
+    assert case["proposals"], "symulacja powinna uruchomić ponowną ocenę otwartej sprawy"
+    assert service.official.status()["lag"].get("count", 0) == 0  # symulacje nie wchodzą do pomiaru opóźnienia
+    client.post("/moderacja/symulacja/usun", headers=admin)
+    assert not service.official.simulations()
+    assert source["id"] not in service.corpus.sources

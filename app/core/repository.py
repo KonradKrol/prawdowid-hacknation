@@ -46,6 +46,21 @@ class Corpus:
                 digest.update(key.encode())
             self.version = digest.hexdigest()
 
+    def remove(self, source_id):
+        """Usuwa wpis z kanału urzędowego z indeksu (np. symulację z panelu moderatora)."""
+        with self.lock:
+            old = self.sources.pop(source_id, None)
+            self.live.pop(source_id, None)
+            if old is not None:
+                self.urls.pop(old["url"].rstrip("/"), None)
+            self.index.execute("DELETE FROM source_search WHERE source_id=?", (source_id,))
+            self.index.commit()
+            digest = sha256(self.base_version.encode())
+            for key in sorted(self.live):
+                digest.update(key.encode())
+            self.version = digest.hexdigest()
+        return old is not None
+
     def search(self, text, url=None, pinned=None):
         with self.lock:
             rows = search_sources(self.index, self.sources, text)
