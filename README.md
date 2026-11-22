@@ -35,7 +35,7 @@ Polecenie kopiowania konfiguracji wykonaj tylko przy pierwszym uruchomieniu. Uru
 - **Pełna weryfikacja:** zostaw `PRAWDOWID_EVALUATOR=live` i wpisz własny klucz OpenAI API w `PRAWDOWID_API_KEY`. Przykładowe ustawienia modelu to `PRAWDOWID_MODEL=gpt-6-luna` oraz `PRAWDOWID_GUARD_MODEL=gpt-6-luna`. Zapytania w tym trybie mogą naliczać koszt API.
 - **Podgląd bez klucza:** ustaw `PRAWDOWID_EVALUATOR=fake`. To tryb demonstracyjny z wynikami testowymi.
 
-Plik `.env` jest ignorowany przez Git. Konfiguracja startowa ładuje z repozytorium `Research/Prawdoskop_Korpus_v5.jsonl` i zapisuje dane lokalnie w `data/`. Jeśli chcesz włączyć cykliczny import IMGW i Demagoga, ustaw `PRAWDOWID_OFFICIAL_POLL_S=600` i uruchom aplikację ponownie.
+Plik `.env` jest ignorowany przez Git. Konfiguracja startowa ładuje z repozytorium `Research/Prawdoskop_Korpus_v6.jsonl` i zapisuje dane lokalnie w `data/`. Jeśli chcesz włączyć cykliczny import IMGW i Demagoga, ustaw `PRAWDOWID_OFFICIAL_POLL_S=600` i uruchom aplikację ponownie.
 
 ### 3. Uruchom serwer
 
@@ -72,9 +72,9 @@ python -m pytest tests/test_official.py
 
 Pierwsze polecenie odtwarza najważniejszy przebieg bez kosztów: dwie różne wiadomości o tym samym zdarzeniu tworzą jedną sprawę, inny powiat lub dzień tworzy osobną, import ostrzeżenia daje propozycję tylko w sprawie, której dotyczy, a powtórny import nie tworzy duplikatów.
 
-## Korpus v5 i pomiary
+## Korpus v6 i pomiary
 
-`Research/Prawdoskop_Korpus_v5.jsonl` ma 515 dokumentów statycznych: korpus v4 i 400 nowych materiałów (226 rządowych, 62 samorządowe, 112 fact-checków) zebranych skryptem `scripts/collect_corpus.py`. Porównanie odpowiedzi przed i po rozszerzeniu oraz wariantów BM25, E5 i hybrydy: `python eval/compare_corpus.py --e5 <katalog modelu> --report eval/wyniki`. Znane narracje EUvsDisinfo: `Research/EUvsDisinfo_Przypadki.jsonl`, klient MCP w `app/ingest/narratives.py` (token `PRAWDOWID_EUVS_TOKEN`).
+`Research/Prawdoskop_Korpus_v6.jsonl` ma 394 dokumenty statyczne po przeglądzie i wycofaniu 121 rekordów z v5. Importy IMGW i Demagoga zwiększają bieżący licznik. Porównanie odpowiedzi przed i po rozszerzeniu oraz wariantów BM25, E5 i hybrydy: `python eval/compare_corpus.py --e5 <katalog modelu> --report eval/wyniki`. Znane narracje EUvsDisinfo: `Research/EUvsDisinfo_Przypadki.jsonl`, klient MCP w `app/ingest/narratives.py` (token `PRAWDOWID_EUVS_TOKEN`).
 
 [Raport z 22.11.2026](docs/RAPORT_2026-11-22.md) · [Prezentacja](docs/pitch/index.html)
 
