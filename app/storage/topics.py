@@ -57,9 +57,18 @@ class TopicStore:
             for topic_id, title, reports, created, updated, last_hour, last_day in rows:
                 labels = dict(db.execute("SELECT COALESCE(label, 'brak'), COUNT(*) FROM topic_reports WHERE topic_id=? GROUP BY 1",
                                          (topic_id,)).fetchall())
-                recent = [{"created": r[0], "channel": r[1], "text": r[2], "topic": r[3]} for r in db.execute(
-                    "SELECT created, channel, text, topic FROM topic_reports WHERE topic_id=? ORDER BY created DESC LIMIT 10",
-                    (topic_id,)).fetchall()]
+                recent = []
+                for created_at, channel, text, topic, context in db.execute(
+                    """SELECT r.created, r.channel, r.text, r.topic, c.root_input
+                       FROM topic_reports r LEFT JOIN checks c ON c.id=r.check_id AND c.rounds > 0
+                       WHERE r.topic_id=? ORDER BY r.created DESC LIMIT 10""",
+                    (topic_id,),
+                ):
+                    if context:
+                        text = " · ".join(line.strip() for line in context.splitlines() if line.strip())
+                        if len(text) > 600:
+                            text = text[:400] + " … " + text[-195:]
+                    recent.append({"created": created_at, "channel": channel, "text": text, "topic": topic})
                 board.append({"id": topic_id, "title": title, "reports": reports, "created": created, "updated": updated,
                               "last_hour": last_hour, "last_day": last_day, "labels": labels, "recent": recent})
         return board

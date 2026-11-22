@@ -24,3 +24,18 @@ def test_moderation_prioritizes_bursts_and_topics_accumulating_over_a_day(tmp_pa
         ("Poniżej progu", 1, 14),
         ("Sprawa z poprzednich dni", 0, 0),
     ]
+
+
+def test_moderation_reads_original_question_with_follow_up(tmp_path):
+    store = Store(tmp_path / "clarification.db")
+    now = 1_000_000
+    title = "ostrzeżenie IMGW"
+    topic_id = store.topic_add(title, [], [], now)
+    original = "Czy IMGW ostrzega przed burzą?"
+    with store.connection() as db:
+        db.execute("INSERT INTO checks VALUES (?, ?, ?, ?, ?, ?)",
+                   ("check", "session", now, "{}", f"{original}\nKiedy?\nteraz", 1))
+    store.topic_report(topic_id, now, "check", "web", None, title, "teraz", [])
+    row, = store.topics_board(now, 0, hourly_threshold=5, daily_threshold=15)
+    assert row["recent"][0]["text"] == f"{original} · Kiedy? · teraz"
+    assert row["reports"] == 1
