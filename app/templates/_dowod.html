@@ -1,7 +1,10 @@
-{# Dowód w prostej formie: cytat, źródło, ewentualne ostrzeżenie i brak #}
+{# Dowód: najpierw po ludzku, co ten materiał mówi; potem tytuł, cytat i źródło #}
+{% set undecided = item.label in ("insufficient_evidence", "not_verifiable") %}
 {% for ev in item.evidence %}
 <figure class="proof">
-  <p class="proof__label">Skąd to wiemy</p>
+  <p class="proof__label">{% if undecided %}Co wiadomo ze źródeł{% else %}Skąd to wiemy{% endif %}</p>
+  {% if ev.explanation %}<p class="proof__explain">{{ ev.explanation }}</p>{% endif %}
+  <p class="proof__title">{{ ev.title }}</p>
   {% if ev.quote %}<blockquote class="proof__quote">„{{ ev.quote }}”</blockquote>
   {% else %}<p class="proof__quote">Data publikacji: {{ ev.published_on | date }}</p>{% endif %}
   <figcaption class="proof__src">
@@ -14,5 +17,8 @@
 <p class="note note--warn"><svg aria-hidden="true"><use href="#i-clock"/></svg><span>{{ cm.explanation }} W wiadomości: <strong>{{ cm.claim_value }}</strong>. W źródle: <strong>{{ cm.source_value }}</strong>.</span></p>
 {% endif %}
 {% if item.missing_evidence %}
-<p class="note"><svg aria-hidden="true"><use href="#i-question"/></svg><span><strong>Czego nie wiemy.</strong> {{ item.missing_evidence }}</span></p>
+<p class="note"><svg aria-hidden="true"><use href="#i-question"/></svg><span><strong>Czego brakuje do odpowiedzi.</strong> {{ item.missing_evidence }}</span></p>
+{% endif %}
+{% if item.label == "insufficient_evidence" %}
+<p class="note note--advice"><svg aria-hidden="true"><use href="#i-info"/></svg><span><strong>Co to dla Ciebie znaczy.</strong> Brak potwierdzenia nie oznacza, że to fałsz. Lepiej nie przekazywać tej wiadomości dalej, dopóki nie potwierdzi jej oficjalne źródło.</span></p>
 {% endif %}

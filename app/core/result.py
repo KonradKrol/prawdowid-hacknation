@@ -1,4 +1,5 @@
 from datetime import date
+import re
 
 from app.contract import Evidence, Item, Premise, Strength
 from app.core.safety import safe_copy
@@ -22,6 +23,61 @@ def matches_publication_date(answer, published_on):
     return normalized in {human_date, f"{human_date} r", f"{human_date} roku", publication.strftime("%d.%m.%Y")}
 
 
+# ---------- strażnik liczb i dat ----------
+# Tekst modelu (reason, explanation, answer) jest tylko opisem. Każda liczba lub data,
+# którą w nim podaje, musi występować w zweryfikowanym cytacie, dacie publikacji
+# albo w pytaniu użytkownika. Zdanie z liczbą bez pokrycia usuwamy.
+NUMBER = re.compile(r"\d+(?:[  .,]\d+)*")
+SENTENCE = re.compile(r"(?<=[.!?])\s+")
+
+
+def _forms(raw):
+    """'207,9' → {'207.9'}, '1 000' / '1.000' → {'1000', '1.000'}, '21.11.2026' → też '21','11','2026'."""
+    compact = re.sub(r"[  ]", "", raw).rstrip(".,").replace(",", ".")
+    parts = [p for p in compact.split(".") if p]
+    return compact, {compact, "".join(parts)}, parts
+
+
+def numbers_in(text):
+    found = set()
+    for raw in NUMBER.findall(text or ""):
+        _, forms, parts = _forms(raw)
+        found |= forms | set(parts)
+    return {n.lstrip("0") or "0" for n in found}
+
+
+def allowed_numbers(evidence, question):
+    allowed = numbers_in(question)
+    for row in evidence:
+        allowed |= numbers_in(row.quote)
+        if row.published_on:
+            for part in row.published_on.split("-"):  # 2024-04-05 → 2024, 4, 5
+                allowed |= numbers_in(part)
+    return allowed
+
+
+def unsupported(text, allowed):
+    """Liczby z tekstu bez pokrycia w materiale. Liczba dziesiętna (207,9) musi wystąpić w całości;
+    data zapisana z kropkami (21.11.2026) przechodzi, gdy każda jej część jest w materiale."""
+    out = set()
+    for raw in NUMBER.findall(text or ""):
+        compact, forms, parts = _forms(raw)
+        if {f.lstrip("0") or "0" for f in forms} & allowed:
+            continue
+        if len(parts) >= 3 and all((p.lstrip("0") or "0") in allowed for p in parts):
+            continue
+        out.add(compact)
+    return out
+
+
+def guard_numbers(text, allowed):
+    """Zwraca tekst bez zdań zawierających liczby bez pokrycia (albo None, gdy nic nie zostało)."""
+    if not text:
+        return text
+    kept = [s for s in SENTENCE.split(text.strip()) if not unsupported(s, allowed)]
+    return " ".join(kept) or None
+
+
 def citations_for(draft, sources):
     evidence = []
     for ref in draft.evidence[:8]:
@@ -42,6 +98,7 @@ def citations_for(draft, sources):
             is_primary=source["type"] in {"urzędowe", "pierwotne", "dane_publiczne"},
             archival=bool(source.get("archival")) or bool(published and
                 int(source["checked_on"][:4]) - int(published[:4]) >= 2),
+            explanation=getattr(ref, "explanation", None) or None,
         )
         if entry not in evidence:
             evidence.append(entry)
@@ -91,20 +148,29 @@ def normalize(draft, sources, item_id, question, canary):
     # Inspect all proposed quotes even when the code rejects them below.
     for ref in draft.evidence:
         safe_copy(ref.quote, canary)
+        if getattr(ref, "explanation", None):
+            ref.explanation = safe_copy(ref.explanation, canary)
     evidence = citations_for(draft, sources)
+    allowed = allowed_numbers(evidence, question)
+    if reason and unsupported(reason, allowed):
+        reason = guard_numbers(reason, allowed) or "Szczegóły podajemy w cytacie ze źródła poniżej."
+    evidence = [row.model_copy(update={"explanation": guard_numbers(row.explanation, allowed)})
+                if row.explanation else row for row in evidence]
     if draft.label == "not_verifiable" and draft.kind == "verdict":
         return Item(id=item_id, claim=claim, claim_span=span, kind="verdict",
-                    label="not_verifiable", reason=reason or "To opinia lub ocena.")
+                    label="not_verifiable", reason=reason or "To opinia lub ocena.",
+                    evidence=[row for row in evidence if row.stance == "context"])
     stances = {row.stance for row in evidence}
     if {"supports", "refutes"} <= stances:
         return missing_item(item_id, claim, "Źródła podają sprzeczne informacje.",
                             missing or "Potrzebny jest dowód rozstrzygający rozbieżność.", evidence, span)
     if draft.label == "insufficient_evidence":
-        return missing_item(item_id, claim, "Dostępne źródła nie rozstrzygają tej tezy.", missing, evidence, span)
+        return missing_item(item_id, claim, reason or "Dostępne źródła nie rozstrzygają tej tezy.", missing, evidence, span)
     expected = {"confirmed": {"supports"}, "false": {"refutes"}, "misleading": {"context", "refutes"}}
     if draft.kind == "answer":
         answer = next((row.published_on for row in evidence if row.field == "published_on"), answer)
-        valid = draft.label is None and bool(answer) and "supports" in stances
+        # Krótka odpowiedź z liczbą bez pokrycia nie przechodzi — lepiej „Nie wiadomo” niż zmyślona liczba.
+        valid = draft.label is None and bool(answer) and "supports" in stances and not unsupported(answer, allowed)
     else:
         valid = bool(stances & expected.get(draft.label, set()))
         if draft.label == "misleading":

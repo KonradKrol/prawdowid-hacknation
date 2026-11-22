@@ -20,16 +20,16 @@ LABELS = {
 # Proste słowa dla obywatela; oficjalna klasa briefu jest w szczegółach oceny.
 PLAIN = {
     "pl": {"confirmed": "Prawda", "false": "Nieprawda", "misleading": "Wprowadza w błąd",
-           "insufficient_evidence": "Nie wiadomo", "not_verifiable": "To opinia", "answer": "Odpowiedź"}
+           "insufficient_evidence": "Nie wiadomo", "not_verifiable": "Nie do sprawdzenia", "answer": "Odpowiedź"}
 }
 
 STATUSES = {
     "pl": {
-        "needs_clarification": {"name": "Potrzebujemy doprecyzowania", "icon": "question"},
-        "out_of_scope": {"name": "Poza zakresem Prawdomira", "icon": "stop"},
+        "needs_clarification": {"name": "Potrzebujemy jednej informacji, żeby to sprawdzić", "icon": "question"},
+        "out_of_scope": {"name": "W tej sprawie nie możemy pomóc", "icon": "stop"},
         "invalid_input": {"name": "Nie możemy przyjąć tego tekstu", "icon": "alert"},
-        "rate_limited": {"name": "Za dużo sprawdzeń naraz", "icon": "clock"},
-        "technical_error": {"name": "Nie udało się sprawdzić", "icon": "wrench"},
+        "rate_limited": {"name": "Za dużo sprawdzeń naraz. Spróbuj za chwilę", "icon": "clock"},
+        "technical_error": {"name": "Nie udało się sprawdzić wiadomości", "icon": "wrench"},
     }
 }
 

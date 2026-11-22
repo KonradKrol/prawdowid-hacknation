@@ -1,4 +1,4 @@
-// Prawdomir — ulepszenia interfejsu. Wszystko działa też bez JavaScriptu.
+// Prawdoskop — ulepszenia interfejsu. Wszystko działa też bez JavaScriptu.
 
 for (const form of document.querySelectorAll("[data-check-form]")) {
   const area = form.querySelector("textarea");
@@ -15,7 +15,7 @@ for (const form of document.querySelectorAll("[data-check-form]")) {
       if (!chip) return;
       area.value = chip.dataset.example;
       update();
-      area.focus();
+      form.requestSubmit();
     });
   }
 
@@ -31,6 +31,7 @@ for (const form of document.querySelectorAll("[data-check-form]")) {
     if (!progress) return;
     // Pokazujemy postęp; przeglądarka wysyła formularz normalnie i przejdzie do wyniku.
     progress.hidden = false;
+    document.body.classList.add("is-loading");
     body.style.display = "none";
     const steps = [...progress.querySelectorAll("[data-step]")];
     let i = 0;
@@ -107,4 +108,45 @@ if (a11y) {
       speechSynthesis.speak(u);
     });
   }
+}
+
+// „Wklej ze schowka” — jedno dotknięcie zamiast przytrzymywania pola na telefonie.
+for (const btn of document.querySelectorAll("[data-paste]")) {
+  if (!navigator.clipboard?.readText) continue;
+  btn.hidden = false;
+  btn.addEventListener("click", async () => {
+    const area = btn.closest("form").querySelector("textarea");
+    try {
+      const text = await navigator.clipboard.readText();
+      if (text.trim()) { area.value = text.trim(); area.dispatchEvent(new Event("input")); }
+    } catch { /* brak zgody na schowek — użytkownik wklei ręcznie */ }
+    area.focus();
+  });
+}
+
+// Przykłady poza formularzem (strona główna): jedno kliknięcie = od razu sprawdzenie.
+for (const box of document.querySelectorAll("[data-examples]")) {
+  if (box.closest("form")) continue;
+  const form = document.querySelector("[data-check-form]");
+  if (!form) continue;
+  box.hidden = false;
+  box.addEventListener("click", (e) => {
+    const chip = e.target.closest("[data-example]");
+    if (!chip) return;
+    form.querySelector("textarea").value = chip.dataset.example;
+    form.requestSubmit();
+  });
+}
+
+// „Wstaw przykład” — wpisuje przykład do pola; sprawdzenie uruchamia użytkownik.
+for (const box of document.querySelectorAll("[data-fill-examples]")) {
+  const area = box.closest("form").querySelector("textarea");
+  box.hidden = false;
+  box.addEventListener("click", (e) => {
+    const btn = e.target.closest("[data-fill]");
+    if (!btn) return;
+    area.value = btn.dataset.fill;
+    area.dispatchEvent(new Event("input"));
+    area.focus();
+  });
 }

@@ -30,6 +30,7 @@ class Evidence(BaseModel):
     source_type: str
     is_primary: bool
     archival: bool
+    explanation: str | None = None
 
 
 class Premise(BaseModel):

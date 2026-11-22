@@ -1,96 +1,58 @@
 {% extends "base.html" %}
 {% block body_class %}page-start{% endblock %}
 {% block main %}
-<section class="hero">
-  <div class="wrap hero__in">
-    <p class="eyebrow eyebrow--light">Bezpłatnie · bez logowania · bez instalowania</p>
-    <h1 class="hero__title">Sprawdź, <span class="marker">zanim przekażesz.</span></h1>
-    <p class="hero__lead">Wklej wiadomość, link albo zadaj pytanie. Każde twierdzenie ocenimy osobno, pokażemy dowód ze źródła — i powiemy wprost, czego nie wiadomo.</p>
-  </div>
-</section>
+<div class="wrap quick">
+  {% if deleted %}<p class="note"><svg aria-hidden="true"><use href="#i-check"/></svg><span>Usunęliśmy to sprawdzenie.</span></p>{% endif %}
 
-<section class="wrap ask" aria-labelledby="ask-title">
-  <form class="ask__card" method="post" action="/sprawdz" data-check-form novalidate>
-    {% if deleted %}<p class="flash" role="status"><svg aria-hidden="true"><use href="#i-check"/></svg>Usunęliśmy to sprawdzenie.</p>{% endif %}
-    <div class="ask__form" data-form-body>
-      <label id="ask-title" class="ask__label" for="text">Co chcesz sprawdzić?</label>
-      <p class="ask__hint" id="text-hint">Na przykład SMS „od urzędu”, post z Facebooka albo pytanie o wydarzenie. Nie wpisuj danych osobowych.</p>
+  <form class="quick__form" method="post" action="/sprawdz" data-check-form novalidate>
+    <div data-form-body>
+      <h1 class="quick__title"><label for="text">Dostałeś wiadomość, która budzi wątpliwości?</label></h1>
       <textarea id="text" name="text" rows="5" maxlength="4000" required
-        aria-describedby="text-hint text-count{% if error %} text-error{% endif %}"
-        {% if error %}aria-invalid="true"{% endif %}
-        placeholder="Wklej tutaj treść wiadomości…">{{ text or "" }}</textarea>
+        {% if error %}aria-invalid="true" aria-describedby="text-error"{% endif %}
+        placeholder="Wklej wiadomość albo wpisz pytanie">{{ text or "" }}</textarea>
       {% if error %}<p class="field-error" id="text-error" role="alert"><svg aria-hidden="true"><use href="#i-alert"/></svg>{{ error }}</p>{% endif %}
-      <div class="ask__row">
-        <p class="ask__count" id="text-count" aria-live="polite"><span data-count>0</span> / 4000 znaków</p>
-        <button class="btn btn--primary btn--lg" type="submit">
-          Sprawdź <svg aria-hidden="true"><use href="#i-arrow"/></svg>
-        </button>
+      <p class="quick__try" data-fill-examples hidden>Wstaw przykład:
+        <button type="button" data-fill="Dostałem SMS od RCB, że mężczyźni mają się zgłosić do urzędu gminy. Podobno dostało go ponad 1000 osób.">SMS</button> ·
+        <button type="button" data-fill="Udostępniam dalej! W Bydgoszczy powiesili wzdłuż ulicy flagi Ukrainy, zobaczcie sami.">post z Facebooka</button> ·
+        <button type="button" data-fill="Czy we Wrocławiu komunikacja miejska jest darmowa?">pytanie</button>
+      </p>
+      <div class="quick__actions">
+        <button class="btn btn--secondary quick__paste" type="button" data-paste hidden>Wklej ze schowka</button>
+        <button class="btn btn--primary btn--lg quick__go" type="submit">Sprawdź</button>
       </div>
-      <div class="examples" data-examples hidden>
-        <p class="examples__label">Spróbuj na przykładzie:</p>
-        <ul>
-          <li><button type="button" class="chip" data-example="Dostałem SMS od RCB, że mężczyźni mają się zgłosić do urzędu gminy. Podobno dostało go ponad 1000 osób.">SMS „od RCB” o wezwaniu do urzędu</button></li>
-          <li><button type="button" class="chip" data-example="Dzisiejszy komunikat RCB: uwaga, fałszywe SMS-y wzywają mężczyzn do urzędów gmin! Przekaż dalej.">„Dzisiejszy komunikat” do przekazania</button></li>
-          <li><button type="button" class="chip" data-example="Czy banany mogą być niebieskie?">Czy banany mogą być niebieskie?</button></li>
-        </ul>
-      </div>
+      <details class="quick__help">
+        <summary>Jak skopiować wiadomość z telefonu?</summary>
+        <ol>
+          <li>Otwórz SMS albo inną wiadomość, którą chcesz sprawdzić.</li>
+          <li>Przytrzymaj palec na tekście, aż pojawi się małe menu.</li>
+          <li>Naciśnij <strong>Kopiuj</strong>.</li>
+          <li>Wróć na tę stronę i naciśnij <strong>Wklej ze schowka</strong>.</li>
+        </ol>
+      </details>
     </div>
-
-    <div class="progress" data-progress hidden aria-live="polite">
-      <p class="progress__title">Sprawdzamy źródła…</p>
-      <ol class="progress__steps">
-        <li data-step>Rozkładamy wiadomość na twierdzenia</li>
-        <li data-step>Szukamy w {{ stats.documents or "zatwierdzonych" }} {% if stats.documents %}{{ pl_count(stats.documents, "dokumencie", "dokumentach", "dokumentach") }}{% else %}dokumentach{% endif %}</li>
-        <li data-step>Porównujemy daty, miejsca i osoby</li>
-        <li data-step>Sprawdzamy, czy cytaty naprawdę są w źródłach</li>
-      </ol>
+    <div class="progress" data-progress hidden role="status" aria-live="polite">
+      <span class="progress__spinner" aria-hidden="true"></span>
+      <p class="progress__title">Sprawdzamy…</p>
       <p class="progress__note">Zwykle trwa to kilkanaście sekund.</p>
     </div>
   </form>
 
-  <aside class="trust" aria-label="Na czym się opieramy">
-    <p class="trust__lead">Opieramy się wyłącznie na zatwierdzonym zbiorze źródeł.</p>
-    <dl class="trust__stats">
-      <div><dt>dokumentów</dt><dd>{{ stats.documents or "—" }}</dd></div>
-      <div><dt>{{ pl_count(stats.domains or 0, "domena", "domeny", "domen") }}</dt><dd>{{ stats.domains or "—" }}</dd></div>
-      <div><dt>{{ pl_count(stats.types or 0, "typ źródeł", "typy źródeł", "typów źródeł") }}</dt><dd>{{ stats.types or "—" }}</dd></div>
-    </dl>
-    <a class="link-arrow" href="/zrodla">Zobacz pełną listę źródeł <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
-  </aside>
-</section>
-
-<section class="wrap how" id="jak-to-dziala" aria-labelledby="how-title">
-  <h2 id="how-title" class="section-title">Jak to działa</h2>
-  <ol class="how__steps">
-    <li>
-      <span class="how__n" aria-hidden="true">1</span>
-      <h3>Rozkładamy wiadomość na twierdzenia</h3>
-      <p>Jedna wiadomość często miesza fakty, opinie i liczby. Każde ważne twierdzenie sprawdzamy osobno.</p>
-    </li>
-    <li>
-      <span class="how__n" aria-hidden="true">2</span>
-      <h3>Szukamy dowodu w źródłach</h3>
-      <p>Komunikaty urzędów, dane publiczne i weryfikacje organizacji fact-checkingowych. Nie szukamy w całym internecie.</p>
-    </li>
-    <li>
-      <span class="how__n" aria-hidden="true">3</span>
-      <h3>Pokazujemy cytat i jego granice</h3>
-      <p>Widzisz dokładny fragment, datę i wydawcę. Gdy dowodu brakuje, mówimy to wprost zamiast zgadywać.</p>
-    </li>
-  </ol>
-</section>
-
-<section class="wrap legend" aria-labelledby="legend-title">
-  <h2 id="legend-title" class="section-title">Jakie mogą być wyniki</h2>
-  <ul class="legend__list">
-    {% for code in ["confirmed", "false", "misleading", "insufficient_evidence", "not_verifiable"] %}
-    {% set l = L[code] %}
-    <li class="legend__item">
-      <span class="stamp stamp--{{ l.tone }}"><span class="stamp__icon"><svg aria-hidden="true"><use href="#i-{{ l.icon }}"/></svg></span>{{ l.name }}</span>
-      <p>{{ l.hint }}</p>
-    </li>
-    {% endfor %}
-  </ul>
-  <p class="legend__other"><strong>To nie są oceny:</strong> gdy pytanie jest niejasne, dopytamy. Gdy sprawa wykracza poza sprawdzanie informacji albo coś się zepsuje, powiemy o tym osobno — nigdy w formie werdyktu.</p>
-</section>
+  <section class="sample" aria-labelledby="sample-title">
+    <h2 id="sample-title" class="quick__label">Tak wygląda odpowiedź</h2>
+    <div class="sample__frame" aria-hidden="true">
+      <div class="hv tone-false">
+        <span class="hv__icon"><svg><use href="#i-cross"/></svg></span>
+        <div class="hv__body">
+          <p class="hv__word">Nieprawda</p>
+          <p class="hv__answer">RCB nie wysłało takiego SMS-a.</p>
+        </div>
+      </div>
+      <figure class="proof">
+        <p class="proof__label">Skąd to wiemy</p>
+        <blockquote class="proof__quote">„Rządowe Centrum Bezpieczeństwa nie wysyłało Alertu RCB, dotyczącego zgłaszania się mężczyzn do urzędów gmin.”</blockquote>
+        <figcaption class="proof__src"><span><strong>Rządowe Centrum Bezpieczeństwa</strong> · 27 listopada 2018</span><span class="proof__link">Otwórz źródło</span></figcaption>
+      </figure>
+    </div>
+  </section>
+</div>
 {% endblock %}

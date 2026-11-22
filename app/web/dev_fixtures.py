@@ -147,7 +147,7 @@ FIXTURES = {
     "poza": _base(
         status="out_of_scope",
         input_text="Czy mój mąż mnie zdradza?",
-        message="Prawdomir sprawdza informacje o sprawach publicznych w wiarygodnych źródłach. Nie ocenia spraw prywatnych, nie udziela porad i nie rozwiązuje zadań.",
+        message="Prawdoskop sprawdza informacje o sprawach publicznych w wiarygodnych źródłach. Nie ocenia spraw prywatnych, nie udziela porad i nie rozwiązuje zadań.",
     ),
     "awaria": _base(
         status="technical_error",

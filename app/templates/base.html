@@ -3,15 +3,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{% block title %}Prawdomir — sprawdź, zanim przekażesz{% endblock %}</title>
+  <title>{% block title %}Prawdoskop — sprawdź, zanim przekażesz{% endblock %}</title>
   <meta name="description" content="Sprawdź wiadomość w wiarygodnych źródłach, zanim ją przekażesz. Dla każdej tezy pokazujemy dowód i to, czego nie wiadomo.">
   <meta name="theme-color" content="#14202B">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%23FFE066'/%3E%3Ccircle cx='15' cy='15' r='7.5' fill='none' stroke='%2314202B' stroke-width='3'/%3E%3Ccircle cx='15' cy='15' r='2.6' fill='%2314202B'/%3E%3Cpath d='M20.6 20.6 25 25' stroke='%2314202B' stroke-width='3.2' stroke-linecap='round'/%3E%3C/svg%3E">
   <link rel="preload" href="/static/fonts/source-sans-3-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/static/fonts/source-serif-4-latin-opsz-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/static/css/{{ theme or 'styl-a' }}.css">
-  <link rel="stylesheet" href="/static/css/wynik-v3.css?v=5">
-  <script type="module" src="/static/js/app.js?v=4"></script>
+  <link rel="stylesheet" href="/static/css/wynik-v3.css?v=19">
+  <script type="module" src="/static/js/app.js?v=8"></script>
 </head>
 <body class="{% block body_class %}{% endblock %}{% if v %} k-{{ v.kotwica }} l-{{ v.lista }} c-{{ v.kolor }}{% endif %}">
   {% if dev and v %}
@@ -28,11 +28,11 @@
     <div class="wrap topbar__in">
       <a class="brand" href="/">
         <svg class="brand__mark" aria-hidden="true"><use href="#i-mark"/></svg>
-        <span class="brand__name">Prawdomir</span>
+        <span class="brand__name">Prawdoskop</span>
         <span class="brand__tag">sprawdzanie informacji</span>
       </a>
       <nav class="topnav" aria-label="Główna nawigacja">
-        <a href="/#jak-to-dziala">Jak to działa</a>
+        <a href="/jak-to-dziala">Jak to działa</a>
         <a href="/zrodla">Źródła</a>
       </nav>
     </div>
@@ -55,11 +55,11 @@
     <div class="wrap foot__in">
       <div class="foot__brand">
         <svg class="brand__mark" aria-hidden="true"><use href="#i-mark"/></svg>
-        <p><strong>Prawdomir</strong> · prototyp HackNation 2026. Nie jest serwisem rządowym.</p>
+        <p><strong>Prawdoskop</strong> · prototyp HackNation 2026. Nie jest serwisem rządowym.</p>
       </div>
       <p class="foot__note">Odpowiedzi przygotowuje automat na podstawie zatwierdzonych źródeł. Każdą ocenę możesz sprawdzić samodzielnie w podanym dowodzie.</p>
       <nav class="foot__nav" aria-label="Stopka">
-        <a href="/#jak-to-dziala">Jak to działa</a>
+        <a href="/jak-to-dziala">Jak to działa</a>
         <a href="/zrodla">Lista źródeł</a>
         {% if dev %}<a href="/dev">Podgląd stanów (dev)</a>{% endif %}
       </nav>

@@ -5,6 +5,7 @@ from zoneinfo import ZoneInfo
 from functools import lru_cache
 from hashlib import sha256
 import json
+import re
 from secrets import token_hex
 import sqlite3
 from threading import Lock
@@ -24,6 +25,28 @@ from app.storage.db import Store
 SESSION = ContextVar("prawdowid_session", default=None)
 CLIENT_BUCKET = ContextVar("prawdowid_client_bucket", default=None)
 ERROR_MESSAGE = "Wystąpił błąd techniczny i nie udało się zakończyć sprawdzenia."
+_PL = str.maketrans("ąćęłńóśźż", "acelnoszz")
+
+
+def cache_text(text):
+    """Klucz pamięci wyników: ta sama treść niezależnie od wielkości liter, interpunkcji,
+    polskich znaków i odstępów („Czy RCB wysłało alert?” == „czy rcb wyslalo alert”)."""
+    words = re.sub(r"[^\w\s]", " ", text.casefold().translate(_PL)).split()
+    return " ".join(words)
+
+
+def clarification_selection(question, answer):
+    # Interpret short selections only when the previous question offered a choice.
+    question = cache_text(question)
+    answer = cache_text(answer)
+    if not question.startswith("czy "):
+        return None
+    alternatives = re.search(r"\b(?:czy|albo|lub)\b", question[4:])
+    if alternatives and answer in {"oba", "obie", "obydwa", "obydwie", "jedno i drugie"}:
+        return "both"
+    if not alternatives and answer in {"tak", "tak chodzi mi o to", "tak o to chodzi", "zgadza sie", "dokladnie"}:
+        return "confirmed"
+    return None
 
 
 class Service:
@@ -80,6 +103,8 @@ class Service:
         now = int(at.timestamp())
         result = self.result(text[:4000], channel, at, clarifies)
         root, rounds = result.input.text_masked, 0
+        search_text, source_url = root, result.input.url
+        model_context = {"question": root}
         cache_key = None
         try:
             with self.maintenance:
@@ -95,23 +120,37 @@ class Service:
                 else:
                     previous, previous_context, previous_rounds = parent
                     rounds = previous_rounds + 1
-                    root = (previous_context + "\n" + (previous.clarification_question or "") +
-                            "\n" + result.input.text_masked)[:8000]
+                    question = previous.clarification_question or ""
+                    answer = result.input.text_masked
+                    clarification = {"question": question, "answer": answer}
+                    if selection := clarification_selection(question, answer):
+                        clarification["selection"] = selection
+                    model_context = {
+                        "question": previous_context,
+                        "clarification": clarification,
+                    }
+                    root = "\n".join((previous_context, question, answer))[:8000]
+                    search_text = "\n".join((answer, question, previous_context))
+                    source_url = source_url or previous.input.url
             if result.status == "ok":
-                source_url = result.input.url
                 clean_url = source_url.rstrip("/") if source_url else None
+                url_source = self.corpus.urls.get(clean_url)
                 if SCOPE.match(root):
                     result.status, result.message = "out_of_scope", "Prawdowid weryfikuje sprawdzalne informacje publiczne."
                 elif self.settings.evaluator == "fake":
                     demo_result(result, root, list(self.corpus.sources.values()), self.fake_evidence)
-                elif (result.input.kind == "url" and clean_url not in self.corpus.urls) or VAGUE.fullmatch(root):
+                elif (result.input.kind == "url" and url_source is None) or VAGUE.fullmatch(root):
                     self.clarify(result, "Które konkretne twierdzenie sprawdzić? Wklej jego treść.")
                 else:
-                    candidates = self.corpus.search(root, source_url)
-                    suspected = bool(SUSPICIOUS.search(root) or any(SUSPICIOUS.search(row["excerpt"]) for row in candidates))
+                    if result.input.kind == "url" and url_source is not None:
+                        model_context["linked_source_id"] = url_source["id"]
+                    candidates = self.corpus.search(search_text, source_url)
+                    suspected = bool(SUSPICIOUS.search(search_text) or any(
+                        SUSPICIOUS.search(row["excerpt"]) for row in candidates
+                    ))
                     anchor = at.astimezone(ZoneInfo("Europe/Warsaw")).date().isoformat()
                     if not clarifies and not result.input.masked and not source_url and not suspected:
-                        lookup = [" ".join(root.split()), self.corpus.version, self.settings.model,
+                        lookup = [cache_text(root), self.corpus.version, self.settings.model,
                                   self.settings.url, PROMPT_VERSION, anchor]
                         cache_key = sha256(json.dumps(lookup, ensure_ascii=False).encode()).hexdigest()
                     cached = self.store.cached(cache_key, now) if cache_key and use_cache else None
@@ -125,7 +164,7 @@ class Service:
                     elif self.settings.paid_check_limit and not self.store.reserve_paid_check(self.settings.paid_check_limit):
                         result.status, result.message = "technical_error", "Pula sprawdzeń w tym demie została wykorzystana."
                     else:
-                        self.assess(result, root, candidates, suspected, now)
+                        self.assess(result, search_text, candidates, suspected, now, model_context)
             if result.status == "needs_clarification" and rounds >= 2:
                 result.status, result.message, result.clarification_question = "ok", None, None
                 result.items = [missing_item("t1", result.input.text_masked,
@@ -151,7 +190,7 @@ class Service:
             self.fail(result, start)
         return result
 
-    def assess(self, result, root, candidates, suspected, now):
+    def assess(self, result, root, candidates, suspected, now, model_context):
         marker = "PW-" + token_hex(16)
         # Do not pass a suspicious document to the evaluator. It remains auditable in the catalog.
         candidates = [row for row in candidates if not SUSPICIOUS.search(row["excerpt"])]
@@ -161,7 +200,7 @@ class Service:
         else:
             with ThreadPoolExecutor(max_workers=1) as pool:
                 task = pool.submit(self.provider.guard, root)
-                assessment, usage = self.provider.assess(root, candidates, marker)
+                assessment, usage = self.provider.assess(model_context, candidates, marker)
                 try:
                     guard, guard_usage = task.result()
                     suspected = suspected or (guard.contains_instructions and guard.confidence != "low")

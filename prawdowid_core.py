@@ -17,9 +17,11 @@ REQUIRED_FIELDS = ("id", "title", "publisher", "type", "domain", "url", "checked
 STOP_WORDS = set(
     "aby ale albo było była były czy dla gdy ich jak jaka jaki jakie jest już "
     "kiedy kto która które który ma miał na nie oraz po pod przy się tak też to "
-    "tylko we za ze że".split()
+    "tylko we za ze że co jeśli jesli będą beda będzie bedzie prawda czy".split()
 )
 TOKENS = re.compile(r"[^\W_]+", re.UNICODE)
+# Rozdziela fragmenty w polu `excerpt` wyprowadzonym z listy `excerpts` (indeks i prompt widzą jeden tekst).
+FRAGMENT_SEPARATOR = " ¶ "
 
 
 def load_corpus(path):
@@ -32,6 +34,13 @@ def load_corpus(path):
             source = json.loads(line)
             if not isinstance(source, dict):
                 raise ValueError("rekord musi być obiektem")
+            if "excerpts" in source:
+                parts = source["excerpts"]
+                if (not isinstance(parts, list) or not parts
+                        or not all(isinstance(p, str) and p.strip() and "¶" not in p for p in parts)):
+                    raise ValueError("pole excerpts musi być niepustą listą fragmentów tekstu")
+                source["excerpts"] = [" ".join(p.split()) for p in parts]
+                source["excerpt"] = FRAGMENT_SEPARATOR.join(source["excerpts"])
             for field in REQUIRED_FIELDS:
                 if not isinstance(source.get(field), str) or not source[field].strip():
                     raise ValueError(f"brak poprawnego pola {field}")
@@ -54,6 +63,16 @@ def load_corpus(path):
     return sources, version
 
 
+def fold(text):
+    """„ł” nie jest literą z ogonkiem w Unicode, więc remove_diacritics jej nie zamienia — robimy to sami."""
+    return text.replace("ł", "l").replace("Ł", "L")
+
+
+def query_term(word):
+    """Polska odmiana: szukamy po początku słowa (wrocławiu → wrocl*, darmowe → darmo*)."""
+    return f'"{word}"' if len(word) < 6 else f'"{word[:max(4, len(word) - 3)]}"*'
+
+
 def index_corpus(connection, sources):
     connection.execute(
         """CREATE VIRTUAL TABLE source_search USING fts5(
@@ -66,10 +85,10 @@ def index_corpus(connection, sources):
         (
             (
                 source["id"],
-                source["title"],
-                source["excerpt"],
-                source.get("scope", ""),
-                source["publisher"],
+                fold(source["title"]),
+                fold(source["excerpt"]),
+                fold(source.get("scope", "")),
+                fold(source["publisher"]),
                 source.get("published_on") or "",
             )
             for source in sources.values()
@@ -81,12 +100,12 @@ def search_sources(connection, sources, question, limit=4):
     """Return document candidates. A candidate alone does not justify a verdict."""
     if not 1 <= limit <= 8:
         raise ValueError("limit musi być od 1 do 8")
-    words = TOKENS.findall(question.casefold())
+    words = TOKENS.findall(fold(question.casefold()))
     terms = list(dict.fromkeys(word for word in words if len(word) >= 2 and word not in STOP_WORDS))
     if not terms:
         return []
     # Limit the query after tokenization. Only letters and numbers enter the FTS expression.
-    match = " OR ".join(f'"{term}"' for term in terms[:48])
+    match = " OR ".join(query_term(term) for term in terms[:48])
     rows = connection.execute(
         """SELECT source_id
            FROM source_search
@@ -98,13 +117,20 @@ def search_sources(connection, sources, question, limit=4):
     return [sources[source_id] for (source_id,) in rows]
 
 
+def fragments(source):
+    """Dosłowne fragmenty dokumentu: lista `excerpts`, a w starszych rekordach jedno pole `excerpt`."""
+    return source.get("excerpts") or [source["excerpt"]]
+
+
 def literal_citation(candidates, source_id, quote):
-    """Return canonical citation metadata if the quote is present in a retrieved excerpt."""
+    """Return canonical citation metadata if the quote is present in ONE retrieved fragment.
+
+    Cytat nie może łączyć dwóch fragmentów, więc sprawdzamy każdy osobno."""
     normalized_quote = " ".join(quote.split())
-    if not normalized_quote:
+    if not normalized_quote or FRAGMENT_SEPARATOR.strip() in normalized_quote:
         return None
     for source in candidates:
-        if source["id"] == source_id and normalized_quote in " ".join(source["excerpt"].split()):
+        if source["id"] == source_id and any(normalized_quote in " ".join(part.split()) for part in fragments(source)):
             return {
                 "source_id": source_id,
                 "title": source["title"],

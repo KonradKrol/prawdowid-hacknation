@@ -1,4 +1,4 @@
-"""Strony WWW Prawdomira (właściciel: Claude). Logika weryfikacji jest w backendzie."""
+"""Strony WWW Prawdoskopu (właściciel: Claude). Logika weryfikacji jest w backendzie."""
 
 import os
 from datetime import date, datetime
@@ -207,7 +207,17 @@ def result_page(request: Request, check_id: str):
     if result is None:
         return _render(request, "brak.html")
     parent = get_check(result["parent_id"]) if result.get("parent_id") else None
-    return _render(request, "wynik.html", r=result, parent=parent)
+    # Cała rozmowa: pierwotna wiadomość i kolejne doprecyzowania (od najstarszej).
+    thread, node = [], result
+    while node is not None and len(thread) < 5:
+        thread.insert(0, node["input"]["text_masked"])
+        node = get_check(node["parent_id"]) if node.get("parent_id") else None
+    return _render(request, "wynik.html", r=result, parent=parent, thread=thread)
+
+
+@router.get("/jak-to-dziala", response_class=HTMLResponse)
+def how_page(request: Request):
+    return _render(request, "jak_to_dziala.html", stats=corpus_stats())
 
 
 @router.get("/zrodla", response_class=HTMLResponse)
