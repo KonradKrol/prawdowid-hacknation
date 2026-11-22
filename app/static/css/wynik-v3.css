@@ -272,3 +272,8 @@ html, body { overflow-x: clip; }
 .lens { position: relative; display: inline-block; width: .56em; height: .56em; margin-bottom: -.01em; border: .14em solid currentColor; border-radius: 50%; box-sizing: border-box; }
 .lens::after { content: ""; position: absolute; inset: 0; margin: auto; width: .2em; height: .2em; border-radius: 50%; background: #FFE066; }
 .brand__name { letter-spacing: -.01em; }
+
+.topnav { align-items: center; flex-wrap: wrap; gap: .5rem 1rem; }
+.topnav .topnav__moderation { color: #172b3d; background: #ffe066; border-radius: .3rem; padding: .35rem .65rem; }
+.topnav .topnav__moderation:hover { color: #172b3d; background: #fff1ae; }
+@media (max-width: 35rem) { .topbar__in { flex-wrap: wrap; padding-block: .65rem; } }
