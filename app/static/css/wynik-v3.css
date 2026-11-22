@@ -263,3 +263,8 @@ html, body { overflow-x: clip; }
 /* Drobne dopiski: licencja IMGW pod cytatem, link wyjaśniający przy etykiecie narracji */
 .proof__license { margin-top: .4rem; font-size: .85rem; color: var(--ink-2); }
 .narrative__help { font-size: .9rem; color: var(--ink-2); }
+
+/* Logo: „o” w nazwie jest soczewką z żółtą kropką (propozycja C) */
+.lens { position: relative; display: inline-block; width: .56em; height: .56em; margin-bottom: -.01em; border: .14em solid currentColor; border-radius: 50%; box-sizing: border-box; }
+.lens::after { content: ""; position: absolute; inset: 0; margin: auto; width: .2em; height: .2em; border-radius: 50%; background: #FFE066; }
+.brand__name { letter-spacing: -.01em; }
