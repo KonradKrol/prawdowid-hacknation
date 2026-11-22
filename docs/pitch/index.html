@@ -92,10 +92,10 @@ table { font-size: 28px; color: var(--ink); width: 100%; }
 <h1 class="cover-title rise" style="margin-top:24px;">Prawd<span class="lens"></span>skop</h1>
 <p class="cover-lead rise d1" style="margin-top:28px; max-width:1500px;">Każda odpowiedź ma źródło. A gdy go nie ma, mówimy to wprost.</p>
 <div class="tiles rise d2">
-<div class="tile"><p class="k">Na żywo</p><p class="t">Ostrzeżenia IMGW pobierane co 10 minut</p></div>
-<div class="tile"><p class="k">Weryfikacje</p><p class="t">Demagog, FakeNews.pl, Pravda i znane narracje EUvsDisinfo</p></div>
+<div class="tile"><p class="k">Na żywo</p><p class="t">Ostrzeżenia IMGW i nowe weryfikacje Demagoga, co 10 minut</p></div>
+<div class="tile"><p class="k">Weryfikacje</p><p class="t">FakeNews.pl, Pravda i znane narracje EUvsDisinfo</p></div>
 <div class="tile"><p class="k">Urzędowe</p><p class="t">Komunikaty gov.pl: RCB, ministerstwa, sanepid, urzędy</p></div>
-<div class="tile"><p class="k">Gotowe na WhatsApp</p><p class="t">Do uruchomienia potrzeba tylko konta firmowego</p></div>
+<div class="tile"><p class="k">Gotowe na WhatsApp</p><p class="t">Adapter gotowy. Uruchomienie wymaga konta Meta Business</p></div>
 </div>
 <p class="foot">Autor: Konrad Król · prawdowid-hacknation.fly.dev</p>
 </section>
@@ -148,8 +148,11 @@ table { font-size: 28px; color: var(--ink); width: 100%; }
 <div class="card rise d2"><h3>Brak dowodu</h3><p class="text">Zamiast zgadywać, mówimy „Brak potwierdzenia” i co jest potrzebne.</p></div>
 </div>
 <div class="big" style="margin-top:56px;">
-<div class="stat warn rise d3"><p class="n">0 z 8</p><p class="l">fałszywych werdyktów w teście 8 pytań, na które w bazie nie ma żadnego źródła</p></div>
+<div class="stat rise d3"><p class="n">21 z 22</p><p class="l">zgodnych werdyktów tam, gdzie w bazie jest źródło</p></div>
+<div class="stat warn rise d3"><p class="n">0 z 8</p><p class="l">fałszywych werdyktów, gdy w bazie nie ma źródła</p></div>
+<div class="stat rise d3"><p class="n">44 z 44</p><p class="l">cytatów dosłownie w źródle po kontroli programu</p></div>
 </div>
+<p class="foot">52 pytania (32 z zestawu testowego i 20 napisanych przed testem), baza 575 dokumentów, 22.11.2026.</p>
 </section>
 <section id="kryzys">
 <p class="eyebrow">Moduł kryzysowy</p>
@@ -200,16 +203,16 @@ table { font-size: 28px; color: var(--ink); width: 100%; }
 </section>
 <section id="skala">
 <p class="eyebrow">Koszt i wyszukiwanie</p>
-<h2>Grosze za sprawdzenie. Wyszukiwanie semantyczne gotowe do włączenia.</h2>
+<h2>Pół dolara za tysiąc sprawdzeń. Wyszukiwanie semantyczne przetestowane.</h2>
 <div class="row" style="margin-top:56px; gap:72px; align-items:center;">
 <div class="col" style="gap:8px; flex:none; width:640px;">
-<p class="sbig rise">0,4 USD</p>
+<p class="sbig rise">0,54 USD</p>
 <p class="lead rise d1">za 1000 sprawdzeń</p>
-<p class="minor">Średnia z 44 sprawdzeń na działającej konfiguracji, 22.11.2026. Szacunek z liczników tokenów.</p>
+<p class="minor">100 różnych pytań na działającej wersji, 22.11.2026. Ocena i kontrola, mediana odpowiedzi 3,2 s.</p>
 </div>
 <div class="col" style="gap:28px;">
 <div class="irow rise d1"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#FFE066" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5L20 6"/></svg></div><p class="text">Dziś: słowa kluczowe<span class="sub">Najlepsze werdykty w naszych testach</span></p></div>
-<div class="irow rise d2"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#FFE066" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="6"/><path d="M16 16l5 5"/></svg></div><p class="text">Gotowe: wyszukiwanie semantyczne<span class="sub">Zaimplementowane, włączymy w każdej chwili, gdy baza urośnie</span></p></div>
+<div class="irow rise d2"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#FFE066" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="6"/><path d="M16 16l5 5"/></svg></div><p class="text">Przetestowane: wyszukiwanie semantyczne<span class="sub">Lepiej trafia pierwszy dokument (23 z 25 wobec 21). Włączenie wymaga integracji</span></p></div>
 </div>
 </div>
 <p class="foot">FastAPI · SQLite · Fly.io (Frankfurt)</p>
@@ -220,7 +223,7 @@ table { font-size: 28px; color: var(--ink); width: 100%; }
 <div class="col" style="gap:40px;">
 <p class="eyebrow">Wdrożenie</p>
 <h2>Gotowe do pilotażu w jednym województwie</h2>
-<div class="irow rise" style="color:#F6F8FB;"><div class="ico" style="background:#FFE066;"><svg viewBox="0 0 24 24" fill="none" stroke="#14305C" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5L20 6"/></svg></div><p class="text">Działa dziś<span class="sub" style="color:#C9D6E8;">Strona, IMGW na żywo, panel moderatora</span></p></div>
+<div class="irow rise" style="color:#F6F8FB;"><div class="ico" style="background:#FFE066;"><svg viewBox="0 0 24 24" fill="none" stroke="#14305C" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5L20 6"/></svg></div><p class="text">Działa dziś<span class="sub" style="color:#C9D6E8;">Strona, IMGW i Demagog na żywo, panel moderatora</span></p></div>
 <div class="irow rise d1" style="color:#F6F8FB;"><div class="ico" style="background:#FFE066;"><svg viewBox="0 0 24 24" fill="none" stroke="#14305C" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg></div><p class="text">Dalej<span class="sub" style="color:#C9D6E8;">WhatsApp, kanały RSO i RCB, luka od moderatora</span></p></div>
 <div class="irow rise d2" style="color:#F6F8FB;"><div class="ico" style="background:#FFE066;"><svg viewBox="0 0 24 24" fill="none" stroke="#14305C" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg></div><p class="text">Potrzebujemy<span class="sub" style="color:#C9D6E8;">Dostępu do kanałów urzędowych i jednego województwa</span></p></div>
 </div>
