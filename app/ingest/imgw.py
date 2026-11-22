@@ -63,6 +63,9 @@ def fetch(url=URL, timeout=15):
 
 def parse(raw):
     """Zwraca (wpisy, liczba_odrzuconych). Niekompletny wpis nie przerywa importu."""
+    # Gdy nie ma ostrzeżeń, API zwraca {"message": "Brak ostrzeżeń meteorologicznych"} zamiast pustej listy.
+    if isinstance(raw, dict) and set(raw) == {"message"} and "brak" in str(raw["message"]).lower():
+        return [], 0
     if not isinstance(raw, list):
         raise ValueError("IMGW: oczekiwano listy ostrzeżeń")
     entries, rejected = [], 0

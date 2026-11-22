@@ -190,3 +190,12 @@ def test_simulated_warning_runs_full_pipeline_and_can_be_removed(client):
 def test_hazards_match_from_word_start(text, expected):
     from app.ingest.places import hazards
     assert hazards(text) == expected
+
+
+def test_imgw_no_warnings_message_is_a_successful_empty_sync(client):
+    from app.ingest import imgw
+    assert imgw.parse({"message": "Brak ostrzeżeń meteorologicznych"}) == ([], 0)
+    with pytest.raises(ValueError):
+        imgw.parse({"error": "inny obiekt"})  # inne obiekty nadal są błędem
+    result = get_service().official.sync(raw={"message": "Brak ostrzeżeń meteorologicznych"})
+    assert result["status"] == "ok" and result["fetched"] == 0

@@ -35,11 +35,9 @@
     <div class="mod-kpi"><dd>{{ b.cases | length }}</dd><dt>spraw lokalnych</dt></div>
     <div class="mod-kpi"><dd>{{ o.entries }}</dd><dt>komunikatów IMGW</dt></div>
   </dl>
-  <nav class="mod-nav" aria-label="Sekcje panelu"><a href="#tematy">Tematy</a><a href="#sprawy">Sprawy</a><a href="#kanal">Kanał IMGW</a><a href="#symulacje">Symulacja</a></nav>
 
   <section class="mod-sec" id="tematy" aria-labelledby="topics-h">
     <h2 id="topics-h" class="mod-h">Tematy zgłoszeń</h2>
-    <p class="mod-sub">Zgłoszenia o tym samym temacie łączymy automatycznie. Na górze te, które rosną najszybciej.</p>
     <ul class="mod-topics">
     {% for t in b.topics %}
       <li class="mod-topic{% if t.growing %} mod-topic--hot{% endif %}" data-topic="{{ t.id }}"{% if loop.index > 6 %} hidden data-more{% endif %}>
@@ -62,7 +60,6 @@
 
   <section class="mod-sec" id="sprawy" aria-labelledby="cases-h">
     <h2 id="cases-h" class="mod-h">Sprawy lokalne <span class="mod-count-n">{{ b.cases | length }}</span></h2>
-    <p class="mod-sub">To samo zjawisko, powiat i dzień to jedna sprawa. Nowy komunikat IMGW oceniamy ponownie tylko dla pasujących spraw, a zmianę zatwierdza człowiek.</p>
     {% for c in b.cases %}
     <article class="mod-case" id="sprawa-{{ c.id }}" data-case="{{ c.id }}">
       <header class="mod-case__head">
