@@ -2,10 +2,20 @@
 
 from app.contract import ContextMismatch, Item, NoticeItem
 from app.core.result import missing_item
+from app.ingest.imgw import FEED, covers
+from app.ingest.places import signature
 
 
-def demo_result(result, question, sources, make_evidence):
+def official_match(question, sources, received):
+    found = signature(question, received)
+    if found is None:
+        return None
+    return next((row for row in sources if row.get("feed") == FEED and covers(row, found)), None)
+
+
+def demo_result(result, question, sources, make_evidence, received=None):
     value = question.casefold()
+    official = official_match(question, sources, received) if received else None
     if "awaria" in value:
         result.status, result.message = "technical_error", "Symulowany błąd techniczny."
     elif "wiersz" in value:
@@ -14,6 +24,8 @@ def demo_result(result, question, sources, make_evidence):
         result.status = "needs_clarification"
         result.message = "Potrzebna jest dodatkowa informacja."
         result.clarification_question = "Którą wiadomość chcesz sprawdzić?"
+    elif official is not None:
+        result.items = [make_evidence(official, question, "supports", "confirmed")]
     elif "uważam" in value:
         result.items = [Item(id="t1", claim=question, kind="verdict", label="not_verifiable", reason="To opinia.")]
     elif "kiedy" in value and sources:

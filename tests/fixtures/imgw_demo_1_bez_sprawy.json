@@ -1,0 +1,18 @@
+[
+ {
+  "id": "Sk20261202090011111",
+  "nazwa_zdarzenia": "Silny wiatr",
+  "stopien": "1",
+  "prawdopodobienstwo": "80",
+  "obowiazuje_od": "2026-12-03 06:00:00",
+  "obowiazuje_do": "2026-12-03 20:00:00",
+  "opublikowano": "2026-12-02 09:00:00",
+  "tresc": "Prognozowany jest silny wiatr o średniej prędkości od 30 km/h do 45 km/h, w porywach do 75 km/h, z zachodu.",
+  "komentarz": "Brak.",
+  "biuro": "Biuro Prognoz Meteorologicznych w Gdyni",
+  "teryt": [
+   "2263",
+   "2212"
+  ]
+ }
+]

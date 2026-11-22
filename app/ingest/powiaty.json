@@ -1,0 +1,1526 @@
+{
+"source": "https://api.dane.gov.pl/media/resources/20260216/NauczEtatyOsoby_2025_wg_wojewodztw_powiatow.xlsx",
+"note": "Kody TERYT powiatów wyodrębnione z zestawu MEN na dane.gov.pl (2025).",
+"powiaty": {
+"0201": {
+"name": "bolesławiecki",
+"voivodeship": "dolnośląskie"
+},
+"0202": {
+"name": "dzierżoniowski",
+"voivodeship": "dolnośląskie"
+},
+"0203": {
+"name": "głogowski",
+"voivodeship": "dolnośląskie"
+},
+"0204": {
+"name": "górowski",
+"voivodeship": "dolnośląskie"
+},
+"0205": {
+"name": "jaworski",
+"voivodeship": "dolnośląskie"
+},
+"0206": {
+"name": "karkonoski",
+"voivodeship": "dolnośląskie"
+},
+"0207": {
+"name": "kamiennogórski",
+"voivodeship": "dolnośląskie"
+},
+"0208": {
+"name": "kłodzki",
+"voivodeship": "dolnośląskie"
+},
+"0209": {
+"name": "legnicki",
+"voivodeship": "dolnośląskie"
+},
+"0210": {
+"name": "lubański",
+"voivodeship": "dolnośląskie"
+},
+"0211": {
+"name": "lubiński",
+"voivodeship": "dolnośląskie"
+},
+"0212": {
+"name": "lwówecki",
+"voivodeship": "dolnośląskie"
+},
+"0213": {
+"name": "milicki",
+"voivodeship": "dolnośląskie"
+},
+"0214": {
+"name": "oleśnicki",
+"voivodeship": "dolnośląskie"
+},
+"0215": {
+"name": "oławski",
+"voivodeship": "dolnośląskie"
+},
+"0216": {
+"name": "polkowicki",
+"voivodeship": "dolnośląskie"
+},
+"0217": {
+"name": "strzeliński",
+"voivodeship": "dolnośląskie"
+},
+"0218": {
+"name": "średzki",
+"voivodeship": "dolnośląskie"
+},
+"0219": {
+"name": "świdnicki",
+"voivodeship": "dolnośląskie"
+},
+"0220": {
+"name": "trzebnicki",
+"voivodeship": "dolnośląskie"
+},
+"0221": {
+"name": "wałbrzyski",
+"voivodeship": "dolnośląskie"
+},
+"0222": {
+"name": "wołowski",
+"voivodeship": "dolnośląskie"
+},
+"0223": {
+"name": "wrocławski",
+"voivodeship": "dolnośląskie"
+},
+"0224": {
+"name": "ząbkowicki",
+"voivodeship": "dolnośląskie"
+},
+"0225": {
+"name": "zgorzelecki",
+"voivodeship": "dolnośląskie"
+},
+"0226": {
+"name": "złotoryjski",
+"voivodeship": "dolnośląskie"
+},
+"0261": {
+"name": "m. Jelenia Góra",
+"voivodeship": "dolnośląskie"
+},
+"0262": {
+"name": "m. Legnica",
+"voivodeship": "dolnośląskie"
+},
+"0264": {
+"name": "m. Wrocław",
+"voivodeship": "dolnośląskie"
+},
+"0265": {
+"name": "m. Wałbrzych",
+"voivodeship": "dolnośląskie"
+},
+"0401": {
+"name": "aleksandrowski",
+"voivodeship": "kujawsko-pomorskie"
+},
+"0402": {
+"name": "brodnicki",
+"voivodeship": "kujawsko-pomorskie"
+},
+"0403": {
+"name": "bydgoski",
+"voivodeship": "kujawsko-pomorskie"
+},
+"0404": {
+"name": "chełmiński",
+"voivodeship": "kujawsko-pomorskie"
+},
+"0405": {
+"name": "golubsko-dobrzyński",
+"voivodeship": "kujawsko-pomorskie"
+},
+"0406": {
+"name": "grudziądzki",
+"voivodeship": "kujawsko-pomorskie"
+},
+"0407": {
+"name": "inowrocławski",
+"voivodeship": "kujawsko-pomorskie"
+},
+"0408": {
+"name": "lipnowski",
+"voivodeship": "kujawsko-pomorskie"
+},
+"0409": {
+"name": "mogileński",
+"voivodeship": "kujawsko-pomorskie"
+},
+"0410": {
+"name": "nakielski",
+"voivodeship": "kujawsko-pomorskie"
+},
+"0411": {
+"name": "radziejowski",
+"voivodeship": "kujawsko-pomorskie"
+},
+"0412": {
+"name": "rypiński",
+"voivodeship": "kujawsko-pomorskie"
+},
+"0413": {
+"name": "sępoleński",
+"voivodeship": "kujawsko-pomorskie"
+},
+"0414": {
+"name": "świecki",
+"voivodeship": "kujawsko-pomorskie"
+},
+"0415": {
+"name": "toruński",
+"voivodeship": "kujawsko-pomorskie"
+},
+"0416": {
+"name": "tucholski",
+"voivodeship": "kujawsko-pomorskie"
+},
+"0417": {
+"name": "wąbrzeski",
+"voivodeship": "kujawsko-pomorskie"
+},
+"0418": {
+"name": "włocławski",
+"voivodeship": "kujawsko-pomorskie"
+},
+"0419": {
+"name": "żniński",
+"voivodeship": "kujawsko-pomorskie"
+},
+"0461": {
+"name": "m. Bydgoszcz",
+"voivodeship": "kujawsko-pomorskie"
+},
+"0462": {
+"name": "m. Grudziądz",
+"voivodeship": "kujawsko-pomorskie"
+},
+"0463": {
+"name": "m. Toruń",
+"voivodeship": "kujawsko-pomorskie"
+},
+"0464": {
+"name": "m. Włocławek",
+"voivodeship": "kujawsko-pomorskie"
+},
+"0601": {
+"name": "bialski",
+"voivodeship": "lubelskie"
+},
+"0602": {
+"name": "biłgorajski",
+"voivodeship": "lubelskie"
+},
+"0603": {
+"name": "chełmski",
+"voivodeship": "lubelskie"
+},
+"0604": {
+"name": "hrubieszowski",
+"voivodeship": "lubelskie"
+},
+"0605": {
+"name": "janowski",
+"voivodeship": "lubelskie"
+},
+"0606": {
+"name": "krasnostawski",
+"voivodeship": "lubelskie"
+},
+"0607": {
+"name": "kraśnicki",
+"voivodeship": "lubelskie"
+},
+"0608": {
+"name": "lubartowski",
+"voivodeship": "lubelskie"
+},
+"0609": {
+"name": "lubelski",
+"voivodeship": "lubelskie"
+},
+"0610": {
+"name": "łęczyński",
+"voivodeship": "lubelskie"
+},
+"0611": {
+"name": "łukowski",
+"voivodeship": "lubelskie"
+},
+"0612": {
+"name": "opolski",
+"voivodeship": "lubelskie"
+},
+"0613": {
+"name": "parczewski",
+"voivodeship": "lubelskie"
+},
+"0614": {
+"name": "puławski",
+"voivodeship": "lubelskie"
+},
+"0615": {
+"name": "radzyński",
+"voivodeship": "lubelskie"
+},
+"0616": {
+"name": "rycki",
+"voivodeship": "lubelskie"
+},
+"0617": {
+"name": "świdnicki",
+"voivodeship": "lubelskie"
+},
+"0618": {
+"name": "tomaszowski",
+"voivodeship": "lubelskie"
+},
+"0619": {
+"name": "włodawski",
+"voivodeship": "lubelskie"
+},
+"0620": {
+"name": "zamojski",
+"voivodeship": "lubelskie"
+},
+"0661": {
+"name": "m. Biała Podlaska",
+"voivodeship": "lubelskie"
+},
+"0662": {
+"name": "m. Chełm",
+"voivodeship": "lubelskie"
+},
+"0663": {
+"name": "m. Lublin",
+"voivodeship": "lubelskie"
+},
+"0664": {
+"name": "m. Zamość",
+"voivodeship": "lubelskie"
+},
+"0801": {
+"name": "gorzowski",
+"voivodeship": "lubuskie"
+},
+"0802": {
+"name": "krośnieński",
+"voivodeship": "lubuskie"
+},
+"0803": {
+"name": "międzyrzecki",
+"voivodeship": "lubuskie"
+},
+"0804": {
+"name": "nowosolski",
+"voivodeship": "lubuskie"
+},
+"0805": {
+"name": "słubicki",
+"voivodeship": "lubuskie"
+},
+"0806": {
+"name": "strzelecko-drezdenecki",
+"voivodeship": "lubuskie"
+},
+"0807": {
+"name": "sulęciński",
+"voivodeship": "lubuskie"
+},
+"0808": {
+"name": "świebodziński",
+"voivodeship": "lubuskie"
+},
+"0809": {
+"name": "zielonogórski",
+"voivodeship": "lubuskie"
+},
+"0810": {
+"name": "żagański",
+"voivodeship": "lubuskie"
+},
+"0811": {
+"name": "żarski",
+"voivodeship": "lubuskie"
+},
+"0812": {
+"name": "wschowski",
+"voivodeship": "lubuskie"
+},
+"0861": {
+"name": "m. Gorzów Wielkopolski",
+"voivodeship": "lubuskie"
+},
+"0862": {
+"name": "m. Zielona Góra",
+"voivodeship": "lubuskie"
+},
+"1001": {
+"name": "bełchatowski",
+"voivodeship": "łódzkie"
+},
+"1002": {
+"name": "kutnowski",
+"voivodeship": "łódzkie"
+},
+"1003": {
+"name": "łaski",
+"voivodeship": "łódzkie"
+},
+"1004": {
+"name": "łęczycki",
+"voivodeship": "łódzkie"
+},
+"1005": {
+"name": "łowicki",
+"voivodeship": "łódzkie"
+},
+"1006": {
+"name": "łódzki wschodni",
+"voivodeship": "łódzkie"
+},
+"1007": {
+"name": "opoczyński",
+"voivodeship": "łódzkie"
+},
+"1008": {
+"name": "pabianicki",
+"voivodeship": "łódzkie"
+},
+"1009": {
+"name": "pajęczański",
+"voivodeship": "łódzkie"
+},
+"1010": {
+"name": "piotrkowski",
+"voivodeship": "łódzkie"
+},
+"1011": {
+"name": "poddębicki",
+"voivodeship": "łódzkie"
+},
+"1012": {
+"name": "radomszczański",
+"voivodeship": "łódzkie"
+},
+"1013": {
+"name": "rawski",
+"voivodeship": "łódzkie"
+},
+"1014": {
+"name": "sieradzki",
+"voivodeship": "łódzkie"
+},
+"1015": {
+"name": "skierniewicki",
+"voivodeship": "łódzkie"
+},
+"1016": {
+"name": "tomaszowski",
+"voivodeship": "łódzkie"
+},
+"1017": {
+"name": "wieluński",
+"voivodeship": "łódzkie"
+},
+"1018": {
+"name": "wieruszowski",
+"voivodeship": "łódzkie"
+},
+"1019": {
+"name": "zduńskowolski",
+"voivodeship": "łódzkie"
+},
+"1020": {
+"name": "zgierski",
+"voivodeship": "łódzkie"
+},
+"1021": {
+"name": "brzeziński",
+"voivodeship": "łódzkie"
+},
+"1061": {
+"name": "m. Łódź",
+"voivodeship": "łódzkie"
+},
+"1062": {
+"name": "m. Piotrków Trybunalski",
+"voivodeship": "łódzkie"
+},
+"1063": {
+"name": "m. Skierniewice",
+"voivodeship": "łódzkie"
+},
+"1201": {
+"name": "bocheński",
+"voivodeship": "małopolskie"
+},
+"1202": {
+"name": "brzeski",
+"voivodeship": "małopolskie"
+},
+"1203": {
+"name": "chrzanowski",
+"voivodeship": "małopolskie"
+},
+"1204": {
+"name": "dąbrowski",
+"voivodeship": "małopolskie"
+},
+"1205": {
+"name": "gorlicki",
+"voivodeship": "małopolskie"
+},
+"1206": {
+"name": "krakowski",
+"voivodeship": "małopolskie"
+},
+"1207": {
+"name": "limanowski",
+"voivodeship": "małopolskie"
+},
+"1208": {
+"name": "miechowski",
+"voivodeship": "małopolskie"
+},
+"1209": {
+"name": "myślenicki",
+"voivodeship": "małopolskie"
+},
+"1210": {
+"name": "nowosądecki",
+"voivodeship": "małopolskie"
+},
+"1211": {
+"name": "nowotarski",
+"voivodeship": "małopolskie"
+},
+"1212": {
+"name": "olkuski",
+"voivodeship": "małopolskie"
+},
+"1213": {
+"name": "oświęcimski",
+"voivodeship": "małopolskie"
+},
+"1214": {
+"name": "proszowicki",
+"voivodeship": "małopolskie"
+},
+"1215": {
+"name": "suski",
+"voivodeship": "małopolskie"
+},
+"1216": {
+"name": "tarnowski",
+"voivodeship": "małopolskie"
+},
+"1217": {
+"name": "tatrzański",
+"voivodeship": "małopolskie"
+},
+"1218": {
+"name": "wadowicki",
+"voivodeship": "małopolskie"
+},
+"1219": {
+"name": "wielicki",
+"voivodeship": "małopolskie"
+},
+"1261": {
+"name": "m. Kraków",
+"voivodeship": "małopolskie"
+},
+"1262": {
+"name": "m. Nowy Sącz",
+"voivodeship": "małopolskie"
+},
+"1263": {
+"name": "m. Tarnów",
+"voivodeship": "małopolskie"
+},
+"1401": {
+"name": "białobrzeski",
+"voivodeship": "mazowieckie"
+},
+"1402": {
+"name": "ciechanowski",
+"voivodeship": "mazowieckie"
+},
+"1403": {
+"name": "garwoliński",
+"voivodeship": "mazowieckie"
+},
+"1404": {
+"name": "gostyniński",
+"voivodeship": "mazowieckie"
+},
+"1405": {
+"name": "grodziski",
+"voivodeship": "mazowieckie"
+},
+"1406": {
+"name": "grójecki",
+"voivodeship": "mazowieckie"
+},
+"1407": {
+"name": "kozienicki",
+"voivodeship": "mazowieckie"
+},
+"1408": {
+"name": "legionowski",
+"voivodeship": "mazowieckie"
+},
+"1409": {
+"name": "lipski",
+"voivodeship": "mazowieckie"
+},
+"1410": {
+"name": "łosicki",
+"voivodeship": "mazowieckie"
+},
+"1411": {
+"name": "makowski",
+"voivodeship": "mazowieckie"
+},
+"1412": {
+"name": "miński",
+"voivodeship": "mazowieckie"
+},
+"1413": {
+"name": "mławski",
+"voivodeship": "mazowieckie"
+},
+"1414": {
+"name": "nowodworski",
+"voivodeship": "mazowieckie"
+},
+"1415": {
+"name": "ostrołęcki",
+"voivodeship": "mazowieckie"
+},
+"1416": {
+"name": "ostrowski",
+"voivodeship": "mazowieckie"
+},
+"1417": {
+"name": "otwocki",
+"voivodeship": "mazowieckie"
+},
+"1418": {
+"name": "piaseczyński",
+"voivodeship": "mazowieckie"
+},
+"1419": {
+"name": "płocki",
+"voivodeship": "mazowieckie"
+},
+"1420": {
+"name": "płoński",
+"voivodeship": "mazowieckie"
+},
+"1421": {
+"name": "pruszkowski",
+"voivodeship": "mazowieckie"
+},
+"1422": {
+"name": "przasnyski",
+"voivodeship": "mazowieckie"
+},
+"1423": {
+"name": "przysuski",
+"voivodeship": "mazowieckie"
+},
+"1424": {
+"name": "pułtuski",
+"voivodeship": "mazowieckie"
+},
+"1425": {
+"name": "radomski",
+"voivodeship": "mazowieckie"
+},
+"1426": {
+"name": "siedlecki",
+"voivodeship": "mazowieckie"
+},
+"1427": {
+"name": "sierpecki",
+"voivodeship": "mazowieckie"
+},
+"1428": {
+"name": "sochaczewski",
+"voivodeship": "mazowieckie"
+},
+"1429": {
+"name": "sokołowski",
+"voivodeship": "mazowieckie"
+},
+"1430": {
+"name": "szydłowiecki",
+"voivodeship": "mazowieckie"
+},
+"1432": {
+"name": "warszawski zachodni",
+"voivodeship": "mazowieckie"
+},
+"1433": {
+"name": "węgrowski",
+"voivodeship": "mazowieckie"
+},
+"1434": {
+"name": "wołomiński",
+"voivodeship": "mazowieckie"
+},
+"1435": {
+"name": "wyszkowski",
+"voivodeship": "mazowieckie"
+},
+"1436": {
+"name": "zwoleński",
+"voivodeship": "mazowieckie"
+},
+"1437": {
+"name": "żuromiński",
+"voivodeship": "mazowieckie"
+},
+"1438": {
+"name": "żyrardowski",
+"voivodeship": "mazowieckie"
+},
+"1461": {
+"name": "m. Ostrołęka",
+"voivodeship": "mazowieckie"
+},
+"1462": {
+"name": "m. Płock",
+"voivodeship": "mazowieckie"
+},
+"1463": {
+"name": "m. Radom",
+"voivodeship": "mazowieckie"
+},
+"1464": {
+"name": "m. Siedlce",
+"voivodeship": "mazowieckie"
+},
+"1465": {
+"name": "m. st. Warszawa",
+"voivodeship": "mazowieckie"
+},
+"1601": {
+"name": "brzeski",
+"voivodeship": "opolskie"
+},
+"1602": {
+"name": "głubczycki",
+"voivodeship": "opolskie"
+},
+"1603": {
+"name": "kędzierzyńsko-kozielski",
+"voivodeship": "opolskie"
+},
+"1604": {
+"name": "kluczborski",
+"voivodeship": "opolskie"
+},
+"1605": {
+"name": "krapkowicki",
+"voivodeship": "opolskie"
+},
+"1606": {
+"name": "namysłowski",
+"voivodeship": "opolskie"
+},
+"1607": {
+"name": "nyski",
+"voivodeship": "opolskie"
+},
+"1608": {
+"name": "oleski",
+"voivodeship": "opolskie"
+},
+"1609": {
+"name": "opolski",
+"voivodeship": "opolskie"
+},
+"1610": {
+"name": "prudnicki",
+"voivodeship": "opolskie"
+},
+"1611": {
+"name": "strzelecki",
+"voivodeship": "opolskie"
+},
+"1661": {
+"name": "m. Opole",
+"voivodeship": "opolskie"
+},
+"1801": {
+"name": "bieszczadzki",
+"voivodeship": "podkarpackie"
+},
+"1802": {
+"name": "brzozowski",
+"voivodeship": "podkarpackie"
+},
+"1803": {
+"name": "dębicki",
+"voivodeship": "podkarpackie"
+},
+"1804": {
+"name": "jarosławski",
+"voivodeship": "podkarpackie"
+},
+"1805": {
+"name": "jasielski",
+"voivodeship": "podkarpackie"
+},
+"1806": {
+"name": "kolbuszowski",
+"voivodeship": "podkarpackie"
+},
+"1807": {
+"name": "krośnieński",
+"voivodeship": "podkarpackie"
+},
+"1808": {
+"name": "leżajski",
+"voivodeship": "podkarpackie"
+},
+"1809": {
+"name": "lubaczowski",
+"voivodeship": "podkarpackie"
+},
+"1810": {
+"name": "łańcucki",
+"voivodeship": "podkarpackie"
+},
+"1811": {
+"name": "mielecki",
+"voivodeship": "podkarpackie"
+},
+"1812": {
+"name": "niżański",
+"voivodeship": "podkarpackie"
+},
+"1813": {
+"name": "przemyski",
+"voivodeship": "podkarpackie"
+},
+"1814": {
+"name": "przeworski",
+"voivodeship": "podkarpackie"
+},
+"1815": {
+"name": "ropczycko-sędziszowski",
+"voivodeship": "podkarpackie"
+},
+"1816": {
+"name": "rzeszowski",
+"voivodeship": "podkarpackie"
+},
+"1817": {
+"name": "sanocki",
+"voivodeship": "podkarpackie"
+},
+"1818": {
+"name": "stalowowolski",
+"voivodeship": "podkarpackie"
+},
+"1819": {
+"name": "strzyżowski",
+"voivodeship": "podkarpackie"
+},
+"1820": {
+"name": "tarnobrzeski",
+"voivodeship": "podkarpackie"
+},
+"1821": {
+"name": "leski",
+"voivodeship": "podkarpackie"
+},
+"1861": {
+"name": "m. Krosno",
+"voivodeship": "podkarpackie"
+},
+"1862": {
+"name": "m. Przemyśl",
+"voivodeship": "podkarpackie"
+},
+"1863": {
+"name": "m. Rzeszów",
+"voivodeship": "podkarpackie"
+},
+"1864": {
+"name": "m. Tarnobrzeg",
+"voivodeship": "podkarpackie"
+},
+"2001": {
+"name": "augustowski",
+"voivodeship": "podlaskie"
+},
+"2002": {
+"name": "białostocki",
+"voivodeship": "podlaskie"
+},
+"2003": {
+"name": "bielski",
+"voivodeship": "podlaskie"
+},
+"2004": {
+"name": "grajewski",
+"voivodeship": "podlaskie"
+},
+"2005": {
+"name": "hajnowski",
+"voivodeship": "podlaskie"
+},
+"2006": {
+"name": "kolneński",
+"voivodeship": "podlaskie"
+},
+"2007": {
+"name": "łomżyński",
+"voivodeship": "podlaskie"
+},
+"2008": {
+"name": "moniecki",
+"voivodeship": "podlaskie"
+},
+"2009": {
+"name": "sejneński",
+"voivodeship": "podlaskie"
+},
+"2010": {
+"name": "siemiatycki",
+"voivodeship": "podlaskie"
+},
+"2011": {
+"name": "sokólski",
+"voivodeship": "podlaskie"
+},
+"2012": {
+"name": "suwalski",
+"voivodeship": "podlaskie"
+},
+"2013": {
+"name": "wysokomazowiecki",
+"voivodeship": "podlaskie"
+},
+"2014": {
+"name": "zambrowski",
+"voivodeship": "podlaskie"
+},
+"2061": {
+"name": "m. Białystok",
+"voivodeship": "podlaskie"
+},
+"2062": {
+"name": "m. Łomża",
+"voivodeship": "podlaskie"
+},
+"2063": {
+"name": "m. Suwałki",
+"voivodeship": "podlaskie"
+},
+"2201": {
+"name": "bytowski",
+"voivodeship": "pomorskie"
+},
+"2202": {
+"name": "chojnicki",
+"voivodeship": "pomorskie"
+},
+"2203": {
+"name": "człuchowski",
+"voivodeship": "pomorskie"
+},
+"2204": {
+"name": "gdański",
+"voivodeship": "pomorskie"
+},
+"2205": {
+"name": "kartuski",
+"voivodeship": "pomorskie"
+},
+"2206": {
+"name": "kościerski",
+"voivodeship": "pomorskie"
+},
+"2207": {
+"name": "kwidzyński",
+"voivodeship": "pomorskie"
+},
+"2208": {
+"name": "lęborski",
+"voivodeship": "pomorskie"
+},
+"2209": {
+"name": "malborski",
+"voivodeship": "pomorskie"
+},
+"2210": {
+"name": "nowodworski",
+"voivodeship": "pomorskie"
+},
+"2211": {
+"name": "pucki",
+"voivodeship": "pomorskie"
+},
+"2212": {
+"name": "słupski",
+"voivodeship": "pomorskie"
+},
+"2213": {
+"name": "starogardzki",
+"voivodeship": "pomorskie"
+},
+"2214": {
+"name": "tczewski",
+"voivodeship": "pomorskie"
+},
+"2215": {
+"name": "wejherowski",
+"voivodeship": "pomorskie"
+},
+"2216": {
+"name": "sztumski",
+"voivodeship": "pomorskie"
+},
+"2261": {
+"name": "m. Gdańsk",
+"voivodeship": "pomorskie"
+},
+"2262": {
+"name": "m. Gdynia",
+"voivodeship": "pomorskie"
+},
+"2263": {
+"name": "m. Słupsk",
+"voivodeship": "pomorskie"
+},
+"2264": {
+"name": "m. Sopot",
+"voivodeship": "pomorskie"
+},
+"2401": {
+"name": "będziński",
+"voivodeship": "śląskie"
+},
+"2402": {
+"name": "bielski",
+"voivodeship": "śląskie"
+},
+"2403": {
+"name": "cieszyński",
+"voivodeship": "śląskie"
+},
+"2404": {
+"name": "częstochowski",
+"voivodeship": "śląskie"
+},
+"2405": {
+"name": "gliwicki",
+"voivodeship": "śląskie"
+},
+"2406": {
+"name": "kłobucki",
+"voivodeship": "śląskie"
+},
+"2407": {
+"name": "lubliniecki",
+"voivodeship": "śląskie"
+},
+"2408": {
+"name": "mikołowski",
+"voivodeship": "śląskie"
+},
+"2409": {
+"name": "myszkowski",
+"voivodeship": "śląskie"
+},
+"2410": {
+"name": "pszczyński",
+"voivodeship": "śląskie"
+},
+"2411": {
+"name": "raciborski",
+"voivodeship": "śląskie"
+},
+"2412": {
+"name": "rybnicki",
+"voivodeship": "śląskie"
+},
+"2413": {
+"name": "tarnogórski",
+"voivodeship": "śląskie"
+},
+"2414": {
+"name": "bieruńsko-lędziński",
+"voivodeship": "śląskie"
+},
+"2415": {
+"name": "wodzisławski",
+"voivodeship": "śląskie"
+},
+"2416": {
+"name": "zawierciański",
+"voivodeship": "śląskie"
+},
+"2417": {
+"name": "żywiecki",
+"voivodeship": "śląskie"
+},
+"2461": {
+"name": "m. Bielsko-Biała",
+"voivodeship": "śląskie"
+},
+"2462": {
+"name": "m. Bytom",
+"voivodeship": "śląskie"
+},
+"2463": {
+"name": "m. Chorzów",
+"voivodeship": "śląskie"
+},
+"2464": {
+"name": "m. Częstochowa",
+"voivodeship": "śląskie"
+},
+"2465": {
+"name": "m. Dąbrowa Górnicza",
+"voivodeship": "śląskie"
+},
+"2466": {
+"name": "m. Gliwice",
+"voivodeship": "śląskie"
+},
+"2467": {
+"name": "m. Jastrzębie-Zdrój",
+"voivodeship": "śląskie"
+},
+"2468": {
+"name": "m. Jaworzno",
+"voivodeship": "śląskie"
+},
+"2469": {
+"name": "m. Katowice",
+"voivodeship": "śląskie"
+},
+"2470": {
+"name": "m. Mysłowice",
+"voivodeship": "śląskie"
+},
+"2471": {
+"name": "m. Piekary Śląskie",
+"voivodeship": "śląskie"
+},
+"2472": {
+"name": "m. Ruda Śląska",
+"voivodeship": "śląskie"
+},
+"2473": {
+"name": "m. Rybnik",
+"voivodeship": "śląskie"
+},
+"2474": {
+"name": "m. Siemianowice Śląskie",
+"voivodeship": "śląskie"
+},
+"2475": {
+"name": "m. Sosnowiec",
+"voivodeship": "śląskie"
+},
+"2476": {
+"name": "m. Świętochłowice",
+"voivodeship": "śląskie"
+},
+"2477": {
+"name": "m. Tychy",
+"voivodeship": "śląskie"
+},
+"2478": {
+"name": "m. Zabrze",
+"voivodeship": "śląskie"
+},
+"2479": {
+"name": "m. Żory",
+"voivodeship": "śląskie"
+},
+"2601": {
+"name": "buski",
+"voivodeship": "świętokrzyskie"
+},
+"2602": {
+"name": "jędrzejowski",
+"voivodeship": "świętokrzyskie"
+},
+"2603": {
+"name": "kazimierski",
+"voivodeship": "świętokrzyskie"
+},
+"2604": {
+"name": "kielecki",
+"voivodeship": "świętokrzyskie"
+},
+"2605": {
+"name": "konecki",
+"voivodeship": "świętokrzyskie"
+},
+"2606": {
+"name": "opatowski",
+"voivodeship": "świętokrzyskie"
+},
+"2607": {
+"name": "ostrowiecki",
+"voivodeship": "świętokrzyskie"
+},
+"2608": {
+"name": "pińczowski",
+"voivodeship": "świętokrzyskie"
+},
+"2609": {
+"name": "sandomierski",
+"voivodeship": "świętokrzyskie"
+},
+"2610": {
+"name": "skarżyski",
+"voivodeship": "świętokrzyskie"
+},
+"2611": {
+"name": "starachowicki",
+"voivodeship": "świętokrzyskie"
+},
+"2612": {
+"name": "staszowski",
+"voivodeship": "świętokrzyskie"
+},
+"2613": {
+"name": "włoszczowski",
+"voivodeship": "świętokrzyskie"
+},
+"2661": {
+"name": "m. Kielce",
+"voivodeship": "świętokrzyskie"
+},
+"2801": {
+"name": "bartoszycki",
+"voivodeship": "warmińsko-mazurskie"
+},
+"2802": {
+"name": "braniewski",
+"voivodeship": "warmińsko-mazurskie"
+},
+"2803": {
+"name": "działdowski",
+"voivodeship": "warmińsko-mazurskie"
+},
+"2804": {
+"name": "elbląski",
+"voivodeship": "warmińsko-mazurskie"
+},
+"2805": {
+"name": "ełcki",
+"voivodeship": "warmińsko-mazurskie"
+},
+"2806": {
+"name": "giżycki",
+"voivodeship": "warmińsko-mazurskie"
+},
+"2807": {
+"name": "iławski",
+"voivodeship": "warmińsko-mazurskie"
+},
+"2808": {
+"name": "kętrzyński",
+"voivodeship": "warmińsko-mazurskie"
+},
+"2809": {
+"name": "lidzbarski",
+"voivodeship": "warmińsko-mazurskie"
+},
+"2810": {
+"name": "mrągowski",
+"voivodeship": "warmińsko-mazurskie"
+},
+"2811": {
+"name": "nidzicki",
+"voivodeship": "warmińsko-mazurskie"
+},
+"2812": {
+"name": "nowomiejski",
+"voivodeship": "warmińsko-mazurskie"
+},
+"2813": {
+"name": "olecki",
+"voivodeship": "warmińsko-mazurskie"
+},
+"2814": {
+"name": "olsztyński",
+"voivodeship": "warmińsko-mazurskie"
+},
+"2815": {
+"name": "ostródzki",
+"voivodeship": "warmińsko-mazurskie"
+},
+"2816": {
+"name": "piski",
+"voivodeship": "warmińsko-mazurskie"
+},
+"2817": {
+"name": "szczycieński",
+"voivodeship": "warmińsko-mazurskie"
+},
+"2818": {
+"name": "gołdapski",
+"voivodeship": "warmińsko-mazurskie"
+},
+"2819": {
+"name": "węgorzewski",
+"voivodeship": "warmińsko-mazurskie"
+},
+"2861": {
+"name": "m. Elbląg",
+"voivodeship": "warmińsko-mazurskie"
+},
+"2862": {
+"name": "m. Olsztyn",
+"voivodeship": "warmińsko-mazurskie"
+},
+"3001": {
+"name": "chodzieski",
+"voivodeship": "wielkopolskie"
+},
+"3002": {
+"name": "czarnkowsko-trzcianecki",
+"voivodeship": "wielkopolskie"
+},
+"3003": {
+"name": "gnieźnieński",
+"voivodeship": "wielkopolskie"
+},
+"3004": {
+"name": "gostyński",
+"voivodeship": "wielkopolskie"
+},
+"3005": {
+"name": "grodziski",
+"voivodeship": "wielkopolskie"
+},
+"3006": {
+"name": "jarociński",
+"voivodeship": "wielkopolskie"
+},
+"3007": {
+"name": "kaliski",
+"voivodeship": "wielkopolskie"
+},
+"3008": {
+"name": "kępiński",
+"voivodeship": "wielkopolskie"
+},
+"3009": {
+"name": "kolski",
+"voivodeship": "wielkopolskie"
+},
+"3010": {
+"name": "koniński",
+"voivodeship": "wielkopolskie"
+},
+"3011": {
+"name": "kościański",
+"voivodeship": "wielkopolskie"
+},
+"3012": {
+"name": "krotoszyński",
+"voivodeship": "wielkopolskie"
+},
+"3013": {
+"name": "leszczyński",
+"voivodeship": "wielkopolskie"
+},
+"3014": {
+"name": "międzychodzki",
+"voivodeship": "wielkopolskie"
+},
+"3015": {
+"name": "nowotomyski",
+"voivodeship": "wielkopolskie"
+},
+"3016": {
+"name": "obornicki",
+"voivodeship": "wielkopolskie"
+},
+"3017": {
+"name": "ostrowski",
+"voivodeship": "wielkopolskie"
+},
+"3018": {
+"name": "ostrzeszowski",
+"voivodeship": "wielkopolskie"
+},
+"3019": {
+"name": "pilski",
+"voivodeship": "wielkopolskie"
+},
+"3020": {
+"name": "pleszewski",
+"voivodeship": "wielkopolskie"
+},
+"3021": {
+"name": "poznański",
+"voivodeship": "wielkopolskie"
+},
+"3022": {
+"name": "rawicki",
+"voivodeship": "wielkopolskie"
+},
+"3023": {
+"name": "słupecki",
+"voivodeship": "wielkopolskie"
+},
+"3024": {
+"name": "szamotulski",
+"voivodeship": "wielkopolskie"
+},
+"3025": {
+"name": "średzki",
+"voivodeship": "wielkopolskie"
+},
+"3026": {
+"name": "śremski",
+"voivodeship": "wielkopolskie"
+},
+"3027": {
+"name": "turecki",
+"voivodeship": "wielkopolskie"
+},
+"3028": {
+"name": "wągrowiecki",
+"voivodeship": "wielkopolskie"
+},
+"3029": {
+"name": "wolsztyński",
+"voivodeship": "wielkopolskie"
+},
+"3030": {
+"name": "wrzesiński",
+"voivodeship": "wielkopolskie"
+},
+"3031": {
+"name": "złotowski",
+"voivodeship": "wielkopolskie"
+},
+"3061": {
+"name": "m. Kalisz",
+"voivodeship": "wielkopolskie"
+},
+"3062": {
+"name": "m. Konin",
+"voivodeship": "wielkopolskie"
+},
+"3063": {
+"name": "m. Leszno",
+"voivodeship": "wielkopolskie"
+},
+"3064": {
+"name": "m. Poznań",
+"voivodeship": "wielkopolskie"
+},
+"3201": {
+"name": "białogardzki",
+"voivodeship": "zachodniopomorskie"
+},
+"3202": {
+"name": "choszczeński",
+"voivodeship": "zachodniopomorskie"
+},
+"3203": {
+"name": "drawski",
+"voivodeship": "zachodniopomorskie"
+},
+"3204": {
+"name": "goleniowski",
+"voivodeship": "zachodniopomorskie"
+},
+"3205": {
+"name": "gryficki",
+"voivodeship": "zachodniopomorskie"
+},
+"3206": {
+"name": "gryfiński",
+"voivodeship": "zachodniopomorskie"
+},
+"3207": {
+"name": "kamieński",
+"voivodeship": "zachodniopomorskie"
+},
+"3208": {
+"name": "kołobrzeski",
+"voivodeship": "zachodniopomorskie"
+},
+"3209": {
+"name": "koszaliński",
+"voivodeship": "zachodniopomorskie"
+},
+"3210": {
+"name": "myśliborski",
+"voivodeship": "zachodniopomorskie"
+},
+"3211": {
+"name": "policki",
+"voivodeship": "zachodniopomorskie"
+},
+"3212": {
+"name": "pyrzycki",
+"voivodeship": "zachodniopomorskie"
+},
+"3213": {
+"name": "sławieński",
+"voivodeship": "zachodniopomorskie"
+},
+"3214": {
+"name": "stargardzki",
+"voivodeship": "zachodniopomorskie"
+},
+"3215": {
+"name": "szczecinecki",
+"voivodeship": "zachodniopomorskie"
+},
+"3216": {
+"name": "świdwiński",
+"voivodeship": "zachodniopomorskie"
+},
+"3217": {
+"name": "wałecki",
+"voivodeship": "zachodniopomorskie"
+},
+"3218": {
+"name": "łobeski",
+"voivodeship": "zachodniopomorskie"
+},
+"3261": {
+"name": "m. Koszalin",
+"voivodeship": "zachodniopomorskie"
+},
+"3262": {
+"name": "m. Szczecin",
+"voivodeship": "zachodniopomorskie"
+},
+"3263": {
+"name": "m. Świnoujście",
+"voivodeship": "zachodniopomorskie"
+}
+}
+}

@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+{% block title %}Moderacja — Prawdoskop{% endblock %}
+{% macro verdict(r) -%}
+  {%- set key = r.label or ("answer" if r.kind == "answer" else none) -%}
+  {%- if key -%}<span class="mod-tone tone-{{ L[key].tone }}">{{ PLAIN[key] }}</span>{%- else -%}<span class="mod-tone tone-nei">{{ {"needs_clarification": "Wymaga doprecyzowania", "technical_error": "Błąd techniczny"}.get(r.status, r.status) }}</span>{%- endif -%}
+{%- endmacro %}
+{% block main %}
+{% set o = b.official %}
+<div class="wrap page mod">
+  <header class="result__head">
+    <p class="eyebrow">Panel moderatora</p>
+    <h1 class="result__summary">Sprawy zgłoszeń i komunikaty urzędowe</h1>
+    <p class="lead">Zgłoszenia o tym samym zjawisku, powiecie i dniu tworzą jedną sprawę. Nowy lub zmieniony komunikat IMGW uruchamia ponowną ocenę tylko spraw, których dotyczy. Zmianę zatwierdza człowiek.</p>
+  </header>
+
+  {% if o.failing %}
+  <div class="note note--warn" role="alert" data-sync="failed">
+    <svg width="22" height="22" aria-hidden="true"><use href="#i-alert"/></svg>
+    <p><strong>Synchronizacja IMGW nie powiodła się</strong> {{ o.last_run.started_at | datetime }}. Błąd: <code>{{ o.last_run.error }}</code>.
+    {% if o.last_success %}Ostatnie udane pobranie: {{ o.last_success.finished_at | datetime }}. Oceny korzystają z tej wersji komunikatów.{% else %}Nie ma jeszcze udanego pobrania — sprawy oceniamy bez komunikatów IMGW.{% endif %}</p>
+  </div>
+  {% elif o.stale %}
+  <div class="note note--warn" role="status" data-sync="stale">
+    <p><strong>Komunikaty IMGW mogą być nieaktualne.</strong> {% if o.last_success %}Ostatnie udane pobranie: {{ o.last_success.finished_at | datetime }}.{% else %}Kanał nie był jeszcze pobierany.{% endif %}</p>
+  </div>
+  {% endif %}
+  {% if flash %}<p class="note note--advice" role="status">Synchronizacja zakończona: {{ flash }}.</p>{% endif %}
+
+  <section class="mod-feed" aria-labelledby="feed-h">
+    <h2 id="feed-h" class="section-title">Kanał: ostrzeżenia meteorologiczne IMGW-PIB</h2>
+    <dl class="trust__stats trust__stats--page">
+      <div><dt>wpisów</dt><dd>{{ o.entries }}</dd></div>
+      <div><dt>wersji</dt><dd>{{ o.versions }}</dd></div>
+      <div><dt>mediana opóźnienia</dt><dd>{% if o.lag.count %}{{ (o.lag.median_s / 60) | round(1) }} min{% else %}—{% endif %}</dd></div>
+    </dl>
+    <form method="post" action="/moderacja/sync"><button class="btn btn--primary" type="submit">Pobierz teraz</button></form>
+    {% if o.runs %}
+    <div class="table-wrap" tabindex="0" role="region" aria-label="Ostatnie synchronizacje">
+      <table class="sources">
+        <thead><tr><th scope="col">Start</th><th scope="col">Stan</th><th scope="col">Nowe / zmienione / bez zmian</th><th scope="col">Propozycje</th><th scope="col">Czas</th></tr></thead>
+        <tbody>
+        {% for run in o.runs[:5] %}
+          <tr><td>{{ run.started_at | datetime }}</td><td><span class="tag">{{ {"ok": "udana", "partial": "częściowa", "error": "błąd", "running": "trwa"}[run.status] }}</span>{% if run.error %}<br><small>{{ run.error }}</small>{% endif %}</td>
+              <td>{{ run.new }} / {{ run.changed }} / {{ run.unchanged }}</td><td>{{ run.proposals }}</td><td>{{ run.duration_ms or 0 }} ms</td></tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% endif %}
+  </section>
+
+  <section aria-labelledby="cases-h">
+    <h2 id="cases-h" class="section-title">Sprawy ({{ b.cases | length }})</h2>
+    {% for c in b.cases %}
+    <article class="card mod-case tone-{{ 'ok' if c.status == 'resolved' else 'nei' }}" id="sprawa-{{ c.id }}" data-case="{{ c.id }}">
+      <header class="mod-case__head">
+        <h3>{{ c.title }}</h3>
+        <p class="mod-case__meta"><span class="mod-count" data-reports="{{ c.reports }}">{{ c.reports }} {{ pl_count(c.reports, "zgłoszenie", "zgłoszenia", "zgłoszeń") }}</span>
+          · {{ "otwarta" if c.status == "open" else "rozstrzygnięta" }} · obecna ocena: {{ verdict(c.last_result) }}</p>
+      </header>
+      <p class="mod-missing"><strong>Brakujący dowód:</strong> {{ c.missing }}</p>
+      <details class="mod-reports"><summary>Treść zgłoszeń</summary>
+        <ul>{% for r in c.reports_list %}<li>„{{ r.text }}” <small>({{ r.channel }}, {{ r.created_at | datetime }})</small></li>{% endfor %}</ul>
+      </details>
+      {% for p in c.proposals %}
+      <div class="mod-proposal" data-proposal="{{ p.id }}" data-status="{{ p.status }}">
+        <p class="eyebrow">Propozycja po komunikacie IMGW · wpis {{ p.entry_id }}, wersja {{ p.version }} · {{ p.created_at | datetime }}</p>
+        <div class="mod-diff">
+          <div><p class="mod-diff__h">Poprzedni wynik</p>{{ verdict(p.previous) }}<p>{{ p.previous.reason }}</p></div>
+          <div><p class="mod-diff__h">Proponowany wynik</p>{{ verdict(p.proposed) }}<p>{{ p.proposed.reason }}</p></div>
+        </div>
+        {% if p.quote %}
+        <blockquote class="proof__quote" data-quote>„{{ p.quote }}”</blockquote>
+        <p class="proof__src">IMGW-PIB · <a href="{{ p.source_url }}" rel="noopener noreferrer" target="_blank">{{ p.source_url | domain }}</a></p>
+        {% else %}
+        <p class="note note--warn">Model nie zacytował nowego komunikatu. Sprawdź uzasadnienie przed zatwierdzeniem.</p>
+        {% endif %}
+        {% if p.status == "pending" %}
+        <form method="post" action="/moderacja/propozycje/{{ p.id }}" class="mod-actions">
+          <button class="btn btn--primary" name="decision" value="accept">Zatwierdź zmianę</button>
+          <button class="btn btn--secondary" name="decision" value="reject">Odrzuć</button>
+        </form>
+        {% else %}
+        <p class="tag">{{ "Zatwierdzono" if p.status == "accepted" else "Odrzucono" }} {{ p.decided_at | datetime }}</p>
+        {% endif %}
+      </div>
+      {% endfor %}
+    </article>
+    {% else %}
+    <p>Brak spraw. Sprawa powstaje, gdy zgłoszenie wskazuje zjawisko pogodowe i powiat.</p>
+    {% endfor %}
+  </section>
+</div>
+<style>
+.mod .section-title { margin-top: 2rem; }
+.mod-feed form { margin: 1rem 0; }
+.mod-case { margin-top: 1rem; }
+.mod-case__head h3 { font-size: 1.3rem; }
+.mod-case__meta { color: var(--ink-2); margin-top: .25rem; }
+.mod-count { font-weight: 800; color: var(--ink); }
+.mod-tone { display: inline-block; font-weight: 800; color: var(--t); background: var(--tb); padding: .05rem .45rem; }
+.mod-missing { margin-top: .75rem; }
+.mod-reports { margin-top: .5rem; } .mod-reports ul { margin: .5rem 0 0 1.2rem; }
+.mod-proposal { margin-top: 1.25rem; padding-top: 1rem; border-top: 2px solid var(--line); }
+.mod-diff { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: .5rem; }
+.mod-diff > div { background: var(--soft); padding: .75rem .9rem; }
+.mod-diff__h { font-weight: 700; color: var(--ink-2); font-size: .95rem; margin-bottom: .25rem; }
+.mod-actions { display: flex; gap: .75rem; margin-top: 1rem; flex-wrap: wrap; }
+@media (max-width: 40rem) { .mod-diff { grid-template-columns: 1fr; } }
+</style>
+{% endblock %}

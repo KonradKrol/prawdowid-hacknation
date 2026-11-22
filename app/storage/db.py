@@ -4,12 +4,13 @@ import json
 import sqlite3
 
 from app.contract import CheckResult
+from app.storage.official import OFFICIAL_SCHEMA, OfficialStore
 
 CHECK_TTL = 7 * 86400
 EVENT_TTL = 30 * 86400
 
 
-class Store:
+class Store(OfficialStore):
     def __init__(self, path):
         self.path = path
         path.parent.mkdir(parents=True, exist_ok=True)
@@ -39,6 +40,7 @@ class Store:
                   id INTEGER PRIMARY KEY CHECK (id = 1), used INTEGER NOT NULL
                 );
             """)
+            db.executescript(OFFICIAL_SCHEMA)
 
     @contextmanager
     def connection(self):

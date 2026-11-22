@@ -88,5 +88,10 @@ def health():
         return JSONResponse({"status": "database_unavailable"}, status_code=503)
     if service.settings.environment == "production" and not service.settings.key:
         return JSONResponse({"status": "model_unconfigured"}, status_code=503)
+    official = service.official.status()
     return {"status": "ok", "database": "ok", "model_configured": bool(service.settings.key),
-            "evaluator": service.settings.evaluator, "corpus": report.model_dump(exclude={"sources"})}
+            "evaluator": service.settings.evaluator, "corpus": report.model_dump(exclude={"sources"}),
+            "official_feed": {"feed": official["feed"], "failing": official["failing"], "stale": official["stale"],
+                              "entries": official["entries"],
+                              "last_success": (official["last_success"] or {}).get("finished_at"),
+                              "last_error": (official["last_run"] or {}).get("error") if official["failing"] else None}}

@@ -20,7 +20,10 @@ from app.core.model import CitationDraft, ItemDraft, PROMPT_VERSION, Provider
 from app.core.repository import Corpus
 from app.core.result import missing_item, normalize
 from app.core.safety import SCOPE, SUSPICIOUS, VAGUE, input_info
+from app.ingest.official import OfficialSync, summarize
+from app.ingest.places import signature as event_signature
 from app.storage.db import Store
+from prawdowid_core import fragments
 
 SESSION = ContextVar("prawdowid_session", default=None)
 CLIENT_BUCKET = ContextVar("prawdowid_client_bucket", default=None)
@@ -57,6 +60,8 @@ class Service:
         self.provider = Provider(settings)
         self.last_prune = 0
         self.maintenance = Lock()
+        self.official = OfficialSync(self)
+        self.official.load_current()
 
     def sources(self):
         return SourcesResponse(
@@ -87,7 +92,7 @@ class Service:
             answer=src.get("published_on") if date else None,
             reason="Techniczna próbka deweloperska.", missing_evidence=None,
             context_mismatch=None, evidence=[CitationDraft(source_id=src["id"], stance=stance,
-                quote=None if date else src["excerpt"], field="published_on" if date else "excerpt")],
+                quote=None if date else fragments(src)[0], field="published_on" if date else "excerpt")],
         )
         if label == "misleading":
             from app.contract import ContextMismatch
@@ -95,7 +100,8 @@ class Service:
                 source_value=src.get("published_on") or "inna data", explanation="Próba różnicy daty.")
         return normalize(draft, [src], "t1", claim, "")
 
-    def run(self, text, *, channel="web", lang="pl", session_id=None, use_cache=True, clarifies=None):
+    def run(self, text, *, channel="web", lang="pl", session_id=None, use_cache=True, clarifies=None,
+            pinned=None, register=True):
         if lang != "pl":
             raise ValueError("Unsupported language")
         start = perf_counter()
@@ -138,18 +144,20 @@ class Service:
                 if SCOPE.match(root):
                     result.status, result.message = "out_of_scope", "Prawdowid weryfikuje sprawdzalne informacje publiczne."
                 elif self.settings.evaluator == "fake":
-                    demo_result(result, root, list(self.corpus.sources.values()), self.fake_evidence)
+                    pool = list(pinned or []) + [row for row in self.corpus.sources.values()
+                                                 if row["id"] not in {p["id"] for p in pinned or []}]
+                    demo_result(result, root, pool, self.fake_evidence, at)
                 elif (result.input.kind == "url" and url_source is None) or VAGUE.fullmatch(root):
                     self.clarify(result, "Które konkretne twierdzenie sprawdzić? Wklej jego treść.")
                 else:
                     if result.input.kind == "url" and url_source is not None:
                         model_context["linked_source_id"] = url_source["id"]
-                    candidates = self.corpus.search(search_text, source_url)
+                    candidates = self.corpus.search(search_text, source_url, pinned)
                     suspected = bool(SUSPICIOUS.search(search_text) or any(
                         SUSPICIOUS.search(row["excerpt"]) for row in candidates
                     ))
                     anchor = at.astimezone(ZoneInfo("Europe/Warsaw")).date().isoformat()
-                    if not clarifies and not result.input.masked and not source_url and not suspected:
+                    if not clarifies and not result.input.masked and not source_url and not suspected and not pinned:
                         lookup = [cache_text(root), self.corpus.version, self.settings.model,
                                   self.settings.url, PROMPT_VERSION, anchor]
                         cache_key = sha256(json.dumps(lookup, ensure_ascii=False).encode()).hexdigest()
@@ -179,6 +187,8 @@ class Service:
                 cache_result = result.model_copy(update={"input": input_info(""), "parent_id": None})
                 self.store.cache(cache_key, now, cache_result)
             self.store.save(result, session_id, root, rounds)
+            if register and result.status in {"ok", "needs_clarification"}:
+                self.register_case(result, channel, at)
             self.store.event(now, "check", result.id, {
                 "status": result.status, "channel": channel, "elapsed_ms": result.meta.elapsed_ms,
                 "estimated_cost_usd": result.meta.estimated_cost_usd, "corpus_version": self.corpus.version,
@@ -233,6 +243,19 @@ class Service:
         dates = [row for item in result.items for row in item.evidence if row.archival]
         if dates:
             result.notices.append(NoticeItem(type="archival_material", text="Dowód jest archiwalny. Zwróć uwagę na jego datę."))
+
+    def register_case(self, result, channel, at):
+        """Łączy zgłoszenia o tym samym zdarzeniu lokalnym (zjawisko, powiat, dzień) w jedną sprawę."""
+        text = result.input.text_masked
+        found = event_signature(text, at)
+        if found is None:
+            return None
+        try:
+            return self.store.case_register(found, found.title(), found.missing(), text, summarize(result),
+                                            result.id, channel, at.isoformat())
+        except sqlite3.Error:
+            self.store.event(int(at.timestamp()), "case_register_failed", result.id, {})
+            return None
 
     @staticmethod
     def clarify(result, question):

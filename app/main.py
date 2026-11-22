@@ -1,25 +1,39 @@
+import asyncio
 from contextlib import asynccontextmanager
 from hashlib import sha256
 from secrets import token_urlsafe
 import re
 
 from fastapi import FastAPI
+from fastapi.concurrency import run_in_threadpool
 from fastapi.staticfiles import StaticFiles
 
 from app.api.checks import router as checks_router
 from app.api.whatsapp import router as whatsapp_router
+from app.api.moderation import router as moderation_router
 from app.config import ROOT, Settings
 from app.core.service import CLIENT_BUCKET, SESSION, get_service
 
 SESSION_COOKIE = "pw_session"
 
 
+async def poll_official(service):
+    """Cykliczny import z kanału urzędowego, gdy maszyna działa (Fly.io zatrzymuje ją bez ruchu)."""
+    await asyncio.sleep(5)
+    while True:
+        await run_in_threadpool(service.official.sync)
+        await asyncio.sleep(service.settings.official_poll_s)
+
+
 @asynccontextmanager
 async def lifespan(app):
     service = get_service()
+    poller = asyncio.create_task(poll_official(service)) if service.settings.official_poll_s > 0 else None
     try:
         yield
     finally:
+        if poller:
+            poller.cancel()
         service.corpus.close()
         get_service.cache_clear()
 
@@ -29,6 +43,7 @@ def create_app():
     application = FastAPI(title="Prawdowid", version="1.0", lifespan=lifespan)
     application.include_router(checks_router)
     application.include_router(whatsapp_router)
+    application.include_router(moderation_router)
     static_dir = ROOT / "app" / "static"
     if static_dir.is_dir():
         application.mount("/static", StaticFiles(directory=static_dir), name="static")

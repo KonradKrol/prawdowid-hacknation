@@ -25,6 +25,8 @@ class Settings:
     paid_check_limit: int = field(default_factory=lambda: int(os.getenv("PRAWDOWID_PAID_CHECK_LIMIT", "0")))
     whatsapp_secret: str = field(default_factory=lambda: os.getenv("PRAWDOWID_WA_APP_SECRET", ""), repr=False)
     whatsapp_token: str = field(default_factory=lambda: os.getenv("PRAWDOWID_WA_VERIFY_TOKEN", ""), repr=False)
+    admin_token: str = field(default_factory=lambda: os.getenv("PRAWDOWID_ADMIN_TOKEN", ""), repr=False)
+    official_poll_s: int = field(default_factory=lambda: int(os.getenv("PRAWDOWID_OFFICIAL_POLL_S", "0")))
 
     def __post_init__(self):
         if self.evaluator not in {"live", "fake"}:

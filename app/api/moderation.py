@@ -1,0 +1,100 @@
+"""Panel moderatora i API kanału urzędowego.
+
+Dostęp: `PRAWDOWID_ADMIN_TOKEN` w nagłówku `X-Admin-Token`, w ciasteczku `pw_admin`
+albo jednorazowo w `?klucz=` (ustawia ciasteczko). Bez ustawionego tokenu panel działa
+tylko poza produkcją.
+"""
+
+from datetime import datetime, timezone
+from hmac import compare_digest
+
+from fastapi import APIRouter, Form, HTTPException, Request
+from fastapi.concurrency import run_in_threadpool
+from fastapi.responses import RedirectResponse
+
+from app.core.service import get_service
+
+router = APIRouter()
+ADMIN_COOKIE = "pw_admin"
+
+
+def authorized(request):
+    settings = get_service().settings
+    token = settings.admin_token
+    if not token:
+        return settings.environment != "production"
+    offered = (request.headers.get("X-Admin-Token") or request.cookies.get(ADMIN_COOKIE)
+               or request.query_params.get("klucz") or "")
+    return compare_digest(token.encode(), offered.encode())
+
+
+def require_admin(request):
+    if not authorized(request):
+        raise HTTPException(404, "Nie znaleziono.")
+
+
+def board():
+    service = get_service()
+    cases = []
+    for case in service.store.cases():
+        proposals = service.store.proposals(case_id=case["id"])
+        cases.append({**case, "proposals": proposals, "pending": [p for p in proposals if p["status"] == "pending"],
+                      "reports_list": service.store.case_reports(case["id"])})
+    return {"cases": cases, "official": service.official.status()}
+
+
+@router.get("/api/v1/official/status")
+def official_status():
+    status = get_service().official.status()
+    return {key: value for key, value in status.items() if key != "runs"} | {"runs": status["runs"][:5]}
+
+
+@router.post("/api/v1/official/sync")
+async def official_sync(request: Request):
+    require_admin(request)
+    return await run_in_threadpool(get_service().official.sync)
+
+
+@router.get("/api/v1/cases")
+def list_cases(request: Request):
+    require_admin(request)
+    return board()
+
+
+@router.post("/api/v1/proposals/{proposal_id}")
+def decide(proposal_id: int, request: Request, decision: str):
+    require_admin(request)
+    if decision not in {"accept", "reject"}:
+        raise HTTPException(422, "Decyzja: accept albo reject.")
+    if not get_service().store.proposal_decide(proposal_id, decision == "accept", datetime.now(timezone.utc).isoformat()):
+        raise HTTPException(409, "Propozycja nie czeka na decyzję.")
+    return {"id": proposal_id, "status": "accepted" if decision == "accept" else "rejected"}
+
+
+# ---------- strony WWW ----------
+
+@router.get("/moderacja")
+def moderation_page(request: Request, synchronizacja: str | None = None):
+    require_admin(request)
+    from app.web.routes import _render
+    response = _render(request, "moderacja.html", b=board(), flash=synchronizacja)
+    offered = request.query_params.get("klucz")
+    if offered:
+        response.set_cookie(ADMIN_COOKIE, offered, httponly=True, samesite="strict",
+                            secure=get_service().settings.environment == "production", max_age=12 * 3600)
+    return response
+
+
+@router.post("/moderacja/sync")
+async def moderation_sync(request: Request):
+    require_admin(request)
+    summary = await run_in_threadpool(get_service().official.sync)
+    return RedirectResponse(f"/moderacja?synchronizacja={summary['status']}", status_code=303)
+
+
+@router.post("/moderacja/propozycje/{proposal_id}")
+def moderation_decide(proposal_id: int, request: Request, decision: str = Form(...)):
+    require_admin(request)
+    if decision in {"accept", "reject"}:
+        get_service().store.proposal_decide(proposal_id, decision == "accept", datetime.now(timezone.utc).isoformat())
+    return RedirectResponse("/moderacja", status_code=303)
