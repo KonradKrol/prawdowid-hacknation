@@ -70,6 +70,21 @@ table { font-size: 28px; color: var(--ink); width: 100%; }
 .mock .field { border: 2px solid #C6CFDB; border-radius: 8px; padding: 14px 18px; font-size: 26px; color: var(--ink-2); line-height: 1.35; }
 .mock .btn { align-self: flex-start; background: var(--navy); color: #FFFFFF; font-size: 28px; font-weight: 700; padding: 14px 28px; border-radius: 8px; }
 .mock .lab { font-size: 22px; font-weight: 700; color: var(--ink-2); letter-spacing: 0.04em; text-transform: uppercase; }
+.ans { display: flex; flex-wrap: wrap; gap: 14px; }
+.ans .a { font-size: 28px; font-weight: 800; padding: 10px 22px; border-radius: 10px; border-left: 10px solid var(--t); background: var(--tb); color: var(--t); }
+.a.ok { --t: #13653A; --tb: #E7F4EC; } .a.no { --t: #B0261E; --tb: #FBEAE9; } .a.mis { --t: #8A4A00; --tb: #FFF2DF; }
+.a.nei { --t: #3E4C5A; --tb: #EDF0F3; } .a.nv { --t: #4C3F75; --tb: #F0EDF7; } .a.ans-i { --t: #0B5563; --tb: #E3F1F3; }
+.minor { font-size: 24px; color: #7A8794; }
+.ico { width: 72px; height: 72px; border-radius: 36px; background: var(--navy); display: flex; align-items: center; justify-content: center; flex: none; }
+.ico svg { width: 38px; height: 38px; }
+.irow { display: flex; gap: 28px; align-items: center; }
+.irow .text { font-size: 36px; line-height: 1.25; font-weight: 600; }
+.irow .sub { font-size: 28px; color: var(--ink-2); font-weight: 400; display: block; }
+.map { display: grid; grid-template-columns: repeat(5, 150px); grid-auto-rows: 118px; gap: 12px; }
+.map .w { background: var(--soft); border-radius: 14px; font-size: 22px; font-weight: 700; color: var(--ink-2); display: flex; align-items: center; justify-content: center; text-align: center; padding: 6px; box-sizing: border-box; }
+.map .on { background: var(--sun); color: var(--ink); box-shadow: 0 0 0 6px var(--navy); }
+.map .gap { background: transparent; }
+.sbig { font-size: 150px; font-weight: 800; line-height: 1; color: var(--navy); }
 </style></head><body><div class="stage">
 <section id="cover" class="dark" data-transition="fade">
 <div class="bar"></div>
@@ -82,7 +97,7 @@ table { font-size: 28px; color: var(--ink); width: 100%; }
 <div class="tile"><p class="k">Urzędowe</p><p class="t">Komunikaty gov.pl: RCB, ministerstwa, sanepid, urzędy</p></div>
 <div class="tile"><p class="k">Gotowe na WhatsApp</p><p class="t">Do uruchomienia potrzeba tylko konta firmowego</p></div>
 </div>
-<p class="foot">Dziś działa jako strona internetowa, bez konta i bez instalacji · prawdowid-hacknation.fly.dev</p>
+<p class="foot">Autor: Konrad Król · prawdowid-hacknation.fly.dev</p>
 </section>
 <section id="problem">
 <p class="eyebrow">Problem</p>
@@ -96,58 +111,56 @@ table { font-size: 28px; color: var(--ink); width: 100%; }
 </section>
 <section id="obywatel">
 <div class="row" style="gap:96px;">
-<div class="col" style="gap:40px;">
+<div class="col" style="gap:36px;">
 <p class="eyebrow">Dla obywatela</p>
 <h2>Prosty jak aplikacja publiczna: wklej, przeczytaj, sprawdź</h2>
 <div class="steps">
-<div class="step rise"><p class="num">1</p><p class="text">Wkleja SMS, post albo pytanie. Bez konta i bez instalacji.</p></div>
-<div class="step rise d1"><p class="num">2</p><p class="text">Dostaje odpowiedź prostymi słowami: Prawda, Nieprawda, Wprowadza w błąd, Brak potwierdzenia.</p></div>
-<div class="step rise d2"><p class="num">3</p><p class="text">Widzi cytat, wydawcę, datę i link. Każdą ocenę sprawdzi sam.</p></div>
+<div class="step rise"><p class="num">1</p><p class="text">Wklejasz SMS, post albo pytanie.</p></div>
+<div class="step rise d1"><p class="num">2</p><p class="text">Dostajesz odpowiedź w jednym słowie.</p></div>
+<div class="step rise d2"><p class="num">3</p><p class="text">Widzisz cytat, wydawcę i link do źródła.</p></div>
 </div>
-<div class="chips"><p class="chip">Strona internetowa</p><p class="chip">Gotowe na WhatsApp</p><p class="chip">Większy tekst, kontrast, czytanie na głos</p></div>
+<div class="ans rise d3">
+<p class="a ok">Prawda</p><p class="a no">Nieprawda</p><p class="a mis">Wprowadza w błąd</p><p class="a nei">Brak potwierdzenia</p><p class="a nv">Nie do sprawdzenia</p>
+</div>
+<p class="minor" style="margin-top:12px;">Większy tekst · wysoki kontrast · czytanie na głos</p>
 </div>
 <img class="shot rise d1" src="img/s_wynik.png" alt="Wynik w Prawdoskopie: werdykt Prawda dla pytania o oblodzenie w powiecie bytowskim, z cytatem z ostrzeżenia IMGW" style="width:346px; height:780px; object-fit:contain;">
 </div>
 </section>
 <section id="jak-dziala">
 <p class="eyebrow">Jak to działa</p>
-<h2>Model tłumaczy na prosty język. Kod pilnuje faktów.</h2>
-<div class="flow">
-<div class="box rise"><h3>Wiadomość</h3><p class="text">SMS, post albo pytanie. Gdy czegoś brakuje, jedno pytanie doprecyzowujące.</p></div>
+<h2>Szukamy w źródłach. Pokazujemy cytat. Nie zgadujemy.</h2>
+<div class="flow" style="margin-top:72px;">
+<div class="box rise"><h3 style="font-size:44px;">1. Pytasz</h3><p class="text" style="font-size:32px;">Wklejasz wiadomość albo pytanie.</p></div>
 <svg class="arrow" width="56" height="28" viewBox="0 0 56 28" aria-label="dalej"><path d="M0 14 H44 M34 4 L48 14 L34 24" stroke="#2F5C9E" stroke-width="5" fill="none"/></svg>
-<div class="box rise d1"><h3>Zatwierdzone źródła</h3><p class="text">Komunikaty urzędowe, samorządy, fact-checki i ostrzeżenia IMGW na żywo.</p></div>
+<div class="box rise d1"><h3 style="font-size:44px;">2. Szukamy</h3><p class="text" style="font-size:32px;">Tylko w zatwierdzonych źródłach: urzędy, samorządy, fact-checki.</p></div>
 <svg class="arrow" width="56" height="28" viewBox="0 0 56 28" aria-label="dalej"><path d="M0 14 H44 M34 4 L48 14 L34 24" stroke="#2F5C9E" stroke-width="5" fill="none"/></svg>
-<div class="box rise d2"><h3>Model opisuje</h3><p class="text">Wybiera ocenę i pisze 1–2 zdania odpowiedzi na pytanie użytkownika.</p></div>
-<svg class="arrow" width="56" height="28" viewBox="0 0 56 28" aria-label="dalej"><path d="M0 14 H44 M34 4 L48 14 L34 24" stroke="#2F5C9E" stroke-width="5" fill="none"/></svg>
-<div class="box hi rise d3"><h3>Kod sprawdza</h3><p class="text">Cytat musi być w źródle słowo w słowo. Liczba bez pokrycia znika.</p></div>
+<div class="box hi rise d2"><h3 style="font-size:44px;">3. Odpowiadamy</h3><p class="text" style="font-size:32px;">Prostym zdaniem i dokładnym cytatem. Gdy dowodu brak, mówimy to wprost.</p></div>
 </div>
-<p class="statement rise d3">Brak dowodu to „Brak potwierdzenia” z opisem, czego brakuje. Nigdy zgadywanie.</p>
+<p class="statement rise d3">Sztuczna inteligencja pisze odpowiedź, a program sprawdza, czy cytat naprawdę jest w źródle.</p>
 </section>
 <section id="dowod">
 <p class="eyebrow">Jakość dowodów</p>
-<h2>Werdykt tylko wtedy, gdy cytat istnieje w źródle</h2>
-<div class="big">
-<div class="stat rise"><p class="n">13/14</p><p class="l">poprawnych odpowiedzi na pytania o nowe tematy po dodaniu źródeł (wcześniej 1/14)</p></div>
-<div class="stat rise d1"><p class="n">8/12</p><p class="l">na starych pytaniach testowych, bez pogorszenia</p></div>
-<div class="stat warn rise d2"><p class="n">0/8</p><p class="l">fałszywych werdyktów przy braku dowodu: system wstrzymuje ocenę</p></div>
+<h2>Odpowiedź tylko wtedy, gdy cytat jest w źródle</h2>
+<div class="cards" style="margin-top:64px;">
+<div class="card rise"><h3>Cytat dosłownie</h3><p class="text">Program sprawdza, czy cytat występuje w źródle słowo w słowo.</p></div>
+<div class="card rise d1"><h3>Liczby i daty</h3><p class="text">Liczba bez pokrycia w cytacie znika z odpowiedzi.</p></div>
+<div class="card rise d2"><h3>Brak dowodu</h3><p class="text">Zamiast zgadywać, mówimy „Brak potwierdzenia” i co jest potrzebne.</p></div>
 </div>
-<div class="row" style="margin-top:48px; gap:48px;">
-<div class="col"><h3>Kod sprawdza model</h3><p class="muted">Cytat musi występować dosłownie w źródle. Liczby i daty bez pokrycia są usuwane, a polecenia ukryte w wiadomości ignorowane.</p></div>
-<div class="col"><h3>Znane ograniczenie</h3><p class="muted">Test przygotowaliśmy razem z rozbudową bazy, więc duży skok dotyczy tematów, które dodaliśmy. Najważniejsza jest trzecia liczba.</p></div>
+<div class="big" style="margin-top:56px;">
+<div class="stat warn rise d3"><p class="n">0 z 8</p><p class="l">fałszywych werdyktów w teście 8 pytań, na które w bazie nie ma żadnego źródła</p></div>
 </div>
-<p class="foot">32 pytania, model gpt-6-luna, 22.11.2026.</p>
 </section>
 <section id="kryzys">
 <p class="eyebrow">Moduł kryzysowy</p>
-<h2>Gdy tysiące ludzi pytają o to samo, widać to od razu</h2>
-<div class="flow" style="margin-top:64px;">
-<div class="box rise"><h3 style="font-size:44px;">Wiele zgłoszeń</h3><p class="text" style="font-size:32px;">Różnie sformułowane pytania o to samo zdarzenie, z WWW i WhatsAppa.</p></div>
+<h2>Gdy 1000 osób pyta o to samo, widać to od razu</h2>
+<div class="flow" style="margin-top:72px;">
+<div class="box rise"><h3 style="font-size:44px;">Wiele zgłoszeń</h3><p class="text" style="font-size:32px;">Różnie sformułowane pytania o to samo zdarzenie.</p></div>
 <svg class="arrow" width="56" height="28" viewBox="0 0 56 28" aria-label="dalej"><path d="M0 14 H44 M34 4 L48 14 L34 24" stroke="#2F5C9E" stroke-width="5" fill="none"/></svg>
 <div class="box hi rise d1"><h3 style="font-size:44px;">Jeden temat</h3><p class="text" style="font-size:32px;">Moderator widzi licznik i znacznik „Szybko rośnie”.</p></div>
 <svg class="arrow" width="56" height="28" viewBox="0 0 56 28" aria-label="dalej"><path d="M0 14 H44 M34 4 L48 14 L34 24" stroke="#2F5C9E" stroke-width="5" fill="none"/></svg>
-<div class="box rise d2"><h3 style="font-size:44px;">Aktualny komunikat</h3><p class="text" style="font-size:32px;">Nowe ostrzeżenie IMGW uruchamia ponowną ocenę. Zmianę zatwierdza człowiek.</p></div>
+<div class="box rise d2"><h3 style="font-size:44px;">Aktualny komunikat</h3><p class="text" style="font-size:32px;">Nowe ostrzeżenie IMGW odświeża odpowiedź. Zmianę zatwierdza człowiek.</p></div>
 </div>
-<p class="statement rise d3">Połączenie zgłoszeń: 46 z 49 parafraz w jednym temacie, 0 fałszywych połączeń.</p>
 </section>
 <section id="moderator">
 <div class="row" style="gap:96px;">
@@ -187,32 +200,42 @@ table { font-size: 28px; color: var(--ink); width: 100%; }
 <p class="foot">Polskie nazwy to tłumaczenie maszynowe, nie oficjalne. Rozpoznane 6 z 10 ręcznie napisanych powtórzeń, 0 fałszywych etykiet na 74 zwykłych wiadomościach.</p>
 </section>
 <section id="skala">
-<p class="eyebrow">Skala, RAG i koszt</p>
-<h2>Przetestowaliśmy wyszukiwanie semantyczne i wiemy, kiedy je włączyć</h2>
-<table style="margin-top:40px; font-size:30px;">
-<tr><th style="width:36%">Wyszukiwanie</th><th>Trafienie nr 1</th><th>Poprawne werdykty</th><th>Czas</th></tr>
-<tr><td>Słowa kluczowe (BM25), dziś</td><td>21/25</td><td>25/29</td><td>3 ms</td></tr>
-<tr><td>Semantyczne (E5)</td><td>23/25</td><td>—</td><td>20 ms</td></tr>
-<tr><td>Hybryda</td><td>22/25</td><td>23/29</td><td>22 ms</td></tr>
-</table>
-<div class="row" style="margin-top:48px; gap:56px;">
-<div class="col"><h3>0,46 USD za 1000 sprawdzeń</h3><p class="muted">Najtańszy model, odpowiedź w około 3 sekundy. Maszyna zasypia, gdy nikt nie pyta.</p></div>
-<div class="col"><h3>Semantyczny RAG: gotowy</h3><p class="muted">Lepiej trafia pierwszy dokument, ale dziś słowa kluczowe dają lepsze werdykty. Włączymy go, gdy baza urośnie.</p></div>
-<div class="col"><h3>Skaluje się kanałami</h3><p class="muted">Kolejne źródła (RSO, RCB) wchodzą przez ten sam importer.</p></div>
+<p class="eyebrow">Koszt i wyszukiwanie</p>
+<h2>Grosze za sprawdzenie. Wyszukiwanie semantyczne gotowe do włączenia.</h2>
+<div class="row" style="margin-top:56px; gap:72px; align-items:center;">
+<div class="col" style="gap:8px; flex:none; width:640px;">
+<p class="sbig rise">0,4 USD</p>
+<p class="lead rise d1">za 1000 sprawdzeń</p>
+<p class="minor">Średnia z 44 sprawdzeń na działającej konfiguracji, 22.11.2026. Szacunek z liczników tokenów.</p>
 </div>
-<p class="foot">FastAPI · SQLite · Fly.io (Frankfurt). 25 pytań o wskazany dokument, 29 pytań z werdyktem, 22.11.2026.</p>
+<div class="col" style="gap:28px;">
+<div class="irow rise d1"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#FFE066" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5L20 6"/></svg></div><p class="text">Dziś: słowa kluczowe<span class="sub">Najlepsze werdykty w naszych testach</span></p></div>
+<div class="irow rise d2"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#FFE066" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="6"/><path d="M16 16l5 5"/></svg></div><p class="text">Gotowe: wyszukiwanie semantyczne<span class="sub">Zaimplementowane, włączymy w każdej chwili, gdy baza urośnie</span></p></div>
+</div>
+</div>
+<p class="foot">FastAPI · SQLite · Fly.io (Frankfurt)</p>
 </section>
 <section id="wdrozenie" class="dark">
 <div class="bar"></div>
+<div class="row" style="gap:96px; align-items:center;">
+<div class="col" style="gap:40px;">
 <p class="eyebrow">Wdrożenie</p>
 <h2>Gotowe do pilotażu w jednym województwie</h2>
-<div class="cards">
-<div class="card rise" style="color:var(--ink);"><p class="date">Działa dziś</p><p class="text">Strona internetowa, ostrzeżenia IMGW na żywo, panel moderatora, znane narracje EUvsDisinfo.</p></div>
-<div class="card rise d1" style="color:var(--ink);"><p class="date">Kolejne 3 miesiące</p><p class="text">WhatsApp, kanały RSO i RCB, załatanie luki przez moderatora, wersje EN i UK.</p></div>
-<div class="card rise d2" style="color:var(--ink);"><p class="date">Czego potrzebujemy</p><p class="text">Dostępu do kanałów urzędowych, partnera fact-checkingowego i jednego województwa na pilotaż.</p></div>
+<div class="irow rise" style="color:#F6F8FB;"><div class="ico" style="background:#FFE066;"><svg viewBox="0 0 24 24" fill="none" stroke="#14305C" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5L20 6"/></svg></div><p class="text">Działa dziś<span class="sub" style="color:#C9D6E8;">Strona, IMGW na żywo, panel moderatora</span></p></div>
+<div class="irow rise d1" style="color:#F6F8FB;"><div class="ico" style="background:#FFE066;"><svg viewBox="0 0 24 24" fill="none" stroke="#14305C" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg></div><p class="text">Dalej<span class="sub" style="color:#C9D6E8;">WhatsApp, kanały RSO i RCB, luka od moderatora</span></p></div>
+<div class="irow rise d2" style="color:#F6F8FB;"><div class="ico" style="background:#FFE066;"><svg viewBox="0 0 24 24" fill="none" stroke="#14305C" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg></div><p class="text">Potrzebujemy<span class="sub" style="color:#C9D6E8;">Dostępu do kanałów urzędowych i jednego województwa</span></p></div>
 </div>
-<p class="statement rise d3" style="background:var(--sun); color:var(--ink);">Ułamek centa za sprawdzenie. Obywatel nie zakłada konta i nie instaluje aplikacji.</p>
-<p class="foot">prawdowid-hacknation.fly.dev · github.com/KonradKrol/prawdowid-hacknation</p>
+<div class="rise d1">
+<div class="map">
+<div class="w">zachodnio-pomorskie</div><div class="w on">pomorskie</div><div class="w gap"></div><div class="w">warmińsko-mazurskie</div><div class="w gap"></div>
+<div class="w">lubuskie</div><div class="w">wielko-polskie</div><div class="w">kujawsko-pomorskie</div><div class="w">mazowieckie</div><div class="w">podlaskie</div>
+<div class="w">dolno-śląskie</div><div class="w">opolskie</div><div class="w">łódzkie</div><div class="w">święto-krzyskie</div><div class="w">lubelskie</div>
+<div class="w gap"></div><div class="w gap"></div><div class="w">śląskie</div><div class="w">mało-polskie</div><div class="w">podkarpackie</div>
+</div>
+<p class="minor" style="margin-top:20px; color:#C9D6E8;">Pilotaż w jednym województwie, np. pomorskie</p>
+</div>
+</div>
+<p class="foot">Konrad Król · prawdowid-hacknation.fly.dev · github.com/KonradKrol/prawdowid-hacknation</p>
 </section>
 
 </div></body></html>

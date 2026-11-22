@@ -1,17 +1,17 @@
 <section id="skala">
-<p class="eyebrow">Skala, RAG i koszt</p>
-<h2>Przetestowaliśmy wyszukiwanie semantyczne i wiemy, kiedy je włączyć</h2>
-<table style="margin-top:40px; font-size:30px;">
-<tr><th style="width:36%">Wyszukiwanie</th><th>Trafienie nr 1</th><th>Poprawne werdykty</th><th>Czas</th></tr>
-<tr><td>Słowa kluczowe (BM25), dziś</td><td>21/25</td><td>25/29</td><td>3 ms</td></tr>
-<tr><td>Semantyczne (E5)</td><td>23/25</td><td>—</td><td>20 ms</td></tr>
-<tr><td>Hybryda</td><td>22/25</td><td>23/29</td><td>22 ms</td></tr>
-</table>
-<div class="row" style="margin-top:48px; gap:56px;">
-<div class="col"><h3>0,46 USD za 1000 sprawdzeń</h3><p class="muted">Najtańszy model, odpowiedź w około 3 sekundy. Maszyna zasypia, gdy nikt nie pyta.</p></div>
-<div class="col"><h3>Semantyczny RAG: gotowy</h3><p class="muted">Lepiej trafia pierwszy dokument, ale dziś słowa kluczowe dają lepsze werdykty. Włączymy go, gdy baza urośnie.</p></div>
-<div class="col"><h3>Skaluje się kanałami</h3><p class="muted">Kolejne źródła (RSO, RCB) wchodzą przez ten sam importer.</p></div>
+<p class="eyebrow">Koszt i wyszukiwanie</p>
+<h2>Grosze za sprawdzenie. Wyszukiwanie semantyczne gotowe do włączenia.</h2>
+<div class="row" style="margin-top:56px; gap:72px; align-items:center;">
+<div class="col" style="gap:8px; flex:none; width:640px;">
+<p class="sbig rise">0,4 USD</p>
+<p class="lead rise d1">za 1000 sprawdzeń</p>
+<p class="minor">Średnia z 44 sprawdzeń na działającej konfiguracji, 22.11.2026. Szacunek z liczników tokenów.</p>
 </div>
-<p class="foot">FastAPI · SQLite · Fly.io (Frankfurt). 25 pytań o wskazany dokument, 29 pytań z werdyktem, 22.11.2026.</p>
-<aside>Mocna strona: porównaliśmy trzy sposoby wyszukiwania na tych samych pytaniach. Semantyczne trafia pierwszy dokument najlepiej, ale hybryda dała mniej poprawnych werdyktów, więc zostajemy przy słowach kluczowych i włączymy semantykę, gdy baza urośnie.</aside>
+<div class="col" style="gap:28px;">
+<div class="irow rise d1"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#FFE066" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5L20 6"/></svg></div><p class="text">Dziś: słowa kluczowe<span class="sub">Najlepsze werdykty w naszych testach</span></p></div>
+<div class="irow rise d2"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#FFE066" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="6"/><path d="M16 16l5 5"/></svg></div><p class="text">Gotowe: wyszukiwanie semantyczne<span class="sub">Zaimplementowane, włączymy w każdej chwili, gdy baza urośnie</span></p></div>
+</div>
+</div>
+<p class="foot">FastAPI · SQLite · Fly.io (Frankfurt)</p>
+<aside>Koszt to realny szacunek z ostatniego testu na produkcyjnej konfiguracji. Wyszukiwanie semantyczne jest zaimplementowane i przetestowane, ale na razie zostajemy przy słowach kluczowych, bo dają lepsze werdykty.</aside>
 </section>

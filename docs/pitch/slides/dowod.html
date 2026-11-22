@@ -1,15 +1,13 @@
 <section id="dowod">
 <p class="eyebrow">Jakość dowodów</p>
-<h2>Werdykt tylko wtedy, gdy cytat istnieje w źródle</h2>
-<div class="big">
-<div class="stat rise"><p class="n">13/14</p><p class="l">poprawnych odpowiedzi na pytania o nowe tematy po dodaniu źródeł (wcześniej 1/14)</p></div>
-<div class="stat rise d1"><p class="n">8/12</p><p class="l">na starych pytaniach testowych, bez pogorszenia</p></div>
-<div class="stat warn rise d2"><p class="n">0/8</p><p class="l">fałszywych werdyktów przy braku dowodu: system wstrzymuje ocenę</p></div>
+<h2>Odpowiedź tylko wtedy, gdy cytat jest w źródle</h2>
+<div class="cards" style="margin-top:64px;">
+<div class="card rise"><h3>Cytat dosłownie</h3><p class="text">Program sprawdza, czy cytat występuje w źródle słowo w słowo.</p></div>
+<div class="card rise d1"><h3>Liczby i daty</h3><p class="text">Liczba bez pokrycia w cytacie znika z odpowiedzi.</p></div>
+<div class="card rise d2"><h3>Brak dowodu</h3><p class="text">Zamiast zgadywać, mówimy „Brak potwierdzenia” i co jest potrzebne.</p></div>
 </div>
-<div class="row" style="margin-top:48px; gap:48px;">
-<div class="col"><h3>Kod sprawdza model</h3><p class="muted">Cytat musi występować dosłownie w źródle. Liczby i daty bez pokrycia są usuwane, a polecenia ukryte w wiadomości ignorowane.</p></div>
-<div class="col"><h3>Znane ograniczenie</h3><p class="muted">Test przygotowaliśmy razem z rozbudową bazy, więc duży skok dotyczy tematów, które dodaliśmy. Najważniejsza jest trzecia liczba.</p></div>
+<div class="big" style="margin-top:56px;">
+<div class="stat warn rise d3"><p class="n">0 z 8</p><p class="l">fałszywych werdyktów w teście 8 pytań, na które w bazie nie ma żadnego źródła</p></div>
 </div>
-<p class="foot">32 pytania, model gpt-6-luna, 22.11.2026.</p>
-<aside>Uczciwie: duży skok dotyczy pytań o tematy, które dodaliśmy do bazy. Na starych pytaniach wynik się nie pogorszył. Najważniejsza jest trzecia liczba: przy braku dowodu system nie wydał żadnego fałszywego werdyktu.</aside>
+<aside>Wynik z wcześniejszego testu na małym zbiorze pytań. Wymaga powtórzenia na aktualnej bazie i aktualnym kodzie.</aside>
 </section>
