@@ -126,7 +126,7 @@
 
   <section class="mod-sec mod-gap" id="luka" aria-labelledby="gap-h">
     <h2 id="gap-h" class="mod-h">Załataj lukę informacyjną <span class="mod-soon">Podgląd: funkcja planowana</span></h2>
-    <p class="mod-sub">Gdy ludzie pytają o coś, na co nie mamy źródła, moderator dodaje oficjalny materiał i odpowiedź przestaje być „Brak potwierdzenia”.</p>
+    <p class="mod-sub">Gdy ludzie pytają o coś, na co nie ma oficjalnego źródła, można dodać oficjalny dokument. System cytuje wyłącznie oficjalne dokumenty.</p>
     <form class="mod-gap__form" data-gap-form>
       <label class="mod-gap__wide">Której luki dotyczy materiał
         <select name="gap">{% for t in b.topics[:8] %}<option>{{ t.title }}</option>{% else %}<option>dymisja ministra spraw zagranicznych</option>{% endfor %}</select>
@@ -137,14 +137,14 @@
       <label>Adres materiału
         <input type="url" name="url" placeholder="https://www.gov.pl/…">
       </label>
-      <label class="mod-gap__wide">Wklej oficjalny komunikat
-        <textarea name="text" rows="4" placeholder="Wklej treść komunikatu. Fragmenty do cytowania wskażemy za Ciebie, a Ty je zatwierdzisz."></textarea>
+      <label class="mod-gap__wide">Oficjalny dokument (komunikat, decyzja, odpowiedź instytucji)
+        <textarea name="text" rows="4" placeholder="Wklej treść dokumentu. Fragmenty do cytowania wskażemy, a Ty je zatwierdzisz."></textarea>
       </label>
       <div class="mod-actions mod-gap__wide">
-        <button class="btn btn--primary" type="submit">Dodaj do bazy źródeł</button>
-        <span class="mod-gap__steps">1 Wybierz lukę · 2 Wklej materiał · 3 Zatwierdź fragmenty</span>
+        <button class="btn btn--primary" type="submit">Dodaj dokument do bazy</button>
+        <span class="mod-gap__steps">1 Wybierz lukę · 2 Wklej dokument · 3 Zatwierdź fragmenty</span>
       </div>
-      <p class="note note--advice mod-gap__done" role="status" hidden><svg aria-hidden="true"><use href="#i-info"/></svg><span>To podgląd funkcji. Zapis dodamy w kolejnej wersji, a materiał trafi do bazy dopiero po zatwierdzeniu fragmentów przez moderatora.</span></p>
+      <p class="note note--advice mod-gap__done" role="status" hidden><svg aria-hidden="true"><use href="#i-info"/></svg><span>To podgląd funkcji. Zapis dodamy w kolejnej wersji, a dokument trafi do bazy dopiero po zatwierdzeniu fragmentów.</span></p>
     </form>
     <script>
       document.querySelector("[data-gap-form]")?.addEventListener("submit", (e) => {
