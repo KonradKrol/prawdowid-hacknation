@@ -13,6 +13,7 @@
     <span><strong>{{ ev.publisher }}</strong> · {{ ev.published_on | date or "data nieznana" }}</span>
     <a class="proof__link" href="{{ ev.url }}" rel="noopener noreferrer" target="_blank">Otwórz źródło<span class="visually-hidden"> „{{ ev.title }}” (nowa karta)</span> <svg aria-hidden="true"><use href="#i-link"/></svg></a>
   </figcaption>
+  {% if ev.source_id.startswith("imgw-") and not ev.title.startswith("[SYMULACJA]") %}<p class="proof__license">Źródłem pochodzenia danych jest IMGW-PIB. Dane zostały przetworzone.</p>{% endif %}
 </figure>
 {% endfor %}
 {% if item.context_mismatch %}{% set cm = item.context_mismatch %}

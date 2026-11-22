@@ -10,7 +10,8 @@
   {% macro narrative_label() %}{% for n in r.notices if n.type == "known_narrative" %}
   <p class="narrative"><span class="narrative__tag"><svg aria-hidden="true"><use href="#i-alert"/></svg>Znana narracja dezinformacyjna</span>
     <span class="narrative__name">„{{ n.label or n.text }}”</span>
-    {% if n.url %}<a class="narrative__src" href="{{ n.url }}" rel="noopener noreferrer" target="_blank">opisana przez EUvsDisinfo<span class="visually-hidden"> (nowa karta)</span></a>{% endif %}</p>
+    {% if n.url %}<a class="narrative__src" href="{{ n.url }}" rel="noopener noreferrer" target="_blank">opisana przez EUvsDisinfo<span class="visually-hidden"> (nowa karta)</span></a>{% endif %}
+    <a class="narrative__help" href="/informacje#euvsdisinfo">co to znaczy?</a></p>
   {% endfor %}{% endmacro %}
   {% macro icon(tone) %}{{ {"ok": "check", "false": "cross", "mislead": "alert", "nei": "question", "nv": "speech", "answer": "info"}[tone] }}{% endmacro %}
 

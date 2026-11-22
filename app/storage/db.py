@@ -43,6 +43,8 @@ class Store(OfficialStore, TopicStore):
             """)
             db.executescript(OFFICIAL_SCHEMA)
             db.executescript(TOPICS_SCHEMA)
+            if "subject" not in {row[1] for row in db.execute("PRAGMA table_info(topics)")}:
+                db.execute("ALTER TABLE topics ADD COLUMN subject TEXT")  # baza sprzed 22.11.2026
 
     @contextmanager
     def connection(self):
@@ -76,10 +78,19 @@ class Store(OfficialStore, TopicStore):
         return (CheckResult.model_validate_json(row[0]), row[1], row[2]) if row else None
 
     def delete(self, session, check_id=None):
+        """Usuwa sprawdzenia sesji razem z ich treścią w tematach i sprawach moderatora."""
         with self.connection() as db:
             if check_id is None:
-                return db.execute("DELETE FROM checks WHERE session=?", (session,)).rowcount
-            return db.execute("DELETE FROM checks WHERE session=? AND id=?", (session, check_id)).rowcount
+                ids = [row[0] for row in db.execute("SELECT id FROM checks WHERE session=?", (session,))]
+            else:
+                ids = [row[0] for row in db.execute("SELECT id FROM checks WHERE session=? AND id=?", (session, check_id))]
+            for table in ("topic_reports", "case_reports"):
+                db.executemany(f"DELETE FROM {table} WHERE check_id=?", [(i,) for i in ids])
+            db.execute("DELETE FROM topics WHERE id NOT IN (SELECT DISTINCT topic_id FROM topic_reports)")
+            db.execute("UPDATE topics SET reports=(SELECT COUNT(*) FROM topic_reports r WHERE r.topic_id=topics.id)")
+            db.execute("UPDATE cases SET reports=(SELECT COUNT(*) FROM case_reports r WHERE r.case_id=cases.id)")
+            db.executemany("DELETE FROM checks WHERE id=?", [(i,) for i in ids])
+            return len(ids)
 
     def event(self, now, kind, check_id, detail):
         with self.connection() as db:

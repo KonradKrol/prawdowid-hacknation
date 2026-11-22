@@ -259,3 +259,7 @@ html, body { overflow-x: clip; }
 .proof__flag { display: inline-flex; align-items: center; gap: .35rem; margin: .25rem 0 .4rem; padding: .15rem .5rem; background: #FFF2DF; color: #6B3A00; border: 1px solid #E9C48F; font-weight: 700; font-size: .9rem; }
 .proof__flag svg { width: 1rem; height: 1rem; }
 .proof--claim .proof__quote { border-left-color: #B26A00; color: var(--ink-2); font-style: italic; }
+
+/* Drobne dopiski: licencja IMGW pod cytatem, link wyjaśniający przy etykiecie narracji */
+.proof__license { margin-top: .4rem; font-size: .85rem; color: var(--ink-2); }
+.narrative__help { font-size: .9rem; color: var(--ink-2); }

@@ -5,7 +5,8 @@ import json
 TOPICS_SCHEMA = """
 CREATE TABLE IF NOT EXISTS topics (
   id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL, stems TEXT NOT NULL,
-  sources TEXT NOT NULL, created INTEGER NOT NULL, updated INTEGER NOT NULL, reports INTEGER NOT NULL
+  sources TEXT NOT NULL, created INTEGER NOT NULL, updated INTEGER NOT NULL, reports INTEGER NOT NULL,
+  subject TEXT
 );
 CREATE TABLE IF NOT EXISTS topic_reports (
   topic_id INTEGER NOT NULL, created INTEGER NOT NULL, check_id TEXT, channel TEXT,
@@ -21,10 +22,16 @@ class TopicStore:
             rows = db.execute("SELECT id, title, stems, sources FROM topics WHERE updated >= ?", (since,)).fetchall()
         return [{"id": r[0], "title": r[1], "stems": json.loads(r[2]), "sources": json.loads(r[3])} for r in rows]
 
-    def topic_add(self, title, stems, sources, now):
+    def topic_add(self, title, stems, sources, now, subject=None):
         with self.connection() as db:
-            return db.execute("INSERT INTO topics (title, stems, sources, created, updated, reports) VALUES (?, ?, ?, ?, ?, 0)",
-                              (title, json.dumps(stems), json.dumps(sorted(sources)), now, now)).lastrowid
+            return db.execute("INSERT INTO topics (title, stems, sources, created, updated, reports, subject) VALUES (?, ?, ?, ?, ?, 0, ?)",
+                              (title, json.dumps(stems), json.dumps(sorted(sources)), now, now, subject)).lastrowid
+
+    def topic_subjects(self, since, limit=40):
+        with self.connection() as db:
+            rows = db.execute("SELECT DISTINCT subject FROM topics WHERE updated >= ? AND subject IS NOT NULL "
+                              "ORDER BY updated DESC LIMIT ?", (since, limit)).fetchall()
+        return [row[0] for row in rows]
 
     def topic_report(self, topic_id, now, check_id, channel, label, topic, text, sources):
         with self.connection() as db:

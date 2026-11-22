@@ -238,7 +238,7 @@ class Service:
             self.detect_topic(result, root, now)
         else:
             with ThreadPoolExecutor(max_workers=1) as pool:
-                task = pool.submit(self.provider.guard, root)
+                task = pool.submit(self.provider.guard, root, self.known_subjects(now))
                 assessment, usage = self.provider.assess(model_context, candidates, marker)
                 try:
                     guard, guard_usage = task.result()
@@ -293,12 +293,21 @@ class Service:
         if not self.settings.key or self.settings.evaluator != "live":
             return
         try:
-            guard, _ = self.provider.guard(root)
+            guard, _ = self.provider.guard(root, self.known_subjects(now))
             result.topic, result.subject = clean_topic(guard.topic, None), clean_topic(guard.subject, None)
         except HTTPError as error:
             error.close()
         except (OSError, ValueError, KeyError, IndexError, TypeError, AttributeError):
             self.store.event(now, "topic_unavailable", result.id, {})
+
+    def known_subjects(self, now):
+        """Przedmioty tematów z ostatnich 48 h, najświeższe najpierw — model może przepisać pasujący."""
+        try:
+            subjects = self.store.topic_subjects(now - topics.WINDOW_S)
+        except sqlite3.Error:
+            return []
+        # Przedmioty pochodzą z wiadomości innych osób: krótkie i bez śladów poleceń dla modelu.
+        return [s for s in subjects if len(s) <= 60 and not SUSPICIOUS.search(s)]
 
     def register_topic(self, result, channel, now):
         """Dołącza zgłoszenie do tematu z ostatnich 48 h albo zakłada nowy (app/core/topics.py)."""
@@ -311,7 +320,7 @@ class Service:
         label = (item.label or ("answer" if item.kind == "answer" else None)) if item else None
         try:
             topic_id = topics.best_match(found, self.store.topics_recent(now - topics.WINDOW_S))
-            topic_id = topic_id or self.store.topic_add(title, found, sources, now)
+            topic_id = topic_id or self.store.topic_add(title, found, sources, now, result.subject)
             self.store.topic_report(topic_id, now, result.id, channel, label, title, result.input.text_masked, sources)
             return topic_id
         except sqlite3.Error:

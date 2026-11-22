@@ -220,6 +220,19 @@ def how_page(request: Request):
     return _render(request, "jak_to_dziala.html", stats=corpus_stats())
 
 
+@router.get("/informacje", response_class=HTMLResponse)
+def info_page(request: Request, usunieto: int | None = None):
+    return _render(request, "informacje.html", stats=corpus_stats(), removed=usunieto)
+
+
+@router.post("/informacje/usun-moje-dane")
+def delete_my_data(request: Request):
+    removed = 0
+    if backend is not None and _session(request):
+        removed = backend.delete_session(_session(request))
+    return RedirectResponse(f"/informacje?usunieto={removed}#prywatnosc", status_code=303)
+
+
 @router.get("/zrodla", response_class=HTMLResponse)
 def sources_page(request: Request):
     return _render(request, "zrodla.html", stats=corpus_stats())

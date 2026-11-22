@@ -30,3 +30,15 @@
 {"group": "solo-2", "text": "Czy ceny prądu wzrosną od stycznia?"}
 {"group": "solo-3", "text": "Czy Polska wystąpi z Unii Europejskiej?"}
 {"group": "solo-4", "text": "Czy w szkołach skrócono wakacje?"}
+{"group": "dymisja-mf", "text": "Minister finansów złożył dymisję?"}
+{"group": "dymisja-mf", "text": "Szef resortu finansów odchodzi z rządu, prawda?"}
+{"group": "mobywatel", "text": "Czy aplikacja mObywatel przestała działać?"}
+{"group": "mobywatel", "text": "Awaria mObywatela, nie da się pokazać dowodu"}
+{"group": "blackout-hiszpania", "text": "Czy w Hiszpanii był blackout w całym kraju?"}
+{"group": "woda-inna", "text": "Czy w Kartuzach woda z kranu nie nadaje się do picia?"}
+{"group": "dymisja-msz", "text": "Sikorski już nie jest ministrem? Ktoś wie coś więcej?"}
+{"group": "alert-mobilizacja", "text": "Przyszedł mi SMS od RCB, że mam się stawić w urzędzie gminy, czy to fake?"}
+{"group": "blackout", "text": "Szykujcie świeczki, w weekend nie będzie prądu w całej Polsce"}
+{"group": "epuap", "text": "Profil zaufany i ePUAP leżą od rana?"}
+{"group": "szczepionki-nato", "text": "Polacy są królikami doświadczalnymi NATO w sprawie szczepionek"}
+{"group": "woda-brojce", "text": "Kotliny, gmina Brójce: sanepid ostrzega przed wodą?"}

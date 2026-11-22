@@ -10,7 +10,7 @@
   <link rel="preload" href="/static/fonts/source-sans-3-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/static/fonts/source-serif-4-latin-opsz-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/static/css/{{ theme or 'styl-a' }}.css">
-  <link rel="stylesheet" href="/static/css/wynik-v3.css?v=24">
+  <link rel="stylesheet" href="/static/css/wynik-v3.css?v=25">
   <script type="module" src="/static/js/app.js?v=8"></script>
 </head>
 <body class="{% block body_class %}{% endblock %}{% if v %} k-{{ v.kotwica }} l-{{ v.lista }} c-{{ v.kolor }}{% endif %}">
@@ -61,6 +61,7 @@
       <nav class="foot__nav" aria-label="Stopka">
         <a href="/jak-to-dziala">Jak to działa</a>
         <a href="/zrodla">Lista źródeł</a>
+        <a href="/informacje">Informacje prawne i prywatność</a>
         {% if dev %}<a href="/dev">Podgląd stanów (dev)</a>{% endif %}
       </nav>
     </div>

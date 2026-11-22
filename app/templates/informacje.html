@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block title %}Informacje prawne i prywatność — Prawdoskop{% endblock %}
+{% block main %}
+<div class="wrap page info-page">
+  <a class="back" href="/"><svg aria-hidden="true"><use href="#i-back"/></svg>Strona główna</a>
+  <header class="result__head">
+    <h1 class="result__summary">Informacje prawne i prywatność</h1>
+    <p class="lead">Najważniejsze w skrócie: Prawdoskop to prototyp, nie serwis rządowy. Odpowiedzi przygotowuje automat. Nie wymagamy logowania, a dane osobowe z wiadomości ukrywamy, zanim cokolwiek zapiszemy.</p>
+  </header>
+
+  {% if removed is not none %}
+  <p class="note note--advice" role="status"><svg aria-hidden="true"><use href="#i-check"/></svg><span>Usunęliśmy Twoje sprawdzenia z tej przeglądarki: {{ removed }}.</span></p>
+  {% endif %}
+
+  <details class="info" id="kto">
+    <summary>Kto prowadzi serwis</summary>
+    <p>Prawdoskop to prototyp przygotowany na hackathon HackNation 2026 (zadanie Ministerstwa Spraw Zagranicznych). Nie jest serwisem rządowym, a jego odpowiedzi nie są stanowiskiem MSZ ani innej instytucji. Kod jest jawny: <a href="https://github.com/KonradKrol/prawdowid-hacknation" rel="noopener noreferrer" target="_blank">repozytorium projektu</a>.</p>
+  </details>
+
+  <details class="info" id="automat">
+    <summary>Jak powstaje odpowiedź (sztuczna inteligencja)</summary>
+    <p>Odpowiedź przygotowuje model językowy, czyli system sztucznej inteligencji. Model wybiera ocenę i opisuje ją prostym językiem, ale tylko na podstawie zatwierdzonych źródeł. Kod sprawdza, czy każdy cytat występuje w źródle słowo w słowo, a liczby i daty bez pokrycia w cytacie usuwa.</p>
+    <p>Automat może się pomylić. Dlatego przy każdej odpowiedzi pokazujemy cytat, wydawcę, datę i link do źródła. Gdy dowodu brakuje, odpowiadamy „Brak potwierdzenia”. Prawdoskop nie udziela porad prawnych, medycznych ani finansowych.</p>
+  </details>
+
+  <details class="info" id="prywatnosc">
+    <summary>Dane osobowe i prywatność</summary>
+    <ul>
+      <li><strong>Bez konta.</strong> Nie zbieramy imienia, adresu ani danych logowania.</li>
+      <li><strong>Ukrywanie danych.</strong> Zanim zapiszemy wiadomość lub wyślemy ją do modelu językowego, zamieniamy na znaczniki numery telefonów, adresy e-mail, numery PESEL, numery kont i kart oraz numery dokumentów.</li>
+      <li><strong>Jak długo.</strong> Zamaskowaną treść sprawdzenia i wynik przechowujemy 7 dni. Tyle samo żyje treść zgłoszeń widoczna dla moderatora w tematach i sprawach. Dziennik techniczny bez treści wiadomości przechowujemy 30 dni.</li>
+      <li><strong>Kto widzi.</strong> Ty widzisz swoje wyniki. Moderator widzi zamaskowane treści zgłoszeń pogrupowane w tematy, żeby zauważyć falę tej samej wiadomości.</li>
+      <li><strong>Gdzie.</strong> Serwer działa w Unii Europejskiej (Frankfurt, Fly.io). Zamaskowana treść trafia do modelu językowego OpenAI (USA) w celu przygotowania odpowiedzi.</li>
+      <li><strong>Ciasteczka.</strong> Jedno ciasteczko sesji (do 7 dni), żeby pokazać Ci Twoje wyniki. Ustawienia dostępności (wielkość tekstu, kontrast) zapisujemy tylko w Twojej przeglądarce.</li>
+    </ul>
+    <form method="post" action="/informacje/usun-moje-dane" class="info__delete">
+      <button class="btn btn--secondary" type="submit">Usuń moje sprawdzenia z tej przeglądarki</button>
+    </form>
+  </details>
+
+  <details class="info" id="zrodla">
+    <summary>Źródła i licencje</summary>
+    <ul>
+      <li><strong>Serwisy gov.pl</strong> — treści udostępniane na licencji CC BY-SA 4.0. Podajemy wydawcę, datę i link.</li>
+      <li><strong>Ostrzeżenia IMGW-PIB</strong> — Źródłem pochodzenia danych jest Instytut Meteorologii i Gospodarki Wodnej – Państwowy Instytut Badawczy. Dane zostały przetworzone (wybór pól i skrót).</li>
+      <li><strong>Samorządy i organizacje fact-checkingowe</strong> — krótkie cytaty z podaniem wydawcy i linkiem do całego materiału (prawo cytatu). Komunikaty urzędowe nie są chronione prawem autorskim.</li>
+      <li>Pełna lista dokumentów: <a href="/zrodla">Lista źródeł</a>.</li>
+    </ul>
+  </details>
+
+  <details class="info" id="euvsdisinfo">
+    <summary>Znane narracje dezinformacyjne (EUvsDisinfo)</summary>
+    <p>Etykieta „Znana narracja dezinformacyjna” oznacza, że wiadomość przypomina przypadek opisany w bazie EUvsDisinfo, prowadzonej przez zespół East StratCom Europejskiej Służby Działań Zewnętrznych. Dostęp do bazy mamy za zgodą zespołu EUvsDisinfo.</p>
+    <p>Polskie nazwy narracji to <strong>nasze tłumaczenie maszynowe</strong>, przygotowane przez model językowy. Nie są oficjalnym tłumaczeniem ani stanowiskiem UE. Pełny opis przypadku jest zawsze pod linkiem „opisana przez EUvsDisinfo”.</p>
+    <p>Podobieństwo do znanej narracji nie zmienia oceny. Ocena wiadomości opiera się wyłącznie na źródłach dotyczących tej konkretnej sprawy.</p>
+  </details>
+
+  <details class="info" id="dostepnosc">
+    <summary>Dostępność</summary>
+    <p>Strona działa na telefonie i komputerze, ma powiększenie tekstu, tryb wysokiego kontrastu i czytanie na głos. To prototyp: nie przeszedł jeszcze pełnego audytu zgodności z WCAG 2.1 i nie ma deklaracji dostępności wymaganej od podmiotów publicznych.</p>
+  </details>
+</div>
+<script>
+  // Wejście z linku do sekcji (np. #euvsdisinfo) rozwija tę sekcję.
+  const target = location.hash && document.getElementById(location.hash.slice(1));
+  if (target && target.tagName === "DETAILS") target.open = true;
+</script>
+<style>
+.info { margin-top: .75rem; border-top: 2px solid var(--line); padding-top: .75rem; }
+.info summary { font-weight: 800; font-size: 1.15rem; cursor: pointer; }
+.info p, .info ul { margin-top: .6rem; max-width: 46rem; }
+.info ul { padding-left: 1.2rem; display: grid; gap: .4rem; }
+.info__delete { margin-top: 1rem; }
+</style>
+{% endblock %}
