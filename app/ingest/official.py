@@ -146,7 +146,9 @@ def lag_stats(entries):
     fresh = [row for row in entries if row["version"] == 1 and row["first_fetched_at"] != first_fetch]
     values = sorted((datetime.fromisoformat(row["indexed_at"]) - datetime.fromisoformat(row["published_at"]))
                     .total_seconds() for row in fresh)
+    skipped = sum(value < 0 for value in values)  # data publikacji późniejsza niż import: dane testowe lub zegar
+    values = [value for value in values if value >= 0]
     if not values:
-        return {"count": 0, "backlog": len(entries)}
+        return {"count": 0, "backlog": len(entries) - len(fresh), "skipped": skipped}
     return {"count": len(values), "median_s": round(values[len(values) // 2]), "max_s": round(values[-1]),
-            "backlog": len(entries) - len(fresh)}
+            "backlog": len(entries) - len(fresh), "skipped": skipped}

@@ -58,7 +58,11 @@
         <p class="mod-case__meta"><span class="mod-count" data-reports="{{ c.reports }}">{{ c.reports }} {{ pl_count(c.reports, "zgłoszenie", "zgłoszenia", "zgłoszeń") }}</span>
           · {{ "otwarta" if c.status == "open" else "rozstrzygnięta" }} · obecna ocena: {{ verdict(c.last_result) }}</p>
       </header>
+      {% if c.last_result.label in ["confirmed", "false", "misleading"] and c.last_result.sources %}
+      <p class="mod-missing"><strong>Podstawa obecnej oceny:</strong> {{ c.last_result.reason }} <small>(źródła: {{ c.last_result.sources | join(", ") }})</small></p>
+      {% else %}
       <p class="mod-missing"><strong>Brakujący dowód:</strong> {{ c.missing }}</p>
+      {% endif %}
       <details class="mod-reports"><summary>Treść zgłoszeń</summary>
         <ul>{% for r in c.reports_list %}<li>„{{ r.text }}” <small>({{ r.channel }}, {{ r.created_at | datetime }})</small></li>{% endfor %}</ul>
       </details>

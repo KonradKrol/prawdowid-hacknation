@@ -2,8 +2,8 @@
  "source": "https://danepubliczne.imgw.pl/api/data/warningsmeteo",
  "interval_s": 120,
  "started": "2026-11-22T00:18:43.173044+00:00",
- "last": "2026-11-22T00:46:46.043069+00:00",
- "polls": 15,
+ "last": "2026-11-22T01:02:47.839797+00:00",
+ "polls": 23,
  "failed_polls": 0,
  "lag": {
   "count": 0,
@@ -16,7 +16,7 @@
    "published_at": "2026-11-21T12:00:00+01:00",
    "first_fetched_at": "2026-11-22T00:18:42.871071+00:00",
    "indexed_at": "2026-11-22T00:18:43.154863+00:00",
-   "last_seen_at": "2026-11-22T00:46:45.927055+00:00"
+   "last_seen_at": "2026-11-22T01:02:47.655705+00:00"
   }
  ],
  "runs": [
@@ -162,6 +162,86 @@
   },
   {
    "at": "2026-11-22T00:46:46.043069+00:00",
+   "status": "ok",
+   "error": null,
+   "fetched": 1,
+   "new": 0,
+   "changed": 0,
+   "unchanged": 1,
+   "rejected": 0
+  },
+  {
+   "at": "2026-11-22T00:48:46.579269+00:00",
+   "status": "ok",
+   "error": null,
+   "fetched": 1,
+   "new": 0,
+   "changed": 0,
+   "unchanged": 1,
+   "rejected": 0
+  },
+  {
+   "at": "2026-11-22T00:50:46.712827+00:00",
+   "status": "ok",
+   "error": null,
+   "fetched": 1,
+   "new": 0,
+   "changed": 0,
+   "unchanged": 1,
+   "rejected": 0
+  },
+  {
+   "at": "2026-11-22T00:52:46.854152+00:00",
+   "status": "ok",
+   "error": null,
+   "fetched": 1,
+   "new": 0,
+   "changed": 0,
+   "unchanged": 1,
+   "rejected": 0
+  },
+  {
+   "at": "2026-11-22T00:54:47.092441+00:00",
+   "status": "ok",
+   "error": null,
+   "fetched": 1,
+   "new": 0,
+   "changed": 0,
+   "unchanged": 1,
+   "rejected": 0
+  },
+  {
+   "at": "2026-11-22T00:56:47.229591+00:00",
+   "status": "ok",
+   "error": null,
+   "fetched": 1,
+   "new": 0,
+   "changed": 0,
+   "unchanged": 1,
+   "rejected": 0
+  },
+  {
+   "at": "2026-11-22T00:58:47.486483+00:00",
+   "status": "ok",
+   "error": null,
+   "fetched": 1,
+   "new": 0,
+   "changed": 0,
+   "unchanged": 1,
+   "rejected": 0
+  },
+  {
+   "at": "2026-11-22T01:00:47.637942+00:00",
+   "status": "ok",
+   "error": null,
+   "fetched": 1,
+   "new": 0,
+   "changed": 0,
+   "unchanged": 1,
+   "rejected": 0
+  },
+  {
+   "at": "2026-11-22T01:02:47.839797+00:00",
    "status": "ok",
    "error": null,
    "fetched": 1,

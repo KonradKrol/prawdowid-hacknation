@@ -1,0 +1,194 @@
+<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Prawdoskop — pitch</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700;800&family=Source+Serif+4:wght@400;600&display=swap">
+<style>
+* { margin:0; padding:0; } html { background:#0C2142; }
+.stage { display:flex; flex-direction:column; align-items:center; gap:24px; padding:24px 0; }
+section { position:relative; width:1920px; height:1080px; overflow:hidden; flex:none; }
+table { border-collapse:collapse; } th { text-align:left; font-weight:700; border-bottom:2px solid #14305C; padding:.35em .6em; }
+td { border-bottom:1px solid #C6CFDB; padding:.35em .6em; }
+:root {
+  --navy: #14305C; --navy-ink: #0C2142; --line: #2F5C9E; --ink: #14202B; --ink-2: #4A5866;
+  --page: #F6F8FB; --soft: #E9EEF5; --sun: #FFE066; --ok: #13653A; --ok-bg: #E7F4EC; --nei: #3E4C5A;
+}
+body { font-family: 'Source Sans 3', Arial, sans-serif; color: var(--ink); }
+section { padding: 128px 128px 160px; background: var(--page); color: var(--ink); box-sizing: border-box; }
+section.dark { background: var(--navy); color: #F6F8FB; }
+.bar { position: absolute; left: 0; top: 0; width: 1920px; height: 16px; background: var(--line); }
+.eyebrow { font-size: 26px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--line); }
+.dark .eyebrow { color: var(--sun); }
+h1 { font-size: 132px; font-weight: 800; line-height: 1.0; letter-spacing: -0.01em; }
+h2 { font-size: 64px; font-weight: 800; line-height: 1.08; margin-top: 16px; }
+h3 { font-size: 34px; font-weight: 700; line-height: 1.2; }
+p { font-size: 30px; line-height: 1.4; }
+.lead { font-size: 40px; line-height: 1.35; }
+.muted { color: var(--ink-2); }
+.dark .muted { color: #C9D6E8; }
+.quote { font-family: 'Source Serif 4', Georgia, serif; font-size: 30px; line-height: 1.45; border-left: 6px solid #B1B8C2; padding-left: 28px; color: var(--ink); }
+.foot { position: absolute; left: 128px; bottom: 64px; width: 1664px; font-size: 24px; color: var(--ink-2); }
+.dark .foot { color: #C9D6E8; }
+.row { display: flex; gap: 64px; align-items: flex-start; }
+.col { display: flex; flex-direction: column; gap: 28px; flex: 1; }
+.shot { border: 3px solid #C6CFDB; border-radius: 20px; object-fit: contain; background: #FFFFFF; }
+.cards { display: flex; gap: 32px; margin-top: 56px; }
+.card { flex: 1; background: #FFFFFF; border-top: 10px solid var(--navy); padding: 36px 36px 40px; display: flex; flex-direction: column; gap: 16px; }
+.card .date { font-size: 26px; font-weight: 700; color: var(--line); }
+.card .text { font-size: 30px; line-height: 1.35; }
+.statement { margin-top: 56px; background: var(--navy); color: #F6F8FB; padding: 36px 44px; font-size: 36px; line-height: 1.35; font-weight: 600; }
+.steps { display: flex; flex-direction: column; gap: 26px; }
+.step { display: flex; gap: 28px; align-items: flex-start; }
+.num { width: 64px; height: 64px; border-radius: 32px; background: var(--sun); color: var(--ink); font-size: 34px; font-weight: 800; text-align: center; line-height: 64px; flex: none; }
+.step .text { font-size: 32px; line-height: 1.35; }
+.chips { display: flex; gap: 16px; flex-wrap: wrap; }
+.chip { font-size: 26px; font-weight: 700; background: var(--soft); color: var(--navy); padding: 10px 20px; border-radius: 8px; }
+.big { display: flex; gap: 32px; margin-top: 48px; }
+.stat { flex: 1; background: #FFFFFF; padding: 32px 36px; border-left: 10px solid var(--ok); display: flex; flex-direction: column; gap: 8px; }
+.stat .n { font-size: 88px; font-weight: 800; line-height: 1.0; color: var(--ink); }
+.stat .l { font-size: 28px; line-height: 1.3; color: var(--ink-2); }
+.stat.warn { border-left-color: var(--sun); }
+table { font-size: 28px; color: var(--ink); width: 100%; }
+.flow { display: flex; gap: 24px; align-items: stretch; margin-top: 44px; }
+.box { flex: 1; background: #FFFFFF; padding: 28px 30px; border-top: 10px solid var(--line); display: flex; flex-direction: column; gap: 12px; }
+.box.hi { border-top-color: var(--sun); }
+.box .text { font-size: 27px; line-height: 1.35; color: var(--ink-2); }
+.arrow { width: 56px; height: 28px; align-self: center; flex: none; }
+.small { font-size: 24px; line-height: 1.35; }
+.cover-title { font-size: 150px; font-weight: 800; line-height: 1.0; color: #F6F8FB; }
+.cover-lead { font-size: 44px; line-height: 1.3; color: #F6F8FB; }
+.pill { font-size: 28px; font-weight: 700; background: var(--sun); color: var(--ink); padding: 12px 24px; border-radius: 10px; display: inline-block; }
+.rise { animation: rise 600ms ease-out both; }
+.d1 { animation-delay: 120ms; } .d2 { animation-delay: 240ms; } .d3 { animation-delay: 360ms; }
+@keyframes rise { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+
+</style></head><body><div class="stage">
+<section id="cover" class="dark" data-transition="fade">
+<div class="bar"></div>
+<div class="row" style="align-items:center; height:792px;">
+<div class="col" style="gap:40px;">
+<p class="eyebrow">HackNation 2026 · zadanie MSZ</p>
+<h1 class="cover-title rise">Prawdoskop</h1>
+<p class="cover-lead rise d1">Sprawdź wiadomość, zanim ją przekażesz. Każda odpowiedź ma cytat ze źródła urzędowego albo uczciwe „nie wiadomo” z opisem brakującego dowodu.</p>
+<div><p class="pill rise d2">Działa: WWW i WhatsApp, 513 źródeł, import IMGW na żywo</p></div>
+</div>
+<img class="shot rise d2" src="img/s_home.png" alt="Ekran startowy Prawdoskopu na telefonie: pole do wklejenia wiadomości i przycisk Sprawdź" style="width:400px; height:820px; object-fit:contain;">
+</div>
+<p class="foot">prawdowid-hacknation.fly.dev · github.com/KonradKrol/prawdowid-hacknation</p>
+
+</section>
+<section id="problem">
+<p class="eyebrow">Problem</p>
+<h2>Fałszywka wygląda jak komunikat urzędu</h2>
+<div class="cards">
+<div class="card rise"><p class="date">27.11.2018 · RCB</p><p class="text">SMS wzywający mężczyzn do urzędów gmin. RCB: „nie wysyłało Alertu RCB” tej treści.</p></div>
+<div class="card rise d1"><p class="date">16.09.2024 · RCB</p><p class="text">SMS-y podszywające się pod Alert RCB. Prawdziwy alert nie zawiera linków ani prośby o kliknięcie.</p></div>
+<div class="card rise d2"><p class="date">2.07.2026 · Urząd Miejski Wrocławia</p><p class="text">Fałszywi „kurierzy z urzędu” dzwonią i sprawdzają, kiedy ktoś będzie w domu.</p></div>
+</div>
+<p class="statement rise d3">Obywatel potrzebuje w minutę trzech odpowiedzi: czy to prawda, skąd to wiadomo i czego jeszcze nie wiadomo. Dziś szuka komunikatu sam, osobno na stronach RCB, sanepidu, gminy i IMGW.</p>
+<p class="foot">Przypadki z korpusu Prawdoskopu (gov.pl, wroclaw.pl). Wnioski z rozmów z mentorami MSZ: pierwszeństwo właściwego źródła urzędowego i ostrożność ocen.</p>
+
+</section>
+<section id="obywatel">
+<div class="row" style="gap:96px;">
+<div class="col" style="gap:40px;">
+<p class="eyebrow">Dla obywatela</p>
+<h2>Prosty jak aplikacja publiczna: wklej, przeczytaj, sprawdź</h2>
+<div class="steps">
+<div class="step rise"><p class="num">1</p><p class="text">Wkleja wiadomość z SMS-a, Messengera albo WhatsAppa. Bez konta i bez instalacji.</p></div>
+<div class="step rise d1"><p class="num">2</p><p class="text">Dostaje werdykt prostymi słowami: Prawda, Nieprawda, Wprowadza w błąd, Nie wiadomo.</p></div>
+<div class="step rise d2"><p class="num">3</p><p class="text">Widzi dosłowny cytat, wydawcę, datę i link. Każdą ocenę sprawdzi sam.</p></div>
+</div>
+<div class="chips"><p class="chip">Ten sam silnik w WWW i WhatsApp</p><p class="chip">Większy tekst i kontrast</p><p class="chip">Czytanie na głos</p></div>
+</div>
+<img class="shot rise d1" src="img/s_wynik.png" alt="Wynik w Prawdoskopie: werdykt Prawda dla pytania o oblodzenie w powiecie bytowskim, z cytatem z ostrzeżenia IMGW" style="width:346px; height:780px; object-fit:contain;">
+</div>
+<p class="foot">Ekran z wdrożonej aplikacji, 22.11.2026: pytanie o oblodzenie w powiecie bytowskim, odpowiedź z aktualnego ostrzeżenia IMGW.</p>
+
+</section>
+<section id="dowod">
+<p class="eyebrow">Jakość dowodów i bezpieczeństwo</p>
+<h2>Werdykt tylko wtedy, gdy cytat istnieje w źródle</h2>
+<div class="big">
+<div class="stat rise"><p class="n">25/29</p><p class="l">poprawnych werdyktów po rozbudowie korpusu (wcześniej 14/29)</p></div>
+<div class="stat rise d1"><p class="n">18/21</p><p class="l">odpowiedzi cytuje właściwy dokument (wcześniej 6/21)</p></div>
+<div class="stat warn rise d2"><p class="n">0/8</p><p class="l">fałszywych werdyktów przy pytaniach bez dowodu: system wstrzymuje ocenę</p></div>
+</div>
+<div class="row" style="margin-top:48px; gap:48px;">
+<div class="col"><h3>Kod sprawdza model</h3><p class="muted">Cytat musi występować dosłownie w jednym fragmencie źródła. Liczba albo data bez pokrycia w cytacie jest usuwana z uzasadnienia. Instrukcje ukryte w wiadomości są ignorowane.</p></div>
+<div class="col"><h3>Ręczny przegląd cytatów</h3><p class="muted">Wszystkie cytaty w odpowiedziach v5 odpowiadają na zadane pytanie. Przy braku źródła odpowiedź mówi, jakiego komunikatu brakuje.</p></div>
+</div>
+<p class="foot">Próba 22.11.2026: 32 pytania (14 o nowe luki, 6 bez dowodu, 12 z próby startowej), model gpt-6-luna, wyszukiwanie BM25, bez pamięci podręcznej. Korpus v4: 113 dok., v5: 513 dok.</p>
+
+</section>
+<section id="kryzys">
+<p class="eyebrow">Moduł kryzysowy</p>
+<h2>Jedno zdarzenie, jedna sprawa, aktualny komunikat</h2>
+<div class="flow">
+<div class="box rise"><h3>Zgłoszenia</h3><p class="text">Dwie różnie sformułowane wiadomości o gołoledzi w powiecie bytowskim, z WWW i z WhatsAppa.</p></div>
+<svg class="arrow" width="56" height="28" viewBox="0 0 56 28" aria-label="dalej"><path d="M0 14 H44 M34 4 L48 14 L34 24" stroke="#2F5C9E" stroke-width="5" fill="none"/></svg>
+<div class="box hi rise d1"><h3>Jedna sprawa</h3><p class="text">Zjawisko + powiat (TERYT) + dzień. Licznik zgłoszeń i opis brakującego dowodu. Inny powiat albo dzień to osobna sprawa.</p></div>
+<svg class="arrow" width="56" height="28" viewBox="0 0 56 28" aria-label="dalej"><path d="M0 14 H44 M34 4 L48 14 L34 24" stroke="#2F5C9E" stroke-width="5" fill="none"/></svg>
+<div class="box rise d2"><h3>Import IMGW</h3><p class="text">Co 10 minut. Zapis daty publikacji, czasu pobrania i wersji wpisu. Ponowny import tego samego wpisu nic nie dubluje.</p></div>
+<svg class="arrow" width="56" height="28" viewBox="0 0 56 28" aria-label="dalej"><path d="M0 14 H44 M34 4 L48 14 L34 24" stroke="#2F5C9E" stroke-width="5" fill="none"/></svg>
+<div class="box rise d3"><h3>Ponowna ocena</h3><p class="text">Tylko sprawy, których dotyczy komunikat. Ten sam mechanizm weryfikacji, wynik trafia do moderatora.</p></div>
+</div>
+<table style="margin-top:48px; font-size:26px;">
+<tr><th style="width:16%">Kanał</th><th style="width:30%">Format i dostęp</th><th style="width:30%">Daty i korekty</th><th>Decyzja</th></tr>
+<tr><td>IMGW</td><td>JSON, bez klucza, kody TERYT powiatów</td><td>publikacja, ważność od–do; korekta = nowa wersja</td><td>prototyp</td></tr>
+<tr><td>RSO</td><td>JSON i XML, bez klucza, województwa</td><td>ważność, created_at i updated_at</td><td>następny</td></tr>
+<tr><td>RCB</td><td>strona HTML gov.pl, brak API</td><td>data na liście komunikatów</td><td>parser HTML</td></tr>
+</table>
+<p class="foot">22.11.2026: import IMGW na produkcji 932 ms; lokalnie 19 pobrań co 2 min, 0 błędów, mediana importu 132 ms.</p>
+
+</section>
+<section id="moderator">
+<div class="row" style="gap:80px;">
+<div class="col" style="gap:36px;">
+<p class="eyebrow">Dla moderatora i administratora</p>
+<h2>Zmianę oceny zatwierdza człowiek</h2>
+<p class="muted" style="font-size:34px; line-height:1.35;">Po nowym komunikacie moderator widzi poprzedni wynik, proponowany wynik i cytat, który uzasadnia zmianę. Tylko w sprawie, której komunikat dotyczy.</p>
+<div class="steps">
+<div class="step rise"><p class="num">1</p><p class="text">Sprawy z licznikiem zgłoszeń i opisem brakującego dowodu</p></div>
+<div class="step rise d1"><p class="num">2</p><p class="text">Korekta komunikatu IMGW daje nową wersję i nową propozycję</p></div>
+<div class="step rise d2"><p class="num">3</p><p class="text">Nieudana synchronizacja: czerwony komunikat w panelu i w /health</p></div>
+</div>
+</div>
+<img class="shot rise d1" src="img/s_propozycja.png" alt="Panel moderatora: sprawa oblodzenia w powiecie bytowskim, poprzedni wynik Nie do sprawdzenia, proponowany wynik Prawda i cytat z ostrzeżenia IMGW" style="width:654px; height:760px; object-fit:contain;">
+</div>
+<p class="foot">Panel z odtwarzalnego demo (scripts/demo_moderacja.py --live, model gpt-6-luna). Dostęp do panelu chroniony tokenem administratora.</p>
+
+</section>
+<section id="narracje">
+<div class="row" style="gap:72px;">
+<div class="col" style="gap:36px;">
+<p class="eyebrow">Powracające narracje · EUvsDisinfo</p>
+<h2>Stara narracja, nowa data: Prawdoskop to rozpoznaje</h2>
+<p class="lead">„Polska chce zająć zachodnią Ukrainę”: EUvsDisinfo opisało ten przekaz co najmniej 5 razy w latach 2022–2024.</p>
+<div class="steps">
+<div class="step rise"><p class="num">1</p><p class="text">Link do udokumentowanego przypadku i jego data</p></div>
+<div class="step rise d1"><p class="num">2</p><p class="text">Różnice w zgłoszeniu: nowa data, Lwów, podpis „Sztab Generalny”</p></div>
+<div class="step rise d2"><p class="num">3</p><p class="text">Werdykt tylko z dowodów o tej sprawie. Podobieństwo nie jest dowodem.</p></div>
+</div>
+</div>
+<img class="shot rise d1" src="img/s_narracja2.png" alt="Uwaga w wyniku Prawdoskopu: narracja opisana przez EUvsDisinfo, lista różnic i link do przypadku" style="width:618px; height:760px; object-fit:contain;">
+</div>
+<p class="foot">Ekran z wdrożonej aplikacji, 22.11.2026. Przypadek EUvsDisinfo z 4.10.2024. Klient MCP EUvsDisinfo gotowy, czeka na token (baza: ponad 19 tys. przypadków według dokumentacji MCP).</p>
+
+</section>
+<section id="skala">
+<p class="eyebrow">Skala, RAG i koszt</p>
+<h2>0,46 USD za 1000 sprawdzeń, a maszyna śpi, gdy nikt nie pyta</h2>
+<table style="margin-top:40px; font-size:27px;">
+<tr><th style="width:22%">Wyszukiwanie (korpus v5)</th><th style="width:15%">Trafienie nr 1</th><th style="width:15%">Komplet w top 4</th><th style="width:13%">Czas wyszuk.</th><th style="width:13%">Werdykty</th><th style="width:10%">Mediana</th><th>Koszt / 1000</th></tr>
+<tr><td>BM25 (domyślnie)</td><td>21/25</td><td>24/25</td><td>3,3 ms</td><td>25/29</td><td>3,4 s</td><td>0,464 USD</td></tr>
+<tr><td>E5 semantyczne</td><td>23/25</td><td>24/25</td><td>20,0 ms</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>Hybryda BM25 + E5</td><td>22/25</td><td>24/25</td><td>21,6 ms</td><td>23/29</td><td>3,4 s</td><td>0,461 USD</td></tr>
+</table>
+<div class="row" style="margin-top:44px; gap:48px;">
+<div class="col"><h3>Infrastruktura dziś</h3><p class="muted">Fly.io: 1 współdzielony CPU, 256 MB, automatyczne zatrzymanie bez ruchu, SQLite na trwałym wolumenie. Limit 400 płatnych sprawdzeń w demo.</p></div>
+<div class="col"><h3>Droga do skali</h3><p class="muted">Hybryda RAG do włączenia przy większym korpusie i parafrazach. Kolejne kanały (RSO, RCB) przez ten sam importer. Model i dostawca wymienni.</p></div>
+</div>
+<p class="foot">Warunki: 32 pytania, gpt-6-luna, bez pamięci podręcznej, 22.11.2026. E5 = multilingual-e5-small ONNX int8, lokalny CPU, indeks 513 dok. w 92 s. Hybryda = RRF k=60. Koszt z liczników tokenów API.</p>
+
+</section>
+
+</div></body></html>

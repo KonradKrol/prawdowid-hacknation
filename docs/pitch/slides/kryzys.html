@@ -1,0 +1,21 @@
+<section id="kryzys">
+<p class="eyebrow">Moduł kryzysowy</p>
+<h2>Jedno zdarzenie, jedna sprawa, aktualny komunikat</h2>
+<div class="flow">
+<div class="box rise"><h3>Zgłoszenia</h3><p class="text">Dwie różnie sformułowane wiadomości o gołoledzi w powiecie bytowskim, z WWW i z WhatsAppa.</p></div>
+<svg class="arrow" width="56" height="28" viewBox="0 0 56 28" aria-label="dalej"><path d="M0 14 H44 M34 4 L48 14 L34 24" stroke="#2F5C9E" stroke-width="5" fill="none"/></svg>
+<div class="box hi rise d1"><h3>Jedna sprawa</h3><p class="text">Zjawisko + powiat (TERYT) + dzień. Licznik zgłoszeń i opis brakującego dowodu. Inny powiat albo dzień to osobna sprawa.</p></div>
+<svg class="arrow" width="56" height="28" viewBox="0 0 56 28" aria-label="dalej"><path d="M0 14 H44 M34 4 L48 14 L34 24" stroke="#2F5C9E" stroke-width="5" fill="none"/></svg>
+<div class="box rise d2"><h3>Import IMGW</h3><p class="text">Co 10 minut. Zapis daty publikacji, czasu pobrania i wersji wpisu. Ponowny import tego samego wpisu nic nie dubluje.</p></div>
+<svg class="arrow" width="56" height="28" viewBox="0 0 56 28" aria-label="dalej"><path d="M0 14 H44 M34 4 L48 14 L34 24" stroke="#2F5C9E" stroke-width="5" fill="none"/></svg>
+<div class="box rise d3"><h3>Ponowna ocena</h3><p class="text">Tylko sprawy, których dotyczy komunikat. Ten sam mechanizm weryfikacji, wynik trafia do moderatora.</p></div>
+</div>
+<table style="margin-top:48px; font-size:26px;">
+<tr><th style="width:16%">Kanał</th><th style="width:30%">Format i dostęp</th><th style="width:30%">Daty i korekty</th><th>Decyzja</th></tr>
+<tr><td>IMGW</td><td>JSON, bez klucza, kody TERYT powiatów</td><td>publikacja, ważność od–do; korekta = nowa wersja</td><td>prototyp</td></tr>
+<tr><td>RSO</td><td>JSON i XML, bez klucza, województwa</td><td>ważność, created_at i updated_at</td><td>następny</td></tr>
+<tr><td>RCB</td><td>strona HTML gov.pl, brak API</td><td>data na liście komunikatów</td><td>parser HTML</td></tr>
+</table>
+<p class="foot">22.11.2026: import IMGW na produkcji 932 ms; lokalnie 19 pobrań co 2 min, 0 błędów, mediana importu 132 ms.</p>
+<aside>Ostrzeżenia IMGW mają kody TERYT powiatów, więc możemy łączyć zgłoszenia per powiat i dzień. RSO jest następnym kanałem, bo ma pole updated_at. RCB nie ma API i wymaga parsera strony.</aside>
+</section>

@@ -1,0 +1,234 @@
+{
+ "evaluator": "live",
+ "reports": [
+  {
+   "channel": "web",
+   "text": "Uwaga, 3 grudnia 2026 w powiecie bytowskim będzie gołoledź na drogach!",
+   "label": "not_verifiable",
+   "elapsed_ms": 2805
+  },
+  {
+   "channel": "adapter",
+   "text": "Słyszałem, że w pow. bytowskim 3.12.2026 drogi pokryje oblodzenie. Prawda?",
+   "label": "not_verifiable",
+   "elapsed_ms": 2759
+  },
+  {
+   "channel": "web",
+   "text": "3 grudnia 2026 oblodzenie w powiecie chojnickim, jedźcie ostrożnie",
+   "label": "insufficient_evidence",
+   "elapsed_ms": 3032
+  },
+  {
+   "channel": "web",
+   "text": "4 grudnia 2026 gołoledź w powiecie bytowskim",
+   "label": "not_verifiable",
+   "elapsed_ms": 2345
+  }
+ ],
+ "syncs": [
+  {
+   "step": "Komunikat bez związku ze sprawami (silny wiatr, Słupsk)",
+   "run_id": 1,
+   "status": "ok",
+   "error": null,
+   "fetched": 1,
+   "new": 1,
+   "changed": 0,
+   "unchanged": 0,
+   "rejected": 0,
+   "proposals": 0,
+   "proposal_ids": []
+  },
+  {
+   "step": "Nowe ostrzeżenie: oblodzenie, powiaty bytowski i słupski, 3 grudnia",
+   "run_id": 2,
+   "status": "ok",
+   "error": null,
+   "fetched": 2,
+   "new": 1,
+   "changed": 0,
+   "unchanged": 1,
+   "rejected": 0,
+   "proposals": 1,
+   "proposal_ids": [
+    1
+   ]
+  },
+  {
+   "step": "Powtórny import tych samych wpisów",
+   "run_id": 3,
+   "status": "ok",
+   "error": null,
+   "fetched": 2,
+   "new": 0,
+   "changed": 0,
+   "unchanged": 2,
+   "rejected": 0,
+   "proposals": 0,
+   "proposal_ids": []
+  },
+  {
+   "step": "Korekta: IMGW przedłuża ostrzeżenie do 14:00",
+   "run_id": 4,
+   "status": "ok",
+   "error": null,
+   "fetched": 2,
+   "new": 0,
+   "changed": 1,
+   "unchanged": 1,
+   "rejected": 0,
+   "proposals": 1,
+   "proposal_ids": [
+    2
+   ]
+  }
+ ],
+ "cases": [
+  {
+   "id": 3,
+   "key": "oblodzenie|2201|2026-12-04",
+   "hazard": "oblodzenie",
+   "counties": [
+    "2201"
+   ],
+   "day": "2026-12-04",
+   "title": "Oblodzenie — powiat bytowski, 4 grudnia 2026",
+   "missing": "Brakuje urzędowego komunikatu o zjawisku „oblodzenie” dla obszaru: powiat bytowski w dniu 4 grudnia 2026. Rozstrzygnie to ostrzeżenie IMGW obejmujące ten powiat i dzień albo komunikat starostwa lub wojewódzkiego centrum zarządzania kryzysowego.",
+   "status": "open",
+   "created_at": "2026-11-22T00:55:34.741488+00:00",
+   "updated_at": "2026-11-22T00:55:34.741488+00:00",
+   "reports": 1,
+   "text": "4 grudnia 2026 gołoledź w powiecie bytowskim",
+   "last_result": {
+    "check_id": "chk_e37b132cedfb42d3999fe5dbfc5b73ac",
+    "status": "ok",
+    "label": "not_verifiable",
+    "kind": "verdict",
+    "reason": "Nie da się teraz ustalić, czy 4 grudnia 2026 wystąpi gołoledź w powiecie bytowskim, bo to przyszłe zdarzenie. Dostępne materiały nie zawierają prognozy ani ostrzeżenia dotyczącego tego miejsca i dnia.",
+    "missing_evidence": null,
+    "sources": []
+   },
+   "proposals": []
+  },
+  {
+   "id": 2,
+   "key": "oblodzenie|2202|2026-12-03",
+   "hazard": "oblodzenie",
+   "counties": [
+    "2202"
+   ],
+   "day": "2026-12-03",
+   "title": "Oblodzenie — powiat chojnicki, 3 grudnia 2026",
+   "missing": "Brakuje urzędowego komunikatu o zjawisku „oblodzenie” dla obszaru: powiat chojnicki w dniu 3 grudnia 2026. Rozstrzygnie to ostrzeżenie IMGW obejmujące ten powiat i dzień albo komunikat starostwa lub wojewódzkiego centrum zarządzania kryzysowego.",
+   "status": "open",
+   "created_at": "2026-11-22T00:55:31.657342+00:00",
+   "updated_at": "2026-11-22T00:55:31.657342+00:00",
+   "reports": 1,
+   "text": "3 grudnia 2026 oblodzenie w powiecie chojnickim, jedźcie ostrożnie",
+   "last_result": {
+    "check_id": "chk_15071916474d493ea664f39328505646",
+    "status": "ok",
+    "label": "insufficient_evidence",
+    "kind": "verdict",
+    "reason": "Nie da się ustalić na podstawie podanych źródeł, czy 3 grudnia 2026 w powiecie chojnickim wystąpi oblodzenie. Brakuje komunikatu lub prognozy odnoszącej się do tego dnia i miejsca.",
+    "missing_evidence": "Potrzebny jest aktualny komunikat właściwych służb meteorologicznych lub drogowych o oblodzeniu w powiecie chojnickim 3 grudnia 2026.",
+    "sources": []
+   },
+   "proposals": []
+  },
+  {
+   "id": 1,
+   "key": "oblodzenie|2201|2026-12-03",
+   "hazard": "oblodzenie",
+   "counties": [
+    "2201"
+   ],
+   "day": "2026-12-03",
+   "title": "Oblodzenie — powiat bytowski, 3 grudnia 2026",
+   "missing": "Brakuje urzędowego komunikatu o zjawisku „oblodzenie” dla obszaru: powiat bytowski w dniu 3 grudnia 2026. Rozstrzygnie to ostrzeżenie IMGW obejmujące ten powiat i dzień albo komunikat starostwa lub wojewódzkiego centrum zarządzania kryzysowego.",
+   "status": "open",
+   "created_at": "2026-11-22T00:55:26.002294+00:00",
+   "updated_at": "2026-11-22T00:55:28.856424+00:00",
+   "reports": 2,
+   "text": "Uwaga, 3 grudnia 2026 w powiecie bytowskim będzie gołoledź na drogach!",
+   "last_result": {
+    "check_id": "chk_4976c0ca014f4c03b871245f8b78f4d6",
+    "status": "ok",
+    "label": "not_verifiable",
+    "kind": "verdict",
+    "reason": "Nie da się teraz zweryfikować, czy 3 grudnia 2026 r. w powiecie bytowskim będzie gołoledź — to prognoza dotycząca przyszłości. Przytoczone materiały nie zawierają prognozy pogody ani ostrzeżenia dla tego powiatu na ten dzień.",
+    "missing_evidence": null,
+    "sources": []
+   },
+   "proposals": [
+    {
+     "id": 1,
+     "case_id": 1,
+     "source_id": "imgw-Sk20261202140022222-v1",
+     "feed": "imgw-meteo",
+     "entry_id": "Sk20261202140022222",
+     "version": 1,
+     "created_at": "2026-11-22T00:55:41.244011+00:00",
+     "previous": {
+      "check_id": "chk_4976c0ca014f4c03b871245f8b78f4d6",
+      "status": "ok",
+      "label": "not_verifiable",
+      "kind": "verdict",
+      "reason": "Nie da się teraz zweryfikować, czy 3 grudnia 2026 r. w powiecie bytowskim będzie gołoledź — to prognoza dotycząca przyszłości. Przytoczone materiały nie zawierają prognozy pogody ani ostrzeżenia dla tego powiatu na ten dzień.",
+      "missing_evidence": null,
+      "sources": []
+     },
+     "proposed": {
+      "check_id": "chk_ac5524603c1344b1b5acb2bee8e821fa",
+      "status": "ok",
+      "label": "confirmed",
+      "kind": "verdict",
+      "reason": "Tak, IMGW prognozuje na ten dzień oblodzenie dróg w powiecie bytowskim.",
+      "missing_evidence": null,
+      "sources": [
+       "imgw-Sk20261202140022222-v1"
+      ]
+     },
+     "quote": "Prognozuje się zamarzanie mokrej nawierzchni dróg i chodników po opadach deszczu ze śniegiem.",
+     "source_url": "https://danepubliczne.imgw.pl/api/data/warningsmeteo#Sk20261202140022222",
+     "status": "pending",
+     "decided_at": null
+    },
+    {
+     "id": 2,
+     "case_id": 1,
+     "source_id": "imgw-Sk20261202140022222-v2",
+     "feed": "imgw-meteo",
+     "entry_id": "Sk20261202140022222",
+     "version": 2,
+     "created_at": "2026-11-22T00:55:44.227984+00:00",
+     "previous": {
+      "check_id": "chk_4976c0ca014f4c03b871245f8b78f4d6",
+      "status": "ok",
+      "label": "not_verifiable",
+      "kind": "verdict",
+      "reason": "Nie da się teraz zweryfikować, czy 3 grudnia 2026 r. w powiecie bytowskim będzie gołoledź — to prognoza dotycząca przyszłości. Przytoczone materiały nie zawierają prognozy pogody ani ostrzeżenia dla tego powiatu na ten dzień.",
+      "missing_evidence": null,
+      "sources": []
+     },
+     "proposed": {
+      "check_id": "chk_b1da00edd403476e973776e02e9a3369",
+      "status": "ok",
+      "label": "confirmed",
+      "kind": "verdict",
+      "reason": "Tak — IMGW prognozuje 3 grudnia oblodzenie nawierzchni dróg i chodników w powiecie bytowskim.",
+      "missing_evidence": null,
+      "sources": [
+       "imgw-Sk20261202140022222-v2"
+      ]
+     },
+     "quote": "Prognozuje się zamarzanie mokrej nawierzchni dróg i chodników po opadach deszczu ze śniegiem.",
+     "source_url": "https://danepubliczne.imgw.pl/api/data/warningsmeteo#Sk20261202140022222",
+     "status": "pending",
+     "decided_at": null
+    }
+   ]
+  }
+ ]
+}

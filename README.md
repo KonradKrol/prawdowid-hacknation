@@ -12,7 +12,7 @@ if (!(Test-Path -LiteralPath .env)) { Copy-Item .env.example .env }
 python -m uvicorn app.main:app --port 8000
 ```
 
-Jedna aplikacja obsługuje stronę WWW pod `/` i API pod `/docs`. Widok `/zrodla`, API `/api/v1/sources` i ocena zgłoszeń korzystają z korpusu wskazanego przez `PRAWDOWID_CORPUS`. Przykładowa konfiguracja wskazuje `Research/Prawdowid_Korpus_Probny.jsonl`. Po zmianie ustawienia uruchom aplikację ponownie. [Opis API i adaptera WhatsApp](docs/KONTRAKT_API.md) podaje żądania i format wyniku. Adapter nie wymaga konta Meta do demonstracji. Dane sesji i zdarzeń zapisują się w SQLite. [Instrukcja Fly.io](docs/WDROZENIE_FLY.md) opisuje trwały wolumen `/data` i kopię bazy.
+Jedna aplikacja obsługuje stronę WWW pod `/` i API pod `/docs`. Widok `/zrodla`, API `/api/v1/sources` i ocena zgłoszeń korzystają z korpusu wskazanego przez `PRAWDOWID_CORPUS`. Przykładowa konfiguracja wskazuje `Research/Prawdoskop_Korpus_v5.jsonl`. Po zmianie ustawienia uruchom aplikację ponownie. [Opis API i adaptera WhatsApp](docs/KONTRAKT_API.md) podaje żądania i format wyniku. Adapter nie wymaga konta Meta do demonstracji. Dane sesji i zdarzeń zapisują się w SQLite. [Instrukcja Fly.io](docs/WDROZENIE_FLY.md) opisuje trwały wolumen `/data` i kopię bazy.
 
 Do rzeczywistej weryfikacji ustaw w pliku `.env` wartości `PRAWDOWID_API_KEY` i `PRAWDOWID_MODEL` dla swojego dostawcy oraz wybierz `PRAWDOWID_EVALUATOR=live`. Plik `.env` jest ignorowany przez Git. Ustawienie `PRAWDOWID_EVALUATOR=fake` służy do podglądu frontendu bez klucza. Produkcja wymaga trybu live.
 
@@ -20,6 +20,24 @@ Do rzeczywistej weryfikacji ustaw w pliku `.env` wartości `PRAWDOWID_API_KEY` i
 
 **Pomiary.** `python eval/run.py --report wyniki` tworzy JSON, Markdown i CSV do ręcznej oceny cytatów. `python eval/run_guard.py --report guard.json` porównuje 20 syntetycznych prób z niezmienionym przypadkiem. Oba skrypty wymagają trybu live. Próby techniczne uruchom przez `python -m pip install -r requirements-dev.txt` i `python -m pytest tests`.
 
+
+## Kanał urzędowy, sprawy i moderacja
+
+Prawdoskop importuje przyrostowo ostrzeżenia meteorologiczne IMGW-PIB (`app/ingest/imgw.py`). Zapisuje datę publikacji, czas udanego pobrania i wersję wpisu. Zgłoszenia o tym samym zjawisku, powiecie (TERYT) i dniu tworzą jedną sprawę z licznikiem i opisem brakującego dowodu. Nowy lub zmieniony komunikat uruchamia ponowną ocenę pasujących otwartych spraw, a moderator w `/moderacja` widzi poprzedni wynik, proponowany wynik i cytat. Panel wymaga `PRAWDOWID_ADMIN_TOKEN` (nagłówek `X-Admin-Token` albo jednorazowo `/moderacja?klucz=...`). Odpytywanie włącza `PRAWDOWID_OFFICIAL_POLL_S`.
+
+```powershell
+python scripts/demo_moderacja.py
+python scripts/demo_moderacja.py --live --data-dir data/demo
+python -m pytest tests/test_official.py
+```
+
+Pierwsze polecenie odtwarza najważniejszy przebieg bez kosztów: dwie różne wiadomości o tym samym zdarzeniu tworzą jedną sprawę, inny powiat lub dzień tworzy osobną, import ostrzeżenia daje propozycję tylko w sprawie, której dotyczy, a powtórny import nie tworzy duplikatów.
+
+## Korpus v5 i pomiary
+
+`Research/Prawdoskop_Korpus_v5.jsonl` ma 513 dokumentów: korpus v4 i 400 nowych materiałów (226 rządowych, 62 samorządowe, 112 fact-checków) zebranych skryptem `scripts/collect_corpus.py`. Porównanie odpowiedzi przed i po rozszerzeniu oraz wariantów BM25, E5 i hybrydy: `python eval/compare_corpus.py --e5 <katalog modelu> --report eval/wyniki`. Znane narracje EUvsDisinfo: `Research/EUvsDisinfo_Przypadki.jsonl`, klient MCP w `app/ingest/narratives.py` (token `PRAWDOWID_EUVS_TOKEN`).
+
+[Raport z 22.11.2026](docs/RAPORT_2026-11-22.md) · [Prezentacja](docs/pitch/index.html)
 
 ## Aktualny stan
 

@@ -1,0 +1,55 @@
+{
+ "v": 5,
+ "createdOnFiles": {
+  "v": 1,
+  "at": "2026-11-22T01:30:00Z"
+ },
+ "lists": "css",
+ "format": {
+  "v": 1,
+  "shared": [
+   "project/deck.css"
+  ]
+ },
+ "title": "Prawdoskop — pitch HackNation 2026",
+ "order": [
+  "cover",
+  "problem",
+  "obywatel",
+  "dowod",
+  "kryzys",
+  "moderator",
+  "narracje",
+  "skala"
+ ],
+ "cover": "cover",
+ "sections": {
+  "s1": {
+   "description": "Problem i odpowiedź dla obywatela",
+   "start": "cover"
+  },
+  "s2": {
+   "description": "Jakość dowodów i wstrzymywanie werdyktu",
+   "start": "dowod"
+  },
+  "s3": {
+   "description": "Moduł kryzysowy, moderator i powracające narracje",
+   "start": "kryzys"
+  },
+  "s4": {
+   "description": "Skala, RAG i koszt",
+   "start": "skala"
+  }
+ },
+ "faces": {
+  "source-sans-3": {
+   "family": "Source Sans 3",
+   "href": "https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700;800&family=Source+Serif+4:wght@400;600&display=swap"
+  },
+  "source-serif-4": {
+   "family": "Source Serif 4",
+   "href": "https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600&display=swap"
+  }
+ },
+ "designSystems": []
+}
