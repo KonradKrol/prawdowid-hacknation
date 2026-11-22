@@ -16,11 +16,13 @@
   "cover",
   "problem",
   "obywatel",
+  "jak-dziala",
   "dowod",
   "kryzys",
   "moderator",
   "narracje",
-  "skala"
+  "skala",
+  "wdrozenie"
  ],
  "cover": "cover",
  "sections": {
@@ -29,15 +31,15 @@
    "start": "cover"
   },
   "s2": {
-   "description": "Jakość dowodów i wstrzymywanie werdyktu",
-   "start": "dowod"
+   "description": "Jak to działa i jakość dowodów",
+   "start": "jak-dziala"
   },
   "s3": {
    "description": "Moduł kryzysowy, moderator i powracające narracje",
    "start": "kryzys"
   },
   "s4": {
-   "description": "Skala, RAG i koszt",
+   "description": "Skala, koszt i wdrożenie",
    "start": "skala"
   }
  },
