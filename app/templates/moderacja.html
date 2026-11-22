@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}Moderacja — Prawdoskop{% endblock %}
+{% block title %}Moderacja | Prawdoskop{% endblock %}
 {% macro verdict(r) -%}
   {%- set key = r.label or ("answer" if r.kind == "answer" else none) -%}
   {%- if key -%}<span class="mod-tone tone-{{ L[key].tone }}">{{ PLAIN[key] }}</span>{%- else -%}<span class="mod-tone tone-nei">{{ {"needs_clarification": "Wymaga doprecyzowania", "technical_error": "Błąd techniczny"}.get(r.status, r.status) }}</span>{%- endif -%}
