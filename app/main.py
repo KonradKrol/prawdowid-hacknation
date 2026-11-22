@@ -12,23 +12,26 @@ from app.api.checks import router as checks_router
 from app.api.whatsapp import router as whatsapp_router
 from app.api.moderation import router as moderation_router
 from app.config import ROOT, Settings
+from app.ingest.demagog import DemagogSync
 from app.core.service import CLIENT_BUCKET, SESSION, get_service
 
 SESSION_COOKIE = "pw_session"
 
 
-async def poll_official(service):
+async def poll_official(service, demagog):
     """Cykliczny import z kanału urzędowego, gdy maszyna działa (Fly.io zatrzymuje ją bez ruchu)."""
     await asyncio.sleep(5)
     while True:
-        await run_in_threadpool(service.official.sync)
+        await asyncio.gather(run_in_threadpool(service.official.sync), run_in_threadpool(demagog.sync))
         await asyncio.sleep(service.settings.official_poll_s)
 
 
 @asynccontextmanager
 async def lifespan(app):
     service = get_service()
-    poller = asyncio.create_task(poll_official(service)) if service.settings.official_poll_s > 0 else None
+    demagog = DemagogSync(service)
+    demagog.load_current()
+    poller = asyncio.create_task(poll_official(service, demagog)) if service.settings.official_poll_s > 0 else None
     try:
         yield
     finally:
