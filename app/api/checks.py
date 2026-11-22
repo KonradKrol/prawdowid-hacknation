@@ -88,9 +88,16 @@ def health():
         return JSONResponse({"status": "database_unavailable"}, status_code=503)
     if service.settings.environment == "production" and not service.settings.key:
         return JSONResponse({"status": "model_unconfigured"}, status_code=503)
+    from app.ingest.demagog import FEED
     official = service.official.status()
+    last_demagog_run = next(iter(service.store.sync_runs(FEED, limit=1)), None)
+    demagog = service.store.official_entries(FEED)
     return {"status": "ok", "database": "ok", "model_configured": bool(service.settings.key),
             "evaluator": service.settings.evaluator, "corpus": report.model_dump(exclude={"sources"}),
+            "fact_check_feed": {"feed": FEED, "entries": len(demagog),
+                                "last_status": last_demagog_run["status"] if last_demagog_run else None,
+                                "last_finished_at": last_demagog_run["finished_at"] if last_demagog_run else None,
+                                "latest_published_at": max((entry["published_at"] for entry in demagog), default=None)},
             "official_feed": {"feed": official["feed"], "failing": official["failing"], "stale": official["stale"],
                               "entries": official["entries"],
                               "last_success": (official["last_success"] or {}).get("finished_at"),

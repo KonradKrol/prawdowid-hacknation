@@ -6,6 +6,7 @@ from hashlib import sha256
 import json
 import logging
 import re
+from time import perf_counter
 from urllib.request import Request, urlopen
 from xml.etree import ElementTree
 
@@ -64,8 +65,10 @@ class DemagogSync:
                 self.corpus.upsert(source)
 
     def sync(self):
+        started = perf_counter()
         stamp = datetime.now(timezone.utc).isoformat()
-        indexed = 0
+        run_id = self.store.sync_start(FEED, stamp)
+        indexed = rejected = 0
         try:
             rss = ElementTree.fromstring(self.fetch(URL))
             channel = rss.find("channel")
@@ -73,27 +76,32 @@ class DemagogSync:
                 raise ValueError("Missing RSS channel")
         except (OSError, ValueError, ElementTree.ParseError) as error:
             LOGGER.warning("Demagog RSS import failed: %s", error)
+            self.store.sync_finish(run_id, "error", datetime.now(timezone.utc).isoformat(),
+                                   round((perf_counter() - started) * 1000), error=type(error).__name__)
             return indexed
 
         fetched = 0
-        items = channel.findall("item")[:20]
+        items = channel.findall("item")[:60]
+        self.skipped.intersection_update(item.findtext("link", "").strip().rstrip("/") for item in items)
         items.sort(key=lambda item: item.findtext("link", "").strip().rstrip("/") in self.skipped)
         for item in items:
             url = item.findtext("link", "").strip().rstrip("/")
             title = " ".join(item.findtext("title", "").split())
             if not ARTICLE.fullmatch(url) or not title or url in self.corpus.urls:
                 continue
-            if fetched >= 4:
+            if fetched >= 8:
                 break
             fetched += 1
             try:
                 published = parsedate_to_datetime(item.findtext("pubDate", ""))
                 fragments = review_fragments(self.fetch(url + "/"), url)
             except (OSError, ValueError) as error:
+                rejected += 1
                 self.skipped.add(url)
                 LOGGER.warning("Demagog article skipped (%s): %s", url, error)
                 continue
             if not fragments:
+                rejected += 1
                 self.skipped.add(url)
                 continue
             self.skipped.discard(url)
@@ -111,4 +119,6 @@ class DemagogSync:
                                        datetime.now(timezone.utc).isoformat())
             self.corpus.upsert(source)
             indexed += 1
+        self.store.sync_finish(run_id, "partial" if rejected else "ok", datetime.now(timezone.utc).isoformat(),
+                               round((perf_counter() - started) * 1000), fetched=fetched, new=indexed, rejected=rejected)
         return indexed

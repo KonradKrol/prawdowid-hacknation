@@ -20,6 +20,7 @@ from app.core.model import CitationDraft, ItemDraft, PROMPT_VERSION, Provider
 from app.core.repository import Corpus
 from app.core.result import missing_item, normalize
 from app.core.safety import SCOPE, SUSPICIOUS, VAGUE, input_info
+from app.ingest.narrative_search import NarrativeSearch
 from app.ingest.official import OfficialSync, summarize
 from app.ingest.places import needs_place, signature as event_signature
 from app.ingest import narratives
@@ -74,13 +75,18 @@ class Service:
         self.maintenance = Lock()
         self.official = OfficialSync(self)
         self.narratives = narratives.load()
+        self.narrative_search = (NarrativeSearch(settings, self.narratives)
+                                 if settings.evaluator == "live" and settings.key else None)
         self.official.load_current()
 
     def sources(self):
+        with self.corpus.lock:
+            rows = list(self.corpus.sources.values())
+            version = self.corpus.version
         return SourcesResponse(
-            documents=len(self.corpus.sources), domains=len({source["domain"] for source in self.corpus.sources.values()}),
-            source_types=sorted({source["type"] for source in self.corpus.sources.values()}),
-            version=self.corpus.version, sources=[PublicSource.model_validate(row) for row in self.corpus.sources.values()],
+            documents=len(rows), domains=len({source["domain"] for source in rows}),
+            source_types=sorted({source["type"] for source in rows}),
+            version=version, sources=[PublicSource.model_validate(row) for row in rows],
         )
 
     def result(self, text, channel, timestamp, parent_id=None):
@@ -199,8 +205,15 @@ class Service:
                 result.status, result.message, result.clarification_question = "ok", None, None
                 result.items = [missing_item("t1", result.input.text_masked,
                     "Po doprecyzowaniu nadal brakuje informacji.", "Dokładna teza oraz źródło, którego dotyczy pytanie.")]
-            if result.status == "ok":
-                for match in narratives.find(root, self.narratives)[:1]:
+            if (result.status == "ok" and not pinned and result.input.kind != "url"
+                    and not SUSPICIOUS.search(root)
+                    and not any(notice.type == "instructions_ignored" for notice in result.notices)):
+                if self.narrative_search:
+                    case = self.narrative_search.find(root[:4000])
+                    match = narratives.compare(case, root) if case else None
+                else:
+                    match = next(iter(narratives.find(root, self.narratives)), None)
+                if match:
                     result.notices.append(NoticeItem(type="known_narrative", text=narratives.notice_text(match),
                                                      url=match["url"], label=match["narrative"]))
             if result.status == "ok" and not result.summary:
