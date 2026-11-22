@@ -15,5 +15,5 @@ def test_narrative_attribution_only_appears_for_verified_case(monkeypatch, tmp_p
         assert "Co to znaczy?" in confirmed.text
         unverified = client.post("/sprawdz", data={"text": "Czy Polska chce zająć Lwów?"})
         assert unverified.status_code == 200
-        assert "Znana narracja dezinformacyjna" in unverified.text
+        assert "Uwaga: znana narracja dezinformacyjna" in unverified.text
         assert "w rosyjskim medium państwowym" not in unverified.text

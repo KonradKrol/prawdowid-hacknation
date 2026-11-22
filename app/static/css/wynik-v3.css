@@ -244,11 +244,13 @@ html.a11y-contrast .quick__try button, html.a11y-contrast .quick__help summary {
 .proof__title + .proof__quote { margin-top: .25rem; font-size: 1.05rem; color: var(--ink-2); border-left: 3px solid var(--line); padding-left: .75rem; }
 
 /* Znana narracja (EUvsDisinfo) */
-.narrative { margin-top: 1rem; padding: .8rem 1rem; background: #fffbf5; border-inline-start: 3px solid #b26a00; border-radius: .25rem; }
+.narrative { margin-top: 1rem; padding: .8rem 1rem; background: #fff4e4; border-inline-start: 5px solid #a33f00; border-radius: .25rem; }
 .narrative p { margin: 0; }
 .narrative p + p { margin-top: .4rem; }
-.narrative__tag { color: #6b3a00; font-size: .9rem; font-weight: 700; }
-.narrative__name { font-size: 1.05rem; font-weight: 600; overflow-wrap: anywhere; }
+.narrative__tag { display: flex; align-items: center; gap: .55rem; color: #792d00; font-size: 1.05rem; font-weight: 800; }
+.narrative__tag svg { width: 1.35rem; height: 1.35rem; flex: none; }
+.narrative__name { font-size: 1rem; overflow-wrap: anywhere; }
+.narrative__name span { font-weight: 700; }
 .narrative__attribution { color: var(--ink-2); }
 .narrative__links { display: flex; flex-wrap: wrap; gap: .25rem 1rem; font-size: .95rem; }
 .narrative__links a { display: inline-block; padding-block: .3rem; text-decoration: underline; text-underline-offset: .15em; }
