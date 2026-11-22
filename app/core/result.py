@@ -169,7 +169,7 @@ def normalize(draft, sources, item_id, question, canary):
     expected = {"confirmed": {"supports"}, "false": {"refutes"}, "misleading": {"context", "refutes"}}
     if draft.kind == "answer":
         answer = next((row.published_on for row in evidence if row.field == "published_on"), answer)
-        # Krótka odpowiedź z liczbą bez pokrycia nie przechodzi — lepiej „Nie wiadomo” niż zmyślona liczba.
+        # Krótka odpowiedź z liczbą bez pokrycia nie przechodzi — lepiej „Brak potwierdzenia” niż zmyślona liczba.
         valid = draft.label is None and bool(answer) and "supports" in stances and not unsupported(answer, allowed)
     else:
         valid = bool(stances & expected.get(draft.label, set()))

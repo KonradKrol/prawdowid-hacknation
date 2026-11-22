@@ -9,7 +9,7 @@ LABELS = {
         "misleading": {"name": "Wprowadzające w błąd", "icon": "alert", "tone": "mislead",
                        "hint": "Prawdziwy materiał w złym czasie, miejscu albo kontekście."},
         "insufficient_evidence": {"name": "Brak wystarczających dowodów", "icon": "question", "tone": "nei",
-                                  "hint": "Źródła nie pozwalają tego rozstrzygnąć. Mówimy, czego brakuje."},
+                                  "hint": "W sprawdzonych źródłach nie znaleźliśmy niczego, co to rozstrzyga. Mówimy, czego brakuje."},
         "not_verifiable": {"name": "Nie podlega weryfikacji", "icon": "speech", "tone": "nv",
                            "hint": "To opinia, ocena albo prognoza, a nie fakt do sprawdzenia."},
         "answer": {"name": "Odpowiedź", "icon": "info", "tone": "answer",
@@ -20,7 +20,7 @@ LABELS = {
 # Proste słowa dla obywatela; oficjalna klasa briefu jest w szczegółach oceny.
 PLAIN = {
     "pl": {"confirmed": "Prawda", "false": "Nieprawda", "misleading": "Wprowadza w błąd",
-           "insufficient_evidence": "Nie wiadomo", "not_verifiable": "Nie do sprawdzenia", "answer": "Odpowiedź"}
+           "insufficient_evidence": "Brak potwierdzenia", "not_verifiable": "Nie do sprawdzenia", "answer": "Odpowiedź"}
 }
 
 STATUSES = {
