@@ -4,7 +4,7 @@ primary_region = "fra"
 [env]
   PRAWDOWID_ENV = "production"
   PRAWDOWID_DATA_DIR = "/data"
-  PRAWDOWID_CORPUS = "/srv/prawdowid/Research/Prawdoskop_Korpus_v5.jsonl"
+  PRAWDOWID_CORPUS = "/srv/prawdowid/Research/Prawdoskop_Korpus_v6.jsonl"
   PRAWDOWID_OFFICIAL_POLL_S = "600"
   PRAWDOWID_PAID_CHECK_LIMIT = "400"
 
