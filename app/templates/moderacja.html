@@ -13,6 +13,9 @@
     <p class="lead">Zgłoszenia o tym samym zjawisku, powiecie i dniu tworzą jedną sprawę. Nowy lub zmieniony komunikat IMGW uruchamia ponowną ocenę tylko spraw, których dotyczy. Zmianę zatwierdza człowiek.</p>
   </header>
 
+  {% if demo_open %}
+  <p class="note note--warn" role="note"><svg aria-hidden="true"><use href="#i-info"/></svg><span><strong>Tryb demonstracyjny.</strong> Panel jest otwarty bez klucza, żeby można było go swobodnie obejrzeć. Zgłoszenia są zamaskowane (numery telefonów, e-maile i dokumenty ukryte). Przyciski zatwierdzania, symulacji i usuwania symulacji działają naprawdę.</span></p>
+  {% endif %}
   {% if o.failing %}
   <div class="note note--warn" role="alert" data-sync="failed">
     <svg width="22" height="22" aria-hidden="true"><use href="#i-alert"/></svg>

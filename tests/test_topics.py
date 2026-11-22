@@ -80,3 +80,13 @@ def test_info_page_and_deleting_my_data_removes_topic_reports(service):
         assert done.status_code == 303 and "usunieto=1" in done.headers["location"]
         with service.store.connection() as db:
             assert db.execute("SELECT COUNT(*) FROM topic_reports WHERE check_id=?", (result["id"],)).fetchone()[0] == 0
+
+
+def test_panel_is_open_only_with_demo_flag(service, monkeypatch):
+    with TestClient(create_app()) as client:
+        assert client.get("/moderacja").status_code == 404           # token ustawiony, brak klucza
+    monkeypatch.setenv("PRAWDOWID_ADMIN_OPEN", "1")
+    get_service.cache_clear()
+    with TestClient(create_app()) as client:
+        page = client.get("/moderacja")
+        assert page.status_code == 200 and "Tryb demonstracyjny" in page.text

@@ -21,6 +21,8 @@ ADMIN_COOKIE = "pw_admin"
 def authorized(request):
     settings = get_service().settings
     token = settings.admin_token
+    if settings.admin_open:
+        return True
     if not token:
         return settings.environment != "production"
     offered = (request.headers.get("X-Admin-Token") or request.cookies.get(ADMIN_COOKIE)
@@ -91,7 +93,8 @@ def moderation_page(request: Request, synchronizacja: str | None = None, usuniet
     counties = sorted(((code, county_label(code, data)) for code in data), key=lambda row: row[1])
     sim = {"events": {key: name for key, (name, _) in imgw.SIM_EVENTS.items()}, "counties": counties,
            "active": get_service().official.simulations(), "removed": usunieto}
-    response = _render(request, "moderacja.html", b=board(), flash=synchronizacja, sim=sim)
+    response = _render(request, "moderacja.html", b=board(), flash=synchronizacja, sim=sim,
+                       demo_open=get_service().settings.admin_open)
     offered = request.query_params.get("klucz")
     if offered:
         response.set_cookie(ADMIN_COOKIE, offered, httponly=True, samesite="strict",
