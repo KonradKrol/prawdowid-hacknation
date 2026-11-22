@@ -2,19 +2,58 @@
 
 Autorski projekt Konrada Króla na zadanie MSZ **Prawdowid** na HackNation 2026. Z wklejonej wiadomości wyodrębnia twierdzenia do sprawdzenia, wyszukuje lokalne dowody i wskazuje, co można rozstrzygnąć oraz jakiego dowodu brakuje. Oddziela pytanie o autorstwo wypowiedzi od oceny jej treści.
 
-## Backend, WWW i adapter demonstracyjny
+## Uruchomienie aplikacji
 
-Wymagany Python 3.12 lub nowszy z SQLite FTS5. Uruchomienie odbywa się z katalogu repozytorium.
+Publiczna wersja działa na [Fly.io](https://prawdowid-hacknation.fly.dev/). Możesz też uruchomić ją lokalnie. Potrzebujesz Git i Pythona 3.12 lub nowszego z SQLite FTS5.
+
+### 1. Pobierz repozytorium i zainstaluj zależności
+
+**Windows (PowerShell)**
 
 ```powershell
-python -m pip install -r requirements.txt
-if (!(Test-Path -LiteralPath .env)) { Copy-Item .env.example .env }
-python -m uvicorn app.main:app --port 8000
+git clone https://github.com/KonradKrol/prawdowid-hacknation.git
+cd prawdowid-hacknation
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+Copy-Item .env.example .env
 ```
 
-Jedna aplikacja obsługuje stronę WWW pod `/` i API pod `/docs`. Widok `/zrodla`, API `/api/v1/sources` i ocena zgłoszeń korzystają z korpusu wskazanego przez `PRAWDOWID_CORPUS`. Przykładowa konfiguracja wskazuje `Research/Prawdoskop_Korpus_v5.jsonl`. Po zmianie ustawienia uruchom aplikację ponownie. [Opis API i adaptera WhatsApp](docs/KONTRAKT_API.md) podaje żądania i format wyniku. Adapter nie wymaga konta Meta do demonstracji. Dane sesji i zdarzeń zapisują się w SQLite. [Instrukcja Fly.io](docs/WDROZENIE_FLY.md) opisuje trwały wolumen `/data` i kopię bazy.
+**macOS / Linux**
 
-Do rzeczywistej weryfikacji ustaw w pliku `.env` wartości `PRAWDOWID_API_KEY` i `PRAWDOWID_MODEL` dla swojego dostawcy oraz wybierz `PRAWDOWID_EVALUATOR=live`. Plik `.env` jest ignorowany przez Git. Ustawienie `PRAWDOWID_EVALUATOR=fake` służy do podglądu frontendu bez klucza. Produkcja wymaga trybu live.
+```bash
+git clone https://github.com/KonradKrol/prawdowid-hacknation.git
+cd prawdowid-hacknation
+python3 -m venv .venv
+.venv/bin/python -m pip install -r requirements.txt
+cp .env.example .env
+```
+
+Polecenie kopiowania konfiguracji wykonaj tylko przy pierwszym uruchomieniu. Uruchamiaj kolejne polecenia z katalogu repozytorium.
+
+### 2. Wybierz tryb w pliku .env
+
+- **Pełna weryfikacja:** zostaw `PRAWDOWID_EVALUATOR=live` i wpisz własny klucz OpenAI API w `PRAWDOWID_API_KEY`. Przykładowe ustawienia modelu to `PRAWDOWID_MODEL=gpt-6-luna` oraz `PRAWDOWID_GUARD_MODEL=gpt-6-luna`. Zapytania w tym trybie mogą naliczać koszt API.
+- **Podgląd bez klucza:** ustaw `PRAWDOWID_EVALUATOR=fake`. To tryb demonstracyjny z wynikami testowymi.
+
+Plik `.env` jest ignorowany przez Git. Konfiguracja startowa ładuje z repozytorium `Research/Prawdoskop_Korpus_v5.jsonl` i zapisuje dane lokalnie w `data/`. Jeśli chcesz włączyć cykliczny import IMGW i Demagoga, ustaw `PRAWDOWID_OFFICIAL_POLL_S=600` i uruchom aplikację ponownie.
+
+### 3. Uruchom serwer
+
+**Windows (PowerShell)**
+
+```powershell
+.\.venv\Scripts\python.exe -m uvicorn app.main:app --host 127.0.0.1 --port 8000
+```
+
+**macOS / Linux**
+
+```bash
+.venv/bin/python -m uvicorn app.main:app --host 127.0.0.1 --port 8000
+```
+
+Otwórz [localhost:8000](http://localhost:8000/). W trybie live możesz wpisać **„Czy we Włoszech 20 listopada 2026 odbył się strajk generalny?”**. [Stan aplikacji](http://localhost:8000/health) pokazuje m.in. tryb i liczbę dokumentów, a [dokumentacja API](http://localhost:8000/docs) pozwala wysyłać zapytania. Serwer zatrzymasz przez Ctrl+C. Jeśli port jest zajęty, zmień `--port 8000` na np. `--port 8001` i otwórz odpowiedni adres.
+
+Szczegóły dotyczące testowego adaptera WhatsApp są w [opisie API](docs/KONTRAKT_API.md), a konfiguracja produkcyjna w [instrukcji Fly.io](docs/WDROZENIE_FLY.md).
 
 **Dane.** Utwórz nową wersję przez `python scripts/import_sources.py Research/Prawdowid_Korpus_Start.jsonl nowe_materialy.csv --output Research/korpus_demo.jsonl` i ustaw `PRAWDOWID_CORPUS`. Oczekiwane odpowiedzi i próby trzymaj poza korpusem. Dodatkowy strażnik importu działa z `--llm-guard` i wymaga klucza.
 
@@ -35,7 +74,7 @@ Pierwsze polecenie odtwarza najważniejszy przebieg bez kosztów: dwie różne w
 
 ## Korpus v5 i pomiary
 
-`Research/Prawdoskop_Korpus_v5.jsonl` ma 513 dokumentów: korpus v4 i 400 nowych materiałów (226 rządowych, 62 samorządowe, 112 fact-checków) zebranych skryptem `scripts/collect_corpus.py`. Porównanie odpowiedzi przed i po rozszerzeniu oraz wariantów BM25, E5 i hybrydy: `python eval/compare_corpus.py --e5 <katalog modelu> --report eval/wyniki`. Znane narracje EUvsDisinfo: `Research/EUvsDisinfo_Przypadki.jsonl`, klient MCP w `app/ingest/narratives.py` (token `PRAWDOWID_EUVS_TOKEN`).
+`Research/Prawdoskop_Korpus_v5.jsonl` ma 515 dokumentów statycznych: korpus v4 i 400 nowych materiałów (226 rządowych, 62 samorządowe, 112 fact-checków) zebranych skryptem `scripts/collect_corpus.py`. Porównanie odpowiedzi przed i po rozszerzeniu oraz wariantów BM25, E5 i hybrydy: `python eval/compare_corpus.py --e5 <katalog modelu> --report eval/wyniki`. Znane narracje EUvsDisinfo: `Research/EUvsDisinfo_Przypadki.jsonl`, klient MCP w `app/ingest/narratives.py` (token `PRAWDOWID_EUVS_TOKEN`).
 
 [Raport z 22.11.2026](docs/RAPORT_2026-11-22.md) · [Prezentacja](docs/pitch/index.html)
 
@@ -43,9 +82,9 @@ Pierwsze polecenie odtwarza najważniejszy przebieg bez kosztów: dwie różne w
 
 Backend obsługuje API v1, sesje, SQLite i adapter demonstracyjny. Testy z próbkami sprawdzają kontrakt, walidację dowodów i HTTP. Do ewaluacji jakości potrzebny jest klucz modelu i docelowy korpus. Wdrożenie na Fly.io wymaga wskazania aplikacji, wolumenu i ustawienia sekretów.
 
-## Uruchomienie
+## Narzędzia wiersza poleceń
 
-Wymagany Python ze SQLite FTS5. W katalogu repozytorium:
+W katalogu repozytorium, po aktywacji środowiska Python:
 
 ```powershell
 python -B prawdowid_core.py
