@@ -175,3 +175,18 @@ def test_simulated_warning_runs_full_pipeline_and_can_be_removed(client):
     client.post("/moderacja/symulacja/usun", headers=admin)
     assert not service.official.simulations()
     assert source["id"] not in service.corpus.sources
+
+
+@pytest.mark.parametrize(("text", "expected"), [
+    ("NATO szykuje inwazję na Kaliningrad", []),
+    ("Oburzenie po decyzji rządu", []),
+    ("Rząd zapowiada zamrożenie cen prądu", []),
+    ("Nowa farma wiatraków pod Słupskiem", []),
+    ("Czy jutro będzie burza?", ["burze"]),
+    ("Burze z gradem w powiecie bytowskim", ["burze"]),
+    ("Mrozy do -20 stopni", ["silny_mroz"]),
+    ("Gołoledź na drogach", ["oblodzenie"]),
+])
+def test_hazards_match_from_word_start(text, expected):
+    from app.ingest.places import hazards
+    assert hazards(text) == expected

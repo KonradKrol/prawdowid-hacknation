@@ -22,17 +22,19 @@ MONTHS_PL = ("stycznia", "lutego", "marca", "kwietnia", "maja", "czerwca", "lipc
              "września", "października", "listopada", "grudnia")
 
 # Kolejność ma znaczenie: pierwsze trafienie jest głównym zjawiskiem sprawy.
+# Wzorce pasują od początku słowa: „Kaliningrad” to nie grad, „oburzenie” to nie burza,
+# „zamrożenie cen” to nie mróz, „wiatrak” to nie wiatr.
 HAZARDS = (
-    ("opady_marznace", "opady marznące", r"opad\w* marzn|marznac\w* (deszcz|mzawk)"),
-    ("oblodzenie", "oblodzenie", r"oblodz|gololed|golole|slisk"),
-    ("burze", "burze", r"burz|grad"),
-    ("silny_wiatr", "silny wiatr", r"wiatr|wichur|porywy|orkan"),
-    ("opady_sniegu", "opady śniegu", r"snieg|sniez|zawiej|zamiec"),
-    ("silny_mroz", "silny mróz", r"mroz"),
-    ("opady_deszczu", "opady deszczu", r"deszcz|ulew"),
-    ("upal", "upał", r"upal"),
-    ("mgla", "gęsta mgła", r"mgl"),
-    ("roztopy", "roztopy", r"roztop"),
+    ("opady_marznace", "opady marznące", r"\bopad\w* marzn|\bmarznac\w* (deszcz|mzawk)"),
+    ("oblodzenie", "oblodzenie", r"\b(oblodz|gololed|golole|slisk)"),
+    ("burze", "burze", r"\b(burz[aeyo]?\b|burz(ami|om|owe\w*|owy\w*)|grad)"),
+    ("silny_wiatr", "silny wiatr", r"\b(wiatr(?!ak)|wichur|porywy|orkan)"),
+    ("opady_sniegu", "opady śniegu", r"\b(snieg|sniez|zawiej|zamiec)"),
+    ("silny_mroz", "silny mróz", r"\b(mroz|mrozn)(?!eni)"),
+    ("opady_deszczu", "opady deszczu", r"\b(deszcz|ulew)"),
+    ("upal", "upał", r"\bupal"),
+    ("mgla", "gęsta mgła", r"\bmgl"),
+    ("roztopy", "roztopy", r"\broztop"),
 )
 HAZARD_LABEL = {key: label for key, label, _ in HAZARDS}
 ADJ_SUFFIXES = {"i", "iego", "im", "iemu", "ich", "iej", "ie", "a", "y", "ego", "emu", "ym"}
