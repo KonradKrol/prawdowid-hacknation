@@ -105,6 +105,8 @@ class CheckResult(BaseModel):
     items: list[Item] = Field(default_factory=list)
     notices: list[NoticeItem] = Field(default_factory=list)
     meta: Meta
+    topic: str | None = None  # ujednolicony temat zgłoszenia (do grupowania w panelu moderatora)
+    subject: str | None = None  # przedmiot sprawy, po którym łączymy zgłoszenia w tematy
 
 
 class PublicSource(BaseModel):

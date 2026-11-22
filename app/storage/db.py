@@ -5,12 +5,13 @@ import sqlite3
 
 from app.contract import CheckResult
 from app.storage.official import OFFICIAL_SCHEMA, OfficialStore
+from app.storage.topics import TOPICS_SCHEMA, TopicStore
 
 CHECK_TTL = 7 * 86400
 EVENT_TTL = 30 * 86400
 
 
-class Store(OfficialStore):
+class Store(OfficialStore, TopicStore):
     def __init__(self, path):
         self.path = path
         path.parent.mkdir(parents=True, exist_ok=True)
@@ -41,6 +42,7 @@ class Store(OfficialStore):
                 );
             """)
             db.executescript(OFFICIAL_SCHEMA)
+            db.executescript(TOPICS_SCHEMA)
 
     @contextmanager
     def connection(self):
@@ -53,6 +55,7 @@ class Store(OfficialStore):
                                ("result_cache", CHECK_TTL), ("whatsapp_messages", CHECK_TTL),
                                ("rate_hits", 86400)):
                 db.execute(f"DELETE FROM {table} WHERE created < ?", (now - ttl,))
+        self.topics_prune(now - CHECK_TTL)  # treści zgłoszeń w tematach żyją tyle co sprawdzenia
 
     def save(self, result, session, root_input, rounds):
         if not session:

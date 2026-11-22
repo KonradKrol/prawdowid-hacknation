@@ -40,7 +40,15 @@ def board():
         proposals = service.store.proposals(case_id=case["id"])
         cases.append({**case, "proposals": proposals, "pending": [p for p in proposals if p["status"] == "pending"],
                       "reports_list": service.store.case_reports(case["id"])})
-    return {"cases": cases, "official": service.official.status()}
+    now = int(datetime.now(timezone.utc).timestamp())
+    from app.core.topics import GROWING_LAST_HOUR
+    from app.ingest.places import WARSAW
+    stamp = lambda value: datetime.fromtimestamp(value, WARSAW).isoformat()  # noqa: E731  # czas polski w panelu
+    topic_rows = [dict(row, updated_at=stamp(row["updated"]), growing=row["last_hour"] >= GROWING_LAST_HOUR,
+                       recent=[dict(r, at=stamp(r["created"])) for r in row["recent"]])
+                  for row in service.store.topics_board(now, now - 7 * 86400)]
+    return {"cases": cases, "official": service.official.status(), "topics": topic_rows,
+            "growing_threshold": GROWING_LAST_HOUR}
 
 
 @router.get("/api/v1/official/status")

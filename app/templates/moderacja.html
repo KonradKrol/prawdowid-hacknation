@@ -49,6 +49,27 @@
     {% endif %}
   </section>
 
+  <section class="mod-topics" id="tematy" aria-labelledby="topics-h">
+    <h2 id="topics-h" class="section-title">Tematy zgłoszeń ({{ b.topics | length }})</h2>
+    <p>Zgłoszenia o tym samym temacie łączymy automatycznie, niezależnie od sformułowania. Na górze tematy z największą liczbą zgłoszeń w ostatniej godzinie. Ostatnie 7 dni.</p>
+    {% for t in b.topics %}
+    <article class="card mod-topic{% if t.growing %} mod-topic--hot{% endif %}" data-topic="{{ t.id }}">
+      <header class="mod-topic__head">
+        <h3>{{ t.title }}</h3>
+        {% if t.growing %}<span class="mod-hot"><svg aria-hidden="true"><use href="#i-alert"/></svg>Szybko rośnie</span>{% endif %}
+      </header>
+      <p class="mod-case__meta"><span class="mod-count">{{ t.reports }} {{ pl_count(t.reports, "zgłoszenie", "zgłoszenia", "zgłoszeń") }}</span>
+        · w ostatniej godzinie: {{ t.last_hour }} · ostatnie {{ t.updated_at | datetime }}</p>
+      <p class="mod-topic__labels">{% for key, n in t.labels.items() %}<span class="mod-tone tone-{{ L[key].tone if key in L else 'nei' }}">{{ PLAIN[key] if key in PLAIN else "bez oceny" }}: {{ n }}</span> {% endfor %}</p>
+      <details class="mod-reports"><summary>Treść zgłoszeń (ostatnie {{ t.recent | length }})</summary>
+        <ul>{% for r in t.recent %}<li>„{{ r.text }}” <small>({{ r.channel }}, {{ r.at | datetime }})</small></li>{% endfor %}</ul>
+      </details>
+    </article>
+    {% else %}
+    <p>Brak zgłoszeń w ostatnich 7 dniach.</p>
+    {% endfor %}
+  </section>
+
   <section class="mod-sim" id="symulacje" aria-labelledby="sim-h">
     <h2 id="sim-h" class="section-title">Symulacja ostrzeżenia</h2>
     <p>Dodaje ostrzeżenie w formacie IMGW tą samą ścieżką co prawdziwy import: nowa wersja wpisu, indeks wyszukiwania i ponowna ocena otwartych spraw. Wpis jest oznaczony jako <strong>[SYMULACJA]</strong> w tytule i wydawcy, także w odpowiedziach dla użytkowników. Usuń symulacje po pokazie.</p>
@@ -148,6 +169,13 @@
 .mod-sim__wide { grid-column: 1 / -1; }
 .mod-sim__h { font-size: 1.1rem; margin-top: 1.25rem; }
 .mod-sim__list { margin: .5rem 0 1rem 1.2rem; }
+.mod-topic { margin-top: 1rem; }
+.mod-topic__head { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem 1rem; }
+.mod-topic__head h3 { font-size: 1.25rem; }
+.mod-topic__labels { margin-top: .5rem; display: flex; flex-wrap: wrap; gap: .4rem; }
+.mod-topic--hot { border-left: 6px solid #B26A00; }
+.mod-hot { display: inline-flex; align-items: center; gap: .35rem; padding: .15rem .55rem; background: #FFF2DF; color: #6B3A00; border: 1px solid #E9C48F; font-weight: 700; font-size: .9rem; }
+.mod-hot svg { width: 1rem; height: 1rem; }
 @media (max-width: 40rem) { .mod-diff { grid-template-columns: 1fr; } }
 </style>
 {% endblock %}

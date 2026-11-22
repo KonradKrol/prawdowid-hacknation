@@ -23,6 +23,7 @@ from app.core.safety import SCOPE, SUSPICIOUS, VAGUE, input_info
 from app.ingest.official import OfficialSync, summarize
 from app.ingest.places import needs_place, signature as event_signature
 from app.ingest import narratives
+from app.core import topics
 from app.storage.db import Store
 from prawdowid_core import fragments
 
@@ -51,6 +52,16 @@ def clarification_selection(question, answer):
     if not alternatives and answer in {"tak", "tak chodzi mi o to", "tak o to chodzi", "zgadza sie", "dokladnie"}:
         return "confirmed"
     return None
+
+
+def clean_topic(value, marker):
+    """Temat od modelu: jedna linia, bez znacznika ochronnego, do 120 znaków."""
+    if not value:
+        return None
+    text = " ".join(str(value).split())
+    if marker and marker in text:
+        return None
+    return text.strip(" .„”\"")[:120] or None
 
 
 class Service:
@@ -172,10 +183,12 @@ class Service:
                     if cached:
                         # Uwagę o znanej narracji liczymy zawsze od nowa (poniżej), żeby jej nie dublować.
                         result.items, result.summary = cached.items, cached.summary
+                        result.topic, result.subject = cached.topic, cached.subject
                         result.notices = [n for n in cached.notices if n.type != "known_narrative"]
                         result.meta.cached, result.meta.estimated_cost_usd = True, 0.0
                     elif not candidates:
                         result.items = [missing_item("t1", root, "W zatwierdzonym korpusie nie znaleziono pasujących dowodów.")]
+                        self.detect_topic(result, root, now)
                     elif not self.settings.key:
                         result.status, result.message = "technical_error", "Brakuje konfiguracji usługi modelu."
                     elif self.settings.paid_check_limit and not self.store.reserve_paid_check(self.settings.paid_check_limit):
@@ -202,6 +215,8 @@ class Service:
             self.store.save(result, session_id, root, rounds)
             if register and result.status in {"ok", "needs_clarification"}:
                 self.register_case(result, channel, at, root)
+            if register and result.status == "ok":
+                self.register_topic(result, channel, now)
             self.store.event(now, "check", result.id, {
                 "status": result.status, "channel": channel, "elapsed_ms": result.meta.elapsed_ms,
                 "estimated_cost_usd": result.meta.estimated_cost_usd, "corpus_version": self.corpus.version,
@@ -220,6 +235,7 @@ class Service:
         if not candidates:
             result.items = [missing_item("t1", root, "Brakuje materiałów nadających się do oceny.")]
             usage, guard_cost = {}, None
+            self.detect_topic(result, root, now)
         else:
             with ThreadPoolExecutor(max_workers=1) as pool:
                 task = pool.submit(self.provider.guard, root)
@@ -227,6 +243,7 @@ class Service:
                 try:
                     guard, guard_usage = task.result()
                     suspected = suspected or (guard.contains_instructions and guard.confidence != "low")
+                    result.topic, result.subject = clean_topic(guard.topic, marker), clean_topic(guard.subject, marker)
                     guard_cost = self.provider.estimated_cost(guard_usage, self.settings.guard_model)
                 except HTTPError as error:
                     error.close()
@@ -269,6 +286,36 @@ class Service:
                                             result.id, channel, at.isoformat())
         except sqlite3.Error:
             self.store.event(int(at.timestamp()), "case_register_failed", result.id, {})
+            return None
+
+    def detect_topic(self, result, root, now):
+        """Temat, gdy nie było wywołania oceny (brak kandydatów): jedno tanie wywołanie guard modelu."""
+        if not self.settings.key or self.settings.evaluator != "live":
+            return
+        try:
+            guard, _ = self.provider.guard(root)
+            result.topic, result.subject = clean_topic(guard.topic, None), clean_topic(guard.subject, None)
+        except HTTPError as error:
+            error.close()
+        except (OSError, ValueError, KeyError, IndexError, TypeError, AttributeError):
+            self.store.event(now, "topic_unavailable", result.id, {})
+
+    def register_topic(self, result, channel, now):
+        """Dołącza zgłoszenie do tematu z ostatnich 48 h albo zakłada nowy (app/core/topics.py)."""
+        title = topics.topic_text(result)
+        found = topics.stems(result.subject or title)
+        if not found:
+            return None
+        sources = sorted({row.source_id for item in result.items for row in item.evidence})
+        item = result.items[0] if result.items else None
+        label = (item.label or ("answer" if item.kind == "answer" else None)) if item else None
+        try:
+            topic_id = topics.best_match(found, self.store.topics_recent(now - topics.WINDOW_S))
+            topic_id = topic_id or self.store.topic_add(title, found, sources, now)
+            self.store.topic_report(topic_id, now, result.id, channel, label, title, result.input.text_masked, sources)
+            return topic_id
+        except sqlite3.Error:
+            self.store.event(now, "topic_register_failed", result.id, {})
             return None
 
     @staticmethod

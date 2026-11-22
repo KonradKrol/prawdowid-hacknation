@@ -1,0 +1,276 @@
+{
+ "messages": 32,
+ "grouped": 30,
+ "skipped": [
+  "needs_clarification",
+  "needs_clarification"
+ ],
+ "same_pairs": 26,
+ "joined": 18,
+ "different_pairs": 409,
+ "separated": 409,
+ "false_merges": [],
+ "thresholds": {
+  "same": 0.67,
+  "window_h": 48
+ },
+ "cost_usd": 0.0131,
+ "rows": [
+  {
+   "group": "dymisja-msz",
+   "text": "Czy to prawda, że minister spraw zagranicznych podał się do dymisji?",
+   "status": "ok",
+   "topic": "dymisja ministra spraw zagranicznych",
+   "subject": "minister spraw zagranicznych",
+   "topic_id": 1
+  },
+  {
+   "group": "dymisja-msz",
+   "text": "Szef MSZ odchodzi z rządu, słyszeliście?",
+   "status": "needs_clarification",
+   "topic": "odejście ministra spraw zagranicznych z rządu",
+   "subject": "minister spraw zagranicznych",
+   "topic_id": null
+  },
+  {
+   "group": "dymisja-msz",
+   "text": "Podobno szef polskiej dyplomacji złożył rezygnację",
+   "status": "ok",
+   "topic": "rezygnacja ministra spraw zagranicznych",
+   "subject": "minister spraw zagranicznych",
+   "topic_id": 1
+  },
+  {
+   "group": "dymisja-msz",
+   "text": "MSZ: minister zrezygnował ze stanowiska. Prawda?",
+   "status": "ok",
+   "topic": "rezygnacja ministra spraw zagranicznych ze stanowiska",
+   "subject": "minister spraw zagranicznych",
+   "topic_id": 1
+  },
+  {
+   "group": "dymisja-mz",
+   "text": "Czy minister zdrowia podał się do dymisji?",
+   "status": "ok",
+   "topic": "dymisja ministra zdrowia",
+   "subject": "minister zdrowia",
+   "topic_id": 2
+  },
+  {
+   "group": "dymisja-mz",
+   "text": "Szefowa resortu zdrowia odchodzi z rządu?",
+   "status": "ok",
+   "topic": "odejście szefowej resortu zdrowia z rządu",
+   "subject": "minister zdrowia",
+   "topic_id": 2
+  },
+  {
+   "group": "dymisja-mz",
+   "text": "Minister zdrowia złożył rezygnację, tak piszą w internecie",
+   "status": "needs_clarification",
+   "topic": "rezygnacja ministra zdrowia",
+   "subject": "minister zdrowia",
+   "topic_id": null
+  },
+  {
+   "group": "alert-mobilizacja",
+   "text": "Dostałem SMS z Alertu RCB, że mężczyźni mają się zgłosić do urzędu gminy",
+   "status": "ok",
+   "topic": "Alert Rządowego Centrum Bezpieczeństwa o zgłoszeniu mężczyzn w urzędzie gminy",
+   "subject": "Alert Rządowego Centrum Bezpieczeństwa",
+   "topic_id": 3
+  },
+  {
+   "group": "alert-mobilizacja",
+   "text": "RCB wysłało alert o mobilizacji mężczyzn?",
+   "status": "ok",
+   "topic": "Alert Rządowego Centrum Bezpieczeństwa o mobilizacji mężczyzn",
+   "subject": "Alert Rządowego Centrum Bezpieczeństwa",
+   "topic_id": 3
+  },
+  {
+   "group": "alert-mobilizacja",
+   "text": "Alert RCB: wszyscy mężczyźni do 60 lat mają stawić się w urzędzie. Prawda?",
+   "status": "ok",
+   "topic": "Alert Rządowego Centrum Bezpieczeństwa o stawieniu się mężczyzn w urzędzie",
+   "subject": "Alert Rządowego Centrum Bezpieczeństwa",
+   "topic_id": 3
+  },
+  {
+   "group": "alert-mobilizacja",
+   "text": "Czy jest prawdziwy SMS wzywający mężczyzn do zgłoszenia się w gminach?",
+   "status": "ok",
+   "topic": "pytanie o SMS wzywający mężczyzn w gminach",
+   "subject": "SMS wzywający mężczyzn",
+   "topic_id": 4
+  },
+  {
+   "group": "woda-brojce",
+   "text": "Czy woda w Kotlinach w gminie Brójce nie nadaje się do picia?",
+   "status": "ok",
+   "topic": "jakość wody w Kotlinach w gminie Brójce",
+   "subject": "woda w Kotlinach w gminie Brójce",
+   "topic_id": 5
+  },
+  {
+   "group": "woda-brojce",
+   "text": "Sanepid zakazał picia wody z wodociągu w Kotlinach?",
+   "status": "ok",
+   "topic": "zakaz picia wody z wodociągu w Kotlinach",
+   "subject": "woda z wodociągu w Kotlinach",
+   "topic_id": 6
+  },
+  {
+   "group": "woda-brojce",
+   "text": "W gminie Brójce woda z kranu jest skażona, uważajcie",
+   "status": "ok",
+   "topic": "skażenie wody w gminie Brójce",
+   "subject": "woda w gminie Brójce",
+   "topic_id": 5
+  },
+  {
+   "group": "blackout",
+   "text": "Jutro ma być blackout w całej Polsce, prawda?",
+   "status": "ok",
+   "topic": "zapowiedź blackoutu w Polsce",
+   "subject": "blackout w Polsce",
+   "topic_id": 7
+  },
+  {
+   "group": "blackout",
+   "text": "Słyszałem, że wyłączą prąd w całym kraju na dwa dni",
+   "status": "ok",
+   "topic": "wyłączenie prądu w całym kraju",
+   "subject": "dostawy energii elektrycznej",
+   "topic_id": 8
+  },
+  {
+   "group": "blackout",
+   "text": "Czy rząd planuje ogólnopolskie wyłączenie prądu?",
+   "status": "ok",
+   "topic": "pytanie o ogólnopolskie wyłączenie prądu",
+   "subject": "dostawy energii elektrycznej",
+   "topic_id": 8
+  },
+  {
+   "group": "epuap",
+   "text": "Czy ePUAP znowu działa po awarii?",
+   "status": "ok",
+   "topic": "działanie ePUAP po awarii",
+   "subject": "ePUAP",
+   "topic_id": 9
+  },
+  {
+   "group": "epuap",
+   "text": "Awaria ePUAP została usunięta?",
+   "status": "ok",
+   "topic": "usunięcie awarii ePUAP",
+   "subject": "ePUAP",
+   "topic_id": 9
+  },
+  {
+   "group": "epuap",
+   "text": "ePUAP nie działa od rana, kiedy naprawią?",
+   "status": "ok",
+   "topic": "awaria ePUAP w Polsce",
+   "subject": "ePUAP",
+   "topic_id": 9
+  },
+  {
+   "group": "darmowa-komunikacja",
+   "text": "Czy we Wrocławiu będą darmowe tramwaje?",
+   "status": "ok",
+   "topic": "darmowe tramwaje we Wrocławiu",
+   "subject": "komunikacja miejska we Wrocławiu",
+   "topic_id": 10
+  },
+  {
+   "group": "darmowa-komunikacja",
+   "text": "Darmowa komunikacja miejska we Wrocławiu od przyszłego roku?",
+   "status": "ok",
+   "topic": "darmowa komunikacja miejska we Wrocławiu",
+   "subject": "komunikacja miejska we Wrocławiu",
+   "topic_id": 10
+  },
+  {
+   "group": "darmowa-komunikacja",
+   "text": "Wrocław wprowadzi bezpłatne autobusy i tramwaje?",
+   "status": "ok",
+   "topic": "bezpłatna komunikacja miejska we Wrocławiu",
+   "subject": "komunikacja miejska we Wrocławiu",
+   "topic_id": 10
+  },
+  {
+   "group": "szczepionki-nato",
+   "text": "Szczepionki to eksperyment NATO na Polakach",
+   "status": "ok",
+   "topic": "twierdzenie o szczepionkach w Polsce",
+   "subject": "szczepionki",
+   "topic_id": 11
+  },
+  {
+   "group": "szczepionki-nato",
+   "text": "NATO testuje na nas szczepionki, to wiadomo od lat",
+   "status": "ok",
+   "topic": "testowanie szczepionek przez NATO",
+   "subject": "NATO",
+   "topic_id": 12
+  },
+  {
+   "group": "500-plus",
+   "text": "Czy 800 plus zostanie zlikwidowane od stycznia?",
+   "status": "ok",
+   "topic": "likwidacja świadczenia 800 plus",
+   "subject": "świadczenie 800 plus",
+   "topic_id": 13
+  },
+  {
+   "group": "500-plus",
+   "text": "Rząd likwiduje 800+, prawda?",
+   "status": "ok",
+   "topic": "likwidacja świadczenia 800 plus przez rząd",
+   "subject": "świadczenie 800 plus",
+   "topic_id": 13
+  },
+  {
+   "group": "500-plus",
+   "text": "Od nowego roku nie będzie już świadczenia 800 plus?",
+   "status": "ok",
+   "topic": "koniec świadczenia 800 plus",
+   "subject": "świadczenie 800 plus",
+   "topic_id": 13
+  },
+  {
+   "group": "solo-1",
+   "text": "Czy w Gdańsku zamknięto most na Wiśle?",
+   "status": "ok",
+   "topic": "zamknięcie mostu na Wiśle w Gdańsku",
+   "subject": "most na Wiśle w Gdańsku",
+   "topic_id": 14
+  },
+  {
+   "group": "solo-2",
+   "text": "Czy ceny prądu wzrosną od stycznia?",
+   "status": "ok",
+   "topic": "wzrost cen prądu od stycznia",
+   "subject": "ceny energii elektrycznej",
+   "topic_id": 15
+  },
+  {
+   "group": "solo-3",
+   "text": "Czy Polska wystąpi z Unii Europejskiej?",
+   "status": "ok",
+   "topic": "możliwe wystąpienie Polski z Unii Europejskiej",
+   "subject": "członkostwo Polski w Unii Europejskiej",
+   "topic_id": 16
+  },
+  {
+   "group": "solo-4",
+   "text": "Czy w szkołach skrócono wakacje?",
+   "status": "ok",
+   "topic": "skrócenie wakacji w szkołach",
+   "subject": "wakacje szkolne",
+   "topic_id": 17
+  }
+ ]
+}
